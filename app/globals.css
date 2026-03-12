@@ -1,0 +1,418 @@
+﻿@import "tailwindcss";
+
+:root {
+  /* Local fallback font variables keep the system buildable without network font fetches. */
+  --font-geist-sans: Arial, Helvetica, sans-serif;
+  --font-geist-mono: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+
+  /* Primitive brand palette tokens from the spec. */
+  --purple-500: #5829c7;
+  --yellow-500: #ffca2d;
+  --orange-500: #f9a91f;
+  --orange-200: #fadf90;
+  --green-500: #90c645;
+  --green-200: #c8e3a2;
+  --lavender-500: #9688c0;
+  --lavender-200: #cbc3df;
+  --cyan-500: #2bb7c7;
+  --cyan-200: #94dbe4;
+  --red-orange-500: #f04e28;
+  --peach-200: #f7a793;
+
+  /* Primitive neutral palette tokens from the spec. */
+  --neutral-0: #ffffff;
+  --neutral-25: #fcfcfd;
+  --neutral-50: #f8f8fa;
+  --neutral-100: #f1f2f4;
+  --neutral-200: #e5e7eb;
+  --neutral-300: #d1d5db;
+  --neutral-400: #9ca3af;
+  --neutral-500: #6b7280;
+  --neutral-600: #4b5563;
+  --neutral-700: #374151;
+  --neutral-800: #1f2937;
+  --neutral-900: #111827;
+  --neutral-950: #0b0f19;
+
+  /* Semantic text and icon tokens keep component styling intent-based. */
+  --color-text-primary: var(--neutral-900);
+  --color-text-secondary: var(--neutral-700);
+  --color-text-tertiary: var(--neutral-500);
+  --color-text-inverse: var(--neutral-0);
+  --color-text-brand: var(--purple-500);
+  --color-icon-primary: var(--neutral-800);
+  --color-icon-secondary: var(--neutral-600);
+  --color-icon-inverse: var(--neutral-0);
+  --color-icon-brand: var(--purple-500);
+
+  /* Semantic background and border tokens define the core surface system. */
+  --color-background-canvas: var(--neutral-25);
+  --color-background-surface: var(--neutral-0);
+  --color-background-surface-subtle: var(--neutral-50);
+  --color-background-brand: var(--purple-500);
+  --color-background-brand-subtle: var(--lavender-200);
+  --color-background-warm: var(--yellow-500);
+  --color-border-default: var(--neutral-200);
+  --color-border-strong: var(--neutral-300);
+  --color-border-brand: var(--purple-500);
+  --color-border-focus: var(--purple-500);
+
+  /* Semantic action tokens keep buttons and inputs ready for later reuse. */
+  --color-action-primary-bg: var(--purple-500);
+  --color-action-primary-text: var(--neutral-0);
+  --color-action-primary-hover: #4c24ab;
+  --color-action-secondary-bg: var(--neutral-0);
+  --color-action-secondary-text: var(--neutral-900);
+  --color-action-secondary-border: var(--neutral-300);
+  --color-action-secondary-hover: var(--neutral-50);
+  --color-action-ghost-text: var(--neutral-800);
+  --color-action-ghost-hover: var(--neutral-100);
+
+  /* Semantic feedback tokens prepare the first component states. */
+  --color-feedback-success-bg: #eaf6d8;
+  --color-feedback-success-text: #335c12;
+  --color-feedback-warning-bg: #fff3cc;
+  --color-feedback-warning-text: #7a5900;
+  --color-feedback-error-bg: #fde3dc;
+  --color-feedback-error-text: #8a2e18;
+  --color-feedback-info-bg: #ddf3f6;
+  --color-feedback-info-text: #0e5d66;
+
+  /* Spacing tokens follow the lean 8px-based scale from the spec. */
+  --space-025: 2px;
+  --space-050: 4px;
+  --space-100: 8px;
+  --space-150: 12px;
+  --space-200: 16px;
+  --space-300: 24px;
+  --space-400: 32px;
+  --space-500: 40px;
+  --space-600: 48px;
+  --space-800: 64px;
+  --space-1000: 80px;
+  --space-1200: 96px;
+
+  /* Radius tokens standardize shape decisions before components land. */
+  --ds-radius-none: 0px;
+  --ds-radius-sm: 4px;
+  --ds-radius-md: 8px;
+  --ds-radius-lg: 12px;
+  --ds-radius-xl: 16px;
+  --ds-radius-pill: 999px;
+
+  /* Shadow tokens provide a restrained elevation system for later components. */
+  --ds-shadow-none: none;
+  --ds-shadow-sm: 0 1px 2px rgb(11 15 25 / 0.06);
+  --ds-shadow-md: 0 6px 16px rgb(11 15 25 / 0.08);
+  --ds-shadow-lg: 0 16px 32px rgb(11 15 25 / 0.12);
+
+  /* Font family aliases leave a clean swap point for brand font assets later. */
+  --font-display-family: "Clash Display", var(--font-geist-sans), Arial, sans-serif;
+  --font-body-family: "Gilroy", var(--font-geist-sans), Arial, sans-serif;
+
+  /* Compatibility aliases preserve the current shadcn starter expectations. */
+  --background: var(--color-background-canvas);
+  --foreground: var(--color-text-primary);
+  --muted: var(--color-background-surface-subtle);
+  --muted-foreground: var(--color-text-secondary);
+  --border: var(--color-border-default);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-border: var(--border);
+  --color-card: var(--color-background-surface);
+  --color-card-foreground: var(--color-text-primary);
+  --color-primary: var(--color-action-primary-bg);
+  --color-primary-foreground: var(--color-action-primary-text);
+  --color-secondary: var(--color-action-secondary-bg);
+  --color-secondary-foreground: var(--color-action-secondary-text);
+  --color-accent: var(--color-action-ghost-hover);
+  --color-accent-foreground: var(--color-action-ghost-text);
+  --color-brand: var(--purple-500);
+  --font-sans: var(--font-body-family);
+  --font-display: var(--font-display-family);
+  --font-mono: var(--font-geist-mono);
+  --radius-sm: var(--ds-radius-sm);
+  --radius-md: var(--ds-radius-md);
+  --radius-lg: var(--ds-radius-lg);
+  --radius-xl: var(--ds-radius-xl);
+  --shadow-sm: var(--ds-shadow-sm);
+  --shadow-md: var(--ds-shadow-md);
+  --shadow-lg: var(--ds-shadow-lg);
+}
+
+* {
+  border-color: var(--color-border-default);
+}
+
+html {
+  background: var(--color-background-canvas);
+}
+
+body {
+  min-height: 100vh;
+  background: var(--color-background-canvas);
+  color: var(--color-text-primary);
+  font-family: var(--font-body-family);
+  text-rendering: optimizeLegibility;
+}
+
+::selection {
+  background: color-mix(in srgb, var(--purple-500) 18%, white);
+  color: var(--color-text-primary);
+}
+
+.text-display-xl {
+  font-family: var(--font-display-family);
+  font-size: 64px;
+  font-weight: 600;
+  line-height: 72px;
+  letter-spacing: -0.02em;
+}
+
+
+/* This hero display utility preserves the homepage's original oversized editorial headline scale. */
+.text-hero-display {
+  font-family: var(--font-display-family);
+  font-size: clamp(2.8rem, 6vw, 5rem);
+  font-weight: 500;
+  line-height: 0.96;
+  letter-spacing: -0.055em;
+}
+
+/* This hero support utility preserves the original responsive subtext scale in the shared DS layer. */
+.text-hero-support {
+  font-family: var(--font-body-family);
+  font-size: clamp(1.45rem, 2.4vw, 2.7rem);
+  font-weight: 400;
+  line-height: 1.08;
+  letter-spacing: -0.045em;
+}
+
+/* This section display utility restores the original Work heading size through the shared DS layer. */
+.text-section-display {
+  font-family: var(--font-display-family);
+  font-size: clamp(1.9rem, 3.3vw, 3.1rem);
+  font-weight: 600;
+  line-height: 1.02;
+  letter-spacing: -0.045em;
+}
+
+/* This display utility supports editorial secondary statements without dropping to paragraph styling. */
+.text-display-muted-editorial {
+  font-family: var(--font-display-family);
+  font-size: clamp(1.9rem, 3.3vw, 3.1rem);
+  font-weight: 500;
+  line-height: 1.06;
+  letter-spacing: -0.038em;
+  color: var(--color-text-secondary);
+}
+
+.text-heading-xl {
+  font-family: var(--font-display-family);
+  font-size: 40px;
+  font-weight: 600;
+  line-height: 48px;
+  letter-spacing: -0.02em;
+}
+
+.text-heading-lg {
+  font-family: var(--font-display-family);
+  font-size: 32px;
+  font-weight: 600;
+  line-height: 40px;
+  letter-spacing: -0.015em;
+}
+
+.text-heading-md {
+  font-family: var(--font-display-family);
+  font-size: 24px;
+  font-weight: 500;
+  line-height: 32px;
+  letter-spacing: -0.01em;
+}
+
+.text-heading-sm {
+  font-family: var(--font-body-family);
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 28px;
+  letter-spacing: -0.01em;
+}
+
+.text-body-lg {
+  font-family: var(--font-body-family);
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 28px;
+  letter-spacing: 0;
+}
+
+.text-body-md {
+  font-family: var(--font-body-family);
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+  letter-spacing: 0;
+}
+
+.text-body-sm {
+  font-family: var(--font-body-family);
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
+  letter-spacing: 0;
+}
+
+.text-label-lg {
+  font-family: var(--font-body-family);
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 24px;
+  letter-spacing: 0;
+}
+
+.text-label-md {
+  font-family: var(--font-body-family);
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 20px;
+  letter-spacing: 0;
+}
+
+.text-label-sm {
+  font-family: var(--font-body-family);
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 16px;
+  letter-spacing: 0.01em;
+}
+
+.text-caption {
+  font-family: var(--font-body-family);
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 16px;
+  letter-spacing: 0.01em;
+}
+
+.marquee-viewport {
+  overflow: hidden;
+}
+
+@keyframes marquee-left {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+.marquee-track {
+  display: flex;
+  flex-wrap: nowrap;
+  width: max-content;
+  align-items: center;
+  animation: marquee-left 34s linear infinite;
+  will-change: transform;
+}
+
+.marquee-group {
+  display: flex;
+  flex-wrap: nowrap;
+  flex-shrink: 0;
+  align-items: center;
+  min-width: max-content;
+  gap: 4rem;
+  padding-inline: 4rem;
+}
+
+@media (max-width: 767px) {
+  .marquee-group {
+    gap: 2.5rem;
+    padding-inline: 2.5rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track {
+    animation: none;
+    transform: translate3d(0, 0, 0);
+  }
+
+  .marquee-group[aria-hidden="true"] {
+    display: none;
+  }
+}
+
+[data-studio-shell] {
+  transform-origin: top center;
+  transition: transform 320ms cubic-bezier(0.22, 1, 0.36, 1), filter 320ms cubic-bezier(0.22, 1, 0.36, 1), opacity 220ms ease-out;
+  will-change: transform, filter;
+}
+
+body[data-mobile-nav-open="true"] [data-studio-shell] {
+  transform: scale(0.985);
+  filter: blur(8px) saturate(0.92);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-studio-shell] {
+    transition: opacity 160ms ease-out;
+  }
+
+  body[data-mobile-nav-open="true"] [data-studio-shell] {
+    transform: none;
+    filter: blur(3px);
+  }
+}
+
+
+
+
+.hand-drawn-underline {
+  pointer-events: none;
+  transform-origin: left center;
+  transform: scaleX(0);
+  opacity: 0;
+  animation: hand-drawn-brush-reveal 1.6s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  will-change: transform, opacity;
+}
+
+.hand-drawn-underline__shape {
+  fill: var(--purple-500);
+}
+
+.hand-drawn-underline--delay {
+  animation-delay: 0.42s;
+}
+
+@keyframes hand-drawn-brush-reveal {
+  0% {
+    transform: scaleX(0);
+    opacity: 0;
+  }
+
+  18% {
+    opacity: 1;
+  }
+
+  100% {
+    transform: scaleX(1);
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hand-drawn-underline {
+    animation: none;
+    transform: scaleX(1);
+    opacity: 1;
+  }
+}
