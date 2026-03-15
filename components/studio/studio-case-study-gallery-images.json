@@ -3,37 +3,101 @@
     "badgeLabel": "Drones",
     "images": [
       {
-        "src": "https://images.pexels.com/photos/34182312/pexels-photo-34182312.jpeg?cs=srgb&dl=pexels-magda-ehlers-pexels-34182312.jpg&fm=jpg",
-        "alt": "Agricultural drone hovering above farmland."
+        "src": "/assets/GA_cover.png",
+        "alt": "General Aeronautics mobile product mock."
       },
       {
-        "src": "https://images.pexels.com/photos/34182337/pexels-photo-34182337.jpeg?cs=srgb&dl=pexels-magda-ehlers-pexels-34182337.jpg&fm=jpg",
-        "alt": "Industrial drone in flight against an overcast sky."
+        "src": "/assets/GA_bg.png",
+        "alt": "General Aeronautics interface background treatment."
       },
       {
-        "src": "https://images.pexels.com/photos/4256911/pexels-photo-4256911.jpeg?cs=srgb&dl=pexels-victor-pace-2704890-4256911.jpg&fm=jpg",
-        "alt": "Compact drone flying low above a field at golden hour."
+        "src": "/assets/general-aeronautics.svg",
+        "alt": "General Aeronautics brand mark."
+      }
+    ]
+  },
+  "general-aeronautics-ops": {
+    "badgeLabel": "Flight Ops",
+    "images": [
+      {
+        "src": "/assets/GA_bg.png",
+        "alt": "General Aeronautics operations interface proof."
       },
       {
-        "src": "https://images.pexels.com/photos/13310708/pexels-photo-13310708.jpeg?cs=srgb&dl=pexels-pok-rie-33563-13310708.jpg&fm=jpg",
-        "alt": "Camera drone hovering in front of a warm blurred background."
+        "src": "/assets/GA_cover.png",
+        "alt": "General Aeronautics mobile proof card."
+      },
+      {
+        "src": "/assets/general-aeronautics.svg",
+        "alt": "General Aeronautics identity mark."
       }
     ]
   },
   "bevolve": {
-    "badgeLabel": "Trees",
+    "badgeLabel": "ESG AI",
     "images": [
       {
-        "src": "https://images.pexels.com/photos/789397/pexels-photo-789397.jpeg?cs=srgb&dl=pexels-minan1398-789397.jpg&fm=jpg",
-        "alt": "Sunlight filtering through tall forest trees."
+        "src": "/assets/Bevolve_cover.png",
+        "alt": "Bevolve.ai product experience mock."
       },
       {
-        "src": "https://images.pexels.com/photos/9926163/pexels-photo-9926163.jpeg?cs=srgb&dl=pexels-zh-ru-9926163.jpg&fm=jpg",
-        "alt": "Dense woodland with tall dark tree trunks and warm light."
+        "src": "/assets/bevolve-ai.svg",
+        "alt": "Bevolve.ai brand mark."
       },
       {
-        "src": "https://images.pexels.com/photos/18147221/pexels-photo-18147221.png?cs=srgb&dl=pexels-lauripoldre-18147221.jpg&fm=jpg",
-        "alt": "Forest floor and tree trunks in soft green light."
+        "src": "/assets/illustration3.png",
+        "alt": "Abstract sustainability intelligence illustration."
+      }
+    ]
+  },
+  "tvam": {
+    "badgeLabel": "AI Advisors",
+    "images": [
+      {
+        "src": "/assets/illustration1.png",
+        "alt": "TVAM AI workflow illustration."
+      },
+      {
+        "src": "/assets/illustration2.png",
+        "alt": "TVAM advisor-style product visual."
+      },
+      {
+        "src": "/assets/illustration3.png",
+        "alt": "TVAM platform systems illustration."
+      }
+    ]
+  },
+  "kittykat": {
+    "badgeLabel": "Generative AI",
+    "images": [
+      {
+        "src": "/assets/kittykat.svg",
+        "alt": "KittyKat brand mark."
+      },
+      {
+        "src": "/assets/illustration2.png",
+        "alt": "KittyKat fashion image workflow illustration."
+      },
+      {
+        "src": "/assets/illustration1.png",
+        "alt": "KittyKat generative visual production illustration."
+      }
+    ]
+  },
+  "ageshift": {
+    "badgeLabel": "Wellness AI",
+    "images": [
+      {
+        "src": "/assets/illustration3.png",
+        "alt": "AgeShift wellness platform illustration."
+      },
+      {
+        "src": "/assets/illustration1.png",
+        "alt": "AgeShift mobile and backend systems illustration."
+      },
+      {
+        "src": "/assets/illustration2.png",
+        "alt": "AgeShift AI recommendation platform illustration."
       }
     ]
   }

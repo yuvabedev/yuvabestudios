@@ -1,4 +1,4 @@
-import {
+﻿import {
   BarChart3,
   Bot,
   LayoutGrid,
@@ -8,7 +8,9 @@ import {
 } from "lucide-react";
 import type { ReactNode } from "react";
 
-export type StudioCaseStudyId = "general-aeronautics" | "bevolve";
+import type { StudioCaseStudyMockCardLayout, StudioCaseStudyMockVariant } from "@/components/studio/studio-case-study-mock-card";
+
+export type StudioCaseStudyId = "general-aeronautics" | "bevolve" | "tvam" | "kittykat" | "ageshift" | "general-aeronautics-ops";
 
 export type StudioCaseStudySection = {
   title: string;
@@ -45,6 +47,11 @@ export type StudioCaseStudySummary = {
   summary: string;
   services: string[];
   media: ReactNode;
+  mockImageSrc?: string;
+  mockImageAlt?: string;
+  mockVariant?: StudioCaseStudyMockVariant;
+  mockLayout?: StudioCaseStudyMockCardLayout;
+  mockImageClassName?: string;
   size?: "default" | "feature";
   modalIntro?: string;
   modalOutcomes?: string[];
@@ -66,6 +73,9 @@ export const studioCaseStudies: StudioCaseStudySummary[] = [
     title: "General Aeronautics",
     summary: "Turned a complex drone portfolio into a clearer digital story buyers, partners, and operators could trust faster.",
     services: ["Positioning", "UX/UI", "Brand system"],
+    mockImageSrc: "/assets/GA_cover.png",
+    mockImageAlt: "General Aeronautics mobile product mock",
+    mockVariant: "aurora",
     modalIntro:
       "General Aeronautics builds drone systems across agriculture, defense, humanitarian response, and warehouse automation. As the business expanded, its digital presence needed to explain that breadth with more clarity, confidence, and usability.",
     modalOutcomes: [
@@ -154,6 +164,9 @@ export const studioCaseStudies: StudioCaseStudySummary[] = [
     summary:
       "Turned fragmented sustainability reporting into an AI-guided system teams could trust for faster, evidence-based decisions.",
     services: ["AI integration", "ML", "ESG reporting"],
+    mockImageSrc: "/assets/Bevolve_cover.png",
+    mockImageAlt: "Bevolve.ai product experience mock",
+    mockVariant: "sunrise",
     modalIntro:
       "Bevolve.ai needed a product experience that could bring together fragmented ESG and sustainability data, automate reporting workflows, and make decision support easier for teams navigating compliance pressure.",
     modalOutcomes: [
@@ -235,3 +248,7 @@ export const studioCaseStudies: StudioCaseStudySummary[] = [
     media: <CaseStudyIcon icon={Bot} />,
   },
 ];
+
+
+
+
