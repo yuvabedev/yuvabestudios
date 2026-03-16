@@ -7,7 +7,7 @@ export const metadata: Metadata = {
   metadataBase: siteMetadataBase,
   title: "Yuvabe Studios",
   description:
-    "AI-first product design, development, and engineering studio for startups.",
+    "AI-first strategy, design, engineering, and growth marketing studio for startups.",
 };
 
 export default function RootLayout({

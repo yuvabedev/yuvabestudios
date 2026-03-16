@@ -29,7 +29,7 @@ Write premium, founder-focused copy that sounds decisive, useful, and conversion
 4. Use active verbs: build, launch, scale, convert, automate, ship.
 5. Replace vague words with concrete value language.
 6. Avoid buzzword stacking and generic claims.
-7. Reinforce this narrative: Yuvabe helps founders build the right thing, then iterate toward traction.
+7. Reinforce this narrative: Yuvabe helps founders build the right thing, then iterate toward traction across product, engineering, and growth marketing.
 8. Fit copy to the component and layout system instead of writing oversized paragraphs that fight the design.
 
 ## Website Section Patterns
@@ -49,6 +49,7 @@ Write premium, founder-focused copy that sounds decisive, useful, and conversion
 ## AI-first Framing
 - Mention AI-first positioning early.
 - Frame AI as leverage for better decisions, faster loops, and stronger execution.
+- Keep growth marketing in the execution story when it is relevant so Yuvabe is not framed as product-only by default.
 - Do not present AI as novelty or trend-chasing.
 
 ## CTA Guidelines

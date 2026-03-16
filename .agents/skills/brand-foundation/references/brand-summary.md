@@ -3,7 +3,7 @@
 Use this file as the default brand reference for website, copy, visual, and frontend system work. Only go to the PDF when you need deeper rationale or precise usage guidance.
 
 ## Core Narrative
-- Yuvabe is evolving from a not-for-profit identity into an AI-first product design, development, and engineering studio for startups.
+- Yuvabe is evolving from a not-for-profit identity into an AI-first strategy, design, engineering, and growth marketing studio for startups.
 - The central promise is not just faster shipping. It is helping founders decide what matters, prioritize correctly, and iterate toward traction.
 - Brand expression should feel strategic, future-facing, and outcome-oriented without sounding generic or overhyped.
 
@@ -13,7 +13,7 @@ Use this file as the default brand reference for website, copy, visual, and fron
 - Messaging should speak to founder pressure: limited time, high uncertainty, and the need to make better bets quickly.
 
 ## Positioning
-- Yuvabe combines product thinking, engineering execution, and growth support in one AI-native partner.
+- Yuvabe combines product thinking, engineering execution, and growth marketing support in one AI-native partner.
 - The moat is better decision-making: discovering what to build, sequencing it well, and learning quickly.
 - The brand should feel like a sharp, trusted partner for founders rather than a generic agency.
 
@@ -64,7 +64,7 @@ Use this file as the default brand reference for website, copy, visual, and fron
 ## Website Translation Rules
 - Translate the brand into founder-facing website decisions: strong hero, clear proof, focused capabilities, and one obvious CTA path.
 - Make AI-first positioning practical. Show how AI improves decisions, speed, and leverage rather than presenting it as novelty.
-- Every page should reinforce: Yuvabe helps founders figure out what to build next and execute it well.
+- Every page should reinforce: Yuvabe helps founders figure out what to build next, execute it well, and create traction through growth marketing.
 - Use the brand to reduce noise, not add more messaging layers.
 - Build the website and app UI from the design system outward: foundation tokens first, components second, page composition last.
 

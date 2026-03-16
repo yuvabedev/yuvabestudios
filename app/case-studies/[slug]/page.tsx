@@ -133,7 +133,7 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
               Yuvabe
             </Link>
             <p className="text-body-sm text-[var(--color-text-secondary)]">
-              AI-first product design, development, and engineering for startups.
+              AI-first strategy, design, engineering, and growth marketing for startups.
             </p>
           </div>
 

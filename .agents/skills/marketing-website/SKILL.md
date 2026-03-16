@@ -17,7 +17,7 @@ Build Yuvabe's marketing website as a premium, founder-focused, AI-first studio 
 
 ## Website Strategy
 - The site must clearly communicate the shift into an AI-first studio serving startups.
-- Position Yuvabe as the partner that helps founders decide what to build, execute it fast, and iterate toward traction.
+- Position Yuvabe as the partner that helps founders decide what to build, execute it fast, and iterate toward traction through product, engineering, and growth marketing support.
 - Favor clarity, momentum, and trust over feature dumping or agency-style fluff.
 
 ## Default Page Structure
@@ -34,6 +34,7 @@ Build Yuvabe's marketing website as a premium, founder-focused, AI-first studio 
 - Keep the primary story above the fold on desktop.
 - Every section should answer a founder question: why trust you, what do you do, how do you work, why now, what happens next.
 - Use AI-first language as practical leverage: faster iteration, sharper prioritization, smarter automation, stronger economics.
+- When describing the offer, keep growth marketing explicit enough that the site does not read like a product-only studio.
 - Each page should have one dominant CTA path and minimal decision noise.
 
 ## Surface Guidance

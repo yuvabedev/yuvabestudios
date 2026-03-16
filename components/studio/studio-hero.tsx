@@ -48,7 +48,7 @@ export function StudioHero() {
               </h1>
               <p className="text-hero-support max-w-4xl text-[var(--color-text-secondary)] lg:max-w-[46rem]">
                 <span>Clarity for startups moving fast. AI-first execution across </span>
-                <span className="text-[var(--color-text-brand)]">strategy, design, engineering, and growth.</span>
+                <span className="text-[var(--color-text-brand)]">strategy, design, engineering, and growth marketing.</span>
               </p>
             </div>
 
@@ -56,7 +56,7 @@ export function StudioHero() {
             <div id="start-your-build" className="flex flex-col items-start gap-4 pt-6 sm:flex-row sm:items-center">
               <Button asChild size="lg" className="w-full min-w-0 bg-[var(--purple-500)] px-7 sm:w-auto sm:min-w-[220px]">
                 <Link href="#">
-                  Start Your Build
+                  Start Your Project
                   <ArrowRight className="size-4" />
                 </Link>
               </Button>
@@ -96,7 +96,6 @@ export function StudioHero() {
     </section>
   );
 }
-
 
 
 

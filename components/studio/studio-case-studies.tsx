@@ -55,7 +55,7 @@ export function StudioCaseStudies() {
               <span className="text-[var(--color-text-brand)]">
                 shipped releases
               </span>
-              , adoption, and compounding traction with one execution partner.
+              , stronger campaigns, and compounding traction with one execution partner.
             </p>
           </div>
 
