@@ -35,6 +35,7 @@ Implement Yuvabe's design system in code with a design-system-first approach so 
 - If a neutral needs a primary tint, create a named tinted-neutral token or utility in the shared foundation first; never solve it with per-instance component-level color mixing.
 - Keep variant counts lean and aligned with the spec.
 - Reuse one button contract across nav, hero, and section CTAs.
+- Buttons that trigger API or async work must use the shared loading-state contract on the design-system `Button` with the shared `Spinner`; do not ship ad-hoc loaders or text-only pending states for those actions.
 - Reuse existing shadcn-based form controls whenever possible; styling a one-off native control inside a narrow internal screen is acceptable, but adding a new shared control primitive requires a clear system-level need.
 - Prefer composition over special-case page markup.
 - Treat responsive behavior as part of the component contract, not a page-level afterthought; every shared component should work cleanly from mobile-first layouts upward.

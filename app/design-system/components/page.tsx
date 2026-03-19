@@ -3,8 +3,10 @@ import { Bot, LayoutGrid, Sparkles } from "lucide-react";
 import { BillingSurfacePreview } from "@/app/design-system/components/billing-surface-preview";
 import { StudioCaseStudyCard } from "@/components/studio/studio-case-study-card";
 import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 import { IllustrationCard } from "@/components/ui/illustration-card";
 import { PremiumSurface } from "@/components/ui/premium-surface";
+import { Spinner } from "@/components/ui/spinner";
 
 // This tiny specimen proves the shared illustration card can hold authored HTML/CSS graphics instead of screenshots.
 function IllustrationCardPreviewGraphic() {
@@ -146,6 +148,27 @@ export default function ComponentsPage() {
                 <Sparkles className="size-4" />
               </span>
             </PremiumSurface>
+          </div>
+        </section>
+
+        {/* This specimen documents the shared loading state for buttons that trigger async work. */}
+        <section className="space-y-[var(--space-200)] rounded-[var(--ds-radius-xl)] border bg-[linear-gradient(180deg,rgba(255,255,255,0.96),rgba(248,248,250,0.94))] p-[var(--space-400)] shadow-sm">
+          <div className="max-w-3xl space-y-[var(--space-150)]">
+            <p className="text-label-sm uppercase tracking-[0.22em] text-[var(--color-text-tertiary)]">Components / Button</p>
+            <h2 className="text-heading-lg text-foreground">Loading state</h2>
+            <p className="text-body-md text-muted-foreground">
+              Buttons that trigger API work should use the shared spinner-backed loading state instead of one-off pending text or custom loaders.
+            </p>
+          </div>
+          <div className="flex flex-wrap gap-3">
+            <Button loading loadingText="Generating">Generate concept</Button>
+            <Button variant="secondary" loading loadingText="Downloading" spinnerPlacement="end">
+              Download report
+            </Button>
+            <Button variant="ghost" disabled>
+              <Spinner data-icon="inline-start" />
+              Preview only
+            </Button>
           </div>
         </section>
 

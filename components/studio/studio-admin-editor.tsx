@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useMemo, useState } from "react";
+import { useFormStatus } from "react-dom";
 
 import {
   saveCaseStudyContentAction,
@@ -76,9 +77,23 @@ function StickySaveBar({
         >
           {previewHref}
         </Link>
-        <Button type="submit">{label}</Button>
+        <StickySaveButton label={label} />
       </div>
     </div>
+  );
+}
+
+function StickySaveButton({
+  label,
+}: {
+  label: string;
+}) {
+  const { pending } = useFormStatus();
+
+  return (
+    <Button type="submit" loading={pending} loadingText={`${label}`}>
+      {label}
+    </Button>
   );
 }
 
