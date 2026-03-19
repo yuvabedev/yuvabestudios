@@ -1,6 +1,7 @@
 import { CheckCircle2 } from "lucide-react";
 
 import {
+  getCaseStudyIcon,
   resolveStudioCaseStudyDetail,
   type StudioCaseStudySummary,
 } from "@/components/studio/studio-case-study-content";
@@ -20,7 +21,9 @@ export function StudioCaseStudyOutcomesStrip({
       <div className="mx-auto max-w-7xl px-6 py-10 md:px-10 md:py-12">
         <div className="grid gap-8 md:grid-cols-2 xl:grid-cols-4">
           {detail.outcomes.map((outcome, index) => {
-            const OutcomeIcon = detail.proofPoints[index]?.icon ?? CheckCircle2;
+            const OutcomeIcon = detail.proofPoints[index]?.iconKey
+              ? getCaseStudyIcon(detail.proofPoints[index]?.iconKey)
+              : CheckCircle2;
 
             return (
               <div

@@ -3,6 +3,7 @@ import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 
 import {
+  CaseStudyIcon,
   resolveStudioCaseStudyDetail,
   type StudioCaseStudySummary,
 } from "@/components/studio/studio-case-study-content";
@@ -122,7 +123,7 @@ export function StudioCaseStudyPageHero({
                         />
                       ) : (
                         <div className="flex h-full items-center justify-center text-[var(--neutral-700)]">
-                          {caseStudy.media}
+                          <CaseStudyIcon iconKey={caseStudy.mediaIconKey} />
                         </div>
                       )}
                     </div>

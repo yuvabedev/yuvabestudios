@@ -1,11 +1,12 @@
 import { StudioCaseStudyEditorialCard } from "@/components/studio/studio-case-study-editorial-card";
-import { studioCaseStudies } from "@/components/studio/studio-case-study-content";
 
 // This preview documents the exploratory editorial card as a separate component so production usage can remain unchanged.
 export function EditorialCaseStudyPreview() {
-  // These lookups reuse the production summaries so the preview does not drift away from the main case-study content.
-  const generalAeronautics = studioCaseStudies.find((caseStudy) => caseStudy.id === "general-aeronautics");
-  const bevolve = studioCaseStudies.find((caseStudy) => caseStudy.id === "bevolve");
+  // The preview keeps its sample copy local so exploratory design-system work does not depend on production data loading.
+  const generalAeronauticsSummary =
+    "Brand identity, product storytelling, and interface design for a deep-tech drone portfolio built to communicate complex capability clearly.";
+  const bevolveSummary =
+    "Product design and AI-focused UX for ESG reporting workflows that help teams move from scattered data to usable operational insight.";
 
   return (
     <section className="space-y-6">
@@ -24,7 +25,7 @@ export function EditorialCaseStudyPreview() {
           size="feature"
           title="General Aeronautics"
           headline="Branding for a deep-tech drone portfolio"
-          subtext={generalAeronautics?.summary}
+          subtext={generalAeronauticsSummary}
           brandName="General Aeronautics"
           logoSrc="/assets/general-aeronautics.svg"
           heroSrc="/assets/GA_cover.png"
@@ -34,7 +35,7 @@ export function EditorialCaseStudyPreview() {
         <StudioCaseStudyEditorialCard
           title="Bevolve.ai"
           headline="AI platform for ESG reporting"
-          subtext={bevolve?.summary}
+          subtext={bevolveSummary}
           brandName="Bevolve.ai"
           logoSrc="/assets/bevolve-ai.svg"
           heroSrc="/assets/Bevolve_cover.png"

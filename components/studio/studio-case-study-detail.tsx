@@ -3,6 +3,8 @@ import Link from "next/link";
 import { ArrowUpRight, CheckCircle2, ImageIcon, Sparkles } from "lucide-react";
 
 import {
+  CaseStudyIcon,
+  getCaseStudyIcon,
   resolveStudioCaseStudyDetail,
   type StudioCaseStudySummary,
 } from "@/components/studio/studio-case-study-content";
@@ -140,7 +142,7 @@ export function StudioCaseStudyDetail({
         >
           <div className="relative flex h-full items-end justify-center overflow-hidden rounded-[1.1rem] border border-white/46 bg-[radial-gradient(circle_at_28%_72%,rgba(129,103,255,0.16),rgba(129,103,255,0.03)_34%,rgba(129,103,255,0)_62%),linear-gradient(160deg,rgba(255,255,255,0.34),rgba(255,255,255,0.14))] p-2 backdrop-blur-md sm:p-3">
             <div className="relative flex h-full min-h-[16rem] items-center justify-center p-8 text-[var(--neutral-700)]">
-              {caseStudy.media}
+              <CaseStudyIcon iconKey={caseStudy.mediaIconKey} />
             </div>
           </div>
         </PremiumSurface>
@@ -230,7 +232,9 @@ export function StudioCaseStudyDetail({
       {/* The proof grid closes the main story with compact credibility signals. */}
       <div className="relative z-10 grid gap-5 border-b border-[var(--color-border-default)]/80 py-8 md:grid-cols-3">
         {detail.proofPoints.map((point) => {
-          const ProofIcon = point.icon ?? Sparkles;
+          const ProofIcon = point.iconKey
+            ? getCaseStudyIcon(point.iconKey)
+            : Sparkles;
 
           return (
             <section key={point.title} className="space-y-4 pt-1">
