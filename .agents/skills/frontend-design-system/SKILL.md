@@ -22,9 +22,10 @@ Implement Yuvabe's design system in code with a design-system-first approach so 
    - `../../../app/design-system/foundations/page.tsx`
 2. Translate the spec in this order: tokens, typography, shared variants, components, then patterns.
 3. Always use shadcn primitives as the base layer for UI components, and build custom wrappers or variants on top of them instead of inventing new foundations from scratch.
-4. Check the original `https://ui.shadcn.com/` and `https://www.radix-ui.com/` docs before adding custom code; prefer documented built-in APIs, structure, and patterns before inventing wrappers or interaction logic.
-5. Add or update internal preview routes when introducing new foundation or component layers so the system remains inspectable.
-6. Add short intent-focused comments for non-trivial helpers and major JSX sections.
+4. For controls specifically, always start with an existing shadcn control or the repo's existing `components/ui/*` shadcn-based control before creating anything new; do not invent parallel `Input`, `Textarea`, `Select`, `Checkbox`, or similar primitives unless the user explicitly asks to extend the design system.
+5. Check the original `https://ui.shadcn.com/` and `https://www.radix-ui.com/` docs before adding custom code; prefer documented built-in APIs, structure, and patterns before inventing wrappers or interaction logic.
+6. Add or update internal preview routes when introducing new foundation or component layers so the system remains inspectable.
+7. Add short intent-focused comments for non-trivial helpers and major JSX sections.
 
 ## Implementation Rules
 - Keep `app/globals.css` as the single source of truth for tokens and typography utility contracts.
@@ -34,6 +35,7 @@ Implement Yuvabe's design system in code with a design-system-first approach so 
 - If a neutral needs a primary tint, create a named tinted-neutral token or utility in the shared foundation first; never solve it with per-instance component-level color mixing.
 - Keep variant counts lean and aligned with the spec.
 - Reuse one button contract across nav, hero, and section CTAs.
+- Reuse existing shadcn-based form controls whenever possible; styling a one-off native control inside a narrow internal screen is acceptable, but adding a new shared control primitive requires a clear system-level need.
 - Prefer composition over special-case page markup.
 - Treat responsive behavior as part of the component contract, not a page-level afterthought; every shared component should work cleanly from mobile-first layouts upward.
 - Respect accessibility basics: visible focus states, readable contrast, and reduced visual noise.

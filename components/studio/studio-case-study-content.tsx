@@ -6,23 +6,24 @@ import {
   ScanSearch,
   Sparkles,
 } from "lucide-react";
-import type { ReactNode } from "react";
 
-import rawStudioCaseStudies from "@/components/studio/data/studio-case-studies.json";
 import type {
   StudioCaseStudyMockCardLayout,
   StudioCaseStudyMockVariant,
   StudioCaseStudyMockViewport,
 } from "@/components/studio/studio-case-study-mock-card";
 
-export type StudioCaseStudyId =
-  | "general-aeronautics"
-  | "bevolve"
-  | "tvam"
-  | "kittykat"
-  | "ageshift";
+export const studioCaseStudyIds = [
+  "general-aeronautics",
+  "bevolve",
+  "tvam",
+  "kittykat",
+  "ageshift",
+] as const;
 
-type StudioCaseStudyIconKey =
+export type StudioCaseStudyId = (typeof studioCaseStudyIds)[number];
+
+export type StudioCaseStudyIconKey =
   | "barChart3"
   | "bot"
   | "layoutGrid"
@@ -37,10 +38,6 @@ export type StudioCaseStudySection = {
 export type StudioCaseStudyProofPoint = {
   title: string;
   description: string;
-  icon?: LucideIcon;
-};
-
-type RawStudioCaseStudyProofPoint = Omit<StudioCaseStudyProofPoint, "icon"> & {
   iconKey?: StudioCaseStudyIconKey;
 };
 
@@ -68,7 +65,7 @@ export type StudioCaseStudySummary = {
   summary: string;
   heroMockHeadline?: string;
   services: string[];
-  media: ReactNode;
+  mediaIconKey: StudioCaseStudyIconKey;
   mockImageSrc?: string;
   mockImageAlt?: string;
   mockVariant?: StudioCaseStudyMockVariant;
@@ -86,13 +83,23 @@ export type StudioCaseStudySummary = {
   seoDescription?: string;
 };
 
-type RawStudioCaseStudySummary = Omit<
+export type StudioEditableCaseStudy = Pick<
   StudioCaseStudySummary,
-  "media" | "modalProofPoints"
-> & {
-  mediaIconKey: StudioCaseStudyIconKey;
-  modalProofPoints?: RawStudioCaseStudyProofPoint[];
-};
+  | "id"
+  | "sector"
+  | "title"
+  | "summary"
+  | "heroMockHeadline"
+  | "services"
+  | "modalIntro"
+  | "modalOutcomes"
+  | "modalSections"
+  | "modalProofPoints"
+  | "modalGalleryRows"
+  | "modalTestimonial"
+  | "seoTitle"
+  | "seoDescription"
+>;
 
 export type ResolvedStudioCaseStudyDetail = {
   href: string;
@@ -114,30 +121,6 @@ const caseStudyIcons: Record<StudioCaseStudyIconKey, LucideIcon> = {
   sparkles: Sparkles,
 };
 
-function CaseStudyIcon({ icon: Icon }: { icon: LucideIcon }) {
-  return (
-    <Icon className="size-24 stroke-[1.4] text-[color:color-mix(in_srgb,var(--neutral-700)_82%,var(--lavender-500)_18%)]" />
-  );
-}
-
-function resolveProofPoints(
-  proofPoints?: RawStudioCaseStudyProofPoint[],
-): StudioCaseStudyProofPoint[] | undefined {
-  return proofPoints?.map(({ iconKey, ...point }) => ({
-    ...point,
-    icon: iconKey ? caseStudyIcons[iconKey] : undefined,
-  }));
-}
-
-// This adapter keeps the serializable case-study narrative in JSON while restoring icon-driven UI affordances in code.
-export const studioCaseStudies: StudioCaseStudySummary[] = (
-  rawStudioCaseStudies as RawStudioCaseStudySummary[]
-).map(({ mediaIconKey, modalProofPoints, ...caseStudy }) => ({
-  ...caseStudy,
-  media: <CaseStudyIcon icon={caseStudyIcons[mediaIconKey]} />,
-  modalProofPoints: resolveProofPoints(modalProofPoints),
-}));
-
 export const homepageCaseStudyIds: StudioCaseStudyId[] = [
   "general-aeronautics",
   "bevolve",
@@ -146,16 +129,64 @@ export const homepageCaseStudyIds: StudioCaseStudyId[] = [
   "kittykat",
 ];
 
-export const homepageCaseStudies = homepageCaseStudyIds
-  .map((id) => studioCaseStudies.find((caseStudy) => caseStudy.id === id))
-  .filter((caseStudy): caseStudy is StudioCaseStudySummary => Boolean(caseStudy));
+export function isStudioCaseStudyId(value: string): value is StudioCaseStudyId {
+  return studioCaseStudyIds.includes(value as StudioCaseStudyId);
+}
 
-export function getStudioCaseStudyHref(id: StudioCaseStudyId) {
+export function getStudioCaseStudyHref(id: string) {
   return `/case-studies/${id}`;
 }
 
-export function getStudioCaseStudyById(id: string) {
-  return studioCaseStudies.find((caseStudy) => caseStudy.id === id);
+export function getHomepageCaseStudies(caseStudies: StudioCaseStudySummary[]) {
+  return homepageCaseStudyIds
+    .map((id) => caseStudies.find((caseStudy) => caseStudy.id === id))
+    .filter((caseStudy): caseStudy is StudioCaseStudySummary => Boolean(caseStudy));
+}
+
+export function getCaseStudyIcon(
+  iconKey: StudioCaseStudyIconKey = "sparkles",
+) {
+  return caseStudyIcons[iconKey];
+}
+
+export function CaseStudyIcon({
+  iconKey,
+  className = "size-24 stroke-[1.4] text-[color:color-mix(in_srgb,var(--neutral-700)_82%,var(--lavender-500)_18%)]",
+}: {
+  iconKey: StudioCaseStudyIconKey;
+  className?: string;
+}) {
+  const Icon = getCaseStudyIcon(iconKey);
+
+  return <Icon className={className} />;
+}
+
+// This helper expands fallback copy so the editor can display the exact narrative users see on the site.
+export function createStudioEditableCaseStudy(
+  caseStudy: StudioCaseStudySummary,
+): StudioEditableCaseStudy {
+  const detail = resolveStudioCaseStudyDetail(caseStudy);
+
+  return {
+    id: caseStudy.id,
+    sector: caseStudy.sector,
+    title: caseStudy.title,
+    summary: caseStudy.summary,
+    heroMockHeadline:
+      caseStudy.heroMockHeadline ?? `${caseStudy.sector} product snapshot`,
+    services: [...caseStudy.services],
+    modalIntro: detail.intro,
+    modalOutcomes: [...detail.outcomes],
+    modalSections: detail.sections.map((section) => ({ ...section })),
+    modalProofPoints: detail.proofPoints.map((point) => ({ ...point })),
+    modalGalleryRows: detail.galleryRows.map((row) => ({
+      ...row,
+      items: row.items.map((item) => ({ ...item })),
+    })),
+    modalTestimonial: { ...detail.testimonial },
+    seoTitle: detail.seoTitle,
+    seoDescription: detail.seoDescription,
+  };
 }
 
 // Resolve fallback copy once so modal and page variants stay aligned around the same narrative.

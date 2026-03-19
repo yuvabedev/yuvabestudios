@@ -1,0 +1,32 @@
+{
+  "navigationItems": [
+    {
+      "label": "About",
+      "href": "#about"
+    },
+    {
+      "label": "Work",
+      "href": "#work"
+    },
+    {
+      "label": "AI-first DNA",
+      "href": "#ai-first-dna"
+    }
+  ],
+  "hero": {
+    "headlineIntro": "Build the",
+    "headlineHighlight": "right",
+    "headlineLineTwo": "product faster.",
+    "supportPrefix": "Clarity for startups moving fast. AI-first execution across",
+    "supportHighlight": "strategy, design, engineering, and growth marketing.",
+    "ctaLabel": "Start Your Project",
+    "ctaHref": "#"
+  },
+  "work": {
+    "eyebrow": "Work",
+    "headline": "Launch faster. Reach revenue sooner.",
+    "supportPrefix": "Turn roadmap bets into",
+    "supportHighlight": "shipped releases",
+    "supportSuffix": ", stronger campaigns, and compounding traction with one execution partner."
+  }
+}

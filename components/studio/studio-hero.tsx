@@ -1,8 +1,12 @@
-﻿import Link from "next/link";
+import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 
+import type { StudioHomepageHeroContent } from "@/components/studio/studio-homepage-content";
 import { StudioHandDrawnUnderline } from "@/components/studio/studio-hand-drawn-underline";
-import { StudioTrustStrip, StudioTrustStripGuides } from "@/components/studio/studio-trust-strip";
+import {
+  StudioTrustStrip,
+  StudioTrustStripGuides,
+} from "@/components/studio/studio-trust-strip";
 import { Button } from "@/components/ui/button";
 
 // The hero background borrows Stripe's bright angled energy through Yuvabe's brand palette.
@@ -18,45 +22,61 @@ function HeroBackground() {
   );
 }
 
+type StudioHeroProps = {
+  content: StudioHomepageHeroContent;
+};
+
 // The hero content keeps the user-provided copy intact while shifting the visual system to a Stripe-inspired light layout.
-export function StudioHero() {
+export function StudioHero({ content }: StudioHeroProps) {
   return (
-    <section id="about" className="relative flex min-h-[calc(100svh-72px)] flex-col justify-start overflow-hidden bg-white pb-14 md:pb-20">
+    <section
+      id="about"
+      className="relative flex min-h-[calc(100svh-72px)] flex-col justify-start overflow-hidden bg-white pb-14 md:pb-20"
+    >
       <HeroBackground />
 
       {/* The editorial content occupies the remaining viewport height after the rail is accounted for. */}
-      <div className="relative z-10 mx-auto flex w-full max-w-7xl items-start px-6 pt-10 pb-0 md:px-10 md:pt-16 md:pb-12">
+      <div className="relative z-10 mx-auto flex w-full max-w-7xl items-start px-6 pb-0 pt-10 md:px-10 md:pb-12 md:pt-16">
         <div className="grid w-full items-center gap-5 lg:grid-cols-[minmax(0,1.08fr)_minmax(320px,0.92fr)] lg:gap-7">
           {/* The left column follows Stripe's strong editorial layout with a compact badge, oversized headline, and one CTA. */}
           <div className="max-w-4xl space-y-4 lg:pl-4 xl:pl-4">
             <div id="ai-first-dna" className="max-w-5xl space-y-4">
               <h1 className="max-w-4xl text-hero-display text-[var(--neutral-950)]">
                 <span className="block">
-                  Build the{" "}
+                  {content.headlineIntro}{" "}
                   <span className="relative inline-block pr-[0.12em]">
-                    right
-                    <StudioHandDrawnUnderline className="-translate-y-[0.14em] -left-[0.18em] w-[1.78em]" />
+                    {content.headlineHighlight}
+                    <StudioHandDrawnUnderline className="-left-[0.18em] -translate-y-[0.14em] w-[1.78em]" />
                   </span>
                 </span>
                 <span className="relative mt-[0.06em] block w-fit pr-[0.16em]">
-                  <span>product </span>
-                  <span className="text-[var(--neutral-950)]">
-                    faster.
-                  </span>
-                  <StudioHandDrawnUnderline delay className="-translate-y-[0.14em] -left-[0.01em] w-[calc(100%+0.22rem)]" />
+                  <span>{content.headlineLineTwo}</span>
+                  <StudioHandDrawnUnderline
+                    delay
+                    className="-left-[0.01em] -translate-y-[0.14em] w-[calc(100%+0.22rem)]"
+                  />
                 </span>
               </h1>
               <p className="text-hero-support max-w-4xl text-[var(--color-text-secondary)] lg:max-w-[46rem]">
-                <span>Clarity for startups moving fast. AI-first execution across </span>
-                <span className="text-[var(--color-text-brand)]">strategy, design, engineering, and growth marketing.</span>
+                <span>{content.supportPrefix} </span>
+                <span className="text-[var(--color-text-brand)]">
+                  {content.supportHighlight}
+                </span>
               </p>
             </div>
 
             {/* The main CTA stays singular and visually dominant to preserve a clear conversion path. */}
-            <div id="start-your-build" className="flex flex-col items-start gap-4 pt-6 sm:flex-row sm:items-center">
-              <Button asChild size="lg" className="w-full min-w-0 bg-[var(--purple-500)] px-7 sm:w-auto sm:min-w-[220px]">
-                <Link href="#">
-                  Start Your Project
+            <div
+              id="start-your-build"
+              className="flex flex-col items-start gap-4 pt-6 sm:flex-row sm:items-center"
+            >
+              <Button
+                asChild
+                size="lg"
+                className="w-full min-w-0 bg-[var(--purple-500)] px-7 sm:w-auto sm:min-w-[220px]"
+              >
+                <Link href={content.ctaHref}>
+                  {content.ctaLabel}
                   <ArrowRight className="size-4" />
                 </Link>
               </Button>
@@ -80,11 +100,15 @@ export function StudioHero() {
               <div className="grid grid-cols-2 gap-4 pt-1">
                 <div className="rounded-[1.25rem] border border-slate-200 bg-slate-50 p-4">
                   <p className="text-label-sm text-slate-500">Strategy</p>
-                  <p className="mt-2 text-heading-sm text-[var(--neutral-900)]">Sharper bets</p>
+                  <p className="mt-2 text-heading-sm text-[var(--neutral-900)]">
+                    Sharper bets
+                  </p>
                 </div>
                 <div className="rounded-[1.25rem] border border-slate-200 bg-slate-50 p-4">
                   <p className="text-label-sm text-slate-500">Engineering</p>
-                  <p className="mt-2 text-heading-sm text-[var(--neutral-900)]">Faster loops</p>
+                  <p className="mt-2 text-heading-sm text-[var(--neutral-900)]">
+                    Faster loops
+                  </p>
                 </div>
               </div>
             </div>
@@ -96,28 +120,3 @@ export function StudioHero() {
     </section>
   );
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

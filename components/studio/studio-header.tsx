@@ -6,13 +6,8 @@ import Link from "next/link";
 import { AnimatePresence, motion } from "framer-motion";
 import { ArrowUpRight, Menu, X } from "lucide-react";
 
+import type { StudioHomepageNavItem } from "@/components/studio/studio-homepage-content";
 import { PremiumSurface } from "@/components/ui/premium-surface";
-
-const navigationItems = [
-  { label: "About", href: "#about" },
-  { label: "Work", href: "#work" },
-  { label: "AI-first DNA", href: "#ai-first-dna" },
-];
 
 const overlayTransition = {
   duration: 0.32,
@@ -38,8 +33,12 @@ function subscribe() {
   return () => {};
 }
 
+type StudioHeaderProps = {
+  navigationItems: StudioHomepageNavItem[];
+};
+
 // The header keeps desktop navigation calm while letting mobile users open a full-screen overlay menu.
-export function StudioHeader() {
+export function StudioHeader({ navigationItems }: StudioHeaderProps) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const isMounted = useSyncExternalStore(subscribe, () => true, () => false);
 
@@ -190,5 +189,4 @@ export function StudioHeader() {
     </>
   );
 }
-
 

@@ -5,12 +5,17 @@
     "title": "General Aeronautics",
     "summary": "Turned a complex drone portfolio into a clearer digital story buyers, partners, and operators could trust faster.",
     "heroMockHeadline": "Portfolio clarity across drone systems",
-    "services": ["Positioning", "Branding", "Content system"],
+    "services": [
+      "Positioning",
+      "Branding",
+      "Content system"
+    ],
     "mediaIconKey": "layoutGrid",
     "mockImageSrc": "/assets/GA_cover.png",
     "mockImageAlt": "General Aeronautics mobile product mock",
-    "mockViewport": "portrait",
     "mockVariant": "aurora",
+    "mockViewport": "portrait",
+    "size": "feature",
     "modalIntro": "General Aeronautics builds drone systems across agriculture, defense, humanitarian response, and warehouse automation. As the business expanded, its digital presence needed to explain that breadth with more clarity, confidence, and usability.",
     "modalOutcomes": [
       "Reframed a broad product portfolio into a sharper market story.",
@@ -34,6 +39,23 @@
       {
         "title": "Outcome",
         "body": "The result was a sharper story for the business, more intuitive interfaces, and a stronger platform for future launches, product communication, and brand growth."
+      }
+    ],
+    "modalProofPoints": [
+      {
+        "title": "Sharpened market story",
+        "description": "Turned a complex product portfolio into a clearer business narrative buyers and partners could trust faster.",
+        "iconKey": "scanSearch"
+      },
+      {
+        "title": "Unified touchpoints",
+        "description": "Aligned website, product UX, and supporting communication assets into one more coherent system.",
+        "iconKey": "layoutGrid"
+      },
+      {
+        "title": "Built for scale",
+        "description": "Created a stronger base for future launches, campaigns, and product communication decisions.",
+        "iconKey": "sparkles"
       }
     ],
     "modalGalleryRows": [
@@ -64,43 +86,29 @@
         ]
       }
     ],
-    "modalProofPoints": [
-      {
-        "title": "Sharpened market story",
-        "description": "Turned a complex product portfolio into a clearer business narrative buyers and partners could trust faster.",
-        "iconKey": "scanSearch"
-      },
-      {
-        "title": "Unified touchpoints",
-        "description": "Aligned website, product UX, and supporting communication assets into one more coherent system.",
-        "iconKey": "layoutGrid"
-      },
-      {
-        "title": "Built for scale",
-        "description": "Created a stronger base for future launches, campaigns, and product communication decisions.",
-        "iconKey": "sparkles"
-      }
-    ],
     "modalTestimonial": {
       "quote": "The work made a technically complex drone business easier to understand and easier to trust. Website, product UX, and supporting assets finally reinforced the same story instead of fragmenting it.",
       "attribution": "General Aeronautics engagement"
     },
     "seoTitle": "General Aeronautics Case Study",
-    "seoDescription": "See how Yuvabe helped General Aeronautics turn a broad drone portfolio into a clearer digital story across website, product UX, and brand systems.",
-    "size": "feature"
+    "seoDescription": "See how Yuvabe helped General Aeronautics turn a broad drone portfolio into a clearer digital story across website, product UX, and brand systems."
   },
   {
     "id": "bevolve",
     "sector": "ESG intelligence",
-    "title": "Bevolve.ai",
+    "title": "Bevolve.aia",
     "summary": "Turned fragmented sustainability reporting into an AI-guided system teams could trust for faster, evidence-based decisions.",
     "heroMockHeadline": "AI-guided ESG reporting workflow",
-    "services": ["AI integration", "Reporting automation", "Decision support"],
+    "services": [
+      "AI integration",
+      "Reporting automation",
+      "Decision support"
+    ],
     "mediaIconKey": "bot",
     "mockImageSrc": "/assets/Bevolve_cover.png",
     "mockImageAlt": "Bevolve.ai product experience mock",
-    "mockViewport": "landscape",
     "mockVariant": "sunrise",
+    "mockViewport": "landscape",
     "modalIntro": "Bevolve.ai needed a product experience that could bring together fragmented ESG and sustainability data, automate reporting workflows, and make decision support easier for teams navigating compliance pressure.",
     "modalOutcomes": [
       "Unified structured and unstructured ESG data into one clearer workflow.",
@@ -124,6 +132,23 @@
       {
         "title": "Outcome",
         "body": "The resulting system gave teams a faster, more transparent path through ESG reporting and benchmarking while improving confidence in evidence-based decisions."
+      }
+    ],
+    "modalProofPoints": [
+      {
+        "title": "Connected fragmented data",
+        "description": "Unified diverse ESG and GHG inputs into one more manageable reporting and compliance flow.",
+        "iconKey": "bot"
+      },
+      {
+        "title": "Improved decision support",
+        "description": "Added AI-guided insight generation, benchmarking, and natural-language access to speed up review workflows.",
+        "iconKey": "barChart3"
+      },
+      {
+        "title": "Raised trust and usability",
+        "description": "Made complex sustainability reporting easier to understand while preserving transparency and rigor.",
+        "iconKey": "sparkles"
       }
     ],
     "modalGalleryRows": [
@@ -154,23 +179,6 @@
         ]
       }
     ],
-    "modalProofPoints": [
-      {
-        "title": "Connected fragmented data",
-        "description": "Unified diverse ESG and GHG inputs into one more manageable reporting and compliance flow.",
-        "iconKey": "bot"
-      },
-      {
-        "title": "Improved decision support",
-        "description": "Added AI-guided insight generation, benchmarking, and natural-language access to speed up review workflows.",
-        "iconKey": "barChart3"
-      },
-      {
-        "title": "Raised trust and usability",
-        "description": "Made complex sustainability reporting easier to understand while preserving transparency and rigor.",
-        "iconKey": "sparkles"
-      }
-    ],
     "modalTestimonial": {
       "quote": "The strongest shift was not just automation, but coherence. Reporting, benchmarking, and AI-guided analysis started feeling like one usable system, which made complex ESG work easier to navigate and easier to act on.",
       "attribution": "Bevolve.ai engagement"
@@ -184,13 +192,17 @@
     "title": "TVAM",
     "summary": "Built advisor-style AI tools that simplified health, policy, and exam-prep workflows through one clearer product system.",
     "heroMockHeadline": "Advisor-style AI tools in one system",
-    "services": ["AI integration", "Product design", "RAG workflows"],
+    "services": [
+      "AI integration",
+      "Product design",
+      "RAG workflows"
+    ],
     "mediaIconKey": "bot",
     "mockImageSrc": "/assets/tvam_cover.jpeg",
     "mockImageAlt": "TVAM case study cover",
-    "mockViewport": "portrait",
     "mockVariant": "aurora",
     "mockLayout": "feature",
+    "mockViewport": "portrait",
     "modalIntro": "TVAM focused on simplifying health, policy, and exam-prep workflows through advisor-style AI tools. The opportunity was to turn multiple AI capabilities into one product experience that felt useful, reliable, and easy to navigate.",
     "modalOutcomes": [
       "Built AI-powered Health and Policy Advisors plus a USMLE preparation tool.",
@@ -228,13 +240,17 @@
     "title": "KittyKat",
     "summary": "Built a generative AI fashion platform that turned product photos into realistic model visuals at scale with faster turnaround and less production overhead.",
     "heroMockHeadline": "Product-to-model image generation",
-    "services": ["Generative AI", "Data preprocessing", "Image refinement"],
+    "services": [
+      "Generative AI",
+      "Data preprocessing",
+      "Image refinement"
+    ],
     "mediaIconKey": "sparkles",
     "mockImageSrc": "/assets/KK-cover.png",
     "mockImageAlt": "KittyKat AI fashion workflow cover",
-    "mockViewport": "landscape",
     "mockVariant": "sunrise",
     "mockLayout": "feature",
+    "mockViewport": "landscape",
     "modalIntro": "KittyKat needed a way to generate realistic fashion imagery at scale without the delay and cost of repeated production shoots. The work focused on turning product-to-model image generation into a more reliable AI workflow with the quality required for premium brand presentation.",
     "modalOutcomes": [
       "Built a generative AI fashion platform that automated product-to-model image generation.",
@@ -290,13 +306,16 @@
     "title": "AgeShift",
     "summary": "Delivered an AI-enabled wellness platform spanning mobile app, backend APIs, admin tools, and cloud infrastructure.",
     "heroMockHeadline": "Connected wellness product ecosystem",
-    "services": ["Product ecosystem", "AI recommendations"],
+    "services": [
+      "Product ecosystem",
+      "AI recommendations"
+    ],
     "mediaIconKey": "barChart3",
     "mockImageSrc": "/assets/ageShift_logo.svg",
     "mockImageAlt": "AgeShift logo",
-    "mockViewport": "landscape",
     "mockVariant": "prism",
     "mockLayout": "feature",
+    "mockViewport": "landscape",
     "modalIntro": "AgeShift needed a connected wellness product ecosystem that could guide users through routines, protocol tracking, and AI-powered recommendations while also giving administrators stronger operational visibility.",
     "modalOutcomes": [
       "Built a Flutter mobile app, FastAPI backend, and Next.js admin panel on Google Cloud Platform.",
