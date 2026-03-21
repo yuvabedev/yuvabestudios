@@ -20,6 +20,8 @@ import type {
   StudioHomepageContent,
   StudioHomepageHeroContent,
   StudioHomepageNavItem,
+  StudioHomepageServiceItem,
+  StudioHomepageServicesContent,
   StudioHomepageWorkContent,
 } from "@/components/studio/studio-homepage-content";
 import { getSupabaseAdminClient } from "@/lib/supabase-admin";
@@ -28,6 +30,34 @@ const dataDirectory = path.join(process.cwd(), "components", "studio", "data");
 const caseStudiesFilePath = path.join(dataDirectory, "studio-case-studies.json");
 const homepageFilePath = path.join(dataDirectory, "studio-homepage-content.json");
 const contentDocumentsTable = "content_documents";
+
+const defaultServicesContent: StudioHomepageServicesContent = {
+  eyebrow: "Services",
+  headline: "The operating system for startup traction.",
+  supportPrefix: "Turn roadmap bets into",
+  supportHighlight: "sharper strategy, shipped product,",
+  supportSuffix: "and faster learning with one AI-first execution partner.",
+  items: [
+    {
+      title: "Product Engineering",
+      shortLabel: "From product conception to GTM and scale",
+      description:
+        "We help founders shape the product, plan the roadmap, launch with clarity, and scale what starts working.",
+    },
+    {
+      title: "AI-Native Apps",
+      shortLabel: "AI-native apps and workflows",
+      description:
+        "We design and build AI-native apps, copilots, and workflows that turn frontier capabilities into useful products.",
+    },
+    {
+      title: "Digital Marketing",
+      shortLabel: "Campaigns built to create traction",
+      description:
+        "We run positioning, landing pages, campaigns, and analytics that turn launches into users, pipeline, and learning.",
+    },
+  ],
+};
 
 const legacyStudioAssetPathAliases: Record<string, string> = {
   "/assets/ga-image.png": "/assets/GA_cover.png",
@@ -200,6 +230,81 @@ function normalizeWorkContent(
   };
 }
 
+function parseServiceItem(
+  value: unknown,
+  label: string,
+): StudioHomepageServiceItem {
+  assertRecord(value, label);
+
+  return {
+    title: expectString(value.title, `${label}.title`),
+    shortLabel: expectString(value.shortLabel, `${label}.shortLabel`),
+    description: expectString(value.description, `${label}.description`),
+  };
+}
+
+function normalizeServiceItem(
+  value: unknown,
+  label: string,
+): StudioHomepageServiceItem | null {
+  const parsed = parseServiceItem(value, label);
+
+  const title = parsed.title.trim();
+  const shortLabel = parsed.shortLabel.trim();
+  const description = parsed.description.trim();
+
+  if (!title && !shortLabel && !description) {
+    return null;
+  }
+
+  return {
+    title,
+    shortLabel,
+    description,
+  };
+}
+
+function parseServicesContent(
+  value: unknown,
+  label: string,
+): StudioHomepageServicesContent {
+  assertRecord(value, label);
+
+  return {
+    eyebrow: expectString(value.eyebrow, `${label}.eyebrow`),
+    headline: expectString(value.headline, `${label}.headline`),
+    supportPrefix: expectString(value.supportPrefix, `${label}.supportPrefix`),
+    supportHighlight: expectString(
+      value.supportHighlight,
+      `${label}.supportHighlight`,
+    ),
+    supportSuffix: expectString(value.supportSuffix, `${label}.supportSuffix`),
+    items: expectArray(value.items, `${label}.items`).map((item, index) =>
+      parseServiceItem(item, `${label}.items[${index}]`),
+    ),
+  };
+}
+
+function normalizeServicesContent(
+  value: unknown,
+  label: string,
+): StudioHomepageServicesContent {
+  const parsed = parseServicesContent(value, label);
+
+  return {
+    eyebrow: parsed.eyebrow.trim(),
+    headline: parsed.headline.trim(),
+    supportPrefix: parsed.supportPrefix.trim(),
+    supportHighlight: parsed.supportHighlight.trim(),
+    supportSuffix: parsed.supportSuffix.trim(),
+    items: parsed.items
+      .map((item, index) =>
+        normalizeServiceItem(item, `${label}.items[${index}]`),
+      )
+      .filter((item): item is StudioHomepageServiceItem => Boolean(item)),
+  };
+}
+
 function parseHomepageContent(value: unknown): StudioHomepageContent {
   assertRecord(value, "homepage content");
 
@@ -211,6 +316,9 @@ function parseHomepageContent(value: unknown): StudioHomepageContent {
       parseNavItem(item, `homepage content.navigationItems[${index}]`),
     ),
     hero: parseHeroContent(value.hero, "homepage content.hero"),
+    services: value.services
+      ? parseServicesContent(value.services, "homepage content.services")
+      : defaultServicesContent,
     work: parseWorkContent(value.work, "homepage content.work"),
   };
 }
@@ -230,6 +338,12 @@ export function parseStudioHomepageContentInput(
       )
       .filter((item): item is StudioHomepageNavItem => Boolean(item)),
     hero: normalizeHeroContent(value.hero, "homepage content payload.hero"),
+    services: value.services
+      ? normalizeServicesContent(
+          value.services,
+          "homepage content payload.services",
+        )
+      : defaultServicesContent,
     work: normalizeWorkContent(value.work, "homepage content payload.work"),
   };
 }

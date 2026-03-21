@@ -2,6 +2,7 @@ import { getHomepageCaseStudies } from "@/components/studio/studio-case-study-co
 import { StudioCaseStudies } from "@/components/studio/studio-case-studies";
 import { StudioHeader } from "@/components/studio/studio-header";
 import { StudioHero } from "@/components/studio/studio-hero";
+import { StudioServices } from "@/components/studio/studio-services";
 import {
   getStudioCaseStudies,
   getStudioHomepageContent,
@@ -32,6 +33,7 @@ export default async function Home() {
       {/* The homepage starts with the Stripe-inspired hero and flows into proof. */}
       <StudioHeader navigationItems={homepageContent.navigationItems} />
       <StudioHero content={homepageContent.hero} />
+      <StudioServices content={homepageContent.services} />
       <StudioCaseStudies
         caseStudies={homepageCaseStudies}
         workContent={homepageContent.work}

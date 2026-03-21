@@ -21,8 +21,24 @@ export type StudioHomepageWorkContent = {
   supportSuffix: string;
 };
 
+export type StudioHomepageServiceItem = {
+  title: string;
+  shortLabel: string;
+  description: string;
+};
+
+export type StudioHomepageServicesContent = {
+  eyebrow: string;
+  headline: string;
+  supportPrefix: string;
+  supportHighlight: string;
+  supportSuffix: string;
+  items: StudioHomepageServiceItem[];
+};
+
 export type StudioHomepageContent = {
   navigationItems: StudioHomepageNavItem[];
   hero: StudioHomepageHeroContent;
+  services: StudioHomepageServicesContent;
   work: StudioHomepageWorkContent;
 };

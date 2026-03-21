@@ -58,6 +58,7 @@ Create interfaces that feel premium, calm, high-trust, and technically sophistic
 - Use restrained accent colors; avoid rainbow palettes or equal-weight multi-accent layouts.
 - Surfaces should be minimal, with low-opacity borders and soft depth.
 - Prefer contrast and restraint over decorative effects.
+- Look for opportunities to introduce very small amounts of brand color in disciplined ways, such as short dividers, micro-accents, badges, focus cues, or tiny highlight moments that help the composition feel alive without turning the surface noisy.
 - Respect the official brand palette from brand-foundation before inventing new accents.
 - Keep violet as the primary brand anchor and yellow as the main warm counterweight.
 - Treat the extended accent palette as supporting material, not a competing identity.

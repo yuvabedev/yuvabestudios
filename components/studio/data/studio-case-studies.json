@@ -158,23 +158,50 @@
           {
             "title": "Reporting workflow",
             "description": "A clearer system for collecting, validating, and automating ESG reporting across multiple data sources."
-          },
-          {
-            "title": "AI-assisted review",
-            "description": "Natural-language querying and GPT-powered guidance to help teams move through analysis faster."
           }
         ]
       },
       {
-        "title": "Insight layers",
+        "title": "Review and decision support",
         "items": [
+          {
+            "title": "AI-assisted review",
+            "description": "Natural-language querying and GPT-powered guidance to help teams move through analysis faster."
+          },
           {
             "title": "Benchmarking engine",
             "description": "A decision-support layer for comparing ESG performance across industries, peers, and geographies."
-          },
+          }
+        ]
+      },
+      {
+        "title": "Benchmarking workspace",
+        "items": [
+          {
+            "title": "Peer comparison workspace",
+            "description": "A focused view for reading sector benchmarks, surfacing variance, and turning ESG signals into faster operating decisions."
+          }
+        ]
+      },
+      {
+        "title": "Monitoring layers",
+        "items": [
           {
             "title": "Heat maps and signals",
             "description": "AI-driven visibility layers that make patterns easier to read without forcing users through raw spreadsheets."
+          },
+          {
+            "title": "Compliance monitoring",
+            "description": "Visibility across validation checkpoints, audit trails, and reporting readiness so teams can move with more confidence as standards evolve."
+          }
+        ]
+      },
+      {
+        "title": "System overview",
+        "items": [
+          {
+            "title": "Integrated decision layer",
+            "description": "One connected ESG intelligence surface that brings reporting, review, benchmarking, and compliance into a more usable product story."
           }
         ]
       }
@@ -198,11 +225,14 @@
       "RAG workflows"
     ],
     "mediaIconKey": "bot",
-    "mockImageSrc": "/assets/tvam_cover.jpeg",
+    "mockImageSrc": "/assets/tvam/tvam_cover.jpg",
     "mockImageAlt": "TVAM case study cover",
     "mockVariant": "aurora",
     "mockLayout": "feature",
     "mockViewport": "portrait",
+    "mockPresentation": "fullImage",
+    "mockImageAspectRatio": "1310 / 2708",
+    "mockImageClassName": "scale-[1.22]",
     "modalIntro": "TVAM focused on simplifying health, policy, and exam-prep workflows through advisor-style AI tools. The opportunity was to turn multiple AI capabilities into one product experience that felt useful, reliable, and easy to navigate.",
     "modalOutcomes": [
       "Built AI-powered Health and Policy Advisors plus a USMLE preparation tool.",
@@ -225,6 +255,34 @@
         "title": "Shipped cloud-ready infrastructure",
         "description": "Paired product work with deployment patterns built for secure growth and iteration.",
         "iconKey": "sparkles"
+      }
+    ],
+    "modalGalleryRows": [
+      {
+        "title": "Advisor product flows",
+        "items": [
+          {
+            "title": "Health Advisor workspace",
+            "description": "A portrait-led advisor flow that makes complex health guidance feel more approachable, structured, and actionable."
+          },
+          {
+            "title": "Policy Advisor journey",
+            "description": "A companion AI workflow for policy and coverage questions designed to reduce friction in expert-led decision support."
+          }
+        ]
+      },
+      {
+        "title": "Retrieval and orchestration",
+        "items": [
+          {
+            "title": "Document-aware assistant",
+            "description": "A retrieval-driven experience that connects uploaded materials, reference content, and AI responses inside one usable system."
+          },
+          {
+            "title": "Exam-prep support",
+            "description": "An AI-guided prep flow that brings question support, recall, and guided explanation into a clearer study rhythm."
+          }
+        ]
       }
     ],
     "modalTestimonial": {
@@ -293,6 +351,34 @@
         "iconKey": "scanSearch"
       }
     ],
+    "modalGalleryRows": [
+      {
+        "title": "Generation workflow",
+        "items": [
+          {
+            "title": "Product-to-model pipeline",
+            "description": "A landscape-oriented workflow for turning static product inputs into styled model imagery without the overhead of repeated shoots."
+          },
+          {
+            "title": "Prompt and variation control",
+            "description": "A supporting generation layer that helps teams explore more brand-relevant outputs while keeping the workflow commercially usable."
+          }
+        ]
+      },
+      {
+        "title": "Refinement and output",
+        "items": [
+          {
+            "title": "Image quality tuning",
+            "description": "Refinement passes focused on realism, body proportion, and facial consistency so AI visuals hold up for premium presentation."
+          },
+          {
+            "title": "Campaign-ready asset system",
+            "description": "A scalable output layer that makes it easier to generate larger batches of visuals for storytelling, catalog, and brand content."
+          }
+        ]
+      }
+    ],
     "modalTestimonial": {
       "quote": "The value of the work was not just faster image generation. It was building an AI visual pipeline that improved realism, reduced production delay, and made large-scale branded output far more usable.",
       "attribution": "KittyKat engagement"
@@ -338,6 +424,34 @@
         "title": "Built for secure scaling",
         "description": "Paired product execution with cloud infrastructure and CI/CD for long-term reliability.",
         "iconKey": "sparkles"
+      }
+    ],
+    "modalGalleryRows": [
+      {
+        "title": "Member experience",
+        "items": [
+          {
+            "title": "Wellness app journey",
+            "description": "A mobile-first product flow for routines, check-ins, and protocol guidance built to feel calmer, clearer, and more actionable."
+          },
+          {
+            "title": "Protocol tracking",
+            "description": "Structured user flows that make ongoing habit tracking and next-step guidance easier to understand over time."
+          }
+        ]
+      },
+      {
+        "title": "Admin and intelligence layers",
+        "items": [
+          {
+            "title": "Admin operations surface",
+            "description": "A landscape-oriented control layer for managing users, content, and operational visibility across the platform."
+          },
+          {
+            "title": "Recommendation engine",
+            "description": "AI-assisted personalization flows that connect user behavior, wellness signals, and backend logic into one product ecosystem."
+          }
+        ]
       }
     ],
     "modalTestimonial": {

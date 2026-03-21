@@ -35,16 +35,72 @@ type StudioCaseStudyGalleryImageLibrary = Record<
 const caseStudyGalleryImageLibrary =
   galleryImageLibrary as StudioCaseStudyGalleryImageLibrary;
 const shouldSkipImageOptimization = process.env.NODE_ENV === "development";
+type DetailGalleryLayoutMode = "modal" | "page";
+type DetailGalleryRowKind = "full" | "split";
+type DetailGalleryViewport = "portrait" | "landscape";
 
-// Alternate wide and narrow gallery items so the proof rows keep a clean editorial rhythm.
-function getGalleryItemClasses(rowIndex: number, itemIndex: number) {
-  const featuredFirst = rowIndex % 2 === 0;
-  const isFeatured = featuredFirst ? itemIndex === 0 : itemIndex === 1;
+const detailGalleryStageClassMap: Record<
+  DetailGalleryLayoutMode,
+  Record<DetailGalleryViewport, Record<DetailGalleryRowKind, string>>
+> = {
+  page: {
+    portrait: {
+      full: "aspect-[4/5] sm:aspect-[5/6] lg:aspect-[3/4]",
+      split: "aspect-[5/6] sm:aspect-[4/5] lg:aspect-[7/8]",
+    },
+    landscape: {
+      full: "aspect-[16/10] sm:aspect-[16/9] lg:aspect-[16/8.5]",
+      split: "aspect-[4/3] sm:aspect-[16/10] lg:aspect-[16/10]",
+    },
+  },
+  modal: {
+    portrait: {
+      full: "aspect-[4/5] sm:aspect-[5/6] lg:aspect-[4/5]",
+      split: "aspect-[5/6] sm:aspect-[4/5] lg:aspect-[5/6]",
+    },
+    landscape: {
+      full: "aspect-[16/10] sm:aspect-[16/9] lg:aspect-[16/10]",
+      split: "aspect-[4/3] sm:aspect-[16/10] lg:aspect-[16/10]",
+    },
+  },
+};
 
-  return {
-    wrapper: isFeatured ? "md:col-span-7" : "md:col-span-5",
-    frame: "h-[16rem] md:h-[20rem]",
-  };
+// Gallery rows own their layout: a single item becomes full width, while a pair becomes a split row.
+function getGalleryItemSpan(itemCount: number) {
+  return itemCount <= 1 ? "md:col-span-12" : "md:col-span-6";
+}
+
+// The detail gallery inherits viewport intent from the case study so mobile-first work reads taller than desktop-first work.
+function getGalleryStageClass({
+  isModal,
+  mockViewport,
+  itemCount,
+}: {
+  isModal: boolean;
+  mockViewport?: StudioCaseStudySummary["mockViewport"];
+  itemCount: number;
+}) {
+  const layoutMode: DetailGalleryLayoutMode = isModal ? "modal" : "page";
+  const viewport: DetailGalleryViewport =
+    mockViewport === "landscape" ? "landscape" : "portrait";
+  const rowKind: DetailGalleryRowKind = itemCount <= 1 ? "full" : "split";
+
+  return detailGalleryStageClassMap[layoutMode][viewport][rowKind];
+}
+
+// The browser image-size hint stays aligned to the row shape so single panels can claim the full canvas width.
+function getGalleryImageSizes({
+  isModal,
+  itemCount,
+}: {
+  isModal: boolean;
+  itemCount: number;
+}) {
+  if (itemCount <= 1) {
+    return "100vw";
+  }
+
+  return isModal ? "(min-width: 768px) 50vw, 100vw" : "(min-width: 768px) 50vw, 100vw";
 }
 
 // This shared detail body keeps the modal summary and SEO page aligned around the same case-study narrative.
@@ -172,7 +228,7 @@ export function StudioCaseStudyDetail({
         </div>
       </div>
 
-      {/* The gallery rows keep the visual proof crawlable on the full page and consistent in the modal. */}
+      {/* The gallery rows switch between a wider page showcase and a denser modal proof grid. */}
       <div className="relative z-10 space-y-6 border-b border-[var(--color-border-default)]/80 py-8">
         {detail.galleryRows.map((row, rowIndex) => (
           <section key={row.title} className="space-y-4">
@@ -184,46 +240,67 @@ export function StudioCaseStudyDetail({
                 Proof layer
               </p>
             </div>
-            <div className="grid gap-5 md:grid-cols-12 md:items-start">
+            <div className="grid gap-6 md:grid-cols-12 md:items-stretch">
               {row.items.map((item, itemIndex) => {
-                const layout = getGalleryItemClasses(rowIndex, itemIndex);
                 const galleryImage =
                   galleryAssets.images[
                     (rowIndex * 2 + itemIndex) % galleryAssets.images.length
                   ];
 
                 return (
-                  <div key={item.title} className={cn("space-y-3", layout.wrapper)}>
-                    <div
-                      className={cn(
-                        "relative overflow-hidden rounded-[1.1rem] border border-white/42 bg-[radial-gradient(circle_at_70%_18%,rgba(255,202,45,0.14),rgba(255,202,45,0)_24%,rgba(255,255,255,0)_44%),linear-gradient(145deg,rgba(255,255,255,0.32),rgba(255,255,255,0.14))] shadow-[0_10px_26px_rgba(15,23,42,0.035)] backdrop-blur-md",
-                        layout.frame,
-                      )}
-                    >
-                      {/* The image fill replaces placeholders while preserving the premium frame treatment. */}
-                      <Image
-                        src={galleryImage.src}
-                        alt={galleryImage.alt}
-                        fill
-                        sizes="(min-width: 768px) 50vw, 100vw"
-                        className="object-cover"
-                        unoptimized={shouldSkipImageOptimization}
-                      />
-                      <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgba(11,15,25,0.08),rgba(11,15,25,0.02)_24%,rgba(255,255,255,0)_56%)]" />
-                      <div className="absolute left-5 top-5 inline-flex h-10 items-center gap-2 rounded-full border border-white/44 bg-white/42 px-3 text-[0.66rem] uppercase tracking-[0.16em] text-[var(--color-text-tertiary)] shadow-[0_6px_12px_rgba(15,23,42,0.028)] backdrop-blur-md">
+                  <article
+                    key={item.title}
+                    className={cn(
+                      "flex h-full flex-col overflow-hidden rounded-[1.35rem] border border-[var(--color-border-default)]/80 bg-white shadow-[0_18px_42px_rgba(15,23,42,0.055)]",
+                      getGalleryItemSpan(row.items.length),
+                    )}
+                  >
+                    {/* The modal now reuses the same framed showcase language so both contexts tell the same visual story. */}
+                    <div className="relative border-b border-[var(--color-border-default)]/70 bg-[linear-gradient(180deg,rgba(252,252,253,0.96),rgba(248,248,250,0.92))] p-3 sm:p-4">
+                      <div className="absolute left-8 top-8 z-10 inline-flex items-center gap-2 rounded-full border border-[var(--color-border-default)]/90 bg-white/94 px-3 py-2 text-[0.66rem] uppercase tracking-[0.16em] text-[var(--color-text-tertiary)] shadow-[0_8px_18px_rgba(15,23,42,0.05)]">
                         <ImageIcon className="size-3.5" strokeWidth={1.9} />
                         {galleryAssets.badgeLabel}
                       </div>
+                      <div className="relative overflow-hidden rounded-[1.05rem] border border-[var(--color-border-default)]/75 bg-[var(--color-background-surface)] shadow-[0_10px_28px_rgba(15,23,42,0.06)]">
+                        <div
+                          className={cn(
+                            "relative w-full",
+                            getGalleryStageClass({
+                              isModal,
+                              mockViewport: caseStudy.mockViewport,
+                              itemCount: row.items.length,
+                            }),
+                          )}
+                        >
+                          <Image
+                            src={galleryImage.src}
+                            alt={galleryImage.alt}
+                            fill
+                            sizes={getGalleryImageSizes({
+                              isModal,
+                              itemCount: row.items.length,
+                            })}
+                            className="object-cover object-center"
+                            unoptimized={shouldSkipImageOptimization}
+                          />
+                          <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgba(255,255,255,0.04),rgba(255,255,255,0)_28%,rgba(11,15,25,0.045)_100%)]" />
+                        </div>
+                      </div>
                     </div>
-                    <div className="space-y-1 px-1">
-                      <p className="text-body-lg font-semibold text-[var(--neutral-950)]">
-                        {item.title}
-                      </p>
-                      <p className="max-w-xl text-body-sm leading-7 text-[var(--color-text-secondary)]">
+
+                    {/* The caption bar stays consistent so the page and modal use the same proof-panel contract. */}
+                    <div className="grid flex-1 items-start gap-4 bg-white px-5 py-5 sm:px-6 lg:grid-cols-[minmax(0,18rem)_minmax(0,1fr)] lg:gap-7">
+                      <div className="flex flex-col items-start justify-start gap-2">
+                        <p className="text-[1.35rem] font-semibold leading-[1.04] tracking-[-0.035em] text-[var(--neutral-950)]">
+                          {item.title}
+                        </p>
+                        <div className="h-px w-12 bg-[var(--color-text-brand)]/70" />
+                      </div>
+                      <p className="max-w-3xl pt-0.5 text-body-sm leading-7 text-[var(--color-text-secondary)]">
                         {item.description}
                       </p>
                     </div>
-                  </div>
+                  </article>
                 );
               })}
             </div>

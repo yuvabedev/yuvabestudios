@@ -83,8 +83,10 @@ export function StudioCaseStudies({
                     caseStudy.mockImageAlt ??
                     `${caseStudy.title} case study mock`
                   }
+                  imageAspectRatio={caseStudy.mockImageAspectRatio}
                   imageClassName={caseStudy.mockImageClassName}
                   mockViewport={caseStudy.mockViewport}
+                  mockPresentation={caseStudy.mockPresentation}
                   variant={caseStudy.mockVariant}
                   layout={caseStudy.mockLayout}
                   detailHref={getStudioCaseStudyHref(caseStudy.id)}
@@ -106,8 +108,10 @@ export function StudioCaseStudies({
                     caseStudy.mockImageAlt ??
                     `${caseStudy.title} case study mock`
                   }
+                  imageAspectRatio={caseStudy.mockImageAspectRatio}
                   imageClassName={caseStudy.mockImageClassName}
                   mockViewport={caseStudy.mockViewport}
+                  mockPresentation={caseStudy.mockPresentation}
                   variant={caseStudy.mockVariant}
                   layout={caseStudy.mockLayout}
                   detailHref={getStudioCaseStudyHref(caseStudy.id)}
@@ -128,8 +132,10 @@ export function StudioCaseStudies({
                     spotlightCaseStudy.mockImageAlt ??
                     `${spotlightCaseStudy.title} case study mock`
                   }
+                  imageAspectRatio={spotlightCaseStudy.mockImageAspectRatio}
                   imageClassName={spotlightCaseStudy.mockImageClassName}
                   mockViewport={spotlightCaseStudy.mockViewport}
+                  mockPresentation={spotlightCaseStudy.mockPresentation}
                   variant={spotlightCaseStudy.mockVariant}
                   layout={spotlightCaseStudy.mockLayout}
                   span="full"

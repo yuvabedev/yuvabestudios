@@ -15,7 +15,10 @@ import type {
   StudioEditableCaseStudy,
   StudioCaseStudyId,
 } from "@/components/studio/studio-case-study-content";
-import type { StudioHomepageContent } from "@/components/studio/studio-homepage-content";
+import type {
+  StudioHomepageContent,
+  StudioHomepageServiceItem,
+} from "@/components/studio/studio-homepage-content";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -136,6 +139,96 @@ function StringListEditor({
             Remove
           </Button>
         </div>
+      ))}
+    </div>
+  );
+}
+
+function ServiceItemsEditor({
+  items,
+  onChange,
+}: {
+  items: StudioHomepageServiceItem[];
+  onChange: (items: StudioHomepageServiceItem[]) => void;
+}) {
+  return (
+    <div className="space-y-4">
+      <div className="flex items-center justify-between gap-3">
+        <p className="text-label-sm uppercase tracking-[0.16em] text-[var(--color-text-tertiary)]">
+          Service cards
+        </p>
+        <Button
+          type="button"
+          variant="secondary"
+          size="sm"
+          onClick={() =>
+            onChange([
+              ...items,
+              { title: "", shortLabel: "", description: "" },
+            ])
+          }
+        >
+          Add service
+        </Button>
+      </div>
+      {items.map((item, index) => (
+        <Card key={`service-${index}`}>
+          <CardHeader className="flex flex-row items-center justify-between gap-3">
+            <CardTitle className="text-body-lg">Service {index + 1}</CardTitle>
+            <Button
+              type="button"
+              variant="secondary"
+              size="sm"
+              onClick={() => onChange(removeAt(items, index))}
+            >
+              Remove
+            </Button>
+          </CardHeader>
+          <CardContent className="space-y-4 pb-6">
+            <Field label="Title">
+              <input
+                className={formControlClassName}
+                value={item.title}
+                onChange={(event) =>
+                  onChange(
+                    replaceAt(items, index, {
+                      ...item,
+                      title: event.target.value,
+                    }),
+                  )
+                }
+              />
+            </Field>
+            <Field label="Short label">
+              <input
+                className={formControlClassName}
+                value={item.shortLabel}
+                onChange={(event) =>
+                  onChange(
+                    replaceAt(items, index, {
+                      ...item,
+                      shortLabel: event.target.value,
+                    }),
+                  )
+                }
+              />
+            </Field>
+            <Field label="Description">
+              <textarea
+                className={textareaClassName}
+                value={item.description}
+                onChange={(event) =>
+                  onChange(
+                    replaceAt(items, index, {
+                      ...item,
+                      description: event.target.value,
+                    }),
+                  )
+                }
+              />
+            </Field>
+          </CardContent>
+        </Card>
       ))}
     </div>
   );
@@ -472,6 +565,34 @@ export function StudioAdminEditor({
                     <textarea className={textareaClassName} value={homepageDraft.work.supportSuffix} onChange={(event) => setHomepageDraft({ ...homepageDraft, work: { ...homepageDraft.work, supportSuffix: event.target.value } })} />
                   </Field>
                 </div>
+                <div className="grid gap-6 lg:grid-cols-2">
+                  <Field label="Services eyebrow">
+                    <input className={formControlClassName} value={homepageDraft.services.eyebrow} onChange={(event) => setHomepageDraft({ ...homepageDraft, services: { ...homepageDraft.services, eyebrow: event.target.value } })} />
+                  </Field>
+                  <Field label="Services headline">
+                    <input className={formControlClassName} value={homepageDraft.services.headline} onChange={(event) => setHomepageDraft({ ...homepageDraft, services: { ...homepageDraft.services, headline: event.target.value } })} />
+                  </Field>
+                </div>
+                <div className="grid gap-6 lg:grid-cols-3">
+                  <Field label="Services support prefix">
+                    <textarea className={textareaClassName} value={homepageDraft.services.supportPrefix} onChange={(event) => setHomepageDraft({ ...homepageDraft, services: { ...homepageDraft.services, supportPrefix: event.target.value } })} />
+                  </Field>
+                  <Field label="Services support highlight">
+                    <textarea className={textareaClassName} value={homepageDraft.services.supportHighlight} onChange={(event) => setHomepageDraft({ ...homepageDraft, services: { ...homepageDraft.services, supportHighlight: event.target.value } })} />
+                  </Field>
+                  <Field label="Services support suffix">
+                    <textarea className={textareaClassName} value={homepageDraft.services.supportSuffix} onChange={(event) => setHomepageDraft({ ...homepageDraft, services: { ...homepageDraft.services, supportSuffix: event.target.value } })} />
+                  </Field>
+                </div>
+                <ServiceItemsEditor
+                  items={homepageDraft.services.items}
+                  onChange={(items) =>
+                    setHomepageDraft({
+                      ...homepageDraft,
+                      services: { ...homepageDraft.services, items },
+                    })
+                  }
+                />
                 <div className="space-y-4">
                   <div className="flex items-center justify-between gap-3">
                     <p className="text-label-sm uppercase tracking-[0.16em] text-[var(--color-text-tertiary)]">

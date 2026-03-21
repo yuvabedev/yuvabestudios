@@ -25,6 +25,7 @@ export type StudioCaseStudyMockVariant = "aurora" | "sunrise" | "prism";
 export type StudioCaseStudyMockCardLayout = "feature" | "compact" | "wide";
 export type StudioCaseStudyMockViewport = "portrait" | "landscape";
 export type StudioCaseStudyMockCardSpan = "grid" | "full";
+export type StudioCaseStudyMockPresentation = "framed" | "fullImage";
 
 const mockCardVariantStyles: Record<
   StudioCaseStudyMockVariant,
@@ -164,8 +165,10 @@ export type StudioCaseStudyMockCardProps = {
   services: string[];
   imageSrc: string;
   imageAlt: string;
+  imageAspectRatio?: string;
   imageClassName?: string;
   mockViewport?: StudioCaseStudyMockViewport;
+  mockPresentation?: StudioCaseStudyMockPresentation;
   variant?: StudioCaseStudyMockVariant;
   layout?: StudioCaseStudyMockCardLayout;
   span?: StudioCaseStudyMockCardSpan;
@@ -179,9 +182,11 @@ export function StudioCaseStudyMockCard({
   className,
   detailHref,
   imageAlt,
+  imageAspectRatio,
   imageClassName,
   imageSrc,
   layout = "feature",
+  mockPresentation = "framed",
   mockViewport = "portrait",
   onOpenDetails,
   sector,
@@ -209,6 +214,9 @@ export function StudioCaseStudyMockCard({
   const variantStyles = mockCardVariantStyles[variant];
   const layoutStyles = mockCardLayoutStyles[layout];
   const viewportStyles = mockViewportStyles[mockViewport];
+  const isFullImagePresentation = mockPresentation === "fullImage";
+  const fullImageAspectRatio =
+    imageAspectRatio ?? (mockViewport === "portrait" ? "1310 / 2708" : "16 / 10");
   const serviceTags = services.map(normalizeServiceLabel);
   const canOpenDetails = Boolean(onOpenDetails);
 
@@ -245,11 +253,11 @@ export function StudioCaseStudyMockCard({
       onKeyDown={
         canOpenDetails
           ? (event) => {
-              if (event.key === "Enter" || event.key === " ") {
-                event.preventDefault();
-                handleOpenDetails();
-              }
+            if (event.key === "Enter" || event.key === " ") {
+              event.preventDefault();
+              handleOpenDetails();
             }
+          }
           : undefined
       }
       role={canOpenDetails ? "button" : undefined}
@@ -322,7 +330,9 @@ export function StudioCaseStudyMockCard({
             <div
               className={cn(
                 "flex items-end justify-center [perspective:1400px]",
-                layoutStyles.imageStageClassName,
+                isFullImagePresentation
+                  ? "min-h-0 px-0 py-0"
+                  : layoutStyles.imageStageClassName,
                 span === "full" && fullSpanImageStageOverrides[layout],
               )}
             >
@@ -336,16 +346,32 @@ export function StudioCaseStudyMockCard({
                     : { transformStyle: "preserve-3d", transform }
                 }
                 className={cn(
-                  variantStyles.mockFrameClassName,
+                  isFullImagePresentation
+                    ? "relative max-w-[560px]"
+                    : variantStyles.mockFrameClassName,
                   "relative max-w-[560px] transition-[box-shadow] duration-300 ease-out group-hover:shadow-[0_34px_110px_rgba(11,15,25,0.22)]",
                   span === "full" && "max-w-[680px]",
                 )}
               >
                 <div
+                  style={isFullImagePresentation ? { aspectRatio: fullImageAspectRatio } : undefined}
                   className={cn(
-                    "relative overflow-hidden rounded-[1.6rem] bg-[rgba(17,24,39,0.05)]",
-                    viewportStyles.frameClassName,
-                    span === "full" && fullSpanViewportOverrides[mockViewport],
+                    "relative overflow-hidden",
+                    isFullImagePresentation
+                      ? [
+                        mockViewport === "portrait"
+                          ? "w-[220px] sm:w-[250px] lg:w-[280px]"
+                          : "w-[300px] sm:w-[360px] lg:w-[440px]",
+                        span === "full" &&
+                        (mockViewport === "portrait"
+                          ? "md:w-[290px] lg:w-[320px]"
+                          : "md:w-[420px] lg:w-[540px]"),
+                      ]
+                      : [
+                        "rounded-[1.6rem] bg-[rgba(17,24,39,0.05)]",
+                        viewportStyles.frameClassName,
+                        span === "full" && fullSpanViewportOverrides[mockViewport],
+                      ],
                   )}
                 >
                   <Image
@@ -362,8 +388,10 @@ export function StudioCaseStudyMockCard({
                           : "(max-width: 640px) 260px, (max-width: 1024px) 320px, 380px"
                     }
                     className={cn(
-                      viewportStyles.imageClassName,
-                      variantStyles.mockImageClassName,
+                      isFullImagePresentation
+                        ? "object-contain object-center"
+                        : viewportStyles.imageClassName,
+                      !isFullImagePresentation && variantStyles.mockImageClassName,
                       imageClassName,
                     )}
                     priority={false}

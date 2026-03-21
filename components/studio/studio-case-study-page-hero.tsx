@@ -21,45 +21,21 @@ export function StudioCaseStudyPageHero({
   caseStudy,
 }: StudioCaseStudyPageHeroProps) {
   const detail = resolveStudioCaseStudyDetail(caseStudy);
-  const navigationItems = [
-    "Overview",
-    ...detail.sections.slice(0, 3).map((section) => section.title),
-  ];
 
   return (
     <section className="relative isolate overflow-hidden border-b border-[var(--color-border-default)]/80">
-      {/* The page hero uses a flatter shell and one spectrum band so it reads like a page destination, not a dialog. */}
+      {/* The page hero keeps the band, but folds it into one calmer brand wash so the rails and color feel coordinated. */}
       <div aria-hidden="true" className="pointer-events-none absolute inset-0">
-        <div className="absolute inset-x-0 top-0 h-[32rem] bg-[radial-gradient(circle_at_16%_18%,rgba(88,41,199,0.12),rgba(255,255,255,0)_28%),radial-gradient(circle_at_82%_18%,rgba(255,202,45,0.14),rgba(255,255,255,0)_26%),linear-gradient(180deg,rgba(255,255,255,0.96),rgba(252,252,253,0.88)_58%,rgba(248,248,250,0.9))]" />
-        <div className="absolute inset-x-[-10%] bottom-[7rem] h-[8rem] -rotate-[8deg] bg-[linear-gradient(90deg,rgba(88,41,199,0.95),rgba(129,103,255,0.88),rgba(43,183,199,0.82),rgba(148,233,228,0.88))]" />
+        <div className="absolute inset-x-0 inset-y-0 bg-[linear-gradient(180deg,rgba(255,255,255,0.96),rgba(252,252,253,0.93)_34%,rgba(248,248,250,0.92)_70%,rgba(248,248,250,0.95))]" />
+        <div className="absolute inset-x-0 top-0 h-[34rem] bg-[radial-gradient(circle_at_18%_22%,rgba(88,41,199,0.11),rgba(255,255,255,0)_30%),radial-gradient(circle_at_76%_18%,rgba(255,202,45,0.11),rgba(255,255,255,0)_24%),radial-gradient(circle_at_62%_72%,rgba(150,136,192,0.08),rgba(255,255,255,0)_34%)]" />
+        <div className="absolute inset-y-0 left-1/2 hidden w-full max-w-7xl -translate-x-1/2 px-6 md:block md:px-10">
+          <div className="absolute inset-y-0 left-0 w-px bg-[linear-gradient(180deg,rgba(203,195,223,0.36),rgba(229,231,235,0.72)_20%,rgba(229,231,235,0.72)_78%,rgba(203,195,223,0.34))]" />
+          <div className="absolute inset-y-0 right-0 w-px bg-[linear-gradient(180deg,rgba(250,223,144,0.34),rgba(229,231,235,0.72)_20%,rgba(229,231,235,0.72)_78%,rgba(203,195,223,0.28))]" />
+        </div>
+        <div className="absolute inset-x-[-12%] bottom-[5.25rem] h-[8.5rem] -rotate-[6deg] bg-[linear-gradient(90deg,rgba(88,41,199,0.82),rgba(129,103,255,0.74),rgba(43,183,199,0.66),rgba(148,233,228,0.56))]" />
       </div>
 
       <div className="relative z-10">
-        {/* The top rail borrows the product-page rhythm from the reference without duplicating the site header. */}
-        <div className="border-b border-[var(--color-border-default)]/80">
-          <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-4 px-6 py-5 md:px-10">
-            <div className="flex flex-wrap items-center gap-3">
-              <p className="text-label-lg text-[var(--color-text-brand)]">
-                {caseStudy.title}
-              </p>
-              <span className="rounded-full bg-[var(--color-background-surface-subtle)] px-3 py-1 text-label-sm text-[var(--color-text-secondary)]">
-                {caseStudy.sector}
-              </span>
-            </div>
-
-            <nav className="hidden flex-wrap items-center gap-8 lg:flex">
-              {navigationItems.map((item) => (
-                <span
-                  key={item}
-                  className="text-label-lg text-[var(--color-text-secondary)]"
-                >
-                  {item}
-                </span>
-              ))}
-            </nav>
-          </div>
-        </div>
-
         <div className="mx-auto max-w-7xl px-6 pb-14 pt-10 md:px-10 md:pb-18 md:pt-14">
           <div className="grid gap-12 xl:grid-cols-[minmax(0,0.96fr)_minmax(30rem,0.9fr)] xl:items-start">
             {/* The left column keeps one dominant message, one support paragraph, and one CTA cluster. */}

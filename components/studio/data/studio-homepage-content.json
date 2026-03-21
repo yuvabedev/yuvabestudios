@@ -5,6 +5,10 @@
       "href": "#about"
     },
     {
+      "label": "Services",
+      "href": "#services"
+    },
+    {
       "label": "Work",
       "href": "#work"
     },
@@ -21,6 +25,30 @@
     "supportHighlight": "strategy, design, engineering, and growth marketing.",
     "ctaLabel": "Start Your Project",
     "ctaHref": "#"
+  },
+  "services": {
+    "eyebrow": "Services",
+    "headline": "The operating system for startup traction.",
+    "supportPrefix": "Turn roadmap bets into",
+    "supportHighlight": "sharper strategy, shipped product,",
+    "supportSuffix": "and faster learning with one AI-first execution partner.",
+    "items": [
+      {
+        "title": "Product Engineering",
+        "shortLabel": "From product conception to GTM and scale",
+        "description": "We help founders shape the product, plan the roadmap, launch with clarity, and scale what starts working."
+      },
+      {
+        "title": "AI-Native Apps",
+        "shortLabel": "AI-native apps and workflows",
+        "description": "We design and build AI-native apps, copilots, and workflows that turn frontier capabilities into useful products."
+      },
+      {
+        "title": "Digital Marketing",
+        "shortLabel": "Campaigns built to create traction",
+        "description": "We run positioning, landing pages, campaigns, and analytics that turn launches into users, pipeline, and learning."
+      }
+    ]
   },
   "work": {
     "eyebrow": "Work",

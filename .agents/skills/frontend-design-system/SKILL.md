@@ -43,6 +43,7 @@ Implement Yuvabe's design system in code with a design-system-first approach so 
 - Reuse existing shadcn-based form controls whenever possible; styling a one-off native control inside a narrow internal screen is acceptable, but adding a new shared control primitive requires a clear system-level need.
 - Prefer composition over special-case page markup.
 - Treat responsive behavior as part of the component contract, not a page-level afterthought; every shared component should work cleanly from mobile-first layouts upward.
+- When editing homepage sections, compare their intro alignment, inner gutters, and body start lines against adjacent sections before finalizing; reuse the same container and mobile padding patterns unless there is a deliberate visual reason not to.
 - Respect accessibility basics: visible focus states, readable contrast, and reduced visual noise.
 - Treat premium surfaces as reusable contracts: glass overlays, elevated cards, floating panels, and badges should share consistent border, blur, shadow, and translucency behavior instead of ad-hoc one-off styles.
 - Use premium surfaces only when a layer needs clear separation from the canvas or content beneath it, such as mobile nav overlays, hero callouts, proof cards, or modal-like states.
@@ -68,6 +69,7 @@ Build or refine components in this order unless the task clearly asks otherwise:
 - Run targeted validation after implementation.
 - Prefer `npm run build` and `npm run lint` for repo-level checks.
 - Verify mobile responsiveness for any touched page or component, especially 320px-768px widths, stacked layouts, text wrapping, and tap-target sizing.
+- On homepage work, explicitly compare section-to-section alignment on both mobile and desktop, with the `Work` section used as the baseline when checking services, process, proof, or CTA blocks.
 - Inspect internal preview routes to confirm token usage, hierarchy, and component consistency.
 
 ## Guardrails
