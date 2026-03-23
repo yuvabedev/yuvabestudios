@@ -3,6 +3,7 @@
 import { useEffect, useState, useSyncExternalStore } from "react";
 import { createPortal } from "react-dom";
 import Link from "next/link";
+import Image from "next/image";
 import { AnimatePresence, motion } from "framer-motion";
 import { ArrowUpRight, Menu, X } from "lucide-react";
 
@@ -86,17 +87,15 @@ export function StudioHeader({ navigationItems }: StudioHeaderProps) {
                 transition={overlayTransition}
                 className="mx-auto flex max-w-7xl items-center justify-between gap-4"
               >
-                <Link
-                  href="/"
-                  className="flex min-w-0 items-center gap-3 text-[var(--neutral-950)]"
-                  onClick={handleNavClick}
-                >
-                  <span className="flex size-10 items-center justify-center rounded-full border border-white/50 bg-slate-950 text-sm font-semibold text-white shadow-[0_14px_30px_rgba(15,23,42,0.12)]">
-                    Y
-                  </span>
-                  <span className="truncate font-display text-[26px] leading-none tracking-[-0.03em] sm:text-[30px]">
-                    Yuvabe
-                  </span>
+                <Link href="/" onClick={handleNavClick} className="flex shrink-0 items-center">
+                  <Image
+                    src="/logo.svg"
+                    alt="Yuvabe Studios"
+                    width={140}
+                    height={36}
+                    priority
+                    className="h-9 w-auto"
+                  />
                 </Link>
 
                 {/* The dismiss control now reuses the shared premium-surface contract instead of one-off glass styling. */}
@@ -143,21 +142,20 @@ export function StudioHeader({ navigationItems }: StudioHeaderProps) {
     <>
       <header className="relative z-20 border-b border-slate-200/80 bg-white/85 backdrop-blur-xl">
         <div className="mx-auto max-w-7xl px-6 py-3 md:px-10">
-          <div className="flex items-center justify-start gap-4">
-            {/* The wordmark stays compact so the mobile trigger has room on smaller screens. */}
-            <div className="flex min-w-0 items-center gap-3 sm:gap-4">
-              <Link href="/" className="flex min-w-0 items-center gap-3 text-[var(--neutral-950)]" onClick={handleNavClick}>
-                <span className="flex size-10 items-center justify-center rounded-full border border-slate-200 bg-slate-950 text-sm font-semibold text-white shadow-sm">
-                  Y
-                </span>
-                <span className="truncate font-display text-[26px] leading-none tracking-[-0.03em] sm:text-[30px] md:text-[32px]">
-                  Yuvabe
-                </span>
-              </Link>
-              <span className="hidden h-9 w-px bg-slate-200 lg:block" />
-            </div>
+          <div className="flex items-center justify-between gap-4">
+            {/* Logo — left side */}
+            <Link href="/" onClick={handleNavClick} className="flex shrink-0 items-center">
+              <Image
+                src="/logo.svg"
+                alt="Yuvabe Studios"
+                width={140}
+                height={36}
+                priority
+                className="h-9 w-auto"
+              />
+            </Link>
 
-            {/* Desktop navigation stays persistent once there is enough horizontal room. */}
+            {/* Desktop navigation — right side */}
             <nav className="hidden items-center gap-8 lg:flex">
               {navigationItems.map((item) => (
                 <Link
@@ -170,7 +168,7 @@ export function StudioHeader({ navigationItems }: StudioHeaderProps) {
               ))}
             </nav>
 
-            {/* The mobile trigger opens a fixed overlay instead of pushing page content down. */}
+            {/* Mobile trigger — right side */}
             <button
               type="button"
               aria-expanded={isMenuOpen}

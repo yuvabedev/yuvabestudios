@@ -1,31 +1,24 @@
-﻿import {
-  Building2,
-  Coins,
-  CreditCard,
-  Globe,
-  Package,
-  Rocket,
-  Search,
-  ShoppingBag,
-  Smartphone,
-  Tv,
-  Users,
-  type LucideIcon,
-} from "lucide-react";
-
 const companyLogos = [
-  { name: "Coinbase", Icon: Coins },
-  { name: "Brex", Icon: Rocket },
-  { name: "Airbnb", Icon: Building2 },
-  { name: "DoorDash", Icon: ShoppingBag },
-  { name: "Dropbox", Icon: Package },
-  { name: "Instacart", Icon: ShoppingBag },
-  { name: "Reddit", Icon: Users },
-  { name: "Stripe", Icon: CreditCard },
-  { name: "Twitch", Icon: Tv },
-  { name: "Cruise", Icon: Globe },
-  { name: "Apple", Icon: Smartphone },
-  { name: "Google", Icon: Search },
+  { name: "Ageshift", src: "/logos/ageshift.svg" },
+  { name: "AV Marathon", src: "/logos/av-marathon.svg" },
+  { name: "Bevolve AI", src: "/logos/bevolve-ai.svg" },
+  { name: "BMH", src: "/logos/bmh.svg" },
+  { name: "Buglerock", src: "/logos/buglerock.svg" },
+  { name: "CAT", src: "/logos/cat.svg" },
+  { name: "General Aeronautics", src: "/logos/general-aeronautics.svg" },
+  { name: "Hemplanet", src: "/logos/hemplanet.svg" },
+  { name: "Indic", src: "/logos/indic.svg" },
+  { name: "Kittykat", src: "/logos/kittykat.svg" },
+  { name: "Maatram", src: "/logos/maatram.svg" },
+  { name: "Matrimandir", src: "/logos/matrimandir.svg" },
+  { name: "NSF", src: "/logos/nsf.svg" },
+  { name: "Prakriti Sattva", src: "/logos/prakriti-sattva.svg" },
+  { name: "Quilt AI", src: "/logos/quilt.ai.svg" },
+  { name: "Rangsutra", src: "/logos/rangsutra.svg" },
+  { name: "Shraddha Yoga", src: "/logos/shraddha-yoga.svg" },
+  { name: "Solitude Farm", src: "/logos/solitude-farm.svg" },
+  { name: "Startup-O", src: "/logos/startup-o.svg" },
+  { name: "Tvam", src: "/logos/tvam.svg" },
 ];
 
 // The frame guides keep the hero background and strip edges aligned to the same centered rail.
@@ -40,15 +33,21 @@ export function StudioTrustStripGuides() {
 
 type TrustStripLogoProps = {
   name: string;
-  Icon: LucideIcon;
+  src: string;
 };
 
-// Each logo item uses one shared contract so both marquee groups render identically.
-function TrustStripLogo({ name, Icon }: TrustStripLogoProps) {
+// Each logo sits in a fixed-height box so all SVGs render at the same visual scale regardless of viewBox.
+function TrustStripLogo({ name, src }: TrustStripLogoProps) {
   return (
-    <span className="inline-flex flex-none items-center gap-1.5 whitespace-nowrap text-label-lg text-slate-400/90 sm:text-heading-sm">
-      <Icon className="size-5 stroke-[1.8]" />
-      {name}
+    <span className="inline-flex flex-none items-center justify-center">
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img
+        src={src}
+        alt={name}
+        className="h-8 w-auto max-w-30 object-contain opacity-60 grayscale transition-[opacity,filter] duration-200 hover:opacity-100 hover:grayscale-0"
+        loading="lazy"
+        decoding="async"
+      />
     </span>
   );
 }
@@ -62,8 +61,8 @@ type TrustStripGroupProps = {
 function TrustStripGroup({ groupKey, ariaHidden = false }: TrustStripGroupProps) {
   return (
     <div aria-hidden={ariaHidden || undefined} className="marquee-group">
-      {companyLogos.map(({ name, Icon }) => (
-        <TrustStripLogo key={`${groupKey}-${name}`} name={name} Icon={Icon} />
+      {companyLogos.map(({ name, src }) => (
+        <TrustStripLogo key={`${groupKey}-${name}`} name={name} src={src} />
       ))}
     </div>
   );
@@ -119,7 +118,7 @@ export function StudioTrustStrip() {
 
           {/* The duplicated groups keep the marquee loop seamless across the strip width. */}
           <div className="marquee-viewport">
-            <div className="marquee-track py-8">
+            <div className="marquee-track py-6">
               <TrustStripGroup groupKey="primary" />
               <TrustStripGroup groupKey="duplicate" ariaHidden />
             </div>
@@ -129,6 +128,3 @@ export function StudioTrustStrip() {
     </div>
   );
 }
-
-
-

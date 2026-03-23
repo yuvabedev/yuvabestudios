@@ -3,16 +3,28 @@
     "badgeLabel": "Drones",
     "images": [
       {
-        "src": "/assets/GA_cover.png",
-        "alt": "General Aeronautics mobile product mock."
+        "src": "/assets/general-aeronautics/ga-home.png",
+        "alt": "General Aeronautics positioning-led homepage."
       },
       {
-        "src": "/assets/GA_bg.png",
-        "alt": "General Aeronautics interface background treatment."
+        "src": "/assets/general-aeronautics/product-com.png",
+        "alt": "General Aeronautics product communication system."
       },
       {
-        "src": "/assets/general-aeronautics.svg",
-        "alt": "General Aeronautics brand mark."
+        "src": "/assets/general-aeronautics/interface.png",
+        "alt": "General Aeronautics application UX direction."
+      },
+      {
+        "src": "/assets/general-aeronautics/content.png",
+        "alt": "General Aeronautics content and campaign assets."
+      },
+      {
+        "src": "/assets/general-aeronautics/positioning.png",
+        "alt": "General Aeronautics market positioning view."
+      },
+      {
+        "src": "/assets/general-aeronautics/case-breakdown.png",
+        "alt": "General Aeronautics case breakdown overview."
       }
     ]
   },
@@ -20,16 +32,28 @@
     "badgeLabel": "Flight Ops",
     "images": [
       {
-        "src": "/assets/GA_bg.png",
+        "src": "/assets/general-aeronautics/interface.png",
         "alt": "General Aeronautics operations interface proof."
       },
       {
-        "src": "/assets/GA_cover.png",
-        "alt": "General Aeronautics mobile proof card."
+        "src": "/assets/general-aeronautics/ga-home.png",
+        "alt": "General Aeronautics homepage proof."
       },
       {
-        "src": "/assets/general-aeronautics.svg",
-        "alt": "General Aeronautics identity mark."
+        "src": "/assets/general-aeronautics/case-breakdown.png",
+        "alt": "General Aeronautics case breakdown."
+      },
+      {
+        "src": "/assets/general-aeronautics/positioning.png",
+        "alt": "General Aeronautics positioning proof."
+      },
+      {
+        "src": "/assets/general-aeronautics/product-com.png",
+        "alt": "General Aeronautics product communication."
+      },
+      {
+        "src": "/assets/general-aeronautics/content.png",
+        "alt": "General Aeronautics content proof."
       }
     ]
   },
@@ -37,16 +61,28 @@
     "badgeLabel": "ESG AI",
     "images": [
       {
-        "src": "/assets/Bevolve_cover.png",
-        "alt": "Bevolve.ai product experience mock."
+        "src": "/assets/bevolve/case-study1.png",
+        "alt": "Bevolve.ai reporting workflow interface."
       },
       {
-        "src": "/assets/bevolve-ai.svg",
-        "alt": "Bevolve.ai brand mark."
+        "src": "/assets/bevolve/case-study2.png",
+        "alt": "Bevolve.ai AI-assisted review interface."
       },
       {
-        "src": "/assets/illustration3.png",
-        "alt": "Abstract sustainability intelligence illustration."
+        "src": "/assets/bevolve/Case-study3.png",
+        "alt": "Bevolve.ai benchmarking engine view."
+      },
+      {
+        "src": "/assets/bevolve/emissions-Summary.png",
+        "alt": "Bevolve.ai emissions summary dashboard."
+      },
+      {
+        "src": "/assets/bevolve/path-to-net-zero.png",
+        "alt": "Bevolve.ai path to net zero planning view."
+      },
+      {
+        "src": "/assets/bevolve/platform-banner.png",
+        "alt": "Bevolve.ai integrated platform overview."
       }
     ]
   },
@@ -88,16 +124,28 @@
     "badgeLabel": "Wellness AI",
     "images": [
       {
-        "src": "/assets/illustration3.png",
-        "alt": "AgeShift wellness platform illustration."
+        "src": "/assets/ageshift/onboarding1.png",
+        "alt": "AgeShift wellness app onboarding journey."
       },
       {
-        "src": "/assets/illustration1.png",
-        "alt": "AgeShift mobile and backend systems illustration."
+        "src": "/assets/ageshift/web-ss1.png",
+        "alt": "AgeShift protocol tracking interface."
       },
       {
-        "src": "/assets/illustration2.png",
-        "alt": "AgeShift AI recommendation platform illustration."
+        "src": "/assets/ageshift/web-ss2.png",
+        "alt": "AgeShift admin operations surface."
+      },
+      {
+        "src": "/assets/ageshift/web-ss3.png",
+        "alt": "AgeShift AI recommendation engine view."
+      },
+      {
+        "src": "/assets/ageshift/web-ss4.png",
+        "alt": "AgeShift platform overview screen."
+      },
+      {
+        "src": "/assets/ageshift/ageshift_cover.png",
+        "alt": "AgeShift product cover."
       }
     ]
   }

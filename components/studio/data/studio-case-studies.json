@@ -11,10 +11,11 @@
       "Content system"
     ],
     "mediaIconKey": "layoutGrid",
-    "mockImageSrc": "/assets/GA_cover.png",
-    "mockImageAlt": "General Aeronautics mobile product mock",
+    "mockImageSrc": "/assets/general-aeronautics/ga-cover.png",
+    "mockImageAlt": "General Aeronautics cover",
     "mockVariant": "aurora",
-    "mockViewport": "portrait",
+    "mockViewport": "landscape",
+    "mockPresentation": "fullImage",
     "size": "feature",
     "modalIntro": "General Aeronautics builds drone systems across agriculture, defense, humanitarian response, and warehouse automation. As the business expanded, its digital presence needed to explain that breadth with more clarity, confidence, and usability.",
     "modalOutcomes": [
@@ -105,7 +106,8 @@
       "Decision support"
     ],
     "mediaIconKey": "bot",
-    "mockImageSrc": "/assets/Bevolve_cover.png",
+    "mockImageSrc": "/assets/bevolve/platform-banner.png",
+    "mockVideoSrc": "/assets/bevolve/bevolve-AI-page.mp4",
     "mockImageAlt": "Bevolve.ai product experience mock",
     "mockVariant": "sunrise",
     "mockViewport": "landscape",
@@ -397,8 +399,8 @@
       "AI recommendations"
     ],
     "mediaIconKey": "barChart3",
-    "mockImageSrc": "/assets/ageShift_logo.svg",
-    "mockImageAlt": "AgeShift logo",
+    "mockImageSrc": "/assets/ageshift/web-ss1.png",
+    "mockImageAlt": "AgeShift wellness platform interface",
     "mockVariant": "prism",
     "mockLayout": "feature",
     "mockViewport": "landscape",

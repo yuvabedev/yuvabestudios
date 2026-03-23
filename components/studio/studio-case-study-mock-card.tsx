@@ -165,6 +165,7 @@ export type StudioCaseStudyMockCardProps = {
   services: string[];
   imageSrc: string;
   imageAlt: string;
+  videoSrc?: string;
   imageAspectRatio?: string;
   imageClassName?: string;
   mockViewport?: StudioCaseStudyMockViewport;
@@ -185,6 +186,7 @@ export function StudioCaseStudyMockCard({
   imageAspectRatio,
   imageClassName,
   imageSrc,
+  videoSrc,
   layout = "feature",
   mockPresentation = "framed",
   mockViewport = "portrait",
@@ -374,29 +376,47 @@ export function StudioCaseStudyMockCard({
                       ],
                   )}
                 >
-                  <Image
-                    src={imageSrc}
-                    alt={imageAlt}
-                    fill
-                    sizes={
-                      mockViewport === "portrait"
-                        ? span === "full"
-                          ? "(max-width: 640px) 200px, (max-width: 1024px) 250px, 275px"
-                          : "(max-width: 640px) 200px, (max-width: 1024px) 220px, 240px"
-                        : span === "full"
-                          ? "(max-width: 640px) 260px, (max-width: 1024px) 420px, 540px"
-                          : "(max-width: 640px) 260px, (max-width: 1024px) 320px, 380px"
-                    }
-                    className={cn(
-                      isFullImagePresentation
-                        ? "object-contain object-center"
-                        : viewportStyles.imageClassName,
-                      !isFullImagePresentation && variantStyles.mockImageClassName,
-                      imageClassName,
-                    )}
-                    priority={false}
-                    unoptimized={shouldSkipImageOptimization}
-                  />
+                  {videoSrc ? (
+                    <video
+                      src={videoSrc}
+                      autoPlay
+                      muted
+                      loop
+                      playsInline
+                      className={cn(
+                        "absolute inset-0 h-full w-full",
+                        isFullImagePresentation
+                          ? "object-contain object-center"
+                          : viewportStyles.imageClassName,
+                        !isFullImagePresentation && variantStyles.mockImageClassName,
+                        imageClassName,
+                      )}
+                    />
+                  ) : (
+                    <Image
+                      src={imageSrc}
+                      alt={imageAlt}
+                      fill
+                      sizes={
+                        mockViewport === "portrait"
+                          ? span === "full"
+                            ? "(max-width: 640px) 200px, (max-width: 1024px) 250px, 275px"
+                            : "(max-width: 640px) 200px, (max-width: 1024px) 220px, 240px"
+                          : span === "full"
+                            ? "(max-width: 640px) 260px, (max-width: 1024px) 420px, 540px"
+                            : "(max-width: 640px) 260px, (max-width: 1024px) 320px, 380px"
+                      }
+                      className={cn(
+                        isFullImagePresentation
+                          ? "object-contain object-center"
+                          : viewportStyles.imageClassName,
+                        !isFullImagePresentation && variantStyles.mockImageClassName,
+                        imageClassName,
+                      )}
+                      priority={false}
+                      unoptimized={shouldSkipImageOptimization}
+                    />
+                  )}
                 </div>
               </motion.div>
             </div>
