@@ -28,33 +28,33 @@
   },
   "services": {
     "eyebrow": "Services",
-    "headline": "The operating system for startup traction.",
-    "supportPrefix": "Turn roadmap bets into",
-    "supportHighlight": "sharper strategy, shipped product,",
-    "supportSuffix": "and faster learning with one AI-first execution partner.",
+    "headline": "One execution system for startup growth.",
+    "supportPrefix": "From product strategy to",
+    "supportHighlight": "AI-native apps and growth execution,",
+    "supportSuffix": "we help founders decide what to build, launch it well, and scale what works.",
     "items": [
       {
         "title": "Product Engineering",
-        "shortLabel": "From product conception to GTM and scale",
-        "description": "We help founders shape the product, plan the roadmap, launch with clarity, and scale what starts working."
+        "shortLabel": "From product strategy to launch",
+        "description": "Product shaping, roadmap planning, launch clarity, and scaling support for what starts working."
       },
       {
         "title": "AI-Native Apps",
         "shortLabel": "AI-native apps and workflows",
-        "description": "We design and build AI-native apps, copilots, and workflows that turn frontier capabilities into useful products."
+        "description": "Complex AI workflows, copilots, and application-layer products for B2B and B2C teams."
       },
       {
         "title": "Digital Marketing",
-        "shortLabel": "Campaigns built to create traction",
-        "description": "We run positioning, landing pages, campaigns, and analytics that turn launches into users, pipeline, and learning."
+        "shortLabel": "Campaigns built for traction",
+        "description": "Positioning, landing pages, campaigns, and analytics that turn launches into growth."
       }
     ]
   },
   "work": {
     "eyebrow": "Work",
-    "headline": "Launch faster. Reach revenue sooner.",
-    "supportPrefix": "Turn roadmap bets into",
-    "supportHighlight": "shipped releases",
-    "supportSuffix": ", stronger campaigns, and compounding traction with one execution partner."
+    "headline": "Make better bets. Ship faster.",
+    "supportPrefix": "See how we turn product bets into",
+    "supportHighlight": "shipped experiences,",
+    "supportSuffix": "clearer positioning, and faster learning for ambitious teams."
   }
 }

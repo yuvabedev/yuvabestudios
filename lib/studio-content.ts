@@ -33,28 +33,29 @@ const contentDocumentsTable = "content_documents";
 
 const defaultServicesContent: StudioHomepageServicesContent = {
   eyebrow: "Services",
-  headline: "The operating system for startup traction.",
-  supportPrefix: "Turn roadmap bets into",
-  supportHighlight: "sharper strategy, shipped product,",
-  supportSuffix: "and faster learning with one AI-first execution partner.",
+  headline: "One execution system for startup growth.",
+  supportPrefix: "From product strategy to",
+  supportHighlight: "AI-native apps and growth execution,",
+  supportSuffix:
+    "we help founders decide what to build, launch it well, and scale what works.",
   items: [
     {
       title: "Product Engineering",
-      shortLabel: "From product conception to GTM and scale",
+      shortLabel: "From product strategy to launch",
       description:
-        "We help founders shape the product, plan the roadmap, launch with clarity, and scale what starts working.",
+        "Product shaping, roadmap planning, launch clarity, and scaling support for what starts working.",
     },
     {
       title: "AI-Native Apps",
       shortLabel: "AI-native apps and workflows",
       description:
-        "We design and build AI-native apps, copilots, and workflows that turn frontier capabilities into useful products.",
+        "Complex AI workflows, copilots, and application-layer products for B2B and B2C teams.",
     },
     {
       title: "Digital Marketing",
-      shortLabel: "Campaigns built to create traction",
+      shortLabel: "Campaigns built for traction",
       description:
-        "We run positioning, landing pages, campaigns, and analytics that turn launches into users, pipeline, and learning.",
+        "Positioning, landing pages, campaigns, and analytics that turn launches into growth.",
     },
   ],
 };
@@ -641,6 +642,22 @@ async function readContentDocument(key: "homepage" | "case_studies") {
   return data?.payload;
 }
 
+function shouldUseLocalContentFallback(error: unknown) {
+  if (!(error instanceof Error)) {
+    return false;
+  }
+
+  const message = error.message.toLowerCase();
+
+  return (
+    message.includes("fetch failed") ||
+    message.includes("eacces") ||
+    message.includes("enotfound") ||
+    message.includes("econnrefused") ||
+    message.includes("network")
+  );
+}
+
 async function writeContentDocument(
   key: "homepage" | "case_studies",
   payload: unknown,
@@ -659,14 +676,46 @@ async function getOrBootstrapDocument<T>(
   key: "homepage" | "case_studies",
   fallbackFilePath: string,
 ) {
-  const existingPayload = await readContentDocument(key);
+  // Prefer Supabase when it's reachable, but keep the site renderable when local
+  // development runs without network access or the content store is temporarily down.
+  let existingPayload: unknown;
+
+  try {
+    existingPayload = await readContentDocument(key);
+  } catch (error) {
+    if (!shouldUseLocalContentFallback(error)) {
+      throw error;
+    }
+
+    console.warn(
+      `Falling back to local ${key} content because Supabase could not be reached.`,
+      error,
+    );
+
+    return readJsonFile<T>(fallbackFilePath);
+  }
 
   if (existingPayload !== undefined) {
     return existingPayload as T;
   }
 
   const fallbackPayload = await readJsonFile<T>(fallbackFilePath);
-  await writeContentDocument(key, fallbackPayload);
+
+  // Bootstrap missing documents when Supabase is available, but don't block page
+  // rendering if the initial write cannot complete in local development.
+  try {
+    await writeContentDocument(key, fallbackPayload);
+  } catch (error) {
+    if (!shouldUseLocalContentFallback(error)) {
+      throw error;
+    }
+
+    console.warn(
+      `Loaded local ${key} content without bootstrapping Supabase because the write failed.`,
+      error,
+    );
+  }
+
   return fallbackPayload;
 }
 

@@ -19,19 +19,19 @@ type StudioServiceItem = StudioHomepageServiceItem & {
 const serviceDecorators: Array<
   Pick<StudioServiceItem, "icon" | "accentClassName">
 > = [
-  {
-    icon: Sparkles,
-    accentClassName: "text-[var(--purple-500)]",
-  },
-  {
-    icon: Bot,
-    accentClassName: "text-[var(--orange-500)]",
-  },
-  {
-    icon: LineChart,
-    accentClassName: "text-[var(--lavender-500)]",
-  },
-];
+    {
+      icon: Sparkles,
+      accentClassName: "text-[var(--purple-500)]",
+    },
+    {
+      icon: Bot,
+      accentClassName: "text-[var(--orange-500)]",
+    },
+    {
+      icon: LineChart,
+      accentClassName: "text-[var(--lavender-500)]",
+    },
+  ];
 
 function getDecoratedServices(items: StudioHomepageServiceItem[]) {
   return items.map((item, index) => ({
@@ -106,7 +106,7 @@ export function StudioServices({ content }: StudioServicesProps) {
                     {/* Each column now reads more like an editorial metric block than a standard feature card. */}
                     <div className="space-y-5 text-left">
                       <div className="flex items-center justify-between gap-4">
-                        <p className="font-display text-[clamp(3.1rem,5vw,4.3rem)] leading-none tracking-[-0.08em] text-[color:color-mix(in_srgb,var(--neutral-700)_68%,white)]">
+                        <p className="text-heading-lg text-[color:color-mix(in_srgb,var(--neutral-700)_68%,white)]">
                           {`${index + 1}`.padStart(2, "0")}
                         </p>
                         <div className="flex size-11 items-center justify-center rounded-full border border-white/70 bg-white/88 shadow-[0_10px_28px_rgba(15,23,42,0.06)]">
@@ -115,11 +115,11 @@ export function StudioServices({ content }: StudioServicesProps) {
                       </div>
 
                       <div className="space-y-3">
-                        <h3 className="max-w-[10ch] font-display text-[clamp(1.8rem,3vw,2.7rem)] font-medium leading-[0.94] tracking-[-0.055em] text-[var(--neutral-950)]">
+                        <h3 className="max-w-[10ch] text-display-muted-editorial leading-[0.9]">
                           {service.title}
                         </h3>
-                        <p className="max-w-[20ch] text-heading-sm font-medium text-[var(--neutral-700)]">
-                          {service.shortLabel}
+                        <p className="max-w-[20ch] text-body-md font-bold text-[var(--color-text-brand)]">
+                          <strong>{service.shortLabel}</strong>
                         </p>
                         <p className="max-w-[30ch] text-body-md text-[var(--color-text-secondary)]">
                           {service.description}
