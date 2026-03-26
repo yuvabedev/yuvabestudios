@@ -11,10 +11,11 @@
       "Content system"
     ],
     "mediaIconKey": "layoutGrid",
-    "mockImageSrc": "/assets/GA_cover.png",
-    "mockImageAlt": "General Aeronautics mobile product mock",
+    "mockImageSrc": "/assets/general-aeronautics/ga-cover.png",
+    "mockImageAlt": "General Aeronautics cover",
     "mockVariant": "aurora",
-    "mockViewport": "portrait",
+    "mockViewport": "landscape",
+    "mockPresentation": "fullImage",
     "size": "feature",
     "modalIntro": "General Aeronautics builds drone systems across agriculture, defense, humanitarian response, and warehouse automation. As the business expanded, its digital presence needed to explain that breadth with more clarity, confidence, and usability.",
     "modalOutcomes": [
@@ -60,28 +61,46 @@
     ],
     "modalGalleryRows": [
       {
-        "title": "Brand and product views",
+        "title": "Platform story",
         "items": [
           {
             "title": "Positioning-led homepage",
             "description": "A clearer first impression that communicates the scope of the drone portfolio without overwhelming buyers."
-          },
-          {
-            "title": "Product communication system",
-            "description": "A more structured way to present agricultural, defense, and automation capabilities across web and supporting assets."
           }
         ]
       },
       {
-        "title": "Interface and proof layers",
+        "title": "Product and interface layers",
         "items": [
+          {
+            "title": "Product communication system",
+            "description": "A more structured way to present agricultural, defense, and automation capabilities across web and supporting assets."
+          },
           {
             "title": "Application UX direction",
             "description": "Research and interface decisions that made complex workflows easier to understand and navigate."
-          },
+          }
+        ]
+      },
+      {
+        "title": "Communication system",
+        "items": [
           {
             "title": "Content and campaign assets",
             "description": "Illustrations, video, blogs, and social creatives built to keep the story consistent beyond the website."
+          }
+        ]
+      },
+      {
+        "title": "Positioning and proof",
+        "items": [
+          {
+            "title": "Market positioning view",
+            "description": "A sharper articulation of how the drone portfolio is framed for buyers, partners, and operators across different use cases."
+          },
+          {
+            "title": "Case breakdown overview",
+            "description": "A supporting proof layer that helps the broader system read as coherent, credible, and easier to navigate."
           }
         ]
       }
@@ -105,7 +124,8 @@
       "Decision support"
     ],
     "mediaIconKey": "bot",
-    "mockImageSrc": "/assets/Bevolve_cover.png",
+    "mockImageSrc": "/assets/bevolve/platform-banner.png",
+    "mockVideoSrc": "/assets/bevolve/bevolve-AI-page.mp4",
     "mockImageAlt": "Bevolve.ai product experience mock",
     "mockVariant": "sunrise",
     "mockViewport": "landscape",
@@ -397,8 +417,8 @@
       "AI recommendations"
     ],
     "mediaIconKey": "barChart3",
-    "mockImageSrc": "/assets/ageShift_logo.svg",
-    "mockImageAlt": "AgeShift logo",
+    "mockImageSrc": "/assets/ageshift/web-ss1.png",
+    "mockImageAlt": "AgeShift wellness platform interface",
     "mockVariant": "prism",
     "mockLayout": "feature",
     "mockViewport": "landscape",

@@ -15,6 +15,35 @@ type StudioCaseStudiesProps = {
   workContent: StudioHomepageWorkContent;
 };
 
+// Hard-coded video sources keyed by case study ID — ensures the video shows even when
+// the Supabase record predates the mockVideoSrc field being added.
+const caseStudyVideoOverrides: Partial<Record<string, string>> = {
+  bevolve: "/assets/bevolve/bevolve-AI-page.mp4",
+};
+
+// Hard-coded image overrides — take priority over whatever Supabase returns so real
+// assets are always shown even when the remote record still points to placeholders.
+const caseStudyImageOverrides: Partial<Record<string, string>> = {
+  "general-aeronautics": "/assets/general-aeronautics/ga-cover.png",
+  ageshift: "/assets/ageshift/ageshift_cover.png",
+};
+
+// Hard-coded viewport overrides — switches portrait phone frames to landscape where the
+// cover image is a wide/landscape asset and needs a wider container for full visibility.
+const caseStudyViewportOverrides: Partial<
+  Record<string, "portrait" | "landscape">
+> = {
+  "general-aeronautics": "landscape",
+};
+
+// Hard-coded presentation overrides — "fullImage" removes the phone frame and shows the
+// image directly at the correct aspect ratio so wide covers aren't cropped into a frame.
+const caseStudyPresentationOverrides: Partial<
+  Record<string, "framed" | "fullImage">
+> = {
+  "general-aeronautics": "fullImage",
+};
+
 // The case-studies section turns named proof into a scannable homepage evidence block.
 export function StudioCaseStudies({
   caseStudies,
@@ -55,10 +84,10 @@ export function StudioCaseStudies({
             <p className="text-label-sm uppercase tracking-[0.22em] text-[var(--color-text-tertiary)]">
               {workContent.eyebrow}
             </p>
-            <h2 className="text-hero-support max-w-5xl text-[var(--neutral-950)]">
+            <h2 className="text-display-muted-editorial  max-w-5xl text-[var(--neutral-950)]">
               <strong>{workContent.headline}</strong>
             </h2>
-            <p className="text-display-muted-editorial max-w-6xl">
+            <p className="text-hero-support max-w-6xl">
               {workContent.supportPrefix}{" "}
               <span className="text-[var(--color-text-brand)]">
                 {workContent.supportHighlight}
@@ -69,7 +98,7 @@ export function StudioCaseStudies({
 
           {/* The work grid keeps the current 2 / 2 / 1 rhythm while adding crawlable case-study links. */}
           {/* A small mobile gutter keeps the case-study cards from feeling pinned to the screen edges. */}
-          <div className="space-y-6 px-4 sm:px-0 lg:px-10 xl:px-14">
+          <div className="space-y-6 px-4 sm:px-0 lg:px-10 xl:px-14 pb-10">
             <div className="grid gap-6 xl:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)]">
               {featuredCaseStudies.map((caseStudy) => (
                 <StudioCaseStudyMockCard
@@ -78,15 +107,29 @@ export function StudioCaseStudies({
                   title={caseStudy.title}
                   summary={caseStudy.summary}
                   services={caseStudy.services}
-                  imageSrc={caseStudy.mockImageSrc ?? "/assets/GA_cover.png"}
+                  imageSrc={
+                    caseStudyImageOverrides[caseStudy.id] ??
+                    caseStudy.mockImageSrc ??
+                    "/assets/GA_cover.png"
+                  }
                   imageAlt={
                     caseStudy.mockImageAlt ??
                     `${caseStudy.title} case study mock`
                   }
+                  videoSrc={
+                    caseStudy.mockVideoSrc ??
+                    caseStudyVideoOverrides[caseStudy.id]
+                  }
                   imageAspectRatio={caseStudy.mockImageAspectRatio}
                   imageClassName={caseStudy.mockImageClassName}
-                  mockViewport={caseStudy.mockViewport}
-                  mockPresentation={caseStudy.mockPresentation}
+                  mockViewport={
+                    caseStudyViewportOverrides[caseStudy.id] ??
+                    caseStudy.mockViewport
+                  }
+                  mockPresentation={
+                    caseStudyPresentationOverrides[caseStudy.id] ??
+                    caseStudy.mockPresentation
+                  }
                   variant={caseStudy.mockVariant}
                   layout={caseStudy.mockLayout}
                   detailHref={getStudioCaseStudyHref(caseStudy.id)}
@@ -103,15 +146,29 @@ export function StudioCaseStudies({
                   title={caseStudy.title}
                   summary={caseStudy.summary}
                   services={caseStudy.services}
-                  imageSrc={caseStudy.mockImageSrc ?? "/assets/GA_cover.png"}
+                  imageSrc={
+                    caseStudyImageOverrides[caseStudy.id] ??
+                    caseStudy.mockImageSrc ??
+                    "/assets/GA_cover.png"
+                  }
                   imageAlt={
                     caseStudy.mockImageAlt ??
                     `${caseStudy.title} case study mock`
                   }
+                  videoSrc={
+                    caseStudy.mockVideoSrc ??
+                    caseStudyVideoOverrides[caseStudy.id]
+                  }
                   imageAspectRatio={caseStudy.mockImageAspectRatio}
                   imageClassName={caseStudy.mockImageClassName}
-                  mockViewport={caseStudy.mockViewport}
-                  mockPresentation={caseStudy.mockPresentation}
+                  mockViewport={
+                    caseStudyViewportOverrides[caseStudy.id] ??
+                    caseStudy.mockViewport
+                  }
+                  mockPresentation={
+                    caseStudyPresentationOverrides[caseStudy.id] ??
+                    caseStudy.mockPresentation
+                  }
                   variant={caseStudy.mockVariant}
                   layout={caseStudy.mockLayout}
                   detailHref={getStudioCaseStudyHref(caseStudy.id)}
@@ -127,15 +184,29 @@ export function StudioCaseStudies({
                   title={spotlightCaseStudy.title}
                   summary={spotlightCaseStudy.summary}
                   services={spotlightCaseStudy.services}
-                  imageSrc={spotlightCaseStudy.mockImageSrc ?? "/assets/GA_cover.png"}
+                  imageSrc={
+                    caseStudyImageOverrides[spotlightCaseStudy.id] ??
+                    spotlightCaseStudy.mockImageSrc ??
+                    "/assets/GA_cover.png"
+                  }
                   imageAlt={
                     spotlightCaseStudy.mockImageAlt ??
                     `${spotlightCaseStudy.title} case study mock`
                   }
+                  videoSrc={
+                    spotlightCaseStudy.mockVideoSrc ??
+                    caseStudyVideoOverrides[spotlightCaseStudy.id]
+                  }
                   imageAspectRatio={spotlightCaseStudy.mockImageAspectRatio}
                   imageClassName={spotlightCaseStudy.mockImageClassName}
-                  mockViewport={spotlightCaseStudy.mockViewport}
-                  mockPresentation={spotlightCaseStudy.mockPresentation}
+                  mockViewport={
+                    caseStudyViewportOverrides[spotlightCaseStudy.id] ??
+                    spotlightCaseStudy.mockViewport
+                  }
+                  mockPresentation={
+                    caseStudyPresentationOverrides[spotlightCaseStudy.id] ??
+                    spotlightCaseStudy.mockPresentation
+                  }
                   variant={spotlightCaseStudy.mockVariant}
                   layout={spotlightCaseStudy.mockLayout}
                   span="full"

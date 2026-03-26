@@ -70,10 +70,10 @@ export function StudioServices({ content }: StudioServicesProps) {
           <p className="text-label-sm uppercase tracking-[0.22em] text-[var(--color-text-tertiary)]">
             {content.eyebrow}
           </p>
-          <h2 className="text-hero-support max-w-5xl text-[var(--neutral-950)]">
+          <h2 className=" text-display-muted-editorial  max-w-5xl text-[var(--neutral-950)]">
             <strong>{content.headline}</strong>
           </h2>
-          <p className="text-display-muted-editorial max-w-6xl">
+          <p className="text-hero-support max-w-6xl">
             {content.supportPrefix}{" "}
             <span className="text-[var(--color-text-brand)]">
               {content.supportHighlight}
@@ -100,7 +100,9 @@ export function StudioServices({ content }: StudioServicesProps) {
                     className={[
                       "relative min-h-[18rem] rounded-none border-0 px-5 py-5 sm:p-5 md:min-h-[19rem] md:p-6 lg:p-7",
                       "border-b border-slate-200/80 md:border-b-0",
-                      showDesktopDivider ? "md:border-r md:border-slate-200/80" : "",
+                      showDesktopDivider
+                        ? "md:border-r md:border-slate-200/80"
+                        : "",
                     ].join(" ")}
                   >
                     {/* Each column now reads more like an editorial metric block than a standard feature card. */}
@@ -110,7 +112,11 @@ export function StudioServices({ content }: StudioServicesProps) {
                           {`${index + 1}`.padStart(2, "0")}
                         </p>
                         <div className="flex size-11 items-center justify-center rounded-full border border-white/70 bg-white/88 shadow-[0_10px_28px_rgba(15,23,42,0.06)]">
-                          <Icon className={["size-5", service.accentClassName].join(" ")} />
+                          <Icon
+                            className={["size-5", service.accentClassName].join(
+                              " ",
+                            )}
+                          />
                         </div>
                       </div>
 
