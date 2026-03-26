@@ -29,7 +29,23 @@ import { getSupabaseAdminClient } from "@/lib/supabase-admin";
 const dataDirectory = path.join(process.cwd(), "components", "studio", "data");
 const caseStudiesFilePath = path.join(dataDirectory, "studio-case-studies.json");
 const homepageFilePath = path.join(dataDirectory, "studio-homepage-content.json");
+const approvedContentDirectory = path.join(
+  process.cwd(),
+  ".agents",
+  "skills",
+  "supabase-content-writeback",
+  "references",
+);
+const approvedCaseStudiesFilePath = path.join(
+  approvedContentDirectory,
+  "case-studies-approved.json",
+);
+const approvedHomepageFilePath = path.join(
+  approvedContentDirectory,
+  "homepage-approved.json",
+);
 const contentDocumentsTable = "content_documents";
+type StudioContentSource = "auto" | "local" | "supabase";
 
 const defaultServicesContent: StudioHomepageServicesContent = {
   eyebrow: "Services",
@@ -719,8 +735,57 @@ async function getOrBootstrapDocument<T>(
   return fallbackPayload;
 }
 
+function getStudioContentSource(): StudioContentSource {
+  const configuredSource =
+    process.env.STUDIO_CONTENT_SOURCE?.trim().toLowerCase() ?? "auto";
+
+  if (
+    configuredSource === "auto" ||
+    configuredSource === "local" ||
+    configuredSource === "supabase"
+  ) {
+    return configuredSource;
+  }
+
+  console.warn(
+    `Unsupported STUDIO_CONTENT_SOURCE "${configuredSource}" received. Falling back to "auto".`,
+  );
+
+  return "auto";
+}
+
+function getLocalContentFilePath(key: "homepage" | "case_studies") {
+  return key === "homepage" ? approvedHomepageFilePath : approvedCaseStudiesFilePath;
+}
+
+async function getStudioContentDocument<T>(
+  key: "homepage" | "case_studies",
+  fallbackFilePath: string,
+) {
+  const contentSource = getStudioContentSource();
+
+  if (contentSource === "local") {
+    return readJsonFile<T>(getLocalContentFilePath(key));
+  }
+
+  if (contentSource === "supabase") {
+    const payload = await readContentDocument(key);
+
+    if (payload === undefined) {
+      throw new Error(`Missing Supabase content document "${key}".`);
+    }
+
+    return payload as T;
+  }
+
+  return getOrBootstrapDocument<T>(key, fallbackFilePath);
+}
+
 export async function getStudioHomepageContent() {
-  const rawContent = await getOrBootstrapDocument<unknown>("homepage", homepageFilePath);
+  const rawContent = await getStudioContentDocument<unknown>(
+    "homepage",
+    homepageFilePath,
+  );
   return parseHomepageContent(rawContent);
 }
 
@@ -729,7 +794,7 @@ export async function saveStudioHomepageContent(content: StudioHomepageContent) 
 }
 
 export async function getStudioCaseStudies() {
-  const rawCaseStudies = await getOrBootstrapDocument<unknown[]>(
+  const rawCaseStudies = await getStudioContentDocument<unknown[]>(
     "case_studies",
     caseStudiesFilePath,
   );

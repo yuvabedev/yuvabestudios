@@ -30,6 +30,29 @@ const caseStudyDetailModalImageClassOverrides: Partial<Record<string, string>> =
   "general-aeronautics": "scale-[1.16] object-[center_18%]",
 };
 
+const caseStudyBreakdownSectionOverrides: Partial<
+  Record<string, readonly { title: string; body: string }[]>
+> = {
+  "general-aeronautics": [
+    {
+      title: "Context",
+      body: "General Aeronautics had real depth across multiple drone categories, but that breadth was difficult to communicate clearly in one digital experience.",
+    },
+    {
+      title: "Challenge",
+      body: "Without a clearer narrative, technical breadth risked reading as fragmentation. Buyers, partners, and operators all needed a simpler path through what the company offered and why it mattered.",
+    },
+    {
+      title: "What we changed",
+      body: "Yuvabe paired a website revamp with brand refresh, UI/UX direction, and supporting content so product communication and credibility cues reinforced each other.",
+    },
+    {
+      title: "Outcome",
+      body: "The result was a clearer business story, more intuitive interfaces, and a stronger foundation for future launches and brand growth.",
+    },
+  ],
+};
+
 type StudioCaseStudyDetailProps = {
   caseStudy: StudioCaseStudySummary;
   variant?: "modal" | "page";
@@ -53,6 +76,8 @@ type StudioCaseStudyGalleryImageLibrary = Record<
 const caseStudyGalleryImageLibrary =
   galleryImageLibrary as StudioCaseStudyGalleryImageLibrary;
 const shouldSkipImageOptimization = process.env.NODE_ENV === "development";
+const shouldUseLocalCaseBreakdownOverrides =
+  process.env.NODE_ENV === "development";
 type DetailGalleryLayoutMode = "modal" | "page";
 type DetailGalleryRowKind = "full" | "split";
 type DetailGalleryViewport = "portrait" | "landscape";
@@ -154,6 +179,10 @@ export function StudioCaseStudyDetail({
     caseStudy.mockVideoSrc ?? caseStudyVideoOverrides[caseStudy.id];
   const detailModalImageClassName =
     caseStudyDetailModalImageClassOverrides[caseStudy.id];
+  const caseBreakdownSections =
+    shouldUseLocalCaseBreakdownOverrides
+      ? caseStudyBreakdownSectionOverrides[caseStudy.id] ?? detail.sections
+      : detail.sections;
   const contactHref = "/#process";
   const returnHref = "/#work";
 
@@ -266,7 +295,7 @@ export function StudioCaseStudyDetail({
                 Case breakdown
               </p>
               <div className="grid gap-0 border-t border-(--color-border-default)/80 sm:grid-cols-2 xl:grid-cols-4">
-                {detail.sections.map((section, index) => (
+                {caseBreakdownSections.map((section, index) => (
                   <section
                     key={section.title}
                     className="border-b border-(--color-border-default)/80 px-0 py-5 sm:border-b-0 sm:px-5 sm:first:pl-0 xl:border-l xl:px-6 xl:first:border-l-0 xl:first:pl-0"
@@ -327,7 +356,7 @@ export function StudioCaseStudyDetail({
                 Case breakdown
               </p>
               <div className="space-y-6">
-                {detail.sections.map((section, index) => (
+                {caseBreakdownSections.map((section, index) => (
                   <section key={section.title} className="pt-1">
                     <p className="text-label-sm uppercase tracking-[0.16em] text-(--color-text-brand)">
                       {String(index + 1).padStart(2, "0")}
@@ -349,7 +378,7 @@ export function StudioCaseStudyDetail({
       {/* The gallery rows switch between a wider page showcase and a denser modal proof grid. */}
       <div className="relative z-10 space-y-6 border-b border-(--color-border-default)/80 py-8">
         {detail.galleryRows.map((row, rowIndex) => (
-          <section key={row.title} className="space-y-4">
+          <section key={`${row.title}-${rowIndex}`} className="space-y-4">
             {(() => {
               const currentRowTitle = getGalleryRowTitle(row.title);
               const previousRowTitle =
