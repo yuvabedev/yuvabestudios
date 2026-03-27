@@ -109,7 +109,7 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
   };
 
   return (
-    <main className="relative min-h-screen overflow-visible bg-white text-foreground">
+    <main className="relative min-h-screen overflow-x-hidden overflow-y-visible bg-white text-foreground">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}

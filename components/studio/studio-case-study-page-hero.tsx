@@ -8,7 +8,6 @@ import {
   type StudioCaseStudySummary,
 } from "@/components/studio/studio-case-study-content";
 import { resolveStudioCaseStudyHeroMedia } from "@/components/studio/studio-case-study-detail";
-import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
@@ -27,7 +26,6 @@ export function StudioCaseStudyPageHero({
 }: StudioCaseStudyPageHeroProps) {
   const detail = resolveStudioCaseStudyDetail(caseStudy);
   const heroMedia = resolveStudioCaseStudyHeroMedia(caseStudy);
-  const focusTags = caseStudy.services.slice(0, 3);
   const heroLogoSrc = caseStudyHeroLogoOverrides[caseStudy.id];
 
   return (
@@ -40,7 +38,7 @@ export function StudioCaseStudyPageHero({
           <div className="absolute inset-y-0 left-0 w-px bg-[linear-gradient(180deg,rgba(203,195,223,0.36),rgba(229,231,235,0.72)_20%,rgba(229,231,235,0.72)_78%,rgba(203,195,223,0.34))]" />
           <div className="absolute inset-y-0 right-0 w-px bg-[linear-gradient(180deg,rgba(250,223,144,0.34),rgba(229,231,235,0.72)_20%,rgba(229,231,235,0.72)_78%,rgba(203,195,223,0.28))]" />
         </div>
-        <div className="absolute inset-x-[-14%] bottom-[-6.5rem] h-[12rem] -rotate-[8deg] bg-[linear-gradient(90deg,rgba(88,41,199,0.78),rgba(129,103,255,0.72),rgba(43,183,199,0.62),rgba(148,233,228,0.5))] md:bottom-[-8rem] md:h-[14rem] xl:bottom-[-9rem] xl:h-[16rem]" />
+        <div className="absolute inset-x-[-16%] bottom-[-10rem] h-[13rem] -rotate-[8deg] bg-[linear-gradient(90deg,rgba(88,41,199,0.78),rgba(129,103,255,0.72),rgba(43,183,199,0.62),rgba(148,233,228,0.5))] md:bottom-[-12rem] md:h-[15rem] xl:bottom-[-14rem] xl:h-[18rem]" />
       </div>
 
       <div className="relative z-10">
@@ -49,60 +47,36 @@ export function StudioCaseStudyPageHero({
           <div className="grid gap-12 xl:grid-cols-[minmax(0,0.92fr)_minmax(26rem,0.84fr)] xl:items-center">
             {/* The left column keeps one dominant message, one support paragraph, and one CTA cluster. */}
             <div className="xl:min-h-[27rem] xl:flex xl:flex-col xl:justify-center">
-              <p className="text-label-sm uppercase tracking-[0.22em] text-[var(--color-text-tertiary)]">
-                Case Study
-              </p>
-              <h1 className="mt-4 max-w-[12ch] font-display text-[clamp(3.25rem,6vw,6rem)] leading-[0.92] tracking-[-0.065em] text-[var(--neutral-950)]">
+              <h1 className="max-w-[12ch] font-display text-[clamp(3.25rem,6vw,6rem)] leading-[0.92] tracking-[-0.065em] text-[var(--neutral-950)]">
                 {caseStudy.title}
               </h1>
               <p className="mt-6 max-w-[36rem] text-[clamp(1.22rem,1.65vw,1.6rem)] leading-[1.45] tracking-[-0.02em] text-[var(--color-text-secondary)]">
                 {detail.intro}
               </p>
 
-              {/* The focus pills stay with the story copy so they support the CTA instead of competing with the hero visual. */}
-              {focusTags.length ? (
-                <div className="mt-8 flex flex-wrap gap-3">
-                  {focusTags.map((service) => (
-                    <Badge
-                      key={`${caseStudy.id}-${service}`}
-                      variant="service"
-                      className="border-[var(--color-border-default)] bg-[var(--neutral-200)] px-4 py-2 text-body-sm text-[var(--color-text-inverse)] shadow-none"
-                    >
-                      {service}
-                    </Badge>
-                  ))}
-                </div>
-              ) : null}
-
-              <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+              <div className="mt-10 flex flex-col gap-3 sm:mt-12 sm:flex-row">
                 <Button asChild size="lg" className="rounded-full px-6">
                   <Link href="/#process">
                     Start a project
                     <ArrowUpRight className="size-4" />
                   </Link>
                 </Button>
-                <Button
-                  asChild
-                  variant="secondary"
-                  size="lg"
-                  className="rounded-full px-6"
-                >
-                  <Link href="/#work">Back to work</Link>
-                </Button>
               </div>
             </div>
 
             {/* The right panel now shows the actual case-study visual so the hero reads like work, not a placeholder lockup. */}
-            <div className="relative flex items-center xl:min-h-[27rem]">
+            <div className="relative flex items-center xl:min-h-[27rem] xl:self-center xl:justify-center">
               {heroLogoSrc ? (
-                <div className="relative flex w-full items-center justify-center px-6 py-10 sm:px-10 sm:py-14">
-                  <div className="relative aspect-[17/4] w-full max-w-[30rem]">
+                <div className="relative flex min-h-[18rem] w-full items-center justify-center px-4 py-10 sm:min-h-[22rem] sm:px-8 sm:py-12 xl:min-h-[27rem] xl:py-0">
+                  <div className="pointer-events-none absolute inset-x-[10%] top-1/2 h-24 -translate-y-1/2 rounded-full bg-[radial-gradient(circle,rgba(88,41,199,0.15),rgba(129,103,255,0.12)_34%,rgba(43,183,199,0.08)_56%,rgba(255,255,255,0)_74%)] blur-3xl" />
+                  <div className="pointer-events-none absolute inset-x-[20%] top-1/2 h-px translate-y-[4.25rem] bg-[linear-gradient(90deg,rgba(203,195,223,0),rgba(203,195,223,0.72),rgba(148,219,228,0.62),rgba(203,195,223,0))]" />
+                  <div className="relative aspect-[17/4] w-full max-w-[34rem]">
                     <Image
                       src={heroLogoSrc}
                       alt={`${caseStudy.title} logo`}
                       fill
-                      sizes="(min-width: 1280px) 30rem, (min-width: 768px) 24rem, 18rem"
-                      className="object-contain"
+                      sizes="(min-width: 1280px) 34rem, (min-width: 768px) 28rem, 20rem"
+                      className="object-contain drop-shadow-[0_18px_40px_rgba(15,23,42,0.12)]"
                       priority
                       unoptimized={shouldSkipImageOptimization}
                     />
