@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import {
   ArrowRight,
@@ -46,6 +47,24 @@ const principleHashtagClasses = [
   "text-[var(--orange-500)]",
   "text-[var(--lavender-500)]",
 ] as const;
+const aboutAssets = {
+  cover: {
+    src: "/assets/about/yuvabe-cover.jpeg",
+    alt: "The Yuvabe team gathered outdoors on the studio campus in Auroville.",
+  },
+  roots: {
+    src: "/assets/about/yuvabe-image.jpeg",
+    alt: "An earlier Yuvabe team group photo taken under a large tree in Auroville.",
+  },
+  shirtDetail: {
+    src: "/assets/about/yuvabe-shirt-jpg.jpeg",
+    alt: "A close-up of the Yuvabe mark printed on a grey team shirt.",
+  },
+  illustration: {
+    src: "/assets/about/yuvabe-illustration.png",
+    alt: "An illustration of a sprout growing inside a light bulb.",
+  },
+} as const;
 const workflowCardStyles = [
   {
     backgroundClassName:
@@ -91,6 +110,53 @@ function SectionIntro({
       <h2 className="text-section-display text-[var(--neutral-950)]">{title}</h2>
       <p className="text-body-lg text-[var(--color-text-secondary)]">{description}</p>
     </div>
+  );
+}
+
+type AboutMediaCardProps = {
+  asset: (typeof aboutAssets)[keyof typeof aboutAssets];
+  altCaption?: string;
+  className?: string;
+  imageClassName?: string;
+  priority?: boolean;
+  sizes: string;
+};
+
+// The reusable image frame keeps the new About assets aligned to the existing premium surface system.
+function AboutMediaCard({
+  asset,
+  altCaption,
+  className,
+  imageClassName,
+  priority = false,
+  sizes,
+}: AboutMediaCardProps) {
+  return (
+    <PremiumSurface
+      tone="glassSubtle"
+      elevation="sm"
+      blur="sm"
+      radius="xl"
+      className={["overflow-hidden", className].filter(Boolean).join(" ")}
+    >
+      <div className="relative min-h-[26rem] w-full">
+        <Image
+          src={asset.src}
+          alt={asset.alt}
+          fill
+          sizes={sizes}
+          priority={priority}
+          className={["object-cover object-center", imageClassName].filter(Boolean).join(" ")}
+        />
+      </div>
+      {altCaption ? (
+        <div className="border-t border-slate-200/80 bg-white/92 px-4 py-3">
+          <p className="text-label-sm uppercase tracking-[0.18em] text-[var(--color-text-tertiary)]">
+            {altCaption}
+          </p>
+        </div>
+      ) : null}
+    </PremiumSurface>
   );
 }
 
@@ -221,6 +287,14 @@ function AboutStorySection({ content }: { content: StudioAboutStoryContent }) {
           <p className="max-w-4xl text-body-lg text-[var(--color-text-secondary)]">
             {content.paragraphs[0]}
           </p>
+
+          {/* The roots photo gives the strategic story a human anchor without taking over the section. */}
+          <AboutMediaCard
+            asset={aboutAssets.roots}
+            altCaption="Where we started"
+            sizes="(min-width: 1024px) 34vw, 100vw"
+            className="mt-6 max-w-[34rem]"
+          />
         </div>
 
         <div className="space-y-5">
@@ -296,6 +370,32 @@ function AboutStorySection({ content }: { content: StudioAboutStoryContent }) {
             })}
           </div>
         </div>
+      </StudioPageContainer>
+    </section>
+  );
+}
+
+// This band introduces the larger team image later in the page so the founder-first story stays intact.
+function AboutTeamBandSection() {
+  return (
+    <section className="border-b border-slate-200/80 bg-[var(--color-background-canvas)] py-14 md:py-20">
+      <StudioPageContainer className="space-y-6">
+        <div className="space-y-3 lg:pl-4 xl:pl-6">
+          <p className="text-label-sm uppercase tracking-[0.22em] text-[var(--color-text-tertiary)]">
+            People behind the work
+          </p>
+          <h2 className="max-w-4xl text-section-display text-[var(--neutral-950)]">
+            A close team, built to stay involved.
+          </h2>
+        </div>
+
+        <AboutMediaCard
+          asset={aboutAssets.cover}
+          altCaption="Yuvabe today"
+          priority
+          sizes="100vw"
+          className="lg:mx-4 xl:mx-6"
+        />
       </StudioPageContainer>
     </section>
   );
@@ -497,41 +597,59 @@ function AboutValuesAndTeamSection({
           </div>
         </div>
 
-        {/* The team teaser stays intentionally lightweight so the page talks about collaboration style, not org charts. */}
-        <PremiumSurface
-          tone="glass"
-          elevation="md"
-          blur="md"
-          radius="xl"
-          className="self-start p-6 md:p-7 lg:mt-16"
-        >
-          <div className="space-y-6">
-            <div className="space-y-3">
-              <p className="text-label-sm uppercase tracking-[0.18em] text-[var(--color-text-tertiary)]">
-                {teamTeaser.eyebrow}
-              </p>
-              <h3 className="text-display-muted-editorial text-[var(--neutral-950)]">
-                {teamTeaser.title}
-              </h3>
-              <p className="text-body-lg text-[var(--color-text-secondary)]">
-                {teamTeaser.description}
-              </p>
+        {/* The right column now keeps the same team teaser but adds the new assets as supporting cultural proof. */}
+        <div className="space-y-5">
+          <PremiumSurface
+            tone="glass"
+            elevation="md"
+            blur="md"
+            radius="xl"
+            className="p-6 md:p-7 lg:mt-16"
+          >
+            <div className="space-y-6">
+              <div className="space-y-3">
+                <p className="text-label-sm uppercase tracking-[0.18em] text-[var(--color-text-tertiary)]">
+                  {teamTeaser.eyebrow}
+                </p>
+                <h3 className="text-display-muted-editorial text-[var(--neutral-950)]">
+                  {teamTeaser.title}
+                </h3>
+                <p className="text-body-lg text-[var(--color-text-secondary)]">
+                  {teamTeaser.description}
+                </p>
+              </div>
+              <div className="space-y-3">
+                {teamTeaser.points.map((point) => (
+                  <div
+                    key={point}
+                    className="grid grid-cols-[auto_minmax(0,1fr)] items-center gap-3 rounded-[1rem] border border-slate-200/80 bg-white/80 px-4 py-4"
+                  >
+                    <span className="flex size-2.5 shrink-0 rounded-full bg-[var(--purple-500)]" />
+                    <p className="text-body-md text-[var(--color-text-secondary)]">
+                      {point}
+                    </p>
+                  </div>
+                ))}
+              </div>
             </div>
-            <div className="space-y-3">
-              {teamTeaser.points.map((point) => (
-                <div
-                  key={point}
-                  className="grid grid-cols-[auto_minmax(0,1fr)] items-center gap-3 rounded-[1rem] border border-slate-200/80 bg-white/80 px-4 py-4"
-                >
-                  <span className="flex size-2.5 shrink-0 rounded-full bg-[var(--purple-500)]" />
-                  <p className="text-body-md text-[var(--color-text-secondary)]">
-                    {point}
-                  </p>
-                </div>
-              ))}
-            </div>
+          </PremiumSurface>
+
+          <div className="grid gap-4 md:grid-cols-[minmax(0,1.18fr)_minmax(0,0.82fr)]">
+            <AboutMediaCard
+              asset={aboutAssets.shirtDetail}
+              altCaption="Brand detail"
+              sizes="(min-width: 1024px) 26vw, 100vw"
+              className="min-h-[13rem]"
+            />
+            <AboutMediaCard
+              asset={aboutAssets.illustration}
+              altCaption="Studio ethos"
+              sizes="(min-width: 1024px) 18vw, 50vw"
+              className="min-h-[13rem] bg-[color:color-mix(in_srgb,var(--yellow-500)_18%,white)]"
+              imageClassName="object-contain p-6"
+            />
           </div>
-        </PremiumSurface>
+        </div>
       </StudioPageContainer>
     </section>
   );
@@ -603,6 +721,7 @@ export function StudioAboutPage({ navigationItems }: StudioAboutPageProps) {
       <article className="relative z-10">
         <AboutHero />
         <AboutStorySection content={story} />
+        <AboutTeamBandSection />
         <AboutWorkflowSection content={workflow} />
         <AboutProofSection content={proof} />
         <AboutValuesAndTeamSection values={values} />
