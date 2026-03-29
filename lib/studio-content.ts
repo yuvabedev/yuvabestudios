@@ -41,25 +41,6 @@ const dataDirectory = path.join(process.cwd(), "components", "studio", "data");
 const caseStudiesFilePath = path.join(dataDirectory, "studio-case-studies.json");
 const homepageFilePath = path.join(dataDirectory, "studio-homepage-content.json");
 const aboutFilePath = path.join(dataDirectory, "studio-about-content.json");
-const approvedContentDirectory = path.join(
-  process.cwd(),
-  ".agents",
-  "skills",
-  "supabase-content-writeback",
-  "references",
-);
-const approvedCaseStudiesFilePath = path.join(
-  approvedContentDirectory,
-  "case-studies-approved.json",
-);
-const approvedHomepageFilePath = path.join(
-  approvedContentDirectory,
-  "homepage-approved.json",
-);
-const approvedAboutFilePath = path.join(
-  approvedContentDirectory,
-  "about-approved.json",
-);
 const contentDocumentsTable = "content_documents";
 type StudioContentSource = "auto" | "local" | "supabase";
 
@@ -190,10 +171,6 @@ function normalizeStudioNavHref(href: string) {
   const trimmedHref = href.trim();
   const normalizedHref = trimmedHref.toLowerCase();
 
-  if (trimmedHref.startsWith("#") && trimmedHref.length > 1) {
-    return `/${trimmedHref}`;
-  }
-
   if (
     normalizedHref === "about" ||
     normalizedHref === "./about" ||
@@ -203,6 +180,10 @@ function normalizeStudioNavHref(href: string) {
     normalizedHref === "/about/"
   ) {
     return "/about";
+  }
+
+  if (trimmedHref.startsWith("#") && trimmedHref.length > 1) {
+    return `/${trimmedHref}`;
   }
 
   return trimmedHref;
@@ -1221,18 +1202,6 @@ function getStudioContentSource(): StudioContentSource {
   return "auto";
 }
 
-function getLocalContentFilePath(key: "homepage" | "case_studies" | "about") {
-  if (key === "homepage") {
-    return approvedHomepageFilePath;
-  }
-
-  if (key === "about") {
-    return approvedAboutFilePath;
-  }
-
-  return approvedCaseStudiesFilePath;
-}
-
 async function getStudioContentDocument<T>(
   key: "homepage" | "case_studies" | "about",
   fallbackFilePath: string,
@@ -1240,7 +1209,7 @@ async function getStudioContentDocument<T>(
   const contentSource = getStudioContentSource();
 
   if (contentSource === "local") {
-    return readJsonFile<T>(getLocalContentFilePath(key));
+    return readJsonFile<T>(fallbackFilePath);
   }
 
   if (contentSource === "supabase") {

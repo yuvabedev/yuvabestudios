@@ -1,6 +1,12 @@
 # Content Schema Reference
 
-Use this reference when writing homepage or case-study content through the script.
+Use this reference when writing homepage, about, or case-study content through the script.
+
+## Local Source Of Truth
+- The only local source of truth is the JSON files in `components/studio/data/`.
+- Update local content there first.
+- Only push to Supabase after the user explicitly confirms production writeback.
+- Do not maintain duplicate local mirrors of the same content elsewhere in the repo.
 
 ## Supabase Target
 - Table: `content_documents`
