@@ -36,9 +36,23 @@ export type StudioHomepageServicesContent = {
   items: StudioHomepageServiceItem[];
 };
 
+export type StudioHomepageTestimonialsContent = {
+  eyebrow: string;
+  headline: string;
+  supportPrefix: string;
+  supportHighlight: string;
+  supportSuffix: string;
+  items: Array<{
+    quote: string;
+    name: string;
+    attribution?: string;
+  }>;
+};
+
 export type StudioHomepageContent = {
   navigationItems: StudioHomepageNavItem[];
   hero: StudioHomepageHeroContent;
   services: StudioHomepageServicesContent;
+  testimonials: StudioHomepageTestimonialsContent;
   work: StudioHomepageWorkContent;
 };

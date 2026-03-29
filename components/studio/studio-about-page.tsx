@@ -114,6 +114,7 @@ type AboutMediaCardProps = {
   asset: (typeof aboutAssets)[keyof typeof aboutAssets];
   altCaption?: string;
   className?: string;
+  frameClassName?: string;
   imageClassName?: string;
   priority?: boolean;
   sizes: string;
@@ -124,6 +125,7 @@ function AboutMediaCard({
   asset,
   altCaption,
   className,
+  frameClassName,
   imageClassName,
   priority = false,
   sizes,
@@ -136,7 +138,14 @@ function AboutMediaCard({
       radius="xl"
       className={["overflow-hidden", className].filter(Boolean).join(" ")}
     >
-      <div className="relative min-h-[26rem] w-full">
+      <div
+        className={[
+          "relative min-h-[26rem] w-full",
+          frameClassName,
+        ]
+          .filter(Boolean)
+          .join(" ")}
+      >
         <Image
           src={asset.src}
           alt={asset.alt}
@@ -298,7 +307,6 @@ function AboutStorySection({ content }: { content: StudioAboutStoryContent }) {
           {/* The illustration gives the origin story a warmer metaphor instead of another team photo. */}
           <AboutMediaCard
             asset={aboutAssets.illustration}
-            altCaption="Where we started"
             sizes="(min-width: 1024px) 34vw, 100vw"
             className="mt-6 max-w-[34rem] bg-[color:color-mix(in_srgb,var(--yellow-500)_18%,white)]"
             imageClassName="object-contain p-6"
@@ -388,17 +396,20 @@ function AboutTeamBandSection() {
           <p className="text-label-sm uppercase tracking-[0.22em] text-[var(--color-text-tertiary)]">
             People behind the work
           </p>
-          <h2 className="max-w-4xl text-section-display text-[var(--neutral-950)]">
-            Small team. Deep involvement. Start to finish.
+          <h2 className="max-w-[28ch] text-section-display text-[var(--neutral-950)]">
+            <span>Small team. Deep involvement.</span>
+            <br />
+            <span>Start to finish.</span>
           </h2>
         </div>
 
         <AboutMediaCard
           asset={aboutAssets.cover}
-          altCaption="Yuvabe today"
           priority
           sizes="100vw"
           className="lg:mx-4 xl:mx-6"
+          frameClassName="min-h-[18rem] sm:min-h-[22rem] md:min-h-[26rem]"
+          imageClassName="object-cover object-[center_40%] md:object-center"
         />
       </StudioPageContainer>
     </section>
@@ -544,7 +555,7 @@ function AboutValuesAndTeamSection({
   return (
     <section className="border-b border-slate-200/80 bg-[var(--color-background-canvas)] py-14 md:py-20">
       <StudioPageContainer className="grid gap-10 lg:grid-cols-[minmax(0,1.04fr)_minmax(0,0.96fr)] lg:gap-12">
-        <div className="space-y-8 lg:pl-4 xl:pl-6">
+        <div className="min-w-0 space-y-8 lg:pl-4 xl:pl-6">
           <SectionIntro
             eyebrow={values.eyebrow}
             title={values.title}
@@ -563,13 +574,13 @@ function AboutValuesAndTeamSection({
                   elevation="sm"
                   blur="sm"
                   radius="xl"
-                  className="p-5 md:p-6"
+                  className="min-w-0 p-5 md:p-6"
                 >
-                  <div className="grid gap-4 sm:grid-cols-[auto_minmax(0,1fr)] sm:items-start">
+                  <div className="grid min-w-0 gap-4 sm:grid-cols-[auto_minmax(0,1fr)] sm:items-start">
                     <div className="flex size-11 items-center justify-center rounded-full border border-white/80 bg-white/85 text-[var(--color-text-brand)] shadow-[0_10px_28px_rgba(15,23,42,0.06)]">
                       <Icon className="size-5" />
                     </div>
-                    <div className="space-y-2">
+                    <div className="min-w-0 space-y-2">
                       <h3 className="text-heading-md text-[var(--neutral-950)]">
                         {value.title}
                       </h3>
@@ -583,7 +594,7 @@ function AboutValuesAndTeamSection({
             })}
           </div>
 
-          <div className="flex flex-nowrap items-center gap-4 overflow-x-auto pb-1">
+          <div className="flex w-full min-w-0 flex-wrap items-center gap-x-4 gap-y-2 pb-1 sm:flex-nowrap sm:gap-y-4 sm:overflow-x-auto">
             {values.principles.map((principle, index) => (
               <span
                 key={principle}
@@ -604,7 +615,7 @@ function AboutValuesAndTeamSection({
           elevation="md"
           blur="md"
           radius="xl"
-          className="self-start p-6 md:p-7 lg:mt-16"
+          className="min-w-0 self-start p-6 md:p-7 lg:mt-16"
         >
           <div className="space-y-6">
             <div className="space-y-3">

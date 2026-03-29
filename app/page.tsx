@@ -4,6 +4,7 @@ import { StudioHeader } from "@/components/studio/studio-header";
 import { StudioHero } from "@/components/studio/studio-hero";
 import { StudioPageRails } from "@/components/studio/studio-page-shell";
 import { StudioServices } from "@/components/studio/studio-services";
+import { StudioTestimonials } from "@/components/studio/studio-testimonials";
 import {
   getStudioCaseStudies,
   getStudioHomepageContent,
@@ -36,6 +37,7 @@ export default async function Home() {
         caseStudies={homepageCaseStudies}
         workContent={homepageContent.work}
       />
+      <StudioTestimonials content={homepageContent.testimonials} />
     </main>
   );
 }

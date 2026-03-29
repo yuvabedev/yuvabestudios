@@ -22,6 +22,7 @@ import type {
   StudioHomepageNavItem,
   StudioHomepageServiceItem,
   StudioHomepageServicesContent,
+  StudioHomepageTestimonialsContent,
   StudioHomepageWorkContent,
 } from "@/components/studio/studio-homepage-content";
 import type {
@@ -87,6 +88,23 @@ const defaultServicesContent: StudioHomepageServicesContent = {
       shortLabel: "Campaigns built for traction",
       description:
         "Positioning, landing pages, campaigns, and analytics that turn launches into growth.",
+    },
+  ],
+};
+
+const defaultTestimonialsContent: StudioHomepageTestimonialsContent = {
+  eyebrow: "Testimonials",
+  headline: "Proof that the work feels clearer, sharper, and easier to trust.",
+  supportPrefix: "Founders and teams feel the shift when",
+  supportHighlight: "product, story, and execution start reinforcing each other,",
+  supportSuffix:
+    "not competing for attention across disconnected touchpoints.",
+  items: [
+    {
+      quote:
+        "Partnering with Yuvabe Studios for over a year, we've seen exceptional results. Their deep understanding of our vision and customer segments, combined with prompt responsiveness, has strengthened our brand.",
+      name: "Aruna Sampige",
+      attribution: "tvam Technologies Pvt. Ltd.",
     },
   ],
 };
@@ -171,6 +189,10 @@ function parseNavItem(value: unknown, label: string): StudioHomepageNavItem {
 function normalizeStudioNavHref(href: string) {
   const trimmedHref = href.trim();
   const normalizedHref = trimmedHref.toLowerCase();
+
+  if (trimmedHref.startsWith("#") && trimmedHref.length > 1) {
+    return `/${trimmedHref}`;
+  }
 
   if (
     normalizedHref === "about" ||
@@ -358,6 +380,53 @@ function normalizeServicesContent(
   };
 }
 
+function parseTestimonialsContent(
+  value: unknown,
+  label: string,
+): StudioHomepageTestimonialsContent {
+  assertRecord(value, label);
+
+  return {
+    eyebrow: expectString(value.eyebrow, `${label}.eyebrow`),
+    headline: expectString(value.headline, `${label}.headline`),
+    supportPrefix: expectString(value.supportPrefix, `${label}.supportPrefix`),
+    supportHighlight: expectString(
+      value.supportHighlight,
+      `${label}.supportHighlight`,
+    ),
+    supportSuffix: expectString(value.supportSuffix, `${label}.supportSuffix`),
+    items: expectArray(value.items, `${label}.items`).map((item, index) => {
+      assertRecord(item, `${label}.items[${index}]`);
+
+      return {
+        quote: expectString(item.quote, `${label}.items[${index}].quote`),
+        name: expectString(item.name, `${label}.items[${index}].name`),
+        attribution: optionalString(item.attribution),
+      };
+    }),
+  };
+}
+
+function normalizeTestimonialsContent(
+  value: unknown,
+  label: string,
+): StudioHomepageTestimonialsContent {
+  const parsed = parseTestimonialsContent(value, label);
+
+  return {
+    eyebrow: parsed.eyebrow.trim(),
+    headline: parsed.headline.trim(),
+    supportPrefix: parsed.supportPrefix.trim(),
+    supportHighlight: parsed.supportHighlight.trim(),
+    supportSuffix: parsed.supportSuffix.trim(),
+    items: parsed.items.map((item) => ({
+      quote: item.quote.trim(),
+      name: item.name.trim(),
+      attribution: normalizeOptionalString(item.attribution),
+    })),
+  };
+}
+
 function parseHomepageContent(value: unknown): StudioHomepageContent {
   assertRecord(value, "homepage content");
 
@@ -372,7 +441,30 @@ function parseHomepageContent(value: unknown): StudioHomepageContent {
     services: value.services
       ? parseServicesContent(value.services, "homepage content.services")
       : defaultServicesContent,
+    testimonials: value.testimonials
+      ? parseTestimonialsContent(
+          value.testimonials,
+          "homepage content.testimonials",
+        )
+      : defaultTestimonialsContent,
     work: parseWorkContent(value.work, "homepage content.work"),
+  };
+}
+
+// This merge keeps newly added local homepage proof visible when the remote content document is older.
+function mergeHomepageContentWithFallback(
+  remoteContent: StudioHomepageContent,
+  fallbackContent: StudioHomepageContent,
+): StudioHomepageContent {
+  const shouldUseFallbackTestimonials =
+    remoteContent.testimonials.items.length <
+    fallbackContent.testimonials.items.length;
+
+  return {
+    ...remoteContent,
+    testimonials: shouldUseFallbackTestimonials
+      ? fallbackContent.testimonials
+      : remoteContent.testimonials,
   };
 }
 
@@ -397,6 +489,12 @@ export function parseStudioHomepageContentInput(
           "homepage content payload.services",
         )
       : defaultServicesContent,
+    testimonials: value.testimonials
+      ? normalizeTestimonialsContent(
+          value.testimonials,
+          "homepage content payload.testimonials",
+        )
+      : defaultTestimonialsContent,
     work: normalizeWorkContent(value.work, "homepage content payload.work"),
   };
 }
@@ -1163,7 +1261,12 @@ export async function getStudioHomepageContent() {
     "homepage",
     homepageFilePath,
   );
-  return parseHomepageContent(rawContent);
+  const parsedContent = parseHomepageContent(rawContent);
+  const fallbackContent = parseHomepageContent(
+    await readJsonFile<unknown>(homepageFilePath),
+  );
+
+  return mergeHomepageContentWithFallback(parsedContent, fallbackContent);
 }
 
 export async function saveStudioHomepageContent(content: StudioHomepageContent) {
