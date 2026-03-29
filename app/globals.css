@@ -433,6 +433,7 @@
 
 html {
   background: var(--color-background-canvas);
+  scroll-behavior: smooth;
 }
 
 body {

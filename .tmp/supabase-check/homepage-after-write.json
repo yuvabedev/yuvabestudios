@@ -1,0 +1,94 @@
+{
+  "hero": {
+    "ctaHref": "#",
+    "ctaLabel": "Start Your Project",
+    "headlineIntro": "Build the",
+    "supportPrefix": "Clarity for startups moving fast. AI-first execution across",
+    "headlineLineTwo": "product faster.",
+    "supportHighlight": "strategy, design, engineering, and growth marketing.",
+    "headlineHighlight": "right"
+  },
+  "work": {
+    "eyebrow": "Work",
+    "headline": "Make better bets. Ship faster.",
+    "supportPrefix": "See how we turn product bets into",
+    "supportSuffix": "clearer positioning, and faster learning for ambitious teams.",
+    "supportHighlight": "shipped experiences,"
+  },
+  "services": {
+    "items": [
+      {
+        "title": "Product Engineering",
+        "shortLabel": "From product strategy to launch",
+        "description": "Product shaping, roadmap planning, launch clarity, and scaling support for what starts working."
+      },
+      {
+        "title": "AI-Native Apps",
+        "shortLabel": "AI-native apps and workflows",
+        "description": "Complex AI workflows, copilots, and application-layer products for B2B and B2C teams."
+      },
+      {
+        "title": "Digital Marketing",
+        "shortLabel": "Campaigns built for traction",
+        "description": "Positioning, landing pages, campaigns, and analytics that turn launches into growth."
+      }
+    ],
+    "eyebrow": "Services",
+    "headline": "One execution system for startup growth.",
+    "supportPrefix": "From product strategy to",
+    "supportSuffix": "we help founders decide what to build, launch it well, and scale what works.",
+    "supportHighlight": "AI-native apps and growth execution,"
+  },
+  "testimonials": {
+    "items": [
+      {
+        "name": "Aruna Sampige",
+        "quote": "Partnering with Yuvabe Studios for over a year, we've seen exceptional results. Their deep understanding of our vision and customer segments, combined with prompt responsiveness, has strengthened our brand.",
+        "attribution": "tvam Technologies Pvt. Ltd."
+      },
+      {
+        "name": "Krishna Mackenzie",
+        "quote": "The Project 365 team exceeded our expectations with their innovative approach and dedication. Their automated system and daily content strategy truly transformed our online presence.",
+        "attribution": "Founder of Solitude Farm & Cafe"
+      },
+      {
+        "name": "Antoine Colombani",
+        "quote": "Yuvabe Studios transformed our vision for a dedicated Matrimandir website into a complete digital experience. Their professionalism and alignment with our vision were outstanding.",
+        "attribution": "Matrimandir"
+      },
+      {
+        "name": "Sarita Chand",
+        "quote": "Yuvabe Studios helped us balance clarity and dignity in telling Indic-AI's story across education, jobs, healthcare, and AI. They delivered a brochure and website that feel authentic and impactful.",
+        "attribution": "Co-Founder, Indic-AI"
+      },
+      {
+        "name": "Visa Meyyappan",
+        "quote": "Yuvabe is a talented team of creative, digital marketing professionals who have been instrumental in quite a few campaigns for us in various forms which we have deployed across email, social media campaigns. This has helped us get our message out to our constituents in an engaging manner. The team has a good breadth and deep knowledge of tools and the creative process work. It has been a pleasure to work with them and I would highly recommend them.",
+        "attribution": "Chief Administrative Officer, NorthSouth Foundation"
+      }
+    ],
+    "eyebrow": "Testimonials",
+    "headline": "Client proof, in their own words.",
+    "supportPrefix": "Across",
+    "supportSuffix": "the same pattern shows up: sharper thinking, tighter execution, and teams that feel supported.",
+    "supportHighlight": "product, brand, AI systems, and growth work,"
+  },
+  "navigationItems": [
+    {
+      "href": "/about",
+      "label": "About"
+    },
+    {
+      "href": "#services",
+      "label": "Services"
+    },
+    {
+      "href": "#work",
+      "label": "Work"
+    },
+    {
+      "href": "#ai-first-dna",
+      "label": "AI-first DNA"
+    }
+  ]
+}

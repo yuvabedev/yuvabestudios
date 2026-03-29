@@ -4,7 +4,7 @@ import { useEffect, useState, useSyncExternalStore } from "react";
 import { createPortal } from "react-dom";
 import Link from "next/link";
 import Image from "next/image";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { AnimatePresence, motion } from "framer-motion";
 import { ArrowUpRight, Menu, X } from "lucide-react";
 
@@ -31,6 +31,8 @@ const menuItemVariants = {
   open: { opacity: 1, y: 0, transition: overlayTransition },
 };
 
+const pendingHomepageSectionStorageKey = "studio-pending-homepage-section";
+
 function subscribe() {
   return () => {};
 }
@@ -44,6 +46,7 @@ export function StudioHeader({ navigationItems }: StudioHeaderProps) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const isMounted = useSyncExternalStore(subscribe, () => true, () => false);
   const pathname = usePathname();
+  const router = useRouter();
 
   // Lock page scroll and flag the shell while the overlay menu is open so the background can blur and scale.
   useEffect(() => {
@@ -55,6 +58,46 @@ export function StudioHeader({ navigationItems }: StudioHeaderProps) {
       delete document.body.dataset.mobileNavOpen;
     };
   }, [isMenuOpen]);
+
+  // Pending cross-route section targets are resolved after the homepage mounts.
+  useEffect(() => {
+    if (pathname !== "/" || typeof window === "undefined") {
+      return;
+    }
+
+    const pendingHash = window.sessionStorage.getItem(
+      pendingHomepageSectionStorageKey,
+    );
+
+    if (!pendingHash) {
+      return;
+    }
+
+    let frameId = 0;
+    let attempts = 0;
+
+    const tryPendingScroll = () => {
+      if (scrollToSection(pendingHash)) {
+        window.sessionStorage.removeItem(pendingHomepageSectionStorageKey);
+        return;
+      }
+
+      attempts += 1;
+
+      if (attempts >= 18) {
+        window.sessionStorage.removeItem(pendingHomepageSectionStorageKey);
+        return;
+      }
+
+      frameId = window.requestAnimationFrame(tryPendingScroll);
+    };
+
+    frameId = window.requestAnimationFrame(tryPendingScroll);
+
+    return () => {
+      window.cancelAnimationFrame(frameId);
+    };
+  }, [pathname]);
 
   // Close the mobile panel after navigation so the page content regains focus immediately.
   function handleNavClick() {
@@ -68,6 +111,100 @@ export function StudioHeader({ navigationItems }: StudioHeaderProps) {
     }
 
     return pathname === "/" ? href : `/${href}`;
+  }
+
+  // Shared section scrolling keeps homepage anchors out of the router's default hash-jump behavior.
+  function scrollToSection(href: string) {
+    const targetId = href.replace(/^#/, "");
+    const targetElement = document.getElementById(targetId);
+
+    if (!targetElement) {
+      return false;
+    }
+
+    targetElement.scrollIntoView({
+      behavior: "smooth",
+      block: "start",
+    });
+
+    window.history.replaceState(
+      null,
+      "",
+      `${window.location.pathname}${window.location.search}${href}`,
+    );
+
+    return true;
+  }
+
+  // Hash items scroll in JS so same-route and cross-route section navigation share one deterministic path.
+  function handleSectionNavigation(href: string) {
+    setIsMenuOpen(false);
+
+    if (pathname !== "/") {
+      if (typeof window !== "undefined") {
+        window.sessionStorage.setItem(pendingHomepageSectionStorageKey, href);
+      }
+
+      router.push("/", { scroll: false });
+      return;
+    }
+
+    const runSectionScroll = () => {
+      scrollToSection(href);
+    };
+
+    if (isMenuOpen) {
+      window.requestAnimationFrame(() => {
+        window.requestAnimationFrame(runSectionScroll);
+      });
+      return;
+    }
+
+    runSectionScroll();
+  }
+
+  // Shared nav rendering keeps section items on buttons while route changes stay on real links.
+  function renderNavigationItem(
+    item: StudioHomepageNavItem,
+    className: string,
+    isMobile = false,
+  ) {
+    if (item.href.startsWith("#")) {
+      return (
+        <button
+          key={item.label}
+          type="button"
+          onClick={() => handleSectionNavigation(item.href)}
+          className={className}
+        >
+          <span>{item.label}</span>
+          {isMobile ? (
+            <span className="inline-flex items-center gap-2 text-label-lg tracking-normal text-slate-400">
+              Go
+              <ArrowUpRight className="size-4" />
+            </span>
+          ) : null}
+        </button>
+      );
+    }
+
+    return (
+      <Link
+        key={item.label}
+        href={resolveHref(item.href)}
+        onClick={handleNavClick}
+        prefetch={item.href.startsWith("/") ? undefined : false}
+        className={className}
+      >
+        <span>{item.label}</span>
+        {isMobile ? (
+          <span className="inline-flex items-center gap-2 text-label-lg tracking-normal text-slate-400">
+            Go
+            <ArrowUpRight className="size-4" />
+          </span>
+        ) : null}
+      </Link>
+    );
   }
 
   const overlay = (
@@ -127,18 +264,11 @@ export function StudioHeader({ navigationItems }: StudioHeaderProps) {
                 <motion.nav id="mobile-site-nav" variants={menuListVariants} initial="closed" animate="open" exit="closed">
                   {navigationItems.map((item) => (
                     <motion.div key={item.label} variants={menuItemVariants}>
-                      <Link
-                        href={resolveHref(item.href)}
-                        onClick={handleNavClick}
-                        prefetch={item.href.startsWith("/") ? undefined : false}
-                        className="flex min-h-[5.5rem] items-center justify-between rounded-[1.25rem] px-5 py-6 text-left text-[2.25rem] leading-[0.96] tracking-[-0.04em] text-slate-900 transition-colors hover:bg-white/55 hover:text-[var(--purple-500)] touch-manipulation sm:min-h-[6rem] sm:px-6 sm:py-6 sm:text-[2.5rem]"
-                      >
-                        <span>{item.label}</span>
-                        <span className="inline-flex items-center gap-2 text-label-lg tracking-normal text-slate-400">
-                          Go
-                          <ArrowUpRight className="size-4" />
-                        </span>
-                      </Link>
+                      {renderNavigationItem(
+                        item,
+                        "flex min-h-[5.5rem] w-full items-center justify-between rounded-[1.25rem] px-5 py-6 text-left text-[2.25rem] leading-[0.96] tracking-[-0.04em] text-slate-900 transition-colors hover:bg-white/55 hover:text-[var(--purple-500)] touch-manipulation sm:min-h-[6rem] sm:px-6 sm:py-6 sm:text-[2.5rem]",
+                        true,
+                      )}
                     </motion.div>
                   ))}
                 </motion.nav>
@@ -169,16 +299,12 @@ export function StudioHeader({ navigationItems }: StudioHeaderProps) {
 
             {/* Desktop navigation — right side */}
             <nav className="hidden items-center gap-8 lg:flex">
-              {navigationItems.map((item) => (
-                <Link
-                  key={item.label}
-                  href={resolveHref(item.href)}
-                  prefetch={item.href.startsWith("/") ? undefined : false}
-                  className="text-label-lg text-slate-800 transition-colors hover:text-[var(--purple-500)]"
-                >
-                  {item.label}
-                </Link>
-              ))}
+              {navigationItems.map((item) =>
+                renderNavigationItem(
+                  item,
+                  "text-label-lg text-slate-800 transition-colors hover:text-[var(--purple-500)]",
+                ),
+              )}
             </nav>
 
             {/* Mobile trigger — right side */}
