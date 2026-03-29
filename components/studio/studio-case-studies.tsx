@@ -70,7 +70,7 @@ export function StudioCaseStudies({
     <>
       <section
         id="work"
-        className="relative overflow-hidden bg-white py-10 md:py-2"
+        className="relative overflow-hidden bg-white py-14 md:py-20"
       >
         {/* The section background extends the hero's light grid so the frame line continues below the fold. */}
         <div aria-hidden="true" className="absolute inset-0">
