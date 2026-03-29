@@ -75,11 +75,11 @@ const mockCardLayoutStyles: Record<
     imageClassName: "h-[20rem] sm:h-[22rem] lg:h-[24rem]",
     // The mock stage gets a smaller mobile min-height so the image sits closer to the copy.
     imageStageClassName:
-      "min-h-[250px] px-1 pb-1 pt-1 sm:min-h-[300px] sm:px-2 sm:pt-2 md:min-h-[460px] md:px-4 md:pb-2 md:pt-8 lg:px-6",
+      "min-h-[250px] px-1 pb-1 pt-1 sm:min-h-[300px] sm:px-2 sm:pt-2 md:min-h-[430px] md:px-4 md:pb-2 md:pt-7 lg:px-6",
     // Mobile keeps the media group in normal flow; desktop pushes it down to preserve the premium editorial rhythm.
     mediaGroupClassName: "space-y-4 md:mt-auto md:space-y-5",
     // Mobile uses natural height to avoid dead space, while desktop restores equal card heights for balanced rows.
-    shellClassName: "h-auto px-5 py-5 sm:p-5 md:h-[760px] md:p-6 lg:p-7",
+    shellClassName: "h-auto px-5 py-5 sm:p-5 md:h-[720px] md:p-6 lg:p-7",
     summaryClassName: "max-w-[34ch] text-body-sm text-[var(--color-text-secondary)]",
     titleClassName: "text-heading-md text-foreground",
   },
@@ -127,13 +127,13 @@ const mockViewportStyles: Record<
 };
 
 const fullSpanShellOverrides: Record<StudioCaseStudyMockCardLayout, string> = {
-  feature: "md:h-auto md:min-h-[38rem] lg:min-h-[40rem]",
+  feature: "md:h-auto md:min-h-[36rem] lg:min-h-[38rem]",
   compact: "md:h-auto md:min-h-[30rem]",
   wide: "md:h-auto md:min-h-[34rem] lg:min-h-[36rem]",
 };
 
 const fullSpanImageStageOverrides: Record<StudioCaseStudyMockCardLayout, string> = {
-  feature: "md:min-h-[320px] md:pt-4 lg:min-h-[360px] lg:pt-6",
+  feature: "md:min-h-[300px] md:pt-4 lg:min-h-[340px] lg:pt-6",
   compact: "md:min-h-[220px] md:pt-3",
   wide: "md:min-h-[260px] md:pt-4 lg:min-h-[300px] lg:pt-5",
 };

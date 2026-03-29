@@ -165,9 +165,8 @@ const caseStudyIcons: Record<StudioCaseStudyIconKey, LucideIcon> = {
 export const homepageCaseStudyIds: StudioCaseStudyId[] = [
   "general-aeronautics",
   "bevolve",
-  "tvam",
-  "ageshift",
   "kittykat",
+  "tvam",
 ];
 
 export function isStudioCaseStudyId(value: string): value is StudioCaseStudyId {
