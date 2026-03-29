@@ -21,15 +21,17 @@ const socialLinks = [
   { label: "Instagram", href: "https://instagram.com/yuvabestudios" },
 ];
 
+// Keep the footer year stable during hydration so the layout markup matches on server and client.
+const footerCopyrightYear = 2026;
+
 export function StudioFooter() {
   return (
     <footer className="border-t border-slate-200 bg-white">
       {/* Top section */}
       <div className="mx-auto max-w-7xl px-6 pb-12 pt-16 md:px-10 md:pt-20">
-        <div className="grid grid-cols-1 gap-12 lg:grid-cols-[1fr_auto]">
-
+        <div className="grid max-w-7xl grid-cols-1 gap-12 lg:grid-cols-[1fr_auto]">
           {/* Brand column */}
-          <div className="flex flex-col gap-6 max-w-sm">
+          <div className="max-w-sm space-y-6">
             <Link href="/" className="inline-flex shrink-0 items-center">
               <Image
                 src="/logo.svg"
@@ -40,7 +42,8 @@ export function StudioFooter() {
               />
             </Link>
             <p className="text-body-md text-slate-500">
-              AI-first strategy, design, engineering, and growth marketing for startups that want to move fast and build right.
+              AI-first strategy, design, engineering, and growth marketing for startups that
+              want to move fast and build right.
             </p>
             <Link
               href="/#process"
@@ -85,7 +88,7 @@ export function StudioFooter() {
       <div className="mx-auto max-w-7xl px-6 py-6 md:px-10">
         <div className="flex flex-col items-start gap-4 sm:flex-row sm:items-center sm:justify-between">
           <p className="text-caption text-slate-400">
-            © {new Date().getFullYear()} Yuvabe Studios. All rights reserved.
+            © {footerCopyrightYear} Yuvabe Studios. All rights reserved.
           </p>
           <div className="flex flex-wrap items-center gap-5">
             {socialLinks.map((link) => (

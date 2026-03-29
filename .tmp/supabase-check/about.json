@@ -40,7 +40,7 @@
     "title": "A few places we've done this.",
     "entries": [
       {
-        "client": "TVAM",
+        "client": "Tvam",
         "sector": "Health, insurance, and AI advisory tools",
         "summary": "Built AI advisor workflows with RAG, cloud deployment, vector search, file handling, and secure chat history."
       },
@@ -55,11 +55,6 @@
         "summary": "Built a product-to-model image workflow to help generate fashion visuals faster and at scale."
       },
       {
-        "client": "Quilt AI",
-        "sector": "AI-powered market research and data analysis",
-        "summary": "Supported insight-focused AI and research workflows that help teams turn messy human signals into clearer decision support."
-      },
-      {
         "client": "AgeShift",
         "sector": "AI wellness platform",
         "summary": "Delivered the mobile app, backend, admin tooling, cloud setup, and AI recommendations for a wellness product."
@@ -71,7 +66,7 @@
       }
     ],
     "eyebrow": "Selected work",
-    "description": "We've worked on AI products, wellness platforms, ecommerce image systems, market-intelligence tools, ESG platforms, and deep-tech websites. Different domains, same job: help teams move from idea to traction with clear thinking and strong execution."
+    "description": "We've worked on AI products, wellness platforms, ecommerce image systems, ESG tools, and deep-tech websites. Different domains, same job: help teams move from idea to traction with clear thinking and strong execution."
   },
   "story": {
     "title": "Rooted in care. Built for clearer bets.",

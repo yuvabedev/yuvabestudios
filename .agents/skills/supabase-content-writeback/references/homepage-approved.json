@@ -1,32 +1,60 @@
 {
-  "navigationItems": [
-    {
-      "label": "About",
-      "href": "/about"
-    },
-    {
-      "label": "Work",
-      "href": "#work"
-    },
-    {
-      "label": "AI-first DNA",
-      "href": "#ai-first-dna"
-    }
-  ],
   "hero": {
+    "ctaHref": "#",
+    "ctaLabel": "Start Your Project",
     "headlineIntro": "Build the",
-    "headlineHighlight": "right",
-    "headlineLineTwo": "product faster.",
     "supportPrefix": "Clarity for startups moving fast. AI-first execution across",
+    "headlineLineTwo": "product faster.",
     "supportHighlight": "strategy, design, engineering, and growth marketing.",
-    "ctaLabel": "Talk Through Your Roadmap",
-    "ctaHref": "#"
+    "headlineHighlight": "right"
   },
   "work": {
     "eyebrow": "Work",
     "headline": "Make better bets. Ship faster.",
-    "supportPrefix": "Turn roadmap bets into",
-    "supportHighlight": "shipped product",
-    "supportSuffix": ", sharper positioning, and faster learning with one AI-first execution partner."
-  }
+    "supportPrefix": "See how we turn product bets into",
+    "supportSuffix": "clearer positioning, and faster learning for ambitious teams.",
+    "supportHighlight": "shipped experiences,"
+  },
+  "services": {
+    "items": [
+      {
+        "title": "Product Engineering",
+        "shortLabel": "From product strategy to launch",
+        "description": "Product shaping, roadmap planning, launch clarity, and scaling support for what starts working."
+      },
+      {
+        "title": "AI-Native Apps",
+        "shortLabel": "AI-native apps and workflows",
+        "description": "Complex AI workflows, copilots, and application-layer products for B2B and B2C teams."
+      },
+      {
+        "title": "Digital Marketing",
+        "shortLabel": "Campaigns built for traction",
+        "description": "Positioning, landing pages, campaigns, and analytics that turn launches into growth."
+      }
+    ],
+    "eyebrow": "Services",
+    "headline": "One execution system for startup growth.",
+    "supportPrefix": "From product strategy to",
+    "supportSuffix": "we help founders decide what to build, launch it well, and scale what works.",
+    "supportHighlight": "AI-native apps and growth execution,"
+  },
+  "navigationItems": [
+    {
+      "href": "#about",
+      "label": "About"
+    },
+    {
+      "href": "#services",
+      "label": "Services"
+    },
+    {
+      "href": "#work",
+      "label": "Work"
+    },
+    {
+      "href": "#ai-first-dna",
+      "label": "AI-first DNA"
+    }
+  ]
 }

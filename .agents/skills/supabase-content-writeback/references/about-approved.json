@@ -1,14 +1,16 @@
 {
-  "hero": {
-    "eyebrow": "About Yuvabe",
-    "title": "We help founders make better",
-    "highlight": "bets.",
-    "description": "Rooted in Auroville. Built to help ambitious teams moving fast figure out what matters, build with focus, and keep momentum.",
-    "supportingLine": "",
-    "primaryCtaLabel": "Start Your Project",
+  "cta": {
+    "title": "If you want more than a vendor, talk to us.",
+    "eyebrow": "Start the conversation",
+    "description": "We work best with founders who want a close partner, honest thinking, and people who can move from idea to execution without losing context.",
     "primaryCtaHref": "/#process",
-    "secondaryCtaLabel": "See Our Work",
+    "primaryCtaLabel": "Start Your Project",
     "secondaryCtaHref": "/#work",
+    "secondaryCtaLabel": "See Our Work"
+  },
+  "hero": {
+    "title": "We help founders make better",
+    "eyebrow": "About Yuvabe",
     "callouts": [
       {
         "label": "Founded",
@@ -25,58 +27,17 @@
         "value": "0-to-1 and traction-stage startups",
         "description": "Teams that need clarity, speed, and a partner who can stay close as things change."
       }
-    ]
-  },
-  "story": {
-    "eyebrow": "Our story",
-    "title": "Rooted in care. Built for clearer bets.",
-    "paragraphs": [
-      "We started in 2020 in Auroville with a human-centered way of working and a bias toward thoughtful decisions. That foundation still shapes how we work today: with care, curiosity, and long-term responsibility.",
-      "The roots stayed the same. What changed was the problem. As building got easier, deciding what was actually worth building became harder.",
-      "We help founders cut through noise, make clearer bets, and keep strategy, design, engineering, and growth connected."
     ],
-    "operatingPrinciples": [
-      {
-        "title": "Decide faster",
-        "description": "Get to the real priority before the roadmap fills up."
-      },
-      {
-        "title": "Build smarter",
-        "description": "Use AI and strong product judgment to ship without drifting."
-      },
-      {
-        "title": "Learn sooner",
-        "description": "Stay close to the signal so the next move gets clearer."
-      }
-    ]
-  },
-  "workflow": {
-    "eyebrow": "How we work",
-    "title": "One team across the full loop.",
-    "description": "Strategy, design, engineering, and growth stay connected here. Fewer handoffs, faster decisions, and a product that holds together from the first bet to what happens after launch.",
-    "stages": [
-      {
-        "label": "Strategy",
-        "description": "Clarify the problem, pressure-test the bet, and decide what matters now."
-      },
-      {
-        "label": "Design",
-        "description": "Shape the product, the experience, and the story people actually interact with."
-      },
-      {
-        "label": "Engineering",
-        "description": "Build the product, the systems, and the AI workflows that make it real."
-      },
-      {
-        "label": "Growth",
-        "description": "Launch, learn, and improve based on what people actually do."
-      }
-    ]
+    "highlight": "bets.",
+    "description": "Rooted in Auroville. Built to help ambitious teams moving fast figure out what matters, build with focus, and keep momentum.",
+    "primaryCtaHref": "/#process",
+    "supportingLine": "",
+    "primaryCtaLabel": "Start Your Project",
+    "secondaryCtaHref": "/#work",
+    "secondaryCtaLabel": "See Our Work"
   },
   "proof": {
-    "eyebrow": "Selected work",
     "title": "A few places we've done this.",
-    "description": "We've worked on AI products, wellness platforms, ecommerce image systems, market-intelligence tools, ESG platforms, and deep-tech websites. Different domains, same job: help teams move from idea to traction with clear thinking and strong execution.",
     "entries": [
       {
         "client": "TVAM",
@@ -108,12 +69,35 @@
         "sector": "Agricultural and defence drone technology",
         "summary": "Worked across website, product UX, branding, and content for a deep-tech drone company."
       }
+    ],
+    "eyebrow": "Selected work",
+    "description": "We've worked on AI products, wellness platforms, ecommerce image systems, market-intelligence tools, ESG platforms, and deep-tech websites. Different domains, same job: help teams move from idea to traction with clear thinking and strong execution."
+  },
+  "story": {
+    "title": "Rooted in care. Built for clearer bets.",
+    "eyebrow": "Our story",
+    "paragraphs": [
+      "We started in 2020 in Auroville with a human-centered way of working and a bias toward thoughtful decisions. That foundation still shapes how we work today: with care, curiosity, and long-term responsibility.",
+      "The roots stayed the same. What changed was the problem. As building got easier, deciding what was actually worth building became harder.",
+      "We help founders cut through noise, make clearer bets, and keep strategy, design, engineering, and growth connected."
+    ],
+    "operatingPrinciples": [
+      {
+        "title": "Decide faster",
+        "description": "Get to the real priority before the roadmap fills up."
+      },
+      {
+        "title": "Build smarter",
+        "description": "Use AI and strong product judgment to ship without drifting."
+      },
+      {
+        "title": "Learn sooner",
+        "description": "Stay close to the signal so the next move gets clearer."
+      }
     ]
   },
   "values": {
-    "eyebrow": "How we work",
     "title": "How we work.",
-    "description": "These are not slogans for us. They are the standards we try to keep with clients and with each other.",
     "values": [
       {
         "title": "Care",
@@ -128,30 +112,46 @@
         "description": "Find simpler, better ways through hard product and technical problems."
       }
     ],
+    "eyebrow": "How we work",
     "principles": [
       "Stay useful",
       "Stay honest",
       "Stay close to the work",
       "Care about the details"
-    ]
+    ],
+    "description": "These are not slogans for us. They are the standards we try to keep with clients and with each other."
+  },
+  "workflow": {
+    "title": "One team across the full loop.",
+    "stages": [
+      {
+        "label": "Strategy",
+        "description": "Clarify the problem, pressure-test the bet, and decide what matters now."
+      },
+      {
+        "label": "Design",
+        "description": "Shape the product, the experience, and the story people actually interact with."
+      },
+      {
+        "label": "Engineering",
+        "description": "Build the product, the systems, and the AI workflows that make it real."
+      },
+      {
+        "label": "Growth",
+        "description": "Launch, learn, and improve based on what people actually do."
+      }
+    ],
+    "eyebrow": "How we work",
+    "description": "Strategy, design, engineering, and growth stay connected here. Fewer handoffs, faster decisions, and a product that holds together from the first bet to what happens after launch."
   },
   "teamTeaser": {
-    "eyebrow": "Team",
     "title": "Small team. Close collaboration.",
-    "description": "We're set up to work closely with founders, not hide behind layers. The people shaping the product are part of the conversation, and that keeps the work faster, clearer, and more grounded.",
     "points": [
       "Fewer handoffs. More direct conversations.",
       "Strategy, design, engineering, and growth in one room.",
       "A working style shaped by curiosity, responsibility, and care."
-    ]
-  },
-  "cta": {
-    "eyebrow": "Start the conversation",
-    "title": "If you want more than a vendor, talk to us.",
-    "description": "We work best with founders who want a close partner, honest thinking, and people who can move from idea to execution without losing context.",
-    "primaryCtaLabel": "Start Your Project",
-    "primaryCtaHref": "/#process",
-    "secondaryCtaLabel": "See Our Work",
-    "secondaryCtaHref": "/#work"
+    ],
+    "eyebrow": "Team",
+    "description": "We're set up to work closely with founders, not hide behind layers. The people shaping the product are part of the conversation, and that keeps the work faster, clearer, and more grounded."
   }
 }

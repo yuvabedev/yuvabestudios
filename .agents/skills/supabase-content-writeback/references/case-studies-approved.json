@@ -1,461 +1,497 @@
 [
-    {
-        "id":  "general-aeronautics",
-        "size":  "feature",
-        "title":  "General Aeronautics",
-        "sector":  "Aviation Technology",
-        "summary":  "Turned a complex drone portfolio into a clearer digital story buyers, partners, and operators could trust faster.",
-        "seoTitle":  "General Aeronautics Case Study",
-        "services":  [
-                         "Market Positioning",
-                         "Brand Identity",
-                         "Content \u0026 UX"
-                     ],
-        "modalIntro":  "General Aeronautics builds drone systems across agriculture, defense, humanitarian response, and warehouse automation. As the portfolio expanded, the challenge was making that breadth easier to understand, trust, and navigate.",
-        "mockVariant":  "aurora",
-        "mediaIconKey":  "layoutGrid",
-        "mockImageAlt":  "General Aeronautics mobile product mock",
-        "mockImageSrc":  "/assets/GA_cover.png",
-        "mockViewport":  "portrait",
-        "modalOutcomes":  [
-                              "Reframed a broad drone portfolio into a sharper market story.",
-                              "Made technical capabilities easier for non-technical audiences to understand.",
-                              "Improved credibility across web, applications, and communication assets.",
-                              "Built a stronger platform for future product and growth decisions."
-                          ],
-        "modalSections":  [
-                              {
-                                  "body":  "General Aeronautics had real depth across multiple drone categories, but that breadth was difficult to communicate clearly in one digital experience.",
-                                  "title":  "Context"
-                              },
-                              {
-                                  "body":  "Without a clearer narrative, technical breadth risked reading as fragmentation. Buyers, partners, and operators all needed a simpler path through what the company offered and why it mattered.",
-                                  "title":  "Challenge"
-                              },
-                              {
-                                  "body":  "Yuvabe paired a website revamp with brand refresh, UI/UX direction, and supporting content so product communication and credibility cues reinforced each other.",
-                                  "title":  "What we changed"
-                              },
-                              {
-                                  "body":  "The result was a clearer business story, more intuitive interfaces, and a stronger foundation for future launches and brand growth.",
-                                  "title":  "Outcome"
-                              }
-                          ],
-        "seoDescription":  "See how Yuvabe helped General Aeronautics turn a broad drone portfolio into a clearer digital story across website, product UX, and brand systems.",
-        "heroMockHeadline":  "Portfolio clarity across Drone Systems",
-        "modalGalleryRows":  [
-                                 {
-                                     "items":  [
-                                                   {
-                                                       "title":  "Positioning-led homepage",
-                                                        "description":  "A clearer first impression that communicates the scope of the drone portfolio without overwhelming buyers."
-                                                   },
-                                                   {
-                                                       "title":  "Product communication system",
-                                                        "description":  "A clearer way to present agricultural, defense, and automation capabilities across web and supporting assets."
-                                                   }
-                                               ],
-                                     "title":  "Work Gallery"
-                                 },
-                                 {
-                                     "items":  [
-                                                   {
-                                                       "title":  "Application UX direction",
-                                                        "description":  "Interface decisions that made complex mission-planning workflows easier to understand and navigate."
-                                                   },
-                                                   {
-                                                       "title":  "Content and campaign assets",
-                                                        "description":  "Illustrations, video, blogs, and social creatives that kept the story consistent beyond the website."
-                                                   }
-                                               ],
-                                     "title":  "Work Gallery"
-                                 }
-                             ],
-        "modalProofPoints":  [
-                                 {
-                                     "title":  "Sharpened market story",
-                                     "iconKey":  "scanSearch",
-                                     "description":  "Turned a complex product portfolio into a clearer business narrative that buyers and partners could understand and trust faster."
-                                 },
-                                 {
-                                     "title":  "Unified touchpoints",
-                                     "iconKey":  "layoutGrid",
-                                     "description":  "Aligned website, product UX, and supporting communication assets into one more coherent system."
-                                 },
-                                 {
-                                     "title":  "Built for scale",
-                                     "iconKey":  "sparkles",
-                                     "description":  "Created a stronger platform for future launches, campaigns, and product communication decisions."
-                                 }
-                             ],
-        "modalTestimonial":  {
-                                 "quote":  "The work made a technically complex drone business easier to understand and easier to trust. Website, product UX, and supporting assets finally reinforced the same story instead of fragmenting it.",
-                                 "attribution":  "General Aeronautics team"
-                             }
-    },
-    {
-        "id":  "bevolve",
-        "title":  "Bevolve.ai",
-        "sector":  "ESG intelligence",
-        "summary":  "Turned fragmented sustainability reporting into an AI-guided system teams could trust for faster, evidence-based decisions.",
-        "seoTitle":  "Bevolve.ai Case Study",
-        "services":  [
-                         "AI integration",
-                         "Reporting automation",
-                         "Decision support"
-                     ],
-        "modalIntro":  "Bevolve.ai needed a product experience that could bring together fragmented ESG and sustainability data, automate reporting workflows, and make decision support easier for teams navigating compliance pressure.",
-        "mockVariant":  "sunrise",
-        "mediaIconKey":  "bot",
-        "mockImageAlt":  "Bevolve.ai product experience mock",
-        "mockImageSrc":  "/assets/Bevolve_cover.png",
-        "mockViewport":  "landscape",
-        "modalOutcomes":  [
-                              "Unified structured and unstructured ESG data into one clearer workflow.",
-                              "Accelerated reporting, validation, and compliance monitoring through automation.",
-                              "Improved transparency with natural-language querying and AI-assisted analysis.",
-                              "Enabled stronger benchmarking across sectors, regions, and peer groups."
-                          ],
-        "modalSections":  [
-                              {
-                                  "body":  "Bevolve.ai sits at the intersection of ESG reporting, sustainability intelligence, and compliance automation. The product needed to handle complex data while still giving teams a usable, credible decision-making experience.",
-                                  "title":  "Context"
-                              },
-                              {
-                                  "body":  "The core problem was not just data volume but trust. Teams needed reporting workflows that could connect multiple data sources, maintain accuracy, and stay understandable as standards evolved.",
-                                  "title":  "Challenge"
-                              },
-                              {
-                                  "body":  "Yuvabe helped shape an AI sustainability platform with GPT-powered assistance, benchmarking workflows, AI-guided insights, and automation across reporting, validation, and compliance monitoring.",
-                                  "title":  "What we changed"
-                              },
-                              {
-                                  "body":  "The resulting system gave teams a faster, more transparent path through ESG reporting and benchmarking while improving confidence in evidence-based decisions.",
-                                  "title":  "Outcome"
-                              }
-                          ],
-        "seoDescription":  "Learn how Yuvabe helped Bevolve.ai turn fragmented ESG reporting into an AI-guided product system for faster, evidence-based decisions.",
-        "heroMockHeadline":  "AI-guided ESG reporting workflow",
-        "modalGalleryRows":  [
-                                 {
-                                     "items":  [
-                                                   {
-                                                       "title":  "Reporting workflow",
-                                                       "description":  "A clearer system for collecting, validating, and automating ESG reporting across multiple data sources."
-                                                   }
-                                               ],
-                                     "title":  "Platform experience"
-                                 },
-                                 {
-                                     "items":  [
-                                                   {
-                                                       "title":  "AI-assisted review",
-                                                       "description":  "Natural-language querying and GPT-powered guidance to help teams move through analysis faster."
-                                                   },
-                                                   {
-                                                       "title":  "Benchmarking engine",
-                                                       "description":  "A decision-support layer for comparing ESG performance across industries, peers, and geographies."
-                                                   }
-                                               ],
-                                     "title":  "Review and decision support"
-                                 },
-                                 {
-                                     "items":  [
-                                                   {
-                                                       "title":  "Peer comparison workspace",
-                                                       "description":  "A focused view for reading sector benchmarks, surfacing variance, and turning ESG signals into faster operating decisions."
-                                                   }
-                                               ],
-                                     "title":  "Benchmarking workspace"
-                                 },
-                                 {
-                                     "items":  [
-                                                   {
-                                                       "title":  "Heat maps and signals",
-                                                       "description":  "AI-driven visibility layers that make patterns easier to read without forcing users through raw spreadsheets."
-                                                   },
-                                                   {
-                                                       "title":  "Compliance monitoring",
-                                                       "description":  "Visibility across validation checkpoints, audit trails, and reporting readiness so teams can move with more confidence as standards evolve."
-                                                   }
-                                               ],
-                                     "title":  "Monitoring layers"
-                                 },
-                                 {
-                                     "items":  [
-                                                   {
-                                                       "title":  "Integrated decision layer",
-                                                       "description":  "One connected ESG intelligence surface that brings reporting, review, benchmarking, and compliance into a more usable product story."
-                                                   }
-                                               ],
-                                     "title":  "System overview"
-                                 }
-                             ],
-        "modalProofPoints":  [
-                                 {
-                                     "title":  "Connected fragmented data",
-                                     "iconKey":  "bot",
-                                     "description":  "Unified diverse ESG and GHG inputs into one more manageable reporting and compliance flow."
-                                 },
-                                 {
-                                     "title":  "Improved decision support",
-                                     "iconKey":  "barChart3",
-                                     "description":  "Added AI-guided insight generation, benchmarking, and natural-language access to speed up review workflows."
-                                 },
-                                 {
-                                     "title":  "Raised trust and usability",
-                                     "iconKey":  "sparkles",
-                                     "description":  "Made complex sustainability reporting easier to understand while preserving transparency and rigor."
-                                 }
-                             ],
-        "modalTestimonial":  {
-                                 "quote":  "The strongest shift was not just automation, but coherence. Reporting, benchmarking, and AI-guided analysis started feeling like one usable system, which made complex ESG work easier to navigate and easier to act on.",
-                                 "attribution":  "Bevolve.ai engagement"
-                             }
-    },
-    {
-        "id":  "tvam",
-        "title":  "TVAM",
-        "sector":  "Health insurance AI",
-        "summary":  "Built advisor-style AI tools that simplified health, policy, and exam-prep workflows through one clearer product system.",
-        "seoTitle":  "TVAM Case Study",
-        "services":  [
-                         "AI integration",
-                         "Product design",
-                         "RAG workflows"
-                     ],
-        "mockLayout":  "feature",
-        "modalIntro":  "TVAM focused on simplifying health, policy, and exam-prep workflows through advisor-style AI tools. The opportunity was to turn multiple AI capabilities into one product experience that felt useful, reliable, and easy to navigate.",
-        "mockVariant":  "aurora",
-        "mediaIconKey":  "bot",
-        "mockImageAlt":  "TVAM case study cover",
-        "mockImageSrc":  "/assets/tvam/tvam_cover.jpg",
-        "mockViewport":  "portrait",
-        "modalOutcomes":  [
-                              "Built AI-powered Health and Policy Advisors plus a USMLE preparation tool.",
-                              "Integrated chat-based AI, secure conversation storage, TTS/STT support, vector search, and file uploads.",
-                              "Used Retrieval-Augmented Generation patterns and cloud deployment workflows for scale.",
-                              "Made complex health and policy workflows easier to use through clearer product orchestration."
-                          ],
-        "seoDescription":  "Explore how Yuvabe built advisor-style AI workflows for TVAM across health, policy, and exam-prep use cases using a cloud-ready RAG stack.",
-        "heroMockHeadline":  "Advisor-style AI tools in one system",
-        "modalGalleryRows":  [
-                                 {
-                                     "items":  [
-                                                   {
-                                                       "title":  "Health Advisor workspace",
-                                                       "description":  "A portrait-led advisor flow that makes complex health guidance feel more approachable, structured, and actionable."
-                                                   },
-                                                   {
-                                                       "title":  "Policy Advisor journey",
-                                                       "description":  "A companion AI workflow for policy and coverage questions designed to reduce friction in expert-led decision support."
-                                                   }
-                                               ],
-                                     "title":  "Advisor product flows"
-                                 },
-                                 {
-                                     "items":  [
-                                                   {
-                                                       "title":  "Document-aware assistant",
-                                                       "description":  "A retrieval-driven experience that connects uploaded materials, reference content, and AI responses inside one usable system."
-                                                   },
-                                                   {
-                                                       "title":  "Exam-prep support",
-                                                       "description":  "An AI-guided prep flow that brings question support, recall, and guided explanation into a clearer study rhythm."
-                                                   }
-                                               ],
-                                     "title":  "Retrieval and orchestration"
-                                 }
-                             ],
-        "modalProofPoints":  [
-                                 {
-                                     "title":  "Delivered AI product execution",
-                                     "iconKey":  "bot",
-                                     "description":  "Turned multiple advisor-style workflows into one more coherent AI product experience."
-                                 },
-                                 {
-                                     "title":  "Integrated a real RAG stack",
-                                     "iconKey":  "scanSearch",
-                                     "description":  "Combined retrieval, secure storage, and AI workflow orchestration into a scalable system."
-                                 },
-                                 {
-                                     "title":  "Shipped cloud-ready infrastructure",
-                                     "iconKey":  "sparkles",
-                                     "description":  "Paired product work with deployment patterns built for secure growth and iteration."
-                                 }
-                             ],
-        "modalTestimonial":  {
-                                 "quote":  "What mattered most here was orchestration. Multiple AI tools, retrieval workflows, and cloud systems were brought into one product experience that felt useful, reliable, and much easier to navigate.",
-                                 "attribution":  "TVAM engagement"
-                             }
-    },
-    {
-        "id":  "kittykat",
-        "title":  "KittyKat",
-        "sector":  "Fashion AI visuals",
-        "summary":  "Built a generative AI fashion platform that turned product photos into realistic model visuals at scale with faster turnaround and less production overhead.",
-        "seoTitle":  "KittyKat Case Study",
-        "services":  [
-                         "Generative AI",
-                         "Data preprocessing",
-                         "Image refinement"
-                     ],
-        "mockLayout":  "feature",
-        "modalIntro":  "KittyKat needed a way to generate realistic fashion imagery at scale without the delay and cost of repeated production shoots. The work focused on turning product-to-model image generation into a more reliable AI workflow with the quality required for premium brand presentation.",
-        "mockVariant":  "sunrise",
-        "mediaIconKey":  "sparkles",
-        "mockImageAlt":  "KittyKat AI fashion workflow cover",
-        "mockImageSrc":  "/assets/KK-cover.png",
-        "mockViewport":  "landscape",
-        "modalOutcomes":  [
-                              "Built a generative AI fashion platform that automated product-to-model image generation.",
-                              "Improved realism at scale through data preprocessing, model optimization, and advanced image-generation workflows.",
-                              "Improved facial alignment, body proportions, and final image quality for premium brand presentation.",
-                              "Enabled the client to generate thousands of visuals faster for stronger storytelling and customer engagement."
-                          ],
-        "modalSections":  [
-                              {
-                                  "body":  "KittyKat was positioned around AI-generated fashion visuals, but the real product challenge was not novelty alone. The platform had to turn ordinary product photos into realistic model imagery that a fashion brand could actually use across campaigns and commerce touchpoints.",
-                                  "title":  "Context"
-                              },
-                              {
-                                  "body":  "Generating fashion imagery with AI becomes difficult when realism breaks down. Facial alignment, body proportions, and consistency all needed to hold up well enough for premium presentation, while the workflow still had to move faster than traditional production.",
-                                  "title":  "Challenge"
-                              },
-                              {
-                                  "body":  "Yuvabe built the product-to-model generation workflow, then improved output quality through data preprocessing, model optimization, and hierarchical image refinement. The system was tuned to make the image pipeline feel more reliable, scalable, and aligned to actual fashion-use cases instead of generic AI art output.",
-                                  "title":  "What we changed"
-                              },
-                              {
-                                  "body":  "The result was a generative AI fashion platform that reduced production delay, improved final image quality, and made it easier for the client to create large volumes of branded visuals for stronger storytelling and customer engagement.",
-                                  "title":  "Outcome"
-                              }
-                          ],
-        "seoDescription":  "See how Yuvabe built a generative AI fashion workflow for KittyKat that improved realism, reduced production delays, and scaled branded visual output.",
-        "heroMockHeadline":  "Product-to-model image generation",
-        "modalGalleryRows":  [
-                                 {
-                                     "items":  [
-                                                   {
-                                                       "title":  "Product-to-model pipeline",
-                                                       "description":  "A landscape-oriented workflow for turning static product inputs into styled model imagery without the overhead of repeated shoots."
-                                                   },
-                                                   {
-                                                       "title":  "Prompt and variation control",
-                                                       "description":  "A supporting generation layer that helps teams explore more brand-relevant outputs while keeping the workflow commercially usable."
-                                                   }
-                                               ],
-                                     "title":  "Generation workflow"
-                                 },
-                                 {
-                                     "items":  [
-                                                   {
-                                                       "title":  "Image quality tuning",
-                                                       "description":  "Refinement passes focused on realism, body proportion, and facial consistency so AI visuals hold up for premium presentation."
-                                                   },
-                                                   {
-                                                       "title":  "Campaign-ready asset system",
-                                                       "description":  "A scalable output layer that makes it easier to generate larger batches of visuals for storytelling, catalog, and brand content."
-                                                   }
-                                               ],
-                                     "title":  "Refinement and output"
-                                 }
-                             ],
-        "modalProofPoints":  [
-                                 {
-                                     "title":  "Automated product-to-model generation",
-                                     "iconKey":  "sparkles",
-                                     "description":  "Turned product photos into model visuals through a faster AI-led production workflow."
-                                 },
-                                 {
-                                     "title":  "Improved realism and quality",
-                                     "iconKey":  "layoutGrid",
-                                     "description":  "Used data preprocessing and hierarchical refinement to improve proportion accuracy and premium visual output."
-                                 },
-                                 {
-                                     "title":  "Scaled on brand visual production",
-                                     "iconKey":  "scanSearch",
-                                     "description":  "Reduced image creation time and made it easier to produce larger volumes of usable campaign assets."
-                                 }
-                             ],
-        "modalTestimonial":  {
-                                 "quote":  "The value of the work was not just faster image generation. It was building an AI visual pipeline that improved realism, reduced production delay, and made large-scale branded output far more usable.",
-                                 "attribution":  "KittyKat engagement"
-                             }
-    },
-    {
-        "id":  "ageshift",
-        "title":  "AgeShift",
-        "sector":  "AI wellness platform",
-        "summary":  "Delivered an AI-enabled wellness platform spanning mobile app, backend APIs, admin tools, and cloud infrastructure.",
-        "seoTitle":  "AgeShift Case Study",
-        "services":  [
-                         "Product ecosystem",
-                         "AI recommendations"
-                     ],
-        "mockLayout":  "feature",
-        "modalIntro":  "AgeShift needed a connected wellness product ecosystem that could guide users through routines, protocol tracking, and AI-powered recommendations while also giving administrators stronger operational visibility.",
-        "mockVariant":  "prism",
-        "mediaIconKey":  "barChart3",
-        "mockImageAlt":  "AgeShift logo",
-        "mockImageSrc":  "/assets/ageShift_logo.svg",
-        "mockViewport":  "landscape",
-        "modalOutcomes":  [
-                              "Built a Flutter mobile app, FastAPI backend, and Next.js admin panel on Google Cloud Platform.",
-                              "Added AI-driven recommendations, structured protocol tracking, and unified user/admin workflows.",
-                              "Implemented CI/CD pipelines for more reliable builds, testing, and deployment.",
-                              "Created a secure, scalable product base for ongoing growth and behavior-driven insights."
-                          ],
-        "seoDescription":  "Read how Yuvabe delivered AgeShift\u0027s AI-enabled wellness platform across mobile, backend APIs, admin tooling, and secure cloud infrastructure.",
-        "heroMockHeadline":  "Connected wellness product ecosystem",
-        "modalGalleryRows":  [
-                                 {
-                                     "items":  [
-                                                   {
-                                                       "title":  "Wellness app journey",
-                                                       "description":  "A mobile-first product flow for routines, check-ins, and protocol guidance built to feel calmer, clearer, and more actionable."
-                                                   },
-                                                   {
-                                                       "title":  "Protocol tracking",
-                                                       "description":  "Structured user flows that make ongoing habit tracking and next-step guidance easier to understand over time."
-                                                   }
-                                               ],
-                                     "title":  "Member experience"
-                                 },
-                                 {
-                                     "items":  [
-                                                   {
-                                                       "title":  "Admin operations surface",
-                                                       "description":  "A landscape-oriented control layer for managing users, content, and operational visibility across the platform."
-                                                   },
-                                                   {
-                                                       "title":  "Recommendation engine",
-                                                       "description":  "AI-assisted personalization flows that connect user behavior, wellness signals, and backend logic into one product ecosystem."
-                                                   }
-                                               ],
-                                     "title":  "Admin and intelligence layers"
-                                 }
-                             ],
-        "modalProofPoints":  [
-                                 {
-                                     "title":  "Shipped cross-platform product systems",
-                                     "iconKey":  "layoutGrid",
-                                     "description":  "Connected mobile, backend, and admin experiences into one operational platform."
-                                 },
-                                 {
-                                     "title":  "Integrated AI recommendations",
-                                     "iconKey":  "bot",
-                                     "description":  "Used AI to make routine guidance and wellness insights more personalized and actionable."
-                                 },
-                                 {
-                                     "title":  "Built for secure scaling",
-                                     "iconKey":  "sparkles",
-                                     "description":  "Paired product execution with cloud infrastructure and CI/CD for long-term reliability."
-                                 }
-                             ],
-        "modalTestimonial":  {
-                                 "quote":  "The impact came from connecting the whole system. Mobile experience, backend APIs, admin tooling, AI recommendations, and cloud infrastructure were built to work together instead of behaving like separate layers.",
-                                 "attribution":  "AgeShift engagement"
-                             }
+  {
+    "id": "general-aeronautics",
+    "size": "feature",
+    "title": "General Aeronautics",
+    "sector": "Aviation Technology",
+    "summary": "Turned a complex drone portfolio into a clearer digital story buyers, partners, and operators could trust faster.",
+    "seoTitle": "General Aeronautics Case Study",
+    "services": [
+      "Market Positioning",
+      "Brand Identity",
+      "Content & UX"
+    ],
+    "modalIntro": "General Aeronautics builds drone systems across agriculture, defense, humanitarian response, and warehouse automation. As the portfolio expanded, the challenge was making that breadth easier to understand, trust, and navigate.",
+    "mockVariant": "aurora",
+    "mediaIconKey": "layoutGrid",
+    "mockImageAlt": "General Aeronautics mobile product mock",
+    "mockImageSrc": "/assets/GA_cover.png",
+    "mockViewport": "portrait",
+    "modalOutcomes": [
+      "Reframed a broad drone portfolio into a sharper market story.",
+      "Made technical capabilities easier for non-technical audiences to understand.",
+      "Improved credibility across web, applications, and communication assets.",
+      "Built a stronger platform for future product and growth decisions."
+    ],
+    "modalSections": [
+      {
+        "body": "General Aeronautics had real depth across multiple drone categories, but that breadth was difficult to communicate clearly in one digital experience.",
+        "title": "Context"
+      },
+      {
+        "body": "Without a clearer narrative, technical breadth risked reading as fragmentation. Buyers, partners, and operators all needed a simpler path through what the company offered and why it mattered.",
+        "title": "Challenge"
+      },
+      {
+        "body": "Yuvabe paired a website revamp with brand refresh, UI/UX direction, and supporting content so product communication and credibility cues reinforced each other.",
+        "title": "What we changed"
+      },
+      {
+        "body": "The result was a clearer business story, more intuitive interfaces, and a stronger foundation for future launches and brand growth.",
+        "title": "Outcome"
+      }
+    ],
+    "seoDescription": "See how Yuvabe helped General Aeronautics turn a broad drone portfolio into a clearer digital story across website, product UX, and brand systems.",
+    "heroMockHeadline": "Portfolio clarity across Drone Systems",
+    "modalGalleryRows": [
+      {
+        "items": [
+          {
+            "title": "Positioning-led homepage",
+            "description": "A clearer first impression that communicates the scope of the drone portfolio without overwhelming buyers."
+          },
+          {
+            "title": "Product communication system",
+            "description": "A clearer way to present agricultural, defense, and automation capabilities across web and supporting assets."
+          }
+        ],
+        "title": "Work Gallery"
+      },
+      {
+        "items": [
+          {
+            "title": "Application UX direction",
+            "description": "Interface decisions that made complex mission-planning workflows easier to understand and navigate."
+          },
+          {
+            "title": "Content and campaign assets",
+            "description": "Illustrations, video, blogs, and social creatives that kept the story consistent beyond the website."
+          }
+        ],
+        "title": "Work Gallery"
+      }
+    ],
+    "modalProofPoints": [
+      {
+        "title": "Sharpened market story",
+        "iconKey": "scanSearch",
+        "description": "Turned a complex product portfolio into a clearer business narrative that buyers and partners could understand and trust faster."
+      },
+      {
+        "title": "Unified touchpoints",
+        "iconKey": "layoutGrid",
+        "description": "Aligned website, product UX, and supporting communication assets into one more coherent system."
+      },
+      {
+        "title": "Built for scale",
+        "iconKey": "sparkles",
+        "description": "Created a stronger platform for future launches, campaigns, and product communication decisions."
+      }
+    ],
+    "modalTestimonial": {
+      "quote": "The work made a technically complex drone business easier to understand and easier to trust. Website, product UX, and supporting assets finally reinforced the same story instead of fragmenting it.",
+      "attribution": "General Aeronautics team"
     }
+  },
+  {
+    "id": "bevolve",
+    "title": "Bevolve.ai",
+    "sector": "ESG intelligence",
+    "summary": "Turned fragmented sustainability reporting into an AI-guided system teams could trust for faster, evidence-based decisions.",
+    "seoTitle": "Bevolve.ai Case Study",
+    "services": [
+      "AI integration",
+      "Reporting automation",
+      "Decision support"
+    ],
+    "modalIntro": "Bevolve.ai needed a product experience that could bring together fragmented ESG and sustainability data, automate reporting workflows, and make decision support easier for teams navigating compliance pressure.",
+    "mockVariant": "sunrise",
+    "mediaIconKey": "bot",
+    "mockImageAlt": "Bevolve.ai product experience mock",
+    "mockImageSrc": "/assets/Bevolve_cover.png",
+    "mockViewport": "landscape",
+    "modalOutcomes": [
+      "Unified structured and unstructured ESG data into one clearer workflow.",
+      "Accelerated reporting, validation, and compliance monitoring through automation.",
+      "Improved transparency with natural-language querying and AI-assisted analysis.",
+      "Enabled stronger benchmarking across sectors, regions, and peer groups."
+    ],
+    "modalSections": [
+      {
+        "body": "Bevolve.ai sits at the intersection of ESG reporting, sustainability intelligence, and compliance automation. The product needed to handle complex data while still giving teams a usable, credible decision-making experience.",
+        "title": "Context"
+      },
+      {
+        "body": "The core problem was not just data volume but trust. Teams needed reporting workflows that could connect multiple data sources, maintain accuracy, and stay understandable as standards evolved.",
+        "title": "Challenge"
+      },
+      {
+        "body": "Yuvabe helped shape an AI sustainability platform with Open AI-powered assistance, benchmarking workflows, AI-guided insights, and automation across reporting, validation, and compliance monitoring.",
+        "title": "What we changed"
+      },
+      {
+        "body": "The resulting system gave teams a faster, more transparent path through ESG reporting and benchmarking while improving confidence in evidence-based decisions.",
+        "title": "Outcome"
+      }
+    ],
+    "seoDescription": "Learn how Yuvabe helped Bevolve.ai turn fragmented ESG reporting into an AI-guided product system for faster, evidence-based decisions.",
+    "heroMockHeadline": "AI-guided ESG reporting workflow",
+    "modalGalleryRows": [
+      {
+        "items": [
+          {
+            "title": "Reporting workflow",
+            "description": "A clearer system for collecting, validating, and automating ESG reporting across multiple data sources."
+          }
+        ],
+        "title": "Platform experience"
+      },
+      {
+        "items": [
+          {
+            "title": "AI-assisted review",
+            "description": "Natural-language querying and GPT-powered guidance to help teams move through analysis faster."
+          },
+          {
+            "title": "Benchmarking engine",
+            "description": "A decision-support layer for comparing ESG performance across industries, peers, and geographies."
+          }
+        ],
+        "title": "Review and decision support"
+      },
+      {
+        "items": [
+          {
+            "title": "Peer comparison workspace",
+            "description": "A focused view for reading sector benchmarks, surfacing variance, and turning ESG signals into faster operating decisions."
+          }
+        ],
+        "title": "Benchmarking workspace"
+      },
+      {
+        "items": [
+          {
+            "title": "Heat maps and signals",
+            "description": "AI-driven visibility layers that make patterns easier to read without forcing users through raw spreadsheets."
+          },
+          {
+            "title": "Compliance monitoring",
+            "description": "Visibility across validation checkpoints, audit trails, and reporting readiness so teams can move with more confidence as standards evolve."
+          }
+        ],
+        "title": "Monitoring layers"
+      },
+      {
+        "items": [
+          {
+            "title": "Integrated decision layer",
+            "description": "One connected ESG intelligence surface that brings reporting, review, benchmarking, and compliance into a more usable product story."
+          }
+        ],
+        "title": "System overview"
+      }
+    ],
+    "modalProofPoints": [
+      {
+        "title": "Connected fragmented data",
+        "iconKey": "bot",
+        "description": "Unified diverse ESG and GHG inputs into one more manageable reporting and compliance flow."
+      },
+      {
+        "title": "Improved decision support",
+        "iconKey": "barChart3",
+        "description": "Added AI-guided insight generation, benchmarking, and natural-language access to speed up review workflows."
+      },
+      {
+        "title": "Raised trust and usability",
+        "iconKey": "sparkles",
+        "description": "Made complex sustainability reporting easier to understand while preserving transparency and rigor."
+      }
+    ],
+    "modalTestimonial": {
+      "quote": "The strongest shift was not just automation, but coherence. Reporting, benchmarking, and AI-guided analysis started feeling like one usable system, which made complex ESG work easier to navigate and easier to act on.",
+      "attribution": "Bevolve.ai engagement"
+    }
+  },
+  {
+    "id": "tvam",
+    "title": "tvam",
+    "sector": "Health insurance AI",
+    "summary": "Built advisor-style AI tools that turned complex health, policy, and exam-prep workflows into one product experience users could actually navigate with confidence.",
+    "seoTitle": "tvam Case Study",
+    "services": [
+      "AI integration",
+      "Product design",
+      "RAG workflows"
+    ],
+    "mockLayout": "feature",
+    "modalIntro": "tvam focused on simplifying health guidance, policy support, and exam-prep workflows through advisor-style AI tools. The challenge was turning multiple AI capabilities into one product experience that felt useful, reliable, and easy to navigate — without losing the depth that made each tool valuable.",
+    "mockVariant": "aurora",
+    "mediaIconKey": "bot",
+    "mockImageAlt": "TVAM case study cover",
+    "mockImageSrc": "/assets/tvam/tvam_cover.jpg",
+    "mockViewport": "portrait",
+    "modalOutcomes": [
+      "Built AI-powered Health and Policy Advisors plus a USMLE preparation tool.",
+      "Integrated chat-based AI, secure conversation storage, TTS/STT support, vector search, and file uploads.",
+      "Used Retrieval-Augmented Generation patterns and cloud deployment workflows for scale.",
+      "Made complex health and policy workflows easier to use through clearer product orchestration."
+    ],
+    "modalSections": [
+      {
+        "body": "tvam needed a more coherent narrative across product, experience, and communication as the scope of the work expanded.",
+        "title": "Context"
+      },
+      {
+        "body": "The opportunity wasn't just to ship features — it was to help the business communicate value faster and with more confidence to the people who needed it most.",
+        "title": "Challenge"
+      },
+      {
+        "body": "We aligned the experience, supporting systems, and communication touchpoints around what users and stakeholders needed to understand at each step.",
+        "title": "What we changed"
+      },
+      {
+        "body": "A sharper product story, a more usable experience, and a stronger platform built to support future growth decisions.",
+        "title": "Outcome"
+      }
+    ],
+    "seoDescription": "Explore how Yuvabe built advisor-style AI workflows for tvam across health, policy, and exam-prep use cases using a cloud-ready RAG stack.",
+    "heroMockHeadline": "Advisor-style AI tools in one system",
+    "modalGalleryRows": [
+      {
+        "items": [
+          {
+            "title": "Health Advisor workspace",
+            "description": "A portrait-led advisor flow that makes complex health guidance feel more approachable, structured, and actionable — so users arrive at answers without feeling lost in clinical language."
+          },
+          {
+            "title": "Policy Advisor journey",
+            "description": "A companion AI workflow for policy and coverage questions, designed to reduce friction in expert-led decision support and help users move from confusion to clarity faster."
+          }
+        ],
+        "title": "Advisor product flows"
+      },
+      {
+        "items": [
+          {
+            "title": "Document-aware assistant",
+            "description": "A retrieval-driven experience that connects uploaded materials, reference content, and AI responses inside one usable system — so the right information surfaces at the right moment."
+          },
+          {
+            "title": "Exam-prep support",
+            "description": "An AI-guided prep flow that brings question support, recall, and guided explanation into a clearer study rhythm — making preparation feel less like drilling and more like understanding."
+          }
+        ],
+        "title": "Retrieval and orchestration"
+      }
+    ],
+    "modalProofPoints": [
+      {
+        "title": "Delivered AI product execution",
+        "iconKey": "bot",
+        "description": "Turned multiple advisor-style workflows into one more coherent AI product experience."
+      },
+      {
+        "title": "Integrated a real RAG stack",
+        "iconKey": "scanSearch",
+        "description": "Combined retrieval, secure storage, and AI workflow orchestration into a scalable system."
+      },
+      {
+        "title": "Shipped cloud-ready infrastructure",
+        "iconKey": "sparkles",
+        "description": "Paired product work with deployment patterns built for secure growth and iteration."
+      }
+    ],
+    "modalTestimonial": {
+      "quote": "What mattered most here was orchestration. Multiple AI tools, retrieval workflows, and cloud systems were brought into one product experience that felt useful, reliable, and much easier to navigate.",
+      "attribution": "tvam team"
+    }
+  },
+  {
+    "id": "kittykat",
+    "title": "KittyKat",
+    "sector": "Fashion AI visuals",
+    "summary": "Built a generative AI fashion platform that turned product photos into realistic model visuals at scale with faster turnaround and less production overhead.",
+    "seoTitle": "KittyKat Case Study",
+    "services": [
+      "Generative AI",
+      "Data preprocessing",
+      "Image refinement"
+    ],
+    "mockLayout": "feature",
+    "modalIntro": "KittyKat needed a way to generate realistic fashion imagery at scale — without the delay and cost of repeated production shoots. The work focused on turning product-to-model image generation into a more reliable AI workflow with the output quality a premium fashion brand actually needs.",
+    "mockVariant": "sunrise",
+    "mediaIconKey": "sparkles",
+    "mockImageAlt": "KittyKat AI fashion workflow cover",
+    "mockImageSrc": "/assets/KK-cover.png",
+    "mockViewport": "landscape",
+    "modalOutcomes": [
+      "Built a generative AI fashion platform that automated product-to-model image generation.",
+      "Improved realism at scale through data preprocessing, model optimization, and advanced image-generation workflows.",
+      "Improved facial alignment, body proportions, and final image quality for premium brand presentation.",
+      "Enabled the client to generate thousands of visuals faster for stronger storytelling and customer engagement."
+    ],
+    "modalSections": [
+      {
+        "body": "KittyKat was positioned around AI-generated fashion visuals, but the real product challenge was not novelty alone. The platform had to turn ordinary product photos into realistic model imagery that a fashion brand could actually use across campaigns and commerce touchpoints.",
+        "title": "Context"
+      },
+      {
+        "body": "Generating fashion imagery with AI becomes difficult when realism breaks down. Facial alignment, body proportions, and consistency all needed to hold up well enough for premium presentation, while the workflow still had to move faster than traditional production.",
+        "title": "Challenge"
+      },
+      {
+        "body": "Yuvabe built the product-to-model generation workflow, then improved output quality through data preprocessing, model optimization, and hierarchical image refinement — tuning the pipeline to feel reliable, scalable, and aligned to real fashion use cases rather than generic AI output.",
+        "title": "What we changed"
+      },
+      {
+        "body": "The result was a generative AI fashion platform that reduced production delay, improved final image quality, and made it easier for the client to create large volumes of branded visuals for stronger storytelling and customer engagement.",
+        "title": "Outcome"
+      }
+    ],
+    "seoDescription": "See how Yuvabe built a generative AI fashion workflow for KittyKat that improved realism, reduced production delays, and scaled branded visual output.",
+    "heroMockHeadline": "Product-to-model image generation",
+    "modalGalleryRows": [
+      {
+        "items": [
+          {
+            "title": "Product-to-model pipeline",
+            "description": "A landscape-oriented workflow for turning static product inputs into styled model imagery without the overhead of repeated shoots."
+          },
+          {
+            "title": "Prompt and variation control",
+            "description": "A supporting generation layer that helps teams explore more brand-relevant outputs while keeping the workflow commercially usable."
+          }
+        ],
+        "title": "Generation workflow"
+      },
+      {
+        "items": [
+          {
+            "title": "Image quality tuning",
+            "description": "Refinement passes focused on realism, body proportion, and facial consistency so AI visuals hold up for premium presentation."
+          },
+          {
+            "title": "Campaign-ready asset system",
+            "description": "A scalable output layer that makes it easier to generate larger batches of visuals for storytelling, catalog, and brand content."
+          }
+        ],
+        "title": "Refinement and output"
+      }
+    ],
+    "modalProofPoints": [
+      {
+        "title": "Automated product-to-model generation",
+        "iconKey": "sparkles",
+        "description": "Turned product photos into model visuals through a faster AI-led production workflow."
+      },
+      {
+        "title": "Improved realism and quality",
+        "iconKey": "layoutGrid",
+        "description": "Used data preprocessing and hierarchical refinement to improve proportion accuracy and premium visual output."
+      },
+      {
+        "title": "Scaled on brand visual production",
+        "iconKey": "scanSearch",
+        "description": "Reduced image creation time and made it easier to produce larger volumes of usable campaign assets."
+      }
+    ],
+    "modalTestimonial": {
+      "quote": "The value of the work was not just faster image generation. It was building an AI visual pipeline that improved realism, reduced production delay, and made large-scale branded output far more usable.",
+      "attribution": "KittyKat product team"
+    }
+  },
+  {
+    "id": "ageshift",
+    "title": "AgeShift",
+    "sector": "AI wellness platform",
+    "summary": "Delivered an AI-enabled wellness platform spanning mobile app, backend APIs, admin tools, and cloud infrastructure.",
+    "seoTitle": "AgeShift Case Study",
+    "services": [
+      "Product ecosystem",
+      "AI recommendations"
+    ],
+    "mockLayout": "feature",
+    "modalIntro": "AgeShift needed a connected wellness product ecosystem that could guide users through routines, protocol tracking, and AI-powered recommendations — while giving administrators the operational visibility to manage it all with confidence.",
+    "mockVariant": "prism",
+    "mediaIconKey": "barChart3",
+    "mockImageAlt": "AgeShift logo",
+    "mockImageSrc": "/assets/ageShift_logo.svg",
+    "mockViewport": "landscape",
+    "modalOutcomes": [
+      "Built a Flutter mobile app, FastAPI backend, and Next.js admin panel on Google Cloud Platform.",
+      "Added AI-driven recommendations, structured protocol tracking, and unified user/admin workflows.",
+      "Implemented CI/CD pipelines for more reliable builds, testing, and deployment.",
+      "Created a secure, scalable product base for ongoing growth and behavior-driven insights."
+    ],
+    "modalSections": [
+      {
+        "body": "AgeShift needed one coherent product ecosystem — connecting member experience, admin operations, and AI-driven guidance into a single platform that could scale as the business grew.",
+        "title": "Context"
+      },
+      {
+        "body": "The opportunity was not just to ship assets, but to help the business communicate value faster and with more confidence.",
+        "title": "Challenge"
+      },
+      {
+        "body": "We aligned the experience, supporting systems, and communication touchpoints around what users and stakeholders needed to understand next.",
+        "title": "What we changed"
+      },
+      {
+        "body": "A more connected product, a more capable admin platform, and a scalable infrastructure ready for future growth and behavior-driven product decisions.",
+        "title": "Outcome"
+      }
+    ],
+    "seoDescription": "Read how Yuvabe delivered AgeShift's AI-enabled wellness platform across mobile, backend APIs, admin tooling, and secure cloud infrastructure.",
+    "heroMockHeadline": "Connected wellness product ecosystem",
+    "modalGalleryRows": [
+      {
+        "items": [
+          {
+            "title": "Wellness app journey",
+            "description": "A mobile-first product flow for routines, check-ins, and protocol guidance — built to feel calmer, clearer, and more actionable so users stay engaged with their wellness journey over time."
+          },
+          {
+            "title": "Protocol tracking",
+            "description": "Structured user flows that make ongoing habit tracking and next-step guidance easier to understand over time."
+          }
+        ],
+        "title": "Member experience"
+      },
+      {
+        "items": [
+          {
+            "title": "Admin operations surface",
+            "description": "A landscape-oriented control layer for managing users, content, and operational visibility across the platform — giving administrators the clarity to act without switching between systems."
+          },
+          {
+            "title": "Recommendation engine",
+            "description": "AI-assisted personalization flows that connect user behavior, wellness signals, and backend logic into one product ecosystem — making guidance feel relevant rather than generic."
+          }
+        ],
+        "title": "Admin and intelligence layers"
+      }
+    ],
+    "modalProofPoints": [
+      {
+        "title": "Shipped cross-platform product systems",
+        "iconKey": "layoutGrid",
+        "description": "Connected mobile, backend, and admin experiences into one coherent operational platform."
+      },
+      {
+        "title": "Integrated AI recommendations",
+        "iconKey": "bot",
+        "description": "Used AI to make routine guidance and wellness insights more personalized and actionable for every user."
+      },
+      {
+        "title": "Built for secure scaling",
+        "iconKey": "sparkles",
+        "description": "Paired product execution with cloud infrastructure and CI/CD for long-term reliability and growth."
+      }
+    ],
+    "modalTestimonial": {
+      "quote": "The impact came from connecting the whole system. Mobile experience, backend APIs, admin tooling, AI recommendations, and cloud infrastructure were built to work together instead of behaving like separate layers.",
+      "attribution": "AgeShift team"
+    }
+  }
 ]
