@@ -36,7 +36,7 @@ const previewContent: StudioAboutPageContent = {
     title: "You will work with the people who built",
     highlight: "it.",
     description:
-      "Yuvabe is an AI-first studio from Auroville for founders who need sharper decisions, faster execution, and a team that stays close as the work gets real.",
+      "Yuvabe is an AI-first studio from Auroville for founders who need sharper decisions, faster execution, and direct collaboration with the people doing the work.",
     supportingLine: "",
     primaryCtaLabel: "Start Your Project",
     primaryCtaHref: "/#process",
@@ -69,7 +69,7 @@ const previewContent: StudioAboutPageContent = {
     paragraphs: [
       "We started in Auroville in 2020 with a simple operating principle: slow down before speeding up, ask the harder question, and stay close to the problem. That place taught us to care about the long view, the craft, and the quality of the decisions made before momentum takes over.",
       "What changed is the environment around us. AI has made shipping faster and cheaper, but it has also made it easier for teams to move quickly in the wrong direction. Yuvabe evolved into an AI-first studio because founders now need more than execution. They need help deciding what is worth building in the first place.",
-      "What we care about now is keeping strategy, product thinking, engineering, and growth connected so the original thinking holds up once the work starts moving.",
+      "What we care about now is helping founders make decisions that still hold up once the product ships, users respond, and the next move becomes clearer.",
     ],
     operatingPrinciples: [
       {
@@ -93,7 +93,7 @@ const previewContent: StudioAboutPageContent = {
     eyebrow: "How we work",
     title: "A connected loop, not a handoff wall",
     description:
-      "Most teams split strategy, design, engineering, and growth into separate tracks. We keep them connected.",
+      "Most teams make the founder bridge the gaps between strategy, design, engineering, and growth. We do not.",
     stages: [
       {
         label: "Strategy",
@@ -121,7 +121,7 @@ const previewContent: StudioAboutPageContent = {
     eyebrow: "Selected work",
     title: "A few places we've done this.",
     description:
-      "Different sectors, same job: help teams make a stronger bet and build it well.",
+      "Different sectors, same job: make the bet clearer, build it well, and keep traction in view.",
     entries: [
       {
         client: "TVAM",
@@ -142,10 +142,10 @@ const previewContent: StudioAboutPageContent = {
           "Reframed fashion production from optimizing the photoshoot to replacing it with a product-to-model generative pipeline built for scale.",
       },
       {
-        client: "AgeShift",
-        sector: "AI wellness platform",
+        client: "General Aeronautics",
+        sector: "Drone technology, web, and marketing",
         summary:
-          "Delivered the mobile app, backend, admin tooling, and AI recommendation workflows as one product system instead of separate workstreams.",
+          "Supported the brand, website, product UI, and content system together so the company could present a stronger story as the product matured.",
       },
     ],
   },
@@ -177,18 +177,18 @@ const previewContent: StudioAboutPageContent = {
     eyebrow: "Small team, deep involvement",
     title: "You do not get a pitch team and a delivery team.",
     description:
-      "The people shaping the product stay in the conversation from the first call to the first launch. That is deliberate.",
+      "The people shaping the work stay in the conversation from the first call to the first launch. That is deliberate.",
     points: [
       "Small, senior team with direct involvement from strategy through launch",
-      "Cross-functional collaboration across product, design, engineering, and growth",
-      "A close working style built for founders who want honesty, momentum, and fewer handoff gaps",
+      "Product, engineering, and growth decisions made with shared context instead of serial handoffs",
+      "A close working style built for founders who want honesty, momentum, and fewer surprises",
     ],
   },
   cta: {
     eyebrow: "Start the conversation",
     title: "Tell us what you are building.",
     description:
-      "We work best with founders who want honest thinking, close collaboration, and help figuring out the right move before the work gets expensive.",
+      "We work best with founders who want honest thinking, close collaboration, and a team that will tell them what it would do first.",
     primaryCtaLabel: "Start Your Project",
     primaryCtaHref: "/#process",
     secondaryCtaLabel: "See Our Work",
