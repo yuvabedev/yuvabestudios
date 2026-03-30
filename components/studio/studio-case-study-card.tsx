@@ -11,6 +11,11 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { cn } from "@/lib/utils";
 
 const easeOut = [0.22, 1, 0.36, 1] as const;
+const cardHoverMotion = {
+  lift: { scale: 1.006, y: -2 },
+  mediaLift: { scale: 1.005 },
+  transition: { duration: 0.32, ease: easeOut },
+};
 
 const caseStudyCardVariants = cva(
   "group relative flex h-full flex-col overflow-hidden rounded-[1.5rem] border-0 bg-transparent shadow-none",
@@ -92,8 +97,8 @@ export function StudioCaseStudyCard({
       role={canOpenDetails && !href ? "button" : undefined}
       tabIndex={canOpenDetails && !href ? 0 : undefined}
       aria-label={canOpenDetails && !href ? `Open ${title} case study details` : undefined}
-      whileHover={shouldReduceMotion ? undefined : { scale: 1.012, y: -4 }}
-      transition={{ duration: 0.36, ease: easeOut }}
+      whileHover={shouldReduceMotion ? undefined : cardHoverMotion.lift}
+      transition={cardHoverMotion.transition}
     >
       <Card className={cn(caseStudyCardVariants({ size }), className)}>
         {/* The header carries the sector label, title, summary, and quick action. */}
@@ -158,8 +163,8 @@ export function StudioCaseStudyCard({
         <CardFooter className="relative z-10 mt-auto p-5 pt-5 sm:p-6 sm:pt-6 md:p-7 md:pt-7">
           <motion.div
             className={cn(mediaFrameVariants({ size }), "w-full", mediaClassName)}
-            whileHover={shouldReduceMotion ? undefined : { scale: 1.01 }}
-            transition={{ duration: 0.36, ease: easeOut }}
+            whileHover={shouldReduceMotion ? undefined : cardHoverMotion.mediaLift}
+            transition={cardHoverMotion.transition}
           >
             <div className="relative flex h-full items-center justify-center text-[var(--neutral-700)]">{media}</div>
           </motion.div>

@@ -1,7 +1,8 @@
 "use client";
 
 import Image from "next/image";
-import { useState, type FormEvent } from "react";
+import Link from "next/link";
+import { useEffect, useState, type FormEvent } from "react";
 import { Check } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
@@ -51,6 +52,19 @@ export function StartProjectModal({
   const [needs, setNeeds] = useState<string[]>([]);
   const [notes, setNotes] = useState("");
 
+  // Each open should feel like a fresh start, not a stale draft from a prior CTA click.
+  useEffect(() => {
+    if (!open) {
+      return;
+    }
+
+    setName("");
+    setEmail("");
+    setPhone("");
+    setNeeds([]);
+    setNotes("");
+  }, [open]);
+
   function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
@@ -72,10 +86,10 @@ export function StartProjectModal({
       onOpenChange={onOpenChange}
       motionPreset="fade"
       title="Start your project"
-      className="max-w-[76rem]"
-      contentClassName="px-5 pb-5 pt-16 sm:px-8 sm:pb-7 lg:px-10 lg:pb-8"
+      className="max-h-[calc(100svh-1.5rem)] max-w-[76rem] overflow-hidden"
+      contentClassName="h-full px-5 pb-5 pt-12 sm:px-8 sm:pb-6 lg:px-10 lg:pb-6"
     >
-      <div className="relative grid gap-7 lg:grid-cols-[minmax(0,0.94fr)_minmax(0,1.06fr)] lg:gap-8">
+      <div className="relative grid gap-7 overflow-hidden rounded-[inherit] lg:h-[calc(100svh-10rem)] lg:min-h-0 lg:grid-cols-[minmax(0,0.94fr)_minmax(0,1.06fr)] lg:gap-8">
         {/* The background glow shifts more attention to the form side without adding another heavy surface. */}
         <div
           aria-hidden="true"
@@ -83,7 +97,7 @@ export function StartProjectModal({
         />
 
         {/* The left rail gives the modal stronger brand presence and a clearer founder-facing frame. */}
-        <div className="space-y-6 lg:pr-4">
+        <div className="space-y-6 lg:flex lg:h-full lg:flex-col lg:justify-center lg:pl-2 lg:pr-6">
           <div className="space-y-3">
             <div className="inline-flex items-center gap-3 rounded-full border border-[color:color-mix(in_srgb,var(--lavender-500)_18%,white)] bg-white/80 px-3 py-2 shadow-[0_10px_26px_rgba(15,23,42,0.05)]">
               <Image
@@ -106,17 +120,21 @@ export function StartProjectModal({
           </div>
 
           <div className="space-y-3">
-            <div className="inline-flex rounded-full border border-[color:color-mix(in_srgb,var(--lavender-500)_20%,white)] bg-white/82 px-4 py-2 shadow-[0_12px_28px_rgba(15,23,42,0.05)]">
-              <p className="text-label-sm uppercase tracking-[0.18em] text-[var(--neutral-700)]">
+            <p className="text-body-sm text-[var(--color-text-tertiary)]">
+              Prefer email?{" "}
+              <Link
+                href={`mailto:${START_PROJECT_EMAIL}`}
+                className="cursor-pointer lowercase text-[var(--neutral-700)] underline-offset-4 transition-colors hover:text-[var(--color-text-brand)] hover:underline"
+              >
                 {START_PROJECT_EMAIL}
-              </p>
-            </div>
+              </Link>
+            </p>
           </div>
         </div>
 
         {/* The right column replaces the generic brief field with guided conversation starters and cleaner input copy. */}
-        <div className="relative rounded-[1.75rem] border border-[color:color-mix(in_srgb,var(--lavender-500)_22%,white)] bg-white p-4 shadow-[0_24px_56px_rgba(15,23,42,0.08)] sm:p-5">
-          <form className="space-y-4" onSubmit={handleSubmit}>
+        <div className="relative -mx-5 rounded-b-[inherit] border-t border-white/72 bg-white/92 px-5 pt-4 sm:-mx-8 sm:px-8 lg:-my-8 lg:mx-0 lg:flex lg:h-[calc(100%+4rem)] lg:min-h-0 lg:flex-col lg:overflow-hidden lg:rounded-[inherit] lg:border-l lg:border-t-0 lg:border-white/80 lg:px-8 lg:pb-8 lg:pt-8">
+          <form className="space-y-4 lg:min-h-0 lg:overflow-y-auto lg:pr-1" onSubmit={handleSubmit}>
             {/* The core contact fields stay lightweight so the founder can start fast. */}
             <div className="space-y-2">
               <label
@@ -137,43 +155,45 @@ export function StartProjectModal({
               />
             </div>
 
-            <div className="space-y-2">
-              <label
-                htmlFor="start-project-email"
-                className="text-label-lg text-[var(--neutral-800)]"
-              >
-                Email
-              </label>
-              <input
-                id="start-project-email"
-                name="email"
-                type="email"
-                autoComplete="email"
-                className={inputClassName}
-                placeholder="founder@company.com"
-                value={email}
-                onChange={(event) => setEmail(event.target.value)}
-                required
-              />
-            </div>
+            <div className="grid gap-4 sm:grid-cols-2">
+              <div className="space-y-2">
+                <label
+                  htmlFor="start-project-email"
+                  className="text-label-lg text-[var(--neutral-800)]"
+                >
+                  Email
+                </label>
+                <input
+                  id="start-project-email"
+                  name="email"
+                  type="email"
+                  autoComplete="email"
+                  className={inputClassName}
+                  placeholder="founder@company.com"
+                  value={email}
+                  onChange={(event) => setEmail(event.target.value)}
+                  required
+                />
+              </div>
 
-            <div className="space-y-2">
-              <label
-                htmlFor="start-project-phone"
-                className="text-label-lg text-[var(--neutral-800)]"
-              >
-                Phone or WhatsApp
-              </label>
-              <input
-                id="start-project-phone"
-                name="phone"
-                type="tel"
-                autoComplete="tel"
-                className={inputClassName}
-                placeholder="Best number for a quick follow-up"
-                value={phone}
-                onChange={(event) => setPhone(event.target.value)}
-              />
+              <div className="space-y-2">
+                <label
+                  htmlFor="start-project-phone"
+                  className="text-label-lg text-[var(--neutral-800)]"
+                >
+                  Phone or WhatsApp
+                </label>
+                <input
+                  id="start-project-phone"
+                  name="phone"
+                  type="tel"
+                  autoComplete="tel"
+                  className={inputClassName}
+                  placeholder="WhatsApp or phone"
+                  value={phone}
+                  onChange={(event) => setPhone(event.target.value)}
+                />
+              </div>
             </div>
 
             {/* The service-selection group maps the modal directly to Yuvabe's actual offer areas. */}
