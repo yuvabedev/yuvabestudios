@@ -1,14 +1,13 @@
-import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 
 import type { StudioHomepageHeroContent } from "@/components/studio/studio-homepage-content";
+import { StartProjectButton } from "@/components/studio/start-project-button";
 import { StudioHandDrawnUnderline } from "@/components/studio/studio-hand-drawn-underline";
 import { StudioPageContainer } from "@/components/studio/studio-page-shell";
 import {
   StudioTrustStrip,
   StudioTrustStripGuides,
 } from "@/components/studio/studio-trust-strip";
-import { Button } from "@/components/ui/button";
 
 // The hero background borrows Stripe's bright angled energy through Yuvabe's brand palette.
 function HeroBackground() {
@@ -71,16 +70,14 @@ export function StudioHero({ content }: StudioHeroProps) {
               id="start-your-build"
               className="flex flex-col items-start gap-4 pt-6 sm:flex-row sm:items-center"
             >
-              <Button
-                asChild
+              <StartProjectButton
                 size="lg"
+                source="homepage-hero"
                 className="w-full min-w-0 bg-[var(--purple-500)] px-7 sm:w-auto sm:min-w-[220px]"
               >
-                <Link href={content.ctaHref}>
-                  {content.ctaLabel}
-                  <ArrowRight className="size-4" />
-                </Link>
-              </Button>
+                {content.ctaLabel}
+                <ArrowRight className="size-4" />
+              </StartProjectButton>
             </div>
           </div>
 

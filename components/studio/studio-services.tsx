@@ -73,7 +73,7 @@ export function StudioServices({ content }: StudioServicesProps) {
           <p className="text-label-sm uppercase tracking-[0.22em] text-[var(--color-text-tertiary)]">
             {content.eyebrow}
           </p>
-          <h2 className=" text-display-muted-editorial  max-w-5xl text-[var(--neutral-950)]">
+          <h2 className="max-w-5xl text-display-muted-editorial tracking-[-0.032em] [word-spacing:0.02em] text-[var(--neutral-950)]">
             <strong>{content.headline}</strong>
           </h2>
           <p className="text-hero-support max-w-6xl">

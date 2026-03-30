@@ -75,7 +75,7 @@ const defaultServicesContent: StudioHomepageServicesContent = {
 };
 
 const defaultAfterServicesCtaContent: StudioHomepageInlineCtaContent = {
-  eyebrow: "Start the conversation",
+  eyebrow: "",
   title:
     "If you need one team to shape, ship, and grow the product, talk to us.",
   description:

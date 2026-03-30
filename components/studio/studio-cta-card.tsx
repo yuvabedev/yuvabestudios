@@ -2,8 +2,10 @@ import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 
 import { StudioPageContainer } from "@/components/studio/studio-page-shell";
+import { StartProjectButton } from "@/components/studio/start-project-button";
 import { Button } from "@/components/ui/button";
 import { PremiumSurface } from "@/components/ui/premium-surface";
+import { isStartProjectHref } from "@/lib/start-project";
 
 type StudioCtaCardProps = {
   eyebrow: string;
@@ -31,9 +33,10 @@ export function StudioCtaCard({
   descriptionClassName = "max-w-3xl text-body-lg text-[var(--color-text-secondary)]",
   contentLayout = "split",
 }: StudioCtaCardProps) {
+  const opensStartProjectModal = isStartProjectHref(primaryCtaHref);
   const contentLayoutClassName =
     contentLayout === "stacked"
-      ? "relative z-10 flex flex-col gap-6"
+      ? "relative z-10 flex flex-col items-center gap-6 text-center"
       : "relative z-10 grid gap-6 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-end";
 
   return (
@@ -54,9 +57,11 @@ export function StudioCtaCard({
           {/* The content column stays editorial while the action area keeps one clear next step. */}
           <div className={contentLayoutClassName}>
             <div className="space-y-4">
-              <p className="text-label-sm uppercase tracking-[0.22em] text-[var(--color-text-tertiary)]">
-                {eyebrow}
-              </p>
+              {eyebrow ? (
+                <p className="text-label-sm uppercase tracking-[0.22em] text-[var(--color-text-tertiary)]">
+                  {eyebrow}
+                </p>
+              ) : null}
               <h2 className={titleClassName}>{title}</h2>
               {description ? (
                 <p className={descriptionClassName}>{description}</p>
@@ -64,13 +69,24 @@ export function StudioCtaCard({
             </div>
 
             {/* The CTA button reuses the shared contract so these inserts do not create a parallel action style. */}
-            <div className="flex items-start">
-              <Button asChild size="lg" className="min-w-[220px]">
-                <Link href={primaryCtaHref}>
+            <div className="flex items-start justify-center">
+              {opensStartProjectModal ? (
+                <StartProjectButton
+                  size="lg"
+                  source="inline-cta-card"
+                  className="min-w-[220px]"
+                >
                   {primaryCtaLabel}
                   <ArrowRight className="size-4" />
-                </Link>
-              </Button>
+                </StartProjectButton>
+              ) : (
+                <Button asChild size="lg" className="min-w-[220px]">
+                  <Link href={primaryCtaHref}>
+                    {primaryCtaLabel}
+                    <ArrowRight className="size-4" />
+                  </Link>
+                </Button>
+              )}
             </div>
           </div>
         </PremiumSurface>

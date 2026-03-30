@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 
+import { StartProjectModalProvider } from "@/components/studio/start-project-modal-provider";
 import { siteMetadataBase } from "@/lib/site";
 import { StudioFooter } from "@/components/studio/studio-footer";
 
@@ -80,8 +81,10 @@ export default function RootLayout({
   return (
     <html lang="en" data-scroll-behavior="smooth">
       <body className="font-sans antialiased">
-        {children}
-        <StudioFooter />
+        <StartProjectModalProvider>
+          {children}
+          <StudioFooter />
+        </StartProjectModalProvider>
       </body>
     </html>
   );

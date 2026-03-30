@@ -2,7 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { ArrowUpRight } from "lucide-react";
 
-import { Button } from "@/components/ui/button";
+import { StartProjectButton } from "@/components/studio/start-project-button";
 
 const footerLinks = {
   Services: [
@@ -47,12 +47,10 @@ export function StudioFooter() {
               AI-first strategy, design, engineering, and growth marketing for startups that
               want to move fast and build right.
             </p>
-            <Button asChild className="w-fit">
-              <Link href="/#process">
+            <StartProjectButton className="w-fit" source="footer-primary">
                 Get in touch
                 <ArrowUpRight className="size-4" />
-              </Link>
-            </Button>
+            </StartProjectButton>
           </div>
 
           {/* Nav columns */}

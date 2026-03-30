@@ -25,8 +25,10 @@ import {
   StudioPageContainer,
   StudioPageRails,
 } from "@/components/studio/studio-page-shell";
+import { StartProjectButton } from "@/components/studio/start-project-button";
 import { Button } from "@/components/ui/button";
 import { PremiumSurface } from "@/components/ui/premium-surface";
+import { isStartProjectHref } from "@/lib/start-project";
 
 type StudioAboutPageProps = {
   navigationItems: StudioHomepageNavItem[];
@@ -172,6 +174,7 @@ function AboutHero({ content }: { content: StudioAboutPageContent["hero"] }) {
   const hero = content;
   const descriptionHighlight = "AI-first studio from Auroville";
   const descriptionParts = hero.description.split(descriptionHighlight);
+  const opensStartProjectModal = isStartProjectHref(hero.primaryCtaHref);
 
   return (
     <section className="relative overflow-hidden border-b border-slate-200/80 bg-white pb-14 pt-14 md:pb-20 md:pt-16">
@@ -217,12 +220,23 @@ function AboutHero({ content }: { content: StudioAboutPageContent["hero"] }) {
 
           {/* The CTA pair reuses the shared button contract so this route matches the rest of the site. */}
           <div className="flex flex-col items-start gap-4 pt-2 sm:flex-row sm:items-center">
-            <Button asChild size="lg" className="min-w-[220px]">
-              <Link href={hero.primaryCtaHref}>
+            {opensStartProjectModal ? (
+              <StartProjectButton
+                size="lg"
+                source="about-hero-primary"
+                className="min-w-[220px]"
+              >
                 {hero.primaryCtaLabel}
                 <ArrowRight className="size-4" />
-              </Link>
-            </Button>
+              </StartProjectButton>
+            ) : (
+              <Button asChild size="lg" className="min-w-[220px]">
+                <Link href={hero.primaryCtaHref}>
+                  {hero.primaryCtaLabel}
+                  <ArrowRight className="size-4" />
+                </Link>
+              </Button>
+            )}
             <Button asChild variant="secondary" size="lg" className="min-w-[180px]">
               <Link href={hero.secondaryCtaHref}>{hero.secondaryCtaLabel}</Link>
             </Button>

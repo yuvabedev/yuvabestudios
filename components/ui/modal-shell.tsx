@@ -20,6 +20,7 @@ type ModalShellProps = {
   onOpenChange: (open: boolean) => void;
   onRequestClose?: (reason: "close-button" | "escape-key") => void;
   closeVariant?: "default" | "case-study";
+  motionPreset?: "default" | "fade";
   onAfterClose?: () => void;
   title: string;
   children: ReactNode;
@@ -33,6 +34,7 @@ export function ModalShell({
   onOpenChange,
   onRequestClose,
   closeVariant = "default",
+  motionPreset = "default",
   onAfterClose,
   title,
   children,
@@ -57,7 +59,10 @@ export function ModalShell({
           transition: { duration: 0.56, ease: panelEase },
         },
         panel: {
-          hidden: { opacity: 0, y: 100, scale: 0.992 },
+          hidden:
+            motionPreset === "fade"
+              ? { opacity: 0, scale: 0.988 }
+              : { opacity: 0, y: 100, scale: 0.992 },
           visible: { opacity: 1, y: 0, scale: 1 },
           transition: {
             y: { duration: 0.68, ease: panelEase },

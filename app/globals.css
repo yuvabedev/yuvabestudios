@@ -342,13 +342,13 @@
   /* Semantic action tokens keep buttons and inputs ready for later reuse. */
   --color-action-primary-bg: var(--purple-500);
   --color-action-primary-text: var(--neutral-0);
-  --color-action-primary-hover: #4c24ab;
+  --color-action-primary-hover: color-mix(in srgb, var(--purple-500) 82%, black);
   --color-action-secondary-bg: var(--neutral-0);
   --color-action-secondary-text: var(--neutral-900);
   --color-action-secondary-border: var(--neutral-300);
-  --color-action-secondary-hover: var(--neutral-50);
+  --color-action-secondary-hover: color-mix(in srgb, var(--lavender-200) 72%, white);
   --color-action-ghost-text: var(--neutral-800);
-  --color-action-ghost-hover: var(--neutral-100);
+  --color-action-ghost-hover: color-mix(in srgb, var(--lavender-200) 84%, white);
 
   /* Semantic feedback tokens prepare the first component states. */
   --color-feedback-success-bg: #eaf6d8;

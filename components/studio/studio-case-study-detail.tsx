@@ -9,6 +9,7 @@ import {
   type StudioCaseStudySummary,
 } from "@/components/studio/studio-case-study-content";
 import galleryImageLibrary from "@/components/studio/studio-case-study-gallery-images.json";
+import { StartProjectButton } from "@/components/studio/start-project-button";
 import { Button, buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
@@ -203,7 +204,6 @@ export function StudioCaseStudyDetail({
     shouldUseLocalCaseBreakdownOverrides
       ? caseStudyBreakdownSectionOverrides[caseStudy.id] ?? detail.sections
       : detail.sections;
-  const contactHref = "/#process";
   const returnHref = "/#work";
 
   return (
@@ -240,12 +240,14 @@ export function StudioCaseStudyDetail({
                   </Button>
                 ) : (
                   <>
-                    <Button asChild size="lg" className="px-6">
-                      <Link href={contactHref}>
-                        Start a project
-                        <ArrowUpRight className="size-4" />
-                      </Link>
-                    </Button>
+                    <StartProjectButton
+                      size="lg"
+                      source={`case-study-hero:${caseStudy.id}`}
+                      className="px-6"
+                    >
+                      Start a project
+                      <ArrowUpRight className="size-4" />
+                    </StartProjectButton>
                     <Button
                       asChild
                       variant="secondary"
@@ -568,23 +570,34 @@ export function StudioCaseStudyDetail({
                 </Link>
               </Button>
             ) : (
-              <Button asChild size="lg" className="px-6">
-                <Link href={contactHref}>
-                  Start a project
-                  <ArrowUpRight className="size-4" />
-                </Link>
+              <StartProjectButton
+                size="lg"
+                source={`case-study-footer:${caseStudy.id}`}
+                className="px-6"
+              >
+                Start a project
+                <ArrowUpRight className="size-4" />
+              </StartProjectButton>
+            )}
+            {isModal ? (
+              <StartProjectButton
+                variant="secondary"
+                size="lg"
+                source={`case-study-modal-secondary:${caseStudy.id}`}
+                className="px-6"
+              >
+                Get in touch
+              </StartProjectButton>
+            ) : (
+              <Button
+                asChild
+                variant="secondary"
+                size="lg"
+                className="px-6"
+              >
+                <Link href={returnHref}>Back to work</Link>
               </Button>
             )}
-            <Button
-              asChild
-              variant="secondary"
-              size="lg"
-              className="px-6"
-            >
-              <Link href={isModal ? contactHref : returnHref}>
-                {isModal ? "Get in touch" : "Back to work"}
-              </Link>
-            </Button>
           </div>
         </div>
       </div>
