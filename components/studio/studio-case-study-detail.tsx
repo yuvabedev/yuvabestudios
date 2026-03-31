@@ -10,7 +10,7 @@ import {
 } from "@/components/studio/studio-case-study-content";
 import galleryImageLibrary from "@/components/studio/studio-case-study-gallery-images.json";
 import { StartProjectButton } from "@/components/studio/start-project-button";
-import { Button, buttonVariants } from "@/components/ui/button";
+import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
 const caseStudyVideoOverrides: Partial<Record<string, string>> = {};
@@ -80,6 +80,8 @@ const caseStudyGalleryImageLibrary =
 const shouldSkipImageOptimization = process.env.NODE_ENV === "development";
 const shouldUseLocalCaseBreakdownOverrides =
   process.env.NODE_ENV === "development";
+const proofPointIconShellClassName =
+  "inline-flex h-11 w-11 items-center justify-center gap-2 rounded-[0.95rem] border border-white/80 bg-white/80 text-brand shadow-[0_10px_24px_rgba(15,23,42,0.06)]";
 type DetailGalleryLayoutMode = "modal" | "page";
 type DetailGalleryRowKind = "full" | "split";
 type DetailGalleryViewport = "portrait" | "landscape";
@@ -547,8 +549,8 @@ export function StudioCaseStudyDetail({
             <section key={point.title} className="space-y-4 pt-1">
               <div
                 className={cn(
-                  buttonVariants({ variant: "secondary", size: "icon" }),
-                  "pointer-events-none h-11 w-11 rounded-[0.95rem] border-white/80 bg-white/80 text-brand shadow-[0_10px_24px_rgba(15,23,42,0.06)]",
+                  proofPointIconShellClassName,
+                  "pointer-events-none",
                 )}
               >
                 <ProofIcon className="size-4" strokeWidth={1.9} />

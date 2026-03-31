@@ -136,18 +136,56 @@
   },
   "tvam": {
     "badgeLabel": "AI Advisors",
+    "itemImages": {
+      "Health Advisor workspace": [
+        {
+          "src": "/assets/tvam/mock%201.png",
+          "alt": "TVAM health advisor workspace on a mobile device."
+        }
+      ],
+      "Policy Advisor journey": [
+        {
+          "src": "/assets/tvam/mock2.png",
+          "alt": "TVAM advisor flow across voice and chat interactions."
+        }
+      ],
+      "Document-aware assistant": [
+        {
+          "src": "/assets/tvam/mock5.png",
+          "alt": "TVAM guided assistant experience with suggested next questions."
+        }
+      ],
+      "Exam-prep support": [
+        {
+          "src": "/assets/tvam/mock4.png",
+          "alt": "TVAM product storytelling screens across health, wealth, and trust journeys."
+        }
+      ]
+    },
     "images": [
       {
-        "src": "/assets/illustration1.png",
-        "alt": "TVAM AI workflow illustration."
+        "src": "/assets/tvam/Cover%20img.png",
+        "alt": "TVAM case study cover in a handheld device mockup."
       },
       {
-        "src": "/assets/illustration2.png",
-        "alt": "TVAM advisor-style product visual."
+        "src": "/assets/tvam/mock%201.png",
+        "alt": "TVAM health advisor workspace on a mobile device."
       },
       {
-        "src": "/assets/illustration3.png",
-        "alt": "TVAM platform systems illustration."
+        "src": "/assets/tvam/mock2.png",
+        "alt": "TVAM advisor flow across voice and chat interactions."
+      },
+      {
+        "src": "/assets/tvam/mock3.png",
+        "alt": "TVAM landing and trust screens across multiple mobile frames."
+      },
+      {
+        "src": "/assets/tvam/mock4.png",
+        "alt": "TVAM product storytelling screens across health, wealth, and trust journeys."
+      },
+      {
+        "src": "/assets/tvam/mock5.png",
+        "alt": "TVAM guided assistant experience with suggested next questions."
       }
     ]
   },

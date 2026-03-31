@@ -210,8 +210,10 @@
     "mockVariant": "aurora",
     "mediaIconKey": "bot",
     "mockImageAlt": "TVAM case study cover",
-    "mockImageSrc": "/assets/tvam/tvam_cover.jpg",
-    "mockViewport": "portrait",
+    "mockImageSrc": "/assets/tvam/Cover%20img.png",
+    "mockViewport": "landscape",
+    "mockPresentation": "fullImage",
+    "mockImageAspectRatio": "16 / 9",
     "modalOutcomes": [
       "Built AI-powered Health and Policy Advisors plus a USMLE preparation tool.",
       "Integrated chat-based AI, secure conversation storage, TTS/STT support, vector search, and file uploads.",
