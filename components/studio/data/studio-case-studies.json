@@ -210,7 +210,7 @@
     "mockVariant": "aurora",
     "mediaIconKey": "bot",
     "mockImageAlt": "TVAM case study cover",
-    "mockImageSrc": "/assets/tvam/Cover%20img.png",
+    "mockImageSrc": "/assets/tvam/tvam_cover.png",
     "mockViewport": "landscape",
     "mockPresentation": "fullImage",
     "mockImageAspectRatio": "16 / 9",
