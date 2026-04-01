@@ -225,9 +225,7 @@ export function StudioCaseStudyDetail({
   showGalleryCardFooter = true,
 }: StudioCaseStudyDetailProps) {
   const detail = resolveStudioCaseStudyDetail(caseStudy);
-  const galleryAssets =
-    caseStudyGalleryImageLibrary[caseStudy.id] ??
-    caseStudyGalleryImageLibrary.bevolve;
+  const galleryAssets = caseStudyGalleryImageLibrary[caseStudy.id];
   const isModal = variant === "modal";
   const heroMedia = resolveStudioCaseStudyHeroMedia(caseStudy);
   const summaryVisualSrc = heroMedia.visualSrc;
@@ -491,17 +489,9 @@ export function StudioCaseStudyDetail({
             })()}
             <div className="grid gap-6 md:grid-cols-12 md:items-stretch">
               {row.items.map((item, itemIndex) => {
-                const fallbackImageIndex =
-                  detail.galleryRows
-                    .slice(0, rowIndex)
-                    .reduce((count, currentRow) => count + currentRow.items.length, 0) +
-                  itemIndex;
                 const galleryImageKey = item.imageKey ?? item.title;
                 const galleryImage =
-                  galleryAssets.itemImages?.[galleryImageKey]?.[0] ??
-                  galleryAssets.images[
-                    fallbackImageIndex % galleryAssets.images.length
-                  ];
+                  galleryAssets?.itemImages?.[galleryImageKey]?.[0];
 
                 return (
                   <article
@@ -517,7 +507,7 @@ export function StudioCaseStudyDetail({
                         <ImageIcon className="size-3.5" strokeWidth={1.9} />
                         {getGalleryBadgeLabel({
                           caseStudyId: caseStudy.id,
-                          defaultBadgeLabel: galleryAssets.badgeLabel,
+                          defaultBadgeLabel: galleryAssets?.badgeLabel ?? "Case Study",
                           itemTitle: item.title,
                         })}
                       </div>
@@ -532,18 +522,24 @@ export function StudioCaseStudyDetail({
                           }),
                         )}
                       >
-                        <Image
-                          src={galleryImage.src}
-                          alt={galleryImage.alt}
-                          fill
-                          sizes={getGalleryImageSizes({
-                            caseStudyId: caseStudy.id,
-                            isModal,
-                            itemCount: row.items.length,
-                          })}
-                          className={getGalleryImageClass(caseStudy.id)}
-                          unoptimized={shouldSkipImageOptimization}
-                        />
+                        {galleryImage ? (
+                          <Image
+                            src={galleryImage.src}
+                            alt={galleryImage.alt}
+                            fill
+                            sizes={getGalleryImageSizes({
+                              caseStudyId: caseStudy.id,
+                              isModal,
+                              itemCount: row.items.length,
+                            })}
+                            className={getGalleryImageClass(caseStudy.id)}
+                            unoptimized={shouldSkipImageOptimization}
+                          />
+                        ) : (
+                          <div className="flex h-full w-full items-center justify-center bg-[linear-gradient(180deg,rgba(255,255,255,0.92),rgba(244,246,249,0.96))] text-(--color-text-tertiary)">
+                            <ImageIcon className="size-10" strokeWidth={1.5} />
+                          </div>
+                        )}
                         <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgba(255,255,255,0.04),rgba(255,255,255,0)_28%,rgba(11,15,25,0.045)_100%)]" />
                       </div>
                     </div>
