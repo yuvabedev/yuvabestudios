@@ -5,17 +5,25 @@ Use this file as the default proof source for website, pitch, and case-study tas
 ## TVAM
 - Sector: health, insurance, and AI-powered advisory tools.
 - Positioning summary: AI project focused on simplifying health, policy, and exam-prep workflows with advisor-style tools.
+- Public proof level:
+  - Verified project page.
 - What Yuvabe did:
   - AI integration
   - website design
   - cloud deployment
 - Useful proof points:
   - Built AI-powered Health and Policy Advisors plus a USMLE preparation tool.
-  - Used a Retrieval-Augmented Generation system, cloud deployment workflows, and scalable storage patterns.
-  - Implemented features including chat-based AI, secure conversation storage, TTS/STT support, vector search, and file upload handling.
+  - Used Retrieval-Augmented Generation workflows, vector search, and secure storage patterns across the advisor experience.
+  - Implemented chat-based AI, secure conversation storage, TTS/STT support, and file upload handling.
+  - Deployed the Health Advisor through Docker and Google Cloud workflows, with secure conversation storage on Google Cloud Storage.
+  - Built the Policy Advisor on a RAG knowledge base with Pinecone-backed vector storage, Azure deployment, file upload flows, and secure storage in Supabase.
+- Process and key points:
+  - Health Advisor: chat-based guidance, secure history, voice support, Docker deployment, and Google Cloud infrastructure.
+  - Policy Advisor: RAG-backed retrieval, Pinecone vector search, file upload handling, Azure deployment, and secure storage patterns.
+  - Product scope: a broader AI advisory direction spanning health guidance, policy support, and exam-prep workflows.
 - Challenge-to-win pattern:
-  - Challenge: integrating multiple AI services while keeping security and system coordination reliable.
-  - Win: delivered AI-powered tools that automated tasks, improved engagement, and made complex workflows easier to use.
+  - Challenge: integrating multiple AI services, security layers, and deployment workflows while keeping the experience usable and reliable.
+  - Win: delivered advisor-style AI tools that automated tasks, improved engagement, and made complex workflows easier to use.
 - Best used for claims around:
   - AI product execution
   - RAG systems

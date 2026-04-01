@@ -208,7 +208,7 @@
     "id": "tvam",
     "title": "tvam",
     "sector": "Health insurance AI",
-    "summary": "Built advisor-style AI tools that turned complex health, policy, and exam-prep workflows into one product experience users could actually navigate with confidence.",
+    "summary": "Built Health and Policy Advisors plus a USMLE prep workflow that turned complex guidance tasks into one AI product experience users could navigate with confidence.",
     "seoTitle": "tvam Case Study",
     "services": [
       "AI integration",
@@ -216,7 +216,7 @@
       "RAG workflows"
     ],
     "mockLayout": "wide",
-    "modalIntro": "tvam focused on simplifying health guidance, policy support, and exam-prep workflows through advisor-style AI tools. The challenge was turning multiple AI capabilities into one product experience that felt useful, reliable, and easy to navigate — without losing the depth that made each tool valuable.",
+    "modalIntro": "TVAM set out to simplify health guidance, policy support, and exam-prep workflows through advisor-style AI tools. The real challenge was making chat, retrieval, voice, and secure knowledge flows feel like one dependable product experience instead of a stack of separate AI features.",
     "mockVariant": "aurora",
     "mediaIconKey": "bot",
     "mockImageAlt": "TVAM case study cover",
@@ -231,38 +231,38 @@
     "modalOutcomes": [
       "Built AI-powered Health and Policy Advisors plus a USMLE preparation tool.",
       "Integrated chat-based AI, secure conversation storage, TTS/STT support, vector search, and file uploads.",
-      "Used Retrieval-Augmented Generation patterns and cloud deployment workflows for scale.",
-      "Made complex health and policy workflows easier to use through clearer product orchestration."
+      "Used RAG patterns and cloud deployment workflows across Google Cloud, Azure, and secure storage services.",
+      "Made complex health and policy workflows easier to navigate through clearer advisor-style product flows."
     ],
     "modalSections": [
       {
-        "body": "tvam needed a more coherent narrative across product, experience, and communication as the scope of the work expanded.",
+        "body": "TVAM was building AI tools across health guidance, policy support, and exam prep. As the scope expanded, those experiences had to feel like one usable product rather than a set of disconnected utilities.",
         "title": "Context"
       },
       {
-        "body": "The opportunity wasn't just to ship features — it was to help the business communicate value faster and with more confidence to the people who needed it most.",
+        "body": "The work had to combine chat-based AI, voice interaction, document retrieval, secure conversation history, and file handling without making high-stakes workflows harder to trust or navigate.",
         "title": "Challenge"
       },
       {
-        "body": "We aligned the experience, supporting systems, and communication touchpoints around what users and stakeholders needed to understand at each step.",
+        "body": "Yuvabe designed and deployed Health and Policy Advisors plus a USMLE support workflow, tying them together with RAG-backed retrieval, vector search, TTS/STT, secure storage, and cloud-ready infrastructure.",
         "title": "What we changed"
       },
       {
-        "body": "A sharper product story, a more usable experience, and a stronger platform built to support future growth decisions.",
+        "body": "The result was a more coherent advisor-style AI product suite that automated complex support flows, improved engagement, and gave users clearer help across health, policy, and exam-prep tasks.",
         "title": "Outcome"
       }
     ],
-    "seoDescription": "Explore how Yuvabe built advisor-style AI workflows for tvam across health, policy, and exam-prep use cases using a cloud-ready RAG stack.",
+    "seoDescription": "Explore how Yuvabe built TVAM's Health Advisor, Policy Advisor, and exam-prep workflows using RAG, secure storage, and cloud-ready deployment patterns.",
     "heroMockHeadline": "Advisor-style AI tools in one system",
     "modalGalleryRows": [
       {
         "title": "Multi-domain advisor experience",
         "items": [
-        {
-          "imageKey": "Health Advisor workspace",
-          "title": "Wealth advisor flow",
-          "description": "A structured investment experience that brings financial guidance — portfolio tracking, goal-setting, and investment prompts — into the same product space as health and insurance. One app, multiple advisory domains, no context-switching."
-        },
+          {
+            "imageKey": "Health Advisor workspace",
+            "title": "Wealth advisor flow",
+            "description": "A structured investment experience that brings financial guidance — portfolio tracking, goal-setting, and investment prompts — into the same product space as health and insurance. One app, multiple advisory domains, no context-switching."
+          },
           {
             "imageKey": "Policy Advisor journey",
             "title": "Conversational health guidance",
@@ -288,19 +288,19 @@
     ],
     "modalProofPoints": [
       {
-        "title": "Delivered AI product execution",
+        "title": "Built multiple advisor workflows",
         "iconKey": "bot",
-        "description": "Turned multiple advisor-style workflows into one more coherent AI product experience."
+        "description": "Delivered Health Advisor, Policy Advisor, and USMLE support experiences instead of a narrow single-use prototype."
       },
       {
-        "title": "Integrated a real RAG stack",
+        "title": "Connected retrieval, voice, and secure history",
         "iconKey": "scanSearch",
-        "description": "Combined retrieval, secure storage, and AI workflow orchestration into a scalable system."
+        "description": "Combined RAG, vector search, TTS/STT, file handling, and secure conversation storage into a usable AI product system."
       },
       {
-        "title": "Shipped cloud-ready infrastructure",
+        "title": "Deployed for real-world scale",
         "iconKey": "sparkles",
-        "description": "Paired product work with deployment patterns built for secure growth and iteration."
+        "description": "Shipped cloud-ready workflows across Docker, Google Cloud, Azure, and secure storage patterns built for growth."
       }
     ],
     "modalTestimonial": {

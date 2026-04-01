@@ -21,6 +21,10 @@ const caseStudyDetailImageClassOverrides: Partial<Record<string, string>> = {
   "general-aeronautics": "scale-[1.16] object-[center_18%]",
 };
 
+const caseStudyDetailCoverImageClassOverrides: Partial<Record<string, string>> = {
+  tvam: "object-[center_30%]",
+};
+
 const caseStudyBreakdownSectionOverrides: Partial<
   Record<string, readonly { title: string; body: string }[]>
 > = {
@@ -401,6 +405,7 @@ export function StudioCaseStudyDetail({
                     className={cn(
                       "object-cover object-top",
                       detailImageClassName,
+                      caseStudyDetailCoverImageClassOverrides[caseStudy.id],
                     )}
                     unoptimized={shouldSkipImageOptimization}
                   />
