@@ -44,13 +44,13 @@ const mockCardVariantStyles: Record<
     iconAccentClassName:
       "bg-[rgba(255,248,234,0.92)] text-[color:color-mix(in_srgb,var(--orange-500)_72%,var(--purple-500))]",
     mockImageClassName: "rounded-[1.55rem]",
-    tone: "billingSunrise",
+    tone: "billing",
   },
   prism: {
     iconAccentClassName:
       "bg-[rgba(237,249,251,0.92)] text-[color:color-mix(in_srgb,var(--cyan-500)_72%,var(--purple-500))]",
     mockImageClassName: "rounded-[1.5rem] saturate-[1.03]",
-    tone: "billingPrism",
+    tone: "billing",
   },
 };
 
@@ -59,8 +59,10 @@ const mockCardLayoutStyles: Record<
   {
     bodyClassName: string;
     footerClassName: string;
+    footerWrapClassName: string;
     imageClassName: string;
     imageStageClassName: string;
+    introClassName: string;
     mediaGroupClassName: string;
     shellClassName: string;
     summaryClassName: string;
@@ -74,10 +76,12 @@ const mockCardLayoutStyles: Record<
     // A shared desktop tag lane keeps three proof chips wrapping into two rows
     // consistently across portrait and landscape homepage cards.
     footerClassName: "max-w-none md:max-w-[28rem]",
+    footerWrapClassName: "md:min-h-[5.5rem]",
     imageClassName: "h-[20rem] sm:h-[22rem] lg:h-[24rem]",
     // The mock stage gets a smaller mobile min-height so the image sits closer to the copy.
     imageStageClassName:
       "min-h-[250px] px-1 pb-1 pt-1 sm:min-h-[300px] sm:px-2 sm:pt-2 md:min-h-[430px] md:px-4 md:pb-2 md:pt-7 lg:px-6",
+    introClassName: "md:min-h-[11.25rem]",
     // Mobile keeps the media group in normal flow; desktop pushes it down to preserve the premium editorial rhythm.
     mediaGroupClassName: "space-y-4 md:mt-auto md:space-y-5",
     // Mobile uses natural height to avoid dead space, while desktop restores equal card heights for balanced rows.
@@ -88,9 +92,11 @@ const mockCardLayoutStyles: Record<
   compact: {
     bodyClassName: "gap-3 md:gap-4",
     footerClassName: "max-w-none md:max-w-[24rem]",
+    footerWrapClassName: "md:min-h-[4.5rem]",
     imageClassName: "h-[11rem] sm:h-[12rem]",
     imageStageClassName:
       "min-h-[180px] px-1 pb-1 pt-1 sm:min-h-[220px] sm:px-2 sm:pt-2 md:min-h-[250px] md:px-2 md:pt-4 lg:px-3",
+    introClassName: "md:min-h-[9.5rem]",
     mediaGroupClassName: "space-y-3 md:mt-auto md:space-y-4",
     shellClassName: "h-auto px-5 py-5 sm:p-5 md:h-[520px]",
     summaryClassName:
@@ -100,9 +106,11 @@ const mockCardLayoutStyles: Record<
   wide: {
     bodyClassName: "gap-4 md:gap-5",
     footerClassName: "max-w-none md:max-w-[28rem]",
+    footerWrapClassName: "md:min-h-[5.5rem]",
     imageClassName: "h-[14rem] sm:h-[15rem] lg:h-[16rem]",
     imageStageClassName:
       "min-h-[220px] px-1 pb-1 pt-1 sm:min-h-[260px] sm:px-3 sm:pt-2 md:min-h-[320px] md:pb-1 md:pt-5 lg:px-5",
+    introClassName: "md:min-h-[11.25rem]",
     mediaGroupClassName: "space-y-4 md:mt-auto md:space-y-5",
     shellClassName: "h-auto px-5 py-5 sm:p-5 md:h-[640px] md:p-6 lg:p-7",
     summaryClassName:
@@ -301,7 +309,7 @@ export function StudioCaseStudyMockCard({
         </div>
 
         <div className={cn("relative z-10 flex h-full flex-col", layoutStyles.bodyClassName)}>
-          <div className="space-y-2">
+          <div className={cn("space-y-2", layoutStyles.introClassName)}>
             <div className="flex items-start justify-between gap-4">
               <div className="space-y-2">
                 <p className="text-label-sm uppercase tracking-[0.22em] text-[var(--color-text-tertiary)]">
@@ -482,7 +490,8 @@ export function StudioCaseStudyMockCard({
             {/* The service footer turns each capability into centered proof tags without adding a second CTA. */}
             <div
               className={cn(
-                "mx-auto flex w-full justify-center",
+                "mx-auto flex w-full items-start justify-center",
+                layoutStyles.footerWrapClassName,
                 layoutStyles.footerClassName,
               )}
             >

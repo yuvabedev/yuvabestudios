@@ -25,7 +25,6 @@ const homepageCaseStudyOrder = [
   "bevolve",
   "kittykat",
   "tvam",
-  "ageshift",
 ] as const;
 
 // Hard-coded logo sources keyed by case study ID.
@@ -43,12 +42,7 @@ const caseStudyVideoOverrides: Partial<Record<string, string>> = {};
 
 // Hard-coded viewport overrides — switches portrait phone frames to landscape where the
 // cover image is a wide/landscape asset and needs a wider container for full visibility.
-const caseStudyViewportOverrides: Partial<
-  Record<string, "portrait" | "landscape">
-> = {
-  bevolve: "landscape",
-  "general-aeronautics": "landscape",
-};
+const homepageCaseStudyViewport = "landscape" as const;
 
 // Hard-coded presentation overrides — "fullImage" removes the phone frame and shows the
 // image directly at the correct aspect ratio so wide covers aren't cropped into a frame.
@@ -58,15 +52,12 @@ export function StudioCaseStudies({
   caseStudies,
   workContent,
 }: StudioCaseStudiesProps) {
-  const orderedCaseStudies = homepageCaseStudyOrder
+  const homepageCaseStudies = homepageCaseStudyOrder
     .map((id) => caseStudies.find((caseStudy) => caseStudy.id === id))
     .filter((caseStudy): caseStudy is StudioCaseStudySummary => Boolean(caseStudy));
   const [activeCaseStudy, setActiveCaseStudy] =
     useState<StudioCaseStudySummary | null>(null);
   const [isCaseStudyDialogOpen, setIsCaseStudyDialogOpen] = useState(false);
-  const featuredCaseStudies = orderedCaseStudies.slice(0, 2);
-  const secondaryCaseStudies = orderedCaseStudies.slice(2, 4);
-  const spotlightCaseStudy = orderedCaseStudies[4];
 
   // Keeping the selected study in parent state lets the modal animate out before content is cleared.
   function handleOpenCaseStudy(caseStudy: StudioCaseStudySummary) {
@@ -108,11 +99,11 @@ export function StudioCaseStudies({
             </p>
           </div>
 
-          {/* The work grid keeps the current 2 / 2 / 1 rhythm while adding crawlable case-study links. */}
+          {/* The work grid keeps a strict 50/50 desktop rhythm so all homepage cards align on the same cadence. */}
           {/* A small mobile gutter keeps the case-study cards from feeling pinned to the screen edges. */}
           <div className="space-y-6 px-4 sm:px-0 lg:px-10 xl:px-14 pb-10">
-            <div className="grid gap-6 xl:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)]">
-              {featuredCaseStudies.map((caseStudy) => (
+            <div className="grid gap-6 xl:grid-cols-2">
+              {homepageCaseStudies.map((caseStudy) => (
                 <StudioCaseStudyMockCard
                   key={caseStudy.id}
                   logoSrc={caseStudyLogoMap[caseStudy.id]}
@@ -134,10 +125,7 @@ export function StudioCaseStudies({
                   }
                   imageAspectRatio={caseStudy.mockImageAspectRatio}
                   imageClassName={caseStudy.mockImageClassName}
-                  mockViewport={
-                    caseStudyViewportOverrides[caseStudy.id] ??
-                    caseStudy.mockViewport
-                  }
+                  mockViewport={homepageCaseStudyViewport}
                   mockPresentation={caseStudy.mockPresentation}
                   variant={caseStudy.mockVariant}
                   layout={caseStudy.mockLayout}
@@ -146,78 +134,6 @@ export function StudioCaseStudies({
                 />
               ))}
             </div>
-
-            <div className="grid gap-6 xl:grid-cols-[minmax(0,1.2fr)_minmax(0,0.8fr)]">
-              {secondaryCaseStudies.map((caseStudy) => (
-                <StudioCaseStudyMockCard
-                  key={caseStudy.id}
-                  logoSrc={caseStudyLogoMap[caseStudy.id]}
-                  sector={caseStudy.sector}
-                  title={caseStudy.title}
-                  summary={caseStudy.summary}
-                  services={caseStudy.services}
-                  imageSrc={
-                    resolveStudioCaseStudyCoverSrc(caseStudy, "card") ??
-                    "/assets/GA_cover.png"
-                  }
-                  imageAlt={
-                    caseStudy.mockImageAlt ??
-                    `${caseStudy.title} case study mock`
-                  }
-                  videoSrc={
-                    caseStudy.mockVideoSrc ??
-                    caseStudyVideoOverrides[caseStudy.id]
-                  }
-                  imageAspectRatio={caseStudy.mockImageAspectRatio}
-                  imageClassName={caseStudy.mockImageClassName}
-                  mockViewport={
-                    caseStudyViewportOverrides[caseStudy.id] ??
-                    caseStudy.mockViewport
-                  }
-                  mockPresentation={caseStudy.mockPresentation}
-                  variant={caseStudy.mockVariant}
-                  layout={caseStudy.mockLayout}
-                  detailHref={getStudioCaseStudyHref(caseStudy.id)}
-                  onOpenDetails={() => handleOpenCaseStudy(caseStudy)}
-                />
-              ))}
-            </div>
-
-            {spotlightCaseStudy ? (
-              <div className="grid gap-6">
-                <StudioCaseStudyMockCard
-                  logoSrc={caseStudyLogoMap[spotlightCaseStudy.id]}
-                  sector={spotlightCaseStudy.sector}
-                  title={spotlightCaseStudy.title}
-                  summary={spotlightCaseStudy.summary}
-                  services={spotlightCaseStudy.services}
-                  imageSrc={
-                    resolveStudioCaseStudyCoverSrc(spotlightCaseStudy, "card") ??
-                    "/assets/GA_cover.png"
-                  }
-                  imageAlt={
-                    spotlightCaseStudy.mockImageAlt ??
-                    `${spotlightCaseStudy.title} case study mock`
-                  }
-                  videoSrc={
-                    spotlightCaseStudy.mockVideoSrc ??
-                    caseStudyVideoOverrides[spotlightCaseStudy.id]
-                  }
-                  imageAspectRatio={spotlightCaseStudy.mockImageAspectRatio}
-                  imageClassName={spotlightCaseStudy.mockImageClassName}
-                  mockViewport={
-                    caseStudyViewportOverrides[spotlightCaseStudy.id] ??
-                    spotlightCaseStudy.mockViewport
-                  }
-                  mockPresentation={spotlightCaseStudy.mockPresentation}
-                  variant={spotlightCaseStudy.mockVariant}
-                  layout={spotlightCaseStudy.mockLayout}
-                  span="full"
-                  detailHref={getStudioCaseStudyHref(spotlightCaseStudy.id)}
-                  onOpenDetails={() => handleOpenCaseStudy(spotlightCaseStudy)}
-                />
-              </div>
-            ) : null}
           </div>
         </StudioPageContainer>
       </section>

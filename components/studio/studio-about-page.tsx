@@ -203,16 +203,61 @@ function AboutMediaCard({
 // The illustration stays clean while the section itself carries the larger brand glow.
 function AboutIllustrationStage() {
   return (
-    <div className="relative mt-6 max-w-[34rem]">
-      <div className="relative flex min-h-[26rem] w-full items-center justify-center px-8 py-6 md:min-h-[28rem] md:px-10 md:py-8">
+    <div className="relative mt-2 w-full max-w-[42rem]">
+      <div className="relative flex min-h-[20rem] w-full items-end justify-center px-4 py-2 sm:min-h-[24rem] sm:px-6 sm:py-4 lg:min-h-[34rem] lg:px-8 lg:py-6 xl:min-h-[46rem] xl:px-10 xl:py-8">
         <Image
           src={aboutAssets.illustration.src}
           alt={aboutAssets.illustration.alt}
-          width={508}
-          height={475}
+          width={608}
+          height={575}
           sizes="(min-width: 1024px) 34vw, 100vw"
-          className="h-auto w-full max-w-[27rem] -translate-y-[68px] md:max-w-[31rem] md:-translate-y-20"
+          className="h-auto w-[15rem] max-w-none translate-x-4 translate-y-1 scale-100 sm:w-[19.5rem] sm:translate-x-6 sm:translate-y-3 sm:scale-105 lg:w-[28.5rem] lg:translate-x-10 lg:translate-y-16 lg:scale-[1.22] xl:w-[33rem] xl:translate-x-12 xl:translate-y-20 xl:scale-[1.26]"
         />
+      </div>
+    </div>
+  );
+}
+
+// The operating principles list is shared between mobile and desktop placements so the copy stays in one place.
+function AboutStoryPrinciplesList({
+  principles,
+  className,
+}: {
+  principles: StudioAboutStoryContent["operatingPrinciples"];
+  className?: string;
+}) {
+  return (
+    <div className={["space-y-5", className].filter(Boolean).join(" ")}>
+      <div className="space-y-3">
+        <p className="text-label-sm uppercase tracking-[0.18em] text-[var(--color-text-tertiary)]">
+          How that shows up
+        </p>
+        <div className="h-px w-24 bg-[linear-gradient(90deg,var(--lavender-500),rgba(203,195,223,0))]" />
+      </div>
+
+      <div className="space-y-5">
+        {principles.map((principle, index) => {
+          const Icon = storyIcons[index % storyIcons.length];
+
+          return (
+            <div
+              key={principle.title}
+              className="grid gap-4 border-b border-slate-200/70 pb-5 last:border-b-0 last:pb-0 sm:grid-cols-[3rem_minmax(0,1fr)]"
+            >
+              <div className="flex size-12 items-center justify-center rounded-full border border-white/80 bg-white/88 text-[var(--color-text-brand)] shadow-[0_10px_28px_rgba(15,23,42,0.06)]">
+                <Icon className="size-4.5" />
+              </div>
+              <div className="space-y-1.5">
+                <h3 className="text-heading-md text-[var(--neutral-950)]">
+                  {principle.title}
+                </h3>
+                <p className="max-w-[34rem] text-body-md text-[var(--color-text-secondary)]">
+                  {principle.description}
+                </p>
+              </div>
+            </div>
+          );
+        })}
       </div>
     </div>
   );
@@ -342,119 +387,90 @@ function AboutStorySection({ content }: { content: StudioAboutStoryContent }) {
 
   return (
     <section className="relative overflow-hidden border-b border-slate-200/80 bg-white py-14 md:py-20">
-      {/* The story background anchors a much hotter Yuvabe orb to the bulb position while preserving a readable white lane for the copy. */}
+      {/* The story background now favors the illustration side so the full reading path can stay on the left without competing with the glow. */}
       <div aria-hidden="true" className="pointer-events-none absolute inset-0">
         <div className="absolute inset-0 bg-white" />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_calc(26%+400px)_70%,rgba(255,202,45,1)_0%,rgba(255,202,45,0.96)_8%,rgba(249,169,31,0.86)_16%,rgba(240,78,40,0.66)_28%,rgba(150,136,192,0.6)_42%,rgba(88,41,199,0.44)_56%,rgba(88,41,199,0.22)_68%,rgba(255,255,255,0)_84%)]" />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_calc(26%+400px)_70%,rgba(255,243,181,0.92)_0%,rgba(255,240,166,0.72)_10%,rgba(255,228,138,0.34)_20%,rgba(255,255,255,0)_36%)]" />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_calc(22%+400px)_74%,rgba(255,202,45,0.52)_0%,rgba(249,169,31,0.3)_18%,rgba(255,255,255,0)_42%)]" />
-        <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(255,255,255,0.02)_0%,rgba(255,255,255,0.08)_12%,rgba(255,255,255,0.28)_24%,rgba(255,255,255,0.66)_40%,rgba(255,255,255,0.9)_58%,rgba(255,255,255,1)_100%)]" />
-        <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(255,255,255,0.66)_0%,rgba(255,255,255,0.26)_16%,rgba(255,255,255,0.12)_46%,rgba(255,255,255,0.42)_74%,rgba(255,255,255,0.82)_100%)]" />
-        <div className="absolute left-[2%] top-[4%] h-[28rem] w-[28rem] rounded-full bg-[radial-gradient(circle,rgba(255,255,255,0.26)_0%,rgba(255,255,255,0.06)_44%,rgba(255,255,255,0)_76%)] blur-3xl" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_80%_84%,rgba(255,202,45,0.88)_0%,rgba(255,202,45,0.82)_10%,rgba(249,169,31,0.68)_22%,rgba(240,78,40,0.46)_36%,rgba(150,136,192,0.46)_52%,rgba(88,41,199,0.28)_64%,rgba(255,255,255,0)_84%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_80%_84%,rgba(255,243,181,0.78)_0%,rgba(255,240,166,0.48)_14%,rgba(255,228,138,0.2)_24%,rgba(255,255,255,0)_42%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_76%_88%,rgba(255,202,45,0.28)_0%,rgba(249,169,31,0.16)_18%,rgba(255,255,255,0)_42%)]" />
+        <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(255,255,255,0.98)_0%,rgba(255,255,255,0.92)_20%,rgba(255,255,255,0.72)_38%,rgba(255,255,255,0.36)_58%,rgba(255,255,255,0.1)_74%,rgba(255,255,255,0)_100%)]" />
+        <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(255,255,255,0.76)_0%,rgba(255,255,255,0.34)_18%,rgba(255,255,255,0.14)_48%,rgba(255,255,255,0.36)_76%,rgba(255,255,255,0.72)_100%)]" />
+        <div className="absolute left-[4%] top-[6%] h-[24rem] w-[24rem] rounded-full bg-[radial-gradient(circle,rgba(255,255,255,0.22)_0%,rgba(255,255,255,0.05)_42%,rgba(255,255,255,0)_76%)] blur-3xl" />
+        <div className="absolute inset-x-0 bottom-0 flex justify-center px-2 opacity-[0.1] lg:hidden">
+          <Image
+            src={aboutAssets.illustration.src}
+            alt=""
+            width={320}
+            height={303}
+            sizes="100vw"
+            className="h-auto w-[min(36rem,94vw)] translate-y-10"
+          />
+        </div>
       </div>
 
-      <StudioPageContainer className="relative z-10 grid gap-10 lg:grid-cols-[minmax(0,0.98fr)_minmax(0,1.02fr)] lg:gap-12">
-        {/* The left column becomes the narrative anchor with one strong headline and one tight origin paragraph. */}
-        <div className="space-y-5 lg:pl-4 xl:pl-6">
-          <div className="space-y-3">
-            <p className="text-label-sm uppercase tracking-[0.22em] text-[var(--color-text-tertiary)]">
-              {content.eyebrow}
+      <StudioPageContainer className="relative z-10 grid gap-10 lg:grid-cols-[minmax(0,1.02fr)_minmax(18rem,0.98fr)] lg:items-start lg:gap-12">
+        {/* The full narrative now stays in one left-side stack so the section reads top-to-bottom before the eye lands on the illustration. */}
+        <div className="space-y-10 lg:pl-4 xl:pl-6">
+          <div className="space-y-5">
+            <div className="space-y-3">
+              <p className="text-label-sm uppercase tracking-[0.22em] text-[var(--color-text-tertiary)]">
+                {content.eyebrow}
+              </p>
+              <div className="h-px w-24 bg-[linear-gradient(90deg,var(--lavender-500),rgba(203,195,223,0))]" />
+            </div>
+
+            <h2
+              className="max-w-[13ch] text-section-display text-[var(--neutral-950)]"
+              style={{ fontSize: "3.5rem", fontWeight: 600, wordSpacing: ".2rem" }}
+            >
+              {storyTitleRest ? (
+                <>
+                  <span>{`${storyTitleLead}.`}</span>
+                  <br />
+                  <span>{storyTitleRest}</span>
+                </>
+              ) : (
+                content.title
+              )}
+            </h2>
+
+            <p className="max-w-[38rem] text-body-lg text-[var(--color-text-secondary)]">
+              {content.paragraphs[0]}
             </p>
-            <div className="h-px w-24 bg-[linear-gradient(90deg,var(--lavender-500),rgba(203,195,223,0))]" />
           </div>
 
-          <h2
-            className="max-w-[13ch] text-section-display text-[var(--neutral-950)]"
-            style={{ fontSize: "3.5rem", fontWeight: 600, wordSpacing: ".2rem" }}
-          >
-            {storyTitleRest ? (
-              <>
-                <span>{`${storyTitleLead}.`}</span>
-                <br />
-                <span>{storyTitleRest}</span>
-              </>
-            ) : (
-              content.title
-            )}
-          </h2>
-
-          <p className="max-w-[38rem] text-body-lg text-[var(--color-text-secondary)]">
-            {content.paragraphs[0]}
-          </p>
-
-          {/* The illustration gives the origin story a warmer metaphor instead of another team photo. */}
-          <AboutIllustrationStage />
-        </div>
-
-        <div className="space-y-5">
-          {/* The primary support card carries the one key shift in a tighter editorial block. */}
-          <PremiumSurface
-            tone="neutral"
-            elevation="sm"
-            blur="none"
-            radius="xl"
-            className="p-5 md:p-6"
-          >
-            <div className="max-w-4xl space-y-3">
-              <p className="text-label-sm uppercase tracking-[0.18em] text-[var(--color-text-brand)]">
-                What changed
-              </p>
-              <p className="text-body-lg text-[var(--color-text-secondary)]">
-                {content.paragraphs[1]}
-              </p>
+          {/* The present-day takeaway follows immediately after the origin story so the section carries one continuous argument. */}
+          <div className="relative overflow-visible py-2">
+            <div aria-hidden="true" className="absolute inset-x-[-4%] inset-y-[-24%]">
+              <div className="absolute inset-0 bg-[radial-gradient(circle_at_14%_50%,rgba(255,202,45,0.24)_0%,rgba(249,169,31,0.12)_18%,rgba(255,255,255,0)_46%),linear-gradient(90deg,rgba(255,249,236,0.52)_0%,rgba(255,246,228,0.34)_18%,rgba(255,255,255,0)_58%)] blur-2xl" />
             </div>
-          </PremiumSurface>
-
-          {/* The secondary block now uses the shared aurora surface so the strategic takeaway feels like a system callout, not a one-off panel. */}
-          <PremiumSurface
-            tone="editorialSunrise"
-            elevation="md"
-            blur="lg"
-            radius="xl"
-            className="overflow-hidden p-5 md:p-6"
-          >
-            <div className="max-w-4xl space-y-3">
+            <div className="relative max-w-[44rem] space-y-3">
               <p className="text-label-sm uppercase tracking-[0.18em] text-[var(--neutral-700)]">
                 What we care about now
               </p>
-              <p className="max-w-3xl text-body-lg text-[var(--color-text-primary)]">
+              <p className="max-w-[40rem] text-body-lg text-[var(--color-text-primary)]">
                 {content.paragraphs[2]}
               </p>
             </div>
-          </PremiumSurface>
-
-          {/* The operating-principle cards become a lighter, shorter scan row instead of mini article cards. */}
-          <div className="grid gap-4 md:grid-cols-3">
-            {content.operatingPrinciples.map((principle, index) => {
-              const Icon = storyIcons[index % storyIcons.length];
-
-              return (
-                <PremiumSurface
-                  key={principle.title}
-                  tone="glassSubtle"
-                  elevation="sm"
-                  blur="sm"
-                  radius="xl"
-                  className="p-4 md:p-5"
-                >
-                  <div className="space-y-3">
-                    <div className="flex size-10 items-center justify-center rounded-full border border-white/80 bg-white/80 text-[var(--color-text-brand)] shadow-[0_10px_28px_rgba(15,23,42,0.06)]">
-                      <Icon className="size-4.5" />
-                    </div>
-                    <div className="space-y-1.5">
-                      <h3 className="text-heading-md text-[var(--neutral-950)]">
-                        {principle.title}
-                      </h3>
-                      <p className="text-body-md text-[var(--color-text-secondary)]">
-                        {principle.description}
-                      </p>
-                    </div>
-                  </div>
-                </PremiumSurface>
-              );
-            })}
           </div>
+
+          {/* Desktop keeps the principles directly under the story copy so the left column reads as one continuous stack. */}
+          <AboutStoryPrinciplesList
+            principles={content.operatingPrinciples}
+            className="hidden pt-2 lg:block"
+          />
         </div>
+
+        {/* The illustration now sits on the right as a dedicated visual anchor, reinforcing the story after the text is already understood. */}
+        <div className="hidden justify-center lg:flex lg:justify-end lg:pr-4 xl:pr-6">
+          <AboutIllustrationStage />
+        </div>
+
+        {/* Mobile keeps the principles after the illustration so the section still feels paced on smaller screens. */}
+        <AboutStoryPrinciplesList
+          principles={content.operatingPrinciples}
+          className="pt-2 lg:hidden"
+        />
       </StudioPageContainer>
     </section>
   );
