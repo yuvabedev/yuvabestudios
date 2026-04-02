@@ -121,6 +121,82 @@ const aboutProofToneClassNames = {
   tintPurple: "ds-proof-cell-wash-purple",
   tintCyan: "ds-proof-cell-wash-cyan",
 } satisfies Record<StudioCaseStudyProofTone, string>;
+const aboutProofHoverWashClassNames = {
+  tintWarm:
+    "bg-[linear-gradient(180deg,rgba(255,248,239,0.94)_0%,rgba(255,238,219,0.96)_100%)]",
+  tintGreen:
+    "bg-[linear-gradient(180deg,rgba(244,252,247,0.94)_0%,rgba(231,247,236,0.97)_100%)]",
+  tintLavender:
+    "bg-[linear-gradient(180deg,rgba(248,245,255,0.94)_0%,rgba(239,232,255,0.97)_100%)]",
+  tintPurple:
+    "bg-[linear-gradient(180deg,rgba(245,241,255,0.95)_0%,rgba(233,225,255,0.98)_100%)]",
+  tintCyan:
+    "bg-[linear-gradient(180deg,rgba(241,251,252,0.94)_0%,rgba(226,246,248,0.97)_100%)]",
+} satisfies Record<StudioCaseStudyProofTone, string>;
+const aboutProofHoverGlowClassNames = {
+  tintWarm:
+    "bg-[radial-gradient(circle_at_50%_50%,rgba(249,169,31,0.34)_0%,rgba(255,202,45,0.22)_30%,rgba(242,125,66,0.14)_54%,transparent_76%)]",
+  tintGreen:
+    "bg-[radial-gradient(circle_at_50%_50%,rgba(144,198,69,0.3)_0%,rgba(95,176,122,0.2)_32%,rgba(43,183,199,0.12)_56%,transparent_76%)]",
+  tintLavender:
+    "bg-[radial-gradient(circle_at_50%_50%,rgba(150,136,192,0.34)_0%,rgba(108,96,187,0.24)_30%,rgba(234,182,167,0.12)_56%,transparent_76%)]",
+  tintPurple:
+    "bg-[radial-gradient(circle_at_50%_50%,rgba(88,41,199,0.3)_0%,rgba(150,136,192,0.24)_30%,rgba(43,183,199,0.1)_56%,transparent_76%)]",
+  tintCyan:
+    "bg-[radial-gradient(circle_at_50%_50%,rgba(43,183,199,0.3)_0%,rgba(132,171,224,0.2)_32%,rgba(150,136,192,0.1)_56%,transparent_76%)]",
+} satisfies Record<StudioCaseStudyProofTone, string>;
+const aboutProofLogoAssets = {
+  TVAM: {
+    src: "/assets/tvam/logo.svg",
+    width: 177,
+    height: 248,
+    stageClassName: "w-[4.5rem] md:w-[5.1rem]",
+  },
+  Bevolve: {
+    src: "/assets/bevolve-ai.svg",
+    width: 170,
+    height: 70,
+    stageClassName: "w-[14.25rem] md:w-[16.5rem]",
+  },
+  KittyKat: {
+    src: "/assets/KK/logo.svg",
+    width: 118,
+    height: 40,
+    stageClassName: "w-[9rem] md:w-[10.5rem]",
+  },
+  "Quilt AI": {
+    src: "/logos/quilt.ai.svg",
+    width: 500,
+    height: 121,
+    stageClassName: "w-[9.5rem] md:w-[11rem]",
+  },
+  AgeShift: {
+    src: "/assets/ageshift/logo.svg",
+    width: 117,
+    height: 107,
+    stageClassName: "w-[5.6rem] md:w-[6.3rem]",
+  },
+  "General Aeronautics": {
+    src: "/assets/general-aeronautics/logo.svg",
+    width: 170,
+    height: 40,
+    stageClassName: "w-[13.125rem] md:w-[15.625rem]",
+  },
+} as const satisfies Record<
+  StudioAboutProofContent["entries"][number]["client"],
+  {
+    src: string;
+    width: number;
+    height: number;
+    stageClassName: string;
+  }
+>;
+
+function getAboutProofLogoAsset(
+  client: StudioAboutProofContent["entries"][number]["client"],
+) {
+  return aboutProofLogoAssets[client as keyof typeof aboutProofLogoAssets];
+}
 
 function SectionIntro({
   eyebrow,
@@ -215,6 +291,78 @@ function AboutIllustrationStage() {
         />
       </div>
     </div>
+  );
+}
+
+type AboutProofEntryCardProps = {
+  entry: StudioAboutProofContent["entries"][number];
+  proofTone: StudioCaseStudyProofTone;
+  className?: string;
+};
+
+// Each proof tile keeps its editorial text layout, then swaps to a logo-led cover on hover.
+function AboutProofEntryCard({
+  entry,
+  proofTone,
+  className,
+}: AboutProofEntryCardProps) {
+  const logoAsset = getAboutProofLogoAsset(entry.client);
+  const toneClassName = aboutProofToneClassNames[proofTone];
+  const hoverWashClassName = aboutProofHoverWashClassNames[proofTone];
+  const hoverGlowClassName = aboutProofHoverGlowClassNames[proofTone];
+
+  return (
+    <article
+      className={[
+        "group relative isolate min-h-[15rem] overflow-hidden px-6 py-7 transition-[cursor] duration-[800ms] ease-out hover:cursor-pointer md:px-8 md:py-8",
+        toneClassName,
+        className,
+      ]
+        .filter(Boolean)
+        .join(" ")}
+    >
+      {/* The text block stays in flow so the tile footprint does not shift before hover. */}
+      <div className="relative z-10 flex h-full flex-col gap-4 transition-opacity duration-[800ms] ease-out group-hover:opacity-0">
+        <p className="text-label-sm uppercase tracking-[0.18em] text-[var(--color-text-tertiary)]">
+          {entry.sector}
+        </p>
+        <h3 className="text-heading-lg text-[var(--neutral-950)]">{entry.client}</h3>
+        <p className="max-w-[32rem] text-body-md text-[var(--color-text-secondary)]">
+          {entry.summary}
+        </p>
+      </div>
+
+      {/* The hover cover reuses the same wash family, then adds a stronger veil so the logo reads cleanly above it. */}
+      {logoAsset ? (
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-0 z-20 opacity-0 transition-opacity duration-[800ms] ease-out group-hover:opacity-100"
+        >
+          <div className={["absolute inset-0", toneClassName].join(" ")} />
+          <div className={["absolute inset-0", hoverWashClassName].join(" ")} />
+          <div className={["absolute inset-0 scale-[1.08] blur-2xl", hoverGlowClassName].join(" ")} />
+          <div className="absolute inset-0 bg-white/22" />
+          <div className="relative flex h-full items-center justify-center px-6 py-7 md:px-8 md:py-8">
+            <div
+              className={[
+                "transform-gpu transition-transform duration-[800ms] ease-out group-hover:scale-100",
+                "scale-95",
+                logoAsset.stageClassName,
+              ].join(" ")}
+            >
+              <Image
+                src={logoAsset.src}
+                alt=""
+                width={logoAsset.width}
+                height={logoAsset.height}
+                sizes="(min-width: 1024px) 20vw, 50vw"
+                className="h-auto w-full object-contain drop-shadow-[0_24px_48px_rgba(15,23,42,0.16)]"
+              />
+            </div>
+          </div>
+        </div>
+      ) : null}
+    </article>
   );
 }
 
@@ -611,27 +759,17 @@ function AboutProofSection({ content }: { content: StudioAboutProofContent }) {
               const proofTone = resolveStudioCaseStudyProofTone(entry.client);
 
               return (
-                <article
+                <AboutProofEntryCard
                   key={entry.client}
+                  entry={entry}
+                  proofTone={proofTone}
                   className={[
-                    "min-h-[15rem] space-y-4 px-6 py-7 md:px-8 md:py-8",
-                    aboutProofToneClassNames[proofTone],
                     hasBottomBorder ? "border-b border-slate-200/80" : "",
                     isLeftColumn ? "lg:border-r lg:border-slate-200/80" : "",
                   ]
                     .filter(Boolean)
                     .join(" ")}
-                >
-                  <p className="text-label-sm uppercase tracking-[0.18em] text-[var(--color-text-tertiary)]">
-                    {entry.sector}
-                  </p>
-                  <h3 className="text-heading-lg text-[var(--neutral-950)]">
-                    {entry.client}
-                  </h3>
-                  <p className="max-w-[32rem] text-body-md text-[var(--color-text-secondary)]">
-                    {entry.summary}
-                  </p>
-                </article>
+                />
               );
             })}
           </div>
