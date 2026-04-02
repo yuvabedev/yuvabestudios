@@ -84,7 +84,7 @@ const aboutAssets = {
     alt: "A close-up of the Yuvabe mark printed on a grey team shirt.",
   },
   illustration: {
-    src: "/assets/about/yuvabe-illustration.jpg",
+    src: "/assets/about/yuvabe-illustration.png",
     alt: "An illustration of a sprout growing inside a light bulb.",
   },
 } as const;
@@ -197,6 +197,24 @@ function AboutMediaCard({
         </div>
       ) : null}
     </PremiumSurface>
+  );
+}
+
+// The illustration stays clean while the section itself carries the larger brand glow.
+function AboutIllustrationStage() {
+  return (
+    <div className="relative mt-6 max-w-[34rem]">
+      <div className="relative flex min-h-[26rem] w-full items-center justify-center px-8 py-6 md:min-h-[28rem] md:px-10 md:py-8">
+        <Image
+          src={aboutAssets.illustration.src}
+          alt={aboutAssets.illustration.alt}
+          width={508}
+          height={475}
+          sizes="(min-width: 1024px) 34vw, 100vw"
+          className="h-auto w-full max-w-[27rem] -translate-y-[68px] md:max-w-[31rem] md:-translate-y-20"
+        />
+      </div>
+    </div>
   );
 }
 
@@ -323,8 +341,19 @@ function AboutStorySection({ content }: { content: StudioAboutStoryContent }) {
   const [storyTitleLead, storyTitleRest] = content.title.split(". ");
 
   return (
-    <section className="border-b border-slate-200/80 bg-white py-14 md:py-20">
-      <StudioPageContainer className="grid gap-10 lg:grid-cols-[minmax(0,0.98fr)_minmax(0,1.02fr)] lg:gap-12">
+    <section className="relative overflow-hidden border-b border-slate-200/80 bg-white py-14 md:py-20">
+      {/* The story background anchors a much hotter Yuvabe orb to the bulb position while preserving a readable white lane for the copy. */}
+      <div aria-hidden="true" className="pointer-events-none absolute inset-0">
+        <div className="absolute inset-0 bg-white" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_calc(26%+400px)_70%,rgba(255,202,45,1)_0%,rgba(255,202,45,0.96)_8%,rgba(249,169,31,0.86)_16%,rgba(240,78,40,0.66)_28%,rgba(150,136,192,0.6)_42%,rgba(88,41,199,0.44)_56%,rgba(88,41,199,0.22)_68%,rgba(255,255,255,0)_84%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_calc(26%+400px)_70%,rgba(255,243,181,0.92)_0%,rgba(255,240,166,0.72)_10%,rgba(255,228,138,0.34)_20%,rgba(255,255,255,0)_36%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_calc(22%+400px)_74%,rgba(255,202,45,0.52)_0%,rgba(249,169,31,0.3)_18%,rgba(255,255,255,0)_42%)]" />
+        <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(255,255,255,0.02)_0%,rgba(255,255,255,0.08)_12%,rgba(255,255,255,0.28)_24%,rgba(255,255,255,0.66)_40%,rgba(255,255,255,0.9)_58%,rgba(255,255,255,1)_100%)]" />
+        <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(255,255,255,0.66)_0%,rgba(255,255,255,0.26)_16%,rgba(255,255,255,0.12)_46%,rgba(255,255,255,0.42)_74%,rgba(255,255,255,0.82)_100%)]" />
+        <div className="absolute left-[2%] top-[4%] h-[28rem] w-[28rem] rounded-full bg-[radial-gradient(circle,rgba(255,255,255,0.26)_0%,rgba(255,255,255,0.06)_44%,rgba(255,255,255,0)_76%)] blur-3xl" />
+      </div>
+
+      <StudioPageContainer className="relative z-10 grid gap-10 lg:grid-cols-[minmax(0,0.98fr)_minmax(0,1.02fr)] lg:gap-12">
         {/* The left column becomes the narrative anchor with one strong headline and one tight origin paragraph. */}
         <div className="space-y-5 lg:pl-4 xl:pl-6">
           <div className="space-y-3">
@@ -354,12 +383,7 @@ function AboutStorySection({ content }: { content: StudioAboutStoryContent }) {
           </p>
 
           {/* The illustration gives the origin story a warmer metaphor instead of another team photo. */}
-          <AboutMediaCard
-            asset={aboutAssets.illustration}
-            sizes="(min-width: 1024px) 34vw, 100vw"
-            className="mt-6 max-w-[34rem] bg-[color:color-mix(in_srgb,var(--yellow-500)_18%,white)]"
-            imageClassName="object-contain p-6"
-          />
+          <AboutIllustrationStage />
         </div>
 
         <div className="space-y-5">
