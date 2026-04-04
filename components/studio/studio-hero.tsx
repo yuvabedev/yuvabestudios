@@ -1,6 +1,7 @@
-import { ArrowRight } from "lucide-react";
+﻿import { ArrowRight } from "lucide-react";
 
 import type { StudioHomepageHeroContent } from "@/components/studio/studio-homepage-content";
+import { StudioHeroNoiseBackdrop } from "@/components/studio/hero-effect";
 import { StartProjectButton } from "@/components/studio/start-project-button";
 import { StudioHandDrawnUnderline } from "@/components/studio/studio-hand-drawn-underline";
 import { StudioPageContainer } from "@/components/studio/studio-page-shell";
@@ -29,7 +30,7 @@ type StudioHeroProps = {
 // The hero content keeps the user-provided copy intact while shifting the visual system to a Stripe-inspired light layout.
 export function StudioHero({ content }: StudioHeroProps) {
   return (
-    <section
+    <StudioHeroNoiseBackdrop
       id="about"
       className="relative flex flex-col justify-start overflow-hidden bg-white pb-14 md:min-h-[calc(100svh-72px)] md:pb-20"
     >
@@ -37,7 +38,7 @@ export function StudioHero({ content }: StudioHeroProps) {
 
       {/* The editorial content occupies the remaining viewport height after the rail is accounted for. */}
       <StudioPageContainer className="relative z-10 flex items-start pb-6 pt-14 md:pb-12 md:pt-16">
-        <div className="grid w-full items-center gap-5 lg:grid-cols-[minmax(0,1.08fr)_minmax(320px,0.92fr)] lg:gap-7">
+        <div className="w-full">
           {/* The left column follows Stripe's strong editorial layout with a compact badge, oversized headline, and one CTA. */}
           <div className="max-w-4xl space-y-4 lg:pl-4 xl:pl-4">
             <div id="ai-first-dna" className="max-w-5xl space-y-4">
@@ -80,41 +81,12 @@ export function StudioHero({ content }: StudioHeroProps) {
               </StartProjectButton>
             </div>
           </div>
-
-          {/* The right column gives the hero a premium visual counterweight without introducing extra messaging. */}
-          <div className="relative hidden min-h-[18.5rem] lg:block">
-            <div className="absolute inset-x-8 top-3 h-[18.5rem] rounded-[2rem] border border-white/70 bg-[linear-gradient(180deg,rgba(255,255,255,0.84),rgba(255,255,255,0.35))] shadow-[0_30px_80px_rgba(15,23,42,0.10)] backdrop-blur-sm" />
-            <div className="absolute inset-x-16 top-9 h-[14.25rem] rounded-[1.75rem] border border-white/80 bg-[linear-gradient(160deg,rgba(255,255,255,0.95),rgba(255,255,255,0.50))] shadow-[0_20px_60px_rgba(15,23,42,0.12)]" />
-            <div className="absolute inset-x-24 top-13 space-y-3 rounded-[1.5rem] border border-slate-200/80 bg-white/90 p-5 shadow-[0_20px_50px_rgba(15,23,42,0.08)] backdrop-blur">
-              <div className="inline-flex w-fit rounded-full bg-[color:color-mix(in_srgb,var(--yellow-500)_16%,white)] px-3 py-1 text-label-sm text-[var(--neutral-800)]">
-                Founder momentum, systemized
-              </div>
-              <div className="space-y-2.5">
-                <div className="h-3 w-28 rounded-full bg-[color:color-mix(in_srgb,var(--purple-500)_18%,white)]" />
-                <div className="h-3 w-full rounded-full bg-slate-100" />
-                <div className="h-3 w-[88%] rounded-full bg-slate-100" />
-                <div className="h-3 w-[76%] rounded-full bg-slate-100" />
-              </div>
-              <div className="grid grid-cols-2 gap-4 pt-1">
-                <div className="rounded-[1.25rem] border border-slate-200 bg-slate-50 p-4">
-                  <p className="text-label-sm text-slate-500">Strategy</p>
-                  <p className="mt-2 text-heading-sm text-[var(--neutral-900)]">
-                    Sharper bets
-                  </p>
-                </div>
-                <div className="rounded-[1.25rem] border border-slate-200 bg-slate-50 p-4">
-                  <p className="text-label-sm text-slate-500">Engineering</p>
-                  <p className="mt-2 text-heading-sm text-[var(--neutral-900)]">
-                    Faster loops
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
         </div>
       </StudioPageContainer>
 
       <StudioTrustStrip />
-    </section>
+    </StudioHeroNoiseBackdrop>
   );
 }
+
+

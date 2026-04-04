@@ -321,6 +321,16 @@
     radial-gradient(82% 72% at 52% 92%, color-mix(in srgb, var(--orange-200) 56%, white) 0%, color-mix(in srgb, var(--peach-200) 50%, white) 30%, rgba(247, 167, 147, 0.22) 58%, rgba(247, 167, 147, 0) 82%),
     radial-gradient(90% 76% at 92% 70%, color-mix(in srgb, var(--lavender-500) 44%, white) 0%, color-mix(in srgb, var(--purple-500) 28%, white) 34%, rgba(88, 41, 199, 0.2) 58%, rgba(88, 41, 199, 0) 84%),
     linear-gradient(135deg, #fff8ec 0%, #fff4e8 24%, #fef0e7 56%, #f1e7ff 100%);
+  --gradient-hero-signal-stage:
+    radial-gradient(74% 66% at 14% 18%, color-mix(in srgb, var(--yellow-500) 34%, white) 0%, rgba(255, 255, 255, 0) 62%),
+    radial-gradient(78% 66% at 86% 16%, color-mix(in srgb, var(--cyan-200) 70%, white) 0%, rgba(255, 255, 255, 0) 60%),
+    radial-gradient(92% 72% at 72% 92%, color-mix(in srgb, var(--lavender-500) 42%, white) 0%, rgba(255, 255, 255, 0) 66%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.94) 0%, rgba(248, 248, 250, 0.82) 100%);
+  --gradient-hero-signal-core:
+    radial-gradient(circle, rgba(255, 255, 255, 0.98) 0%, rgba(255, 255, 255, 0.54) 28%, rgba(88, 41, 199, 0.12) 54%, rgba(88, 41, 199, 0) 76%);
+  --pattern-hero-signal-grid:
+    linear-gradient(to right, rgb(148 163 184 / 0.14) 1px, transparent 1px),
+    linear-gradient(to bottom, rgb(148 163 184 / 0.12) 1px, transparent 1px);
   --gradient-premium-billing-prism:
     radial-gradient(120% 80% at 50% 15%, rgba(255, 255, 255, 0.97) 0%, rgba(255, 255, 255, 0.95) 22%, rgba(255, 255, 255, 0.78) 40%, rgba(255, 255, 255, 0.1) 62%, rgba(255, 255, 255, 0) 100%),
     radial-gradient(84% 62% at 12% 84%, color-mix(in srgb, var(--cyan-200) 94%, white) 0%, color-mix(in srgb, var(--cyan-500) 60%, white) 28%, rgba(43, 183, 199, 0.38) 56%, rgba(43, 183, 199, 0) 80%),
@@ -482,6 +492,27 @@ h6 {
 /* This shared utility offers a cooler, slightly more technical spectrum blend. */
 .ds-surface-billing-prism {
   background-image: var(--gradient-premium-billing-prism);
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+}
+
+/* This shared utility keeps the hero interaction stage on one reusable brand-tinted light surface. */
+.ds-surface-hero-signal {
+  background-image: var(--gradient-hero-signal-stage);
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+}
+
+/* This shared utility centralizes the field grid so the hero effect can stay layered without inline texture recipes. */
+.ds-pattern-hero-signal-grid {
+  background-image: var(--pattern-hero-signal-grid);
+  background-repeat: repeat;
+  background-size: 18px 18px;
+}
+
+/* This shared utility gives the hero field one soft core glow beneath the burst canvas. */
+.ds-hero-signal-core {
+  background-image: var(--gradient-hero-signal-core);
   background-repeat: no-repeat;
   background-size: 100% 100%;
 }
