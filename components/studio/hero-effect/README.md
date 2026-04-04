@@ -17,6 +17,7 @@ The current visual direction is:
 - the infinity shape is implied by particle density, not by a visible line stroke
 - the cursor-following glow has been removed
 - the temporary tuning panel has been removed
+- offscreen animation work is paused automatically
 - the click burst still works across the full hero section
 
 The current baked values are:
@@ -24,7 +25,7 @@ The current baked values are:
 - `Path Width`: `1.85`
 - `Path Height`: `2.40`
 - `View Zoom`: `1.38`
-- `Density`: `24375`
+- `Density`: `24375` base desktop target
 - `Point Spread`: `0.23`
 - `Desktop X`: `27%`
 - `Desktop Y`: `-50%`
@@ -52,8 +53,10 @@ Owns the public module entrypoint:
 Owns the full-section backdrop shell:
 
 - wraps the entire hero section
+- pauses both animation systems when the hero leaves the viewport
 - handles click events across the hero
 - renders the 2D canvas burst overlay
+- keeps the canvas static until a burst is active
 - places the shared surface, grid, bloom, and Three.js layer behind the content
 
 ### [`./hero-effect-burst.ts`](./hero-effect-burst.ts)
@@ -73,6 +76,7 @@ Owns the Three.js infinity cloud:
 - builds the orthographic scene
 - computes positions along a horizontal infinity curve
 - attaches a dense point cloud to that curve
+- scales particle budgets down on mobile and tablet
 - animates the particle field with slight drift so the form stays alive
 
 ### [`./hero-effect-utils.ts`](./hero-effect-utils.ts)
@@ -151,6 +155,8 @@ This is why the hero currently feels like a blend of:
 - a stable center-field identity shape
 - an interaction response that can happen anywhere in the section
 
+When no burst is active, the canvas falls back to a static ambient frame instead of running continuously.
+
 ## 4. Content Layering
 
 The copy and CTA are intentionally untouched by the animation system.
@@ -174,6 +180,12 @@ The effect reads well because each layer has a different job:
 - the burst gives interaction feedback
 - the text stays editorial and calm
 
+It also now behaves more responsibly at runtime:
+
+- the hero pauses when it scrolls away
+- the canvas only spins up during actual burst activity
+- smaller screens automatically use lower particle budgets
+
 This is also why removing the cursor-following gradient improved it: the cloud already provides a strong center, so a second hover-led glow added too much competition.
 
 ## Tuning Knobs
@@ -189,6 +201,7 @@ In [`./hero-effect-infinity-cloud.tsx`](./hero-effect-infinity-cloud.tsx):
 - `particleCount`
 - `particleSpread`
 - `particleDrift`
+- responsive density scaling inside `getResponsiveParticleCount`
 - `particleGlowMaterial.size`
 - `particleCoreMaterial.size`
 - `particleGlowMaterial.opacity`

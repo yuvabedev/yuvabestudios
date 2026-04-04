@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useReducedMotion } from "framer-motion";
 import * as THREE from "three";
 
@@ -16,8 +16,11 @@ import { TAU, readCssToken } from "./hero-effect-utils";
 
 type StudioHeroInfinityCloudProps = {
   className?: string;
+  isInViewport?: boolean;
   tuning?: HeroInfinityCloudTuning;
 };
+
+type HeroDensityTier = "mobile" | "tablet" | "desktop";
 
 type InfinityPalette = {
   cyan: THREE.Color;
@@ -31,6 +34,38 @@ function readInfinityPalette() {
     purple: new THREE.Color(readCssToken("--purple-500", "#5829c7")),
     yellow: new THREE.Color(readCssToken("--yellow-500", "#ffca2d")),
   } satisfies InfinityPalette;
+}
+
+function readDensityTier(width: number): HeroDensityTier {
+  if (width < 768) {
+    return "mobile";
+  }
+
+  if (width < 1280) {
+    return "tablet";
+  }
+
+  return "desktop";
+}
+
+function getResponsiveParticleCount(
+  particleCount: number,
+  densityTier: HeroDensityTier,
+  shouldReduceMotion: boolean
+) {
+  if (shouldReduceMotion) {
+    return Math.max(240, Math.round(particleCount * 0.08));
+  }
+
+  if (densityTier === "mobile") {
+    return Math.max(1200, Math.round(particleCount * 0.34));
+  }
+
+  if (densityTier === "tablet") {
+    return Math.max(1200, Math.round(particleCount * 0.58));
+  }
+
+  return Math.max(1200, Math.round(particleCount));
 }
 
 // The infinity curve is procedural so we can tune the silhouette later without replacing a static asset.
@@ -81,15 +116,42 @@ function setParticleColor(
 
 export function StudioHeroInfinityCloud({
   className,
+  isInViewport = true,
   tuning = defaultHeroInfinityCloudTuning,
 }: StudioHeroInfinityCloudProps) {
   const shouldReduceMotion = useReducedMotion();
   const containerRef = useRef<HTMLDivElement | null>(null);
+  const [densityTier, setDensityTier] = useState<HeroDensityTier>(() =>
+    typeof window === "undefined" ? "desktop" : readDensityTier(window.innerWidth)
+  );
+
+  useEffect(() => {
+    if (typeof window === "undefined") {
+      return;
+    }
+
+    // Smaller screens get lower particle budgets so the loop stays fluid without changing the art direction.
+    const syncDensityTier = () => {
+      const nextDensityTier = readDensityTier(window.innerWidth);
+      setDensityTier((currentDensityTier) =>
+        currentDensityTier === nextDensityTier
+          ? currentDensityTier
+          : nextDensityTier
+      );
+    };
+
+    syncDensityTier();
+    window.addEventListener("resize", syncDensityTier, { passive: true });
+
+    return () => {
+      window.removeEventListener("resize", syncDensityTier);
+    };
+  }, []);
 
   useEffect(() => {
     const container = containerRef.current;
 
-    if (!container) {
+    if (!container || !isInViewport) {
       return;
     }
 
@@ -111,9 +173,11 @@ export function StudioHeroInfinityCloud({
     const loopGroup = new THREE.Group();
     scene.add(loopGroup);
 
-    const particleCount = shouldReduceMotion
-      ? Math.max(240, Math.round(tuning.particleCount * 0.2))
-      : Math.max(1200, Math.round(tuning.particleCount));
+    const particleCount = getResponsiveParticleCount(
+      tuning.particleCount,
+      densityTier,
+      shouldReduceMotion
+    );
     const particlePositions = new Float32Array(particleCount * 3);
     const particleColors = new Float32Array(particleCount * 3);
     const particlePhase = new Float32Array(particleCount);
@@ -250,6 +314,8 @@ export function StudioHeroInfinityCloud({
       renderer.domElement.remove();
     };
   }, [
+    densityTier,
+    isInViewport,
     shouldReduceMotion,
     tuning.particleCount,
     tuning.particleSpread,

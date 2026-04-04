@@ -3,6 +3,7 @@
 import {
   useEffect,
   useRef,
+  useState,
   type HTMLAttributes,
   type PointerEvent,
   type CSSProperties,
@@ -37,6 +38,10 @@ type StudioHeroNoiseBackdropProps = HTMLAttributes<HTMLElement>;
 
 const heroSignalEase = [0.22, 1, 0.36, 1] as const;
 
+function isBurstActive(burst: HeroSignalBurst, time: number) {
+  return time - burst.start < burst.duration;
+}
+
 function clampToBounds(value: number, max: number) {
   return Math.min(max, Math.max(0, value));
 }
@@ -64,6 +69,8 @@ export function StudioHeroNoiseBackdrop({
   const paletteRef = useRef<HeroSignalPalette | null>(null);
   const sizeRef = useRef({ width: 0, height: 0 });
   const burstSeedRef = useRef(0);
+  const startCanvasLoopRef = useRef<(() => void) | null>(null);
+  const [isInViewport, setIsInViewport] = useState(true);
   // The tuned hero values are baked into the module now that the temporary control panel is gone.
   const tuning = defaultHeroEffectBackdropTuning;
 
@@ -92,13 +99,41 @@ export function StudioHeroNoiseBackdrop({
     if (burstsRef.current.length > 5) {
       burstsRef.current.shift();
     }
+
+    startCanvasLoopRef.current?.();
   }
 
   useEffect(() => {
     const stage = stageRef.current;
-    const canvas = canvasRef.current;
 
-    if (!stage || !canvas) {
+    if (!stage) {
+      return;
+    }
+
+    // The hero prewarms a little before entering view so the animation is already alive when the section scrolls in.
+    const viewportObserver = new IntersectionObserver(
+      ([entry]) => {
+        setIsInViewport(entry.isIntersecting);
+      },
+      {
+        rootMargin: "220px 0px 220px 0px",
+        threshold: 0.01,
+      }
+    );
+
+    viewportObserver.observe(stage);
+
+    return () => {
+      viewportObserver.disconnect();
+    };
+  }, []);
+
+  useEffect(() => {
+    const stage = stageRef.current;
+    const canvas = canvasRef.current;
+    startCanvasLoopRef.current = null;
+
+    if (!stage || !canvas || !isInViewport) {
       return;
     }
 
@@ -109,6 +144,48 @@ export function StudioHeroNoiseBackdrop({
     }
 
     paletteRef.current = readHeroSignalPalette();
+    let frameId = 0;
+    let isLoopRunning = false;
+
+    const drawFrame = (time: number, animateAmbient: boolean) => {
+      const palette = paletteRef.current;
+      const { width, height } = sizeRef.current;
+
+      if (!palette || !width || !height) {
+        return false;
+      }
+
+      context.clearRect(0, 0, width, height);
+      drawAmbientSpecks(
+        context,
+        specksRef.current,
+        palette,
+        animateAmbient ? time : 0
+      );
+
+      let hasActiveBursts = false;
+
+      burstsRef.current = burstsRef.current.filter((burst) => {
+        const progress = Math.min(Math.max((time - burst.start) / burst.duration, 0), 1);
+
+        if (progress >= 1) {
+          return false;
+        }
+
+        hasActiveBursts = true;
+        drawBurstGlow(context, burst, palette, progress);
+        drawBurstRing(context, burst, palette, time, progress);
+        drawBurstParticles(context, burst, palette, time, progress);
+
+        return true;
+      });
+
+      return hasActiveBursts;
+    };
+
+    const drawStaticFrame = (time = performance.now()) => {
+      drawFrame(time, false);
+    };
 
     // The resize sync keeps the canvas sharp while matching the hero's responsive box.
     const syncCanvas = () => {
@@ -128,51 +205,53 @@ export function StudioHeroNoiseBackdrop({
         height,
         shouldReduceMotion ? 34 : 88
       );
+
+      if (!isLoopRunning) {
+        drawStaticFrame();
+      }
     };
 
     const resizeObserver = new ResizeObserver(syncCanvas);
     resizeObserver.observe(stage);
     syncCanvas();
 
-    let frameId = 0;
-
-    // The render loop draws the idle specks first, then the active click bursts on top of them.
+    // The canvas only animates while a burst is alive; otherwise it falls back to one static frame.
     const render = (time: number) => {
-      const palette = paletteRef.current;
-      const { width, height } = sizeRef.current;
+      const hasActiveBursts = drawFrame(time, !shouldReduceMotion);
 
-      if (!palette || !width || !height) {
-        frameId = window.requestAnimationFrame(render);
+      if (!hasActiveBursts) {
+        isLoopRunning = false;
+        drawStaticFrame(time);
         return;
       }
-
-      context.clearRect(0, 0, width, height);
-      drawAmbientSpecks(context, specksRef.current, palette, time);
-
-      burstsRef.current = burstsRef.current.filter((burst) => {
-        const progress = Math.min(Math.max((time - burst.start) / burst.duration, 0), 1);
-
-        if (progress >= 1) {
-          return false;
-        }
-
-        drawBurstGlow(context, burst, palette, progress);
-        drawBurstRing(context, burst, palette, time, progress);
-        drawBurstParticles(context, burst, palette, time, progress);
-
-        return true;
-      });
 
       frameId = window.requestAnimationFrame(render);
     };
 
-    frameId = window.requestAnimationFrame(render);
+    const startCanvasLoop = () => {
+      if (isLoopRunning) {
+        return;
+      }
+
+      isLoopRunning = true;
+      frameId = window.requestAnimationFrame(render);
+    };
+
+    startCanvasLoopRef.current = startCanvasLoop;
+
+    if (burstsRef.current.some((burst) => isBurstActive(burst, performance.now()))) {
+      startCanvasLoop();
+    } else {
+      drawStaticFrame();
+    }
 
     return () => {
+      startCanvasLoopRef.current = null;
+      isLoopRunning = false;
       window.cancelAnimationFrame(frameId);
       resizeObserver.disconnect();
     };
-  }, [shouldReduceMotion]);
+  }, [isInViewport, shouldReduceMotion]);
 
   function handlePointerDown(event: PointerEvent<HTMLElement>) {
     const point = getLocalPointerPoint(event);
@@ -208,6 +287,7 @@ export function StudioHeroNoiseBackdrop({
             <div className="absolute left-1/2 top-1/2 h-[150%] w-[130%] -translate-x-1/2 -translate-y-1/2 sm:h-[154%] sm:w-[128%] md:h-[160%] md:w-[128%]">
               <div className="absolute left-1/2 top-1/2 h-[16rem] w-[24rem] -translate-x-1/2 -translate-y-1/2 rounded-full ds-hero-signal-core opacity-72 blur-[42px] md:h-[24rem] md:w-[40rem]" />
               <StudioHeroInfinityCloud
+                isInViewport={isInViewport}
                 tuning={tuning}
                 className="opacity-98 [mask-image:radial-gradient(ellipse_at_center,rgba(0,0,0,1)_0%,rgba(0,0,0,0.98)_62%,rgba(0,0,0,0.88)_82%,rgba(0,0,0,0)_100%)]"
               />
