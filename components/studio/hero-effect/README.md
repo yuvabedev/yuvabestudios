@@ -165,6 +165,7 @@ When the user clicks anywhere in the hero, or when the ambient scheduler fires:
 - the pulse draws one restrained expanding circular ring
 - a faint trailing echo ring follows behind it
 - a transparent-center halo softly hugs the wave band
+- each pulse picks from a shared set of brand colors
 - particles stay close to the ring and lightly trail the wavefront
 
 This is why the hero currently feels like a blend of:

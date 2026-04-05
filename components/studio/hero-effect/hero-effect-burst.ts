@@ -1,4 +1,4 @@
-﻿import {
+import {
   TAU,
   clamp,
   createSeededRandom,
@@ -26,6 +26,7 @@ export type HeroSignalBurst = {
   duration: number;
   baseRadius: number;
   maxRadius: number;
+  bandIndex: number;
   seed: number;
   particles: HeroSignalParticle[];
 };
@@ -105,6 +106,7 @@ export function createHeroSignalBurst(
     duration,
     baseRadius: Math.max(16, minDimension * 0.04),
     maxRadius,
+    bandIndex: Math.floor(random() * 4),
     seed,
     particles: Array.from({ length: particleCount }, () => ({
       angle: random() * TAU,
@@ -134,6 +136,24 @@ function getPaletteColor(palette: HeroSignalPalette, colorMix: number) {
   }
 
   return palette.orange;
+}
+
+function getBurstBandColor(
+  palette: HeroSignalPalette,
+  bandIndex: number,
+  offset = 0
+) {
+  const brandColors = [
+    palette.purple,
+    palette.cyan,
+    palette.yellow,
+    palette.orange,
+  ];
+  const normalizedIndex =
+    ((bandIndex + offset) % brandColors.length + brandColors.length) %
+    brandColors.length;
+
+  return brandColors[normalizedIndex];
 }
 
 // These drifting specks use size-based motion and opacity so the larger blobs feel optically closer than the tiny distant ones.
@@ -230,20 +250,22 @@ export function drawBurstRing(
   const echoRadius = Math.max(burst.baseRadius * 0.68, radius - (10 + (1 - progress) * 8));
   const echoAmplitude = primaryAmplitude * 0.72;
   const alpha = Math.pow(1 - progress, 1.45);
+  const primaryColor = getBurstBandColor(palette, burst.bandIndex);
+  const echoColor = getBurstBandColor(palette, burst.bandIndex, 1);
 
   context.save();
   context.lineCap = "round";
   context.lineJoin = "round";
   context.shadowBlur = 14;
-  context.shadowColor = withAlpha(palette.purple, 0.12 * alpha);
+  context.shadowColor = withAlpha(primaryColor, 0.12 * alpha);
   context.lineWidth = 1.5 + (1 - progress) * 4.5;
-  context.strokeStyle = withAlpha(palette.purple, 0.26 * alpha);
+  context.strokeStyle = withAlpha(primaryColor, 0.26 * alpha);
   traceRipplePath(context, burst, time, radius, primaryAmplitude);
   context.stroke();
 
   context.shadowBlur = 0;
   context.lineWidth = 0.8 + (1 - progress) * 2.2;
-  context.strokeStyle = withAlpha(palette.cyan, 0.14 * alpha);
+  context.strokeStyle = withAlpha(echoColor, 0.14 * alpha);
   traceRipplePath(context, burst, time, echoRadius, echoAmplitude, 0.9);
   context.stroke();
 
@@ -261,6 +283,9 @@ export function drawBurstGlow(
   const alpha = Math.pow(1 - progress, 1.35);
   const haloOuterRadius = radius + 42;
   const ringStop = clamp(radius / haloOuterRadius, 0.18, 0.92);
+  const innerHaloColor = getBurstBandColor(palette, burst.bandIndex, 1);
+  const ringColor = getBurstBandColor(palette, burst.bandIndex);
+  const outerHaloColor = getBurstBandColor(palette, burst.bandIndex, 2);
   const gradient = context.createRadialGradient(
     burst.x,
     burst.y,
@@ -274,12 +299,12 @@ export function drawBurstGlow(
   gradient.addColorStop(Math.max(0, ringStop - 0.18), "rgba(255, 255, 255, 0)");
   gradient.addColorStop(
     Math.max(0, ringStop - 0.06),
-    withAlpha(palette.cyan, 0.035 * alpha)
+    withAlpha(innerHaloColor, 0.035 * alpha)
   );
-  gradient.addColorStop(ringStop, withAlpha(palette.purple, 0.12 * alpha));
+  gradient.addColorStop(ringStop, withAlpha(ringColor, 0.12 * alpha));
   gradient.addColorStop(
     Math.min(1, ringStop + 0.08),
-    withAlpha(palette.yellow, 0.06 * alpha)
+    withAlpha(outerHaloColor, 0.06 * alpha)
   );
   gradient.addColorStop(1, "rgba(255, 255, 255, 0)");
 
@@ -348,4 +373,6 @@ export function drawBurstParticles(
 
   context.restore();
 }
+
+
 
