@@ -84,10 +84,11 @@ export function StartProjectModal({
     <ModalShell
       open={open}
       onOpenChange={onOpenChange}
+      mobileLayout="fullscreen"
       motionPreset="fade"
       title="Start your project"
-      className="max-h-[calc(100svh-1.5rem)] max-w-[76rem] overflow-hidden"
-      contentClassName="h-full px-5 pb-5 pt-12 sm:px-8 sm:pb-6 lg:px-10 lg:pb-6"
+      className="h-[100svh] max-w-[76rem] overflow-hidden sm:max-h-[calc(100svh-1.5rem)] sm:h-auto"
+      contentClassName="h-full overflow-y-auto px-5 pb-6 pt-12 sm:px-8 sm:pb-6 lg:px-10 lg:pb-6"
     >
       <div className="relative grid gap-7 overflow-hidden rounded-[inherit] lg:h-[calc(100svh-10rem)] lg:min-h-0 lg:grid-cols-[minmax(0,0.94fr)_minmax(0,1.06fr)] lg:gap-8">
         {/* The background glow shifts more attention to the form side without adding another heavy surface. */}

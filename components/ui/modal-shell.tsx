@@ -20,6 +20,7 @@ type ModalShellProps = {
   onOpenChange: (open: boolean) => void;
   onRequestClose?: (reason: "close-button" | "escape-key") => void;
   closeVariant?: "default" | "case-study";
+  mobileLayout?: "default" | "fullscreen";
   motionPreset?: "default" | "fade";
   onAfterClose?: () => void;
   title: string;
@@ -28,12 +29,13 @@ type ModalShellProps = {
   contentClassName?: string;
 };
 
-// This shared shell keeps the modal simple: one gradient scrim plus one translucent glass panel.
+// This shared shell keeps modal behavior aligned: fullscreen on mobile, elevated glass panel on larger screens.
 export function ModalShell({
   open,
   onOpenChange,
   onRequestClose,
   closeVariant = "default",
+  mobileLayout = "fullscreen",
   motionPreset = "default",
   onAfterClose,
   title,
@@ -44,6 +46,7 @@ export function ModalShell({
   const shouldReduceMotion = useReducedMotion();
   const panelEase: [number, number, number, number] = [0.22, 1, 0.36, 1];
   const [activeCloseVariant, setActiveCloseVariant] = useState<"default" | "case-study">("default");
+  const isMobileFullscreen = mobileLayout === "fullscreen";
 
   const shellMotion = shouldReduceMotion
     ? undefined
@@ -85,6 +88,8 @@ export function ModalShell({
   const scrimExitTransition = isCaseStudyClose ? shellMotion?.caseStudyScrim.transition : shellMotion?.scrim.transition;
   const panelExit = isCaseStudyClose ? shellMotion?.caseStudyPanel.hidden : shellMotion?.panel.hidden;
   const panelExitTransition = isCaseStudyClose ? shellMotion?.caseStudyPanel.transition : shellMotion?.panel.transition;
+  const closeButtonClassName =
+    "rounded-full border border-[color:color-mix(in_srgb,var(--lavender-500)_26%,white)] bg-[linear-gradient(180deg,rgba(241,237,252,0.96),rgba(233,227,249,0.88))] text-[var(--neutral-700)] shadow-[0_8px_18px_rgba(15,23,42,0.04)] backdrop-blur-sm hover:bg-[linear-gradient(180deg,rgba(244,240,254,0.98),rgba(236,231,251,0.92))]";
 
   function handleCloseIntent(reason: "close-button" | "escape-key") {
     if (closeVariant === "case-study") {
@@ -112,14 +117,42 @@ export function ModalShell({
             <>
               <DialogOverlay asChild forceMount>
                 <motion.div
-                  className="fixed inset-0 z-40 overflow-y-auto bg-[radial-gradient(circle_at_6%_16%,color-mix(in_srgb,var(--purple-500)_38%,transparent)_0%,transparent_17%),radial-gradient(circle_at_16%_28%,color-mix(in_srgb,var(--lavender-500)_22%,transparent)_0%,transparent_13%),radial-gradient(circle_at_12%_86%,color-mix(in_srgb,var(--purple-500)_18%,transparent)_0%,transparent_13%),radial-gradient(circle_at_19%_76%,color-mix(in_srgb,var(--lavender-200)_14%,transparent)_0%,transparent_10%),radial-gradient(circle_at_88%_80%,color-mix(in_srgb,var(--yellow-500)_30%,transparent)_0%,transparent_23%),radial-gradient(circle_at_77%_66%,color-mix(in_srgb,var(--orange-500)_24%,transparent)_0%,transparent_15%),radial-gradient(circle_at_69%_90%,color-mix(in_srgb,var(--lavender-500)_14%,transparent)_0%,transparent_11%),linear-gradient(180deg,rgba(255,255,255,0.72),rgba(255,255,255,0.72)),linear-gradient(to_right,rgba(148,163,184,0.042)_1px,transparent_1px),linear-gradient(to_bottom,rgba(148,163,184,0.021)_1px,transparent_1px)] bg-[size:auto,auto,auto,auto,auto,auto,auto,auto,120px_100%,100%_120px] backdrop-blur-xl"
+                  className={cn(
+                    "fixed inset-0 z-40 overflow-y-auto sm:bg-[radial-gradient(circle_at_6%_16%,color-mix(in_srgb,var(--purple-500)_38%,transparent)_0%,transparent_17%),radial-gradient(circle_at_16%_28%,color-mix(in_srgb,var(--lavender-500)_22%,transparent)_0%,transparent_13%),radial-gradient(circle_at_12%_86%,color-mix(in_srgb,var(--purple-500)_18%,transparent)_0%,transparent_13%),radial-gradient(circle_at_19%_76%,color-mix(in_srgb,var(--lavender-200)_14%,transparent)_0%,transparent_10%),radial-gradient(circle_at_88%_80%,color-mix(in_srgb,var(--yellow-500)_30%,transparent)_0%,transparent_23%),radial-gradient(circle_at_77%_66%,color-mix(in_srgb,var(--orange-500)_24%,transparent)_0%,transparent_15%),radial-gradient(circle_at_69%_90%,color-mix(in_srgb,var(--lavender-500)_14%,transparent)_0%,transparent_11%),linear-gradient(180deg,rgba(255,255,255,0.72),rgba(255,255,255,0.72)),linear-gradient(to_right,rgba(148,163,184,0.042)_1px,transparent_1px),linear-gradient(to_bottom,rgba(148,163,184,0.021)_1px,transparent_1px)] sm:bg-[size:auto,auto,auto,auto,auto,auto,auto,auto,120px_100%,100%_120px] sm:backdrop-blur-xl",
+                    isMobileFullscreen ? "bg-transparent backdrop-blur-none" : "bg-transparent",
+                  )}
                   initial={shouldReduceMotion ? undefined : shellMotion?.scrim.hidden}
                   animate={shouldReduceMotion ? undefined : shellMotion?.scrim.visible}
                   exit={shouldReduceMotion ? undefined : scrimExit}
                   transition={shouldReduceMotion ? undefined : open ? shellMotion?.scrim.transition : scrimExitTransition}
                 >
+                  {/* The mobile close control lives outside the scroll container so it stays pinned to the viewport. */}
+                  {isMobileFullscreen ? (
+                    <div className="pointer-events-none fixed inset-x-0 top-0 z-[60] sm:hidden">
+                      <div className="flex justify-end px-5 pt-[calc(env(safe-area-inset-top)+1.25rem)]">
+                        <Button
+                          type="button"
+                          variant="ghost"
+                          size="icon"
+                          onClick={() => {
+                            handleCloseIntent("close-button");
+                          }}
+                          className={cn("pointer-events-auto", closeButtonClassName)}
+                        >
+                          <X className="size-4" />
+                          <span className="sr-only">Close modal</span>
+                        </Button>
+                      </div>
+                    </div>
+                  ) : null}
+
                   {/* The scrim and panel now share one timing system so exit cleanly reverses entry. */}
-                  <div className="flex min-h-screen items-start justify-center p-4 sm:p-6 lg:p-8">
+                  <div
+                    className={cn(
+                      "flex min-h-screen items-start justify-center p-4 sm:p-6 lg:p-8",
+                      isMobileFullscreen && "items-stretch p-0 sm:items-start sm:p-6 lg:p-8",
+                    )}
+                  >
                     <DialogContent
                       forceMount
                       onEscapeKeyDown={(event) => {
@@ -130,9 +163,13 @@ export function ModalShell({
                         event.preventDefault();
                         handleCloseIntent("escape-key");
                       }}
-                      className="!relative !left-auto !top-auto z-50 w-full !max-w-[74rem] !translate-x-0 !translate-y-0 border-0 bg-transparent p-0 shadow-none"
+                      className={cn(
+                        "!relative !left-auto !top-auto z-50 w-full !max-w-[74rem] !translate-x-0 !translate-y-0 border-0 bg-transparent p-0 shadow-none",
+                        isMobileFullscreen && "min-h-screen sm:min-h-0",
+                      )}
                     >
                       <motion.div
+                        className={cn(isMobileFullscreen && "min-h-screen sm:min-h-0")}
                         initial={shouldReduceMotion ? undefined : shellMotion?.panel.hidden}
                         animate={
                           shouldReduceMotion
@@ -153,6 +190,8 @@ export function ModalShell({
                           radius="xl"
                           className={cn(
                             "relative border border-white/72 bg-[linear-gradient(180deg,rgba(255,255,255,0.56),rgba(255,255,255,0.34))] shadow-[0_20px_56px_rgba(15,23,42,0.045)] backdrop-blur-[20px]",
+                            isMobileFullscreen &&
+                              "min-h-screen rounded-none border-0 bg-white shadow-none backdrop-blur-none sm:min-h-0 sm:rounded-[inherit] sm:border sm:border-white/72 sm:bg-[linear-gradient(180deg,rgba(255,255,255,0.56),rgba(255,255,255,0.34))] sm:shadow-[0_20px_56px_rgba(15,23,42,0.045)] sm:backdrop-blur-[20px]",
                             className,
                           )}
                         >
@@ -171,13 +210,30 @@ export function ModalShell({
                             onClick={() => {
                               handleCloseIntent("close-button");
                             }}
-                            className="absolute right-4 top-4 z-20 rounded-full border border-[color:color-mix(in_srgb,var(--lavender-500)_26%,white)] bg-[linear-gradient(180deg,rgba(241,237,252,0.96),rgba(233,227,249,0.88))] text-[var(--neutral-700)] shadow-[0_8px_18px_rgba(15,23,42,0.04)] backdrop-blur-sm hover:bg-[linear-gradient(180deg,rgba(244,240,254,0.98),rgba(236,231,251,0.92))]"
+                            className={cn(
+                              "absolute right-4 top-4 z-20 hidden sm:inline-flex",
+                              closeButtonClassName,
+                            )}
                           >
                             <X className="size-4" />
-                            <span className="sr-only">Close case study summary</span>
+                            <span className="sr-only">Close modal</span>
                           </Button>
 
-                          <div className={cn("relative z-10 p-4 sm:p-6 lg:p-8", contentClassName)}>{children}</div>
+                          <div
+                            className={cn(
+                              "relative z-10 p-4 sm:p-6 lg:p-8",
+                              isMobileFullscreen && "min-h-screen p-0 sm:min-h-0 sm:p-6 lg:p-8",
+                              contentClassName,
+                            )}
+                          >
+                            {isMobileFullscreen ? (
+                              <div
+                                aria-hidden="true"
+                                className="h-[calc(env(safe-area-inset-top)+3.5rem)] sm:hidden"
+                              />
+                            ) : null}
+                            {children}
+                          </div>
                         </PremiumSurface>
                       </motion.div>
                     </DialogContent>
