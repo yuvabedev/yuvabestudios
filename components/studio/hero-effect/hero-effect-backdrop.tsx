@@ -450,8 +450,6 @@ export function StudioHeroNoiseBackdrop({
           className="pointer-events-none absolute inset-0 h-full w-full"
         />
 
-        {/* This shared wash protects the left copy column so the background signal stays energetic without fighting the text. */}
-        <div className="ds-overlay-hero-copy-wash absolute inset-0" />
       </motion.div>
 
       {children}

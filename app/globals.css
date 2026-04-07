@@ -329,13 +329,25 @@
   --gradient-hero-copy-wash:
     linear-gradient(
       90deg,
-      rgba(255, 255, 255, 0.149) 0%,
-      rgba(255, 255, 255, 0.147) 22%,
-      rgba(255, 255, 255, 0.141) 40%,
-      rgba(255, 255, 255, 0.123) 58%,
-      rgba(255, 255, 255, 0.072) 74%,
-      rgba(255, 255, 255, 0.024) 88%,
+      rgba(255, 255, 255, 0.596) 0%,
+      rgba(255, 255, 255, 0.588) 18%,
+      rgba(255, 255, 255, 0.548) 34%,
+      rgba(255, 255, 255, 0.388) 50%,
+      rgba(255, 255, 255, 0.18) 66%,
+      rgba(255, 255, 255, 0.056) 82%,
+      rgba(255, 255, 255, 0.012) 92%,
       rgba(255, 255, 255, 0) 100%
+    );
+  --mask-hero-copy-wash:
+    radial-gradient(
+      144% 154% at 28% 42%,
+      rgba(0, 0, 0, 1) 0%,
+      rgba(0, 0, 0, 0.98) 42%,
+      rgba(0, 0, 0, 0.9) 58%,
+      rgba(0, 0, 0, 0.68) 74%,
+      rgba(0, 0, 0, 0.34) 88%,
+      rgba(0, 0, 0, 0.12) 96%,
+      rgba(0, 0, 0, 0) 100%
     );
   --pattern-hero-signal-grid:
     linear-gradient(to right, rgb(148 163 184 / 0.1) 1px, transparent 1px),
@@ -517,6 +529,9 @@ h6 {
   background-image: var(--gradient-hero-copy-wash);
   background-repeat: no-repeat;
   background-size: 100% 100%;
+  filter: blur(34px);
+  -webkit-mask-image: var(--mask-hero-copy-wash);
+  mask-image: var(--mask-hero-copy-wash);
 }
 
 /* This shared utility centralizes the field grid so the hero effect can stay layered without inline texture recipes. */
