@@ -101,7 +101,7 @@ export function StartProjectModal({
       }
 
       setSubmitState("success");
-      setSubmitMessage("Your inquiry was sent. We’ll get back to you soon.");
+      setSubmitMessage("Your inquiry was saved. We'll get back to you soon.");
       setName("");
       setEmail("");
       setPhone("");
@@ -314,7 +314,7 @@ export function StartProjectModal({
                 ].join(" ")}
               >
                 {submitMessage ||
-                  "Your inquiry goes straight to our inbox with the details above."}
+                  "Your inquiry is captured securely and queued for follow-up."}
               </p>
             </div>
           </form>

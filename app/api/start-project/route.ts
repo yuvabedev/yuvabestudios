@@ -1,10 +1,5 @@
-import { Resend } from "resend";
-
-import {
-  buildStartProjectMessage,
-  buildStartProjectSubject,
-  type StartProjectDraft,
-} from "@/lib/start-project";
+import type { StartProjectDraft } from "@/lib/start-project";
+import { storeStartProjectSubmission } from "@/lib/start-project-submissions";
 
 function normalizeSubmission(payload: Partial<StartProjectDraft>): StartProjectDraft {
   return {
@@ -24,49 +19,43 @@ function normalizeSubmission(payload: Partial<StartProjectDraft>): StartProjectD
 
 // This route keeps inquiry delivery on the server so visitors do not need a local mail app.
 export async function POST(request: Request) {
-  const resendApiKey = process.env.RESEND_API_KEY;
-  const toEmail = process.env.START_PROJECT_TO_EMAIL || "sales@yuvabe.com";
-  const fromEmail =
-    process.env.START_PROJECT_FROM_EMAIL ||
-    "Yuvabe Studios <noreply@yuvabe.com>";
-
-  if (!resendApiKey) {
-    return Response.json(
-      { error: "Missing RESEND_API_KEY." },
-      { status: 500 },
-    );
-  }
+  let payload: Partial<StartProjectDraft>;
 
   try {
-    const payload = (await request.json()) as Partial<StartProjectDraft>;
-    const submission = normalizeSubmission(payload);
-    const resend = new Resend(resendApiKey);
-
-    if (!submission.name || !submission.email) {
-      return Response.json(
-        { error: "Name and email are required." },
-        { status: 400 },
-      );
-    }
-
-    // The email body mirrors the modal fields so the inbox stays easy to triage.
-    const { data, error } = await resend.emails.send({
-      from: fromEmail,
-      to: [toEmail],
-      subject: buildStartProjectSubject(submission),
-      text: buildStartProjectMessage(submission),
-      replyTo: submission.email,
-    });
-
-    if (error) {
-      return Response.json({ error: error.message }, { status: 500 });
-    }
-
-    return Response.json({ ok: true, id: data?.id ?? null });
+    payload = (await request.json()) as Partial<StartProjectDraft>;
   } catch {
     return Response.json(
       { error: "Invalid request payload." },
       { status: 400 },
+    );
+  }
+
+  const submission = normalizeSubmission(payload);
+
+  if (!submission.name || !submission.email) {
+    return Response.json(
+      { error: "Name and email are required." },
+      { status: 400 },
+    );
+  }
+
+  try {
+    const storedSubmission = await storeStartProjectSubmission(submission);
+
+    return Response.json({
+      ok: true,
+      id: storedSubmission.id,
+      storage: "supabase_temp",
+    });
+  } catch (error) {
+    return Response.json(
+      {
+        error:
+          error instanceof Error
+            ? error.message
+            : "Unable to store your inquiry right now.",
+      },
+      { status: 500 },
     );
   }
 }
