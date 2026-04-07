@@ -338,6 +338,18 @@
       rgba(255, 255, 255, 0.012) 92%,
       rgba(255, 255, 255, 0) 100%
     );
+  --gradient-hero-copy-halo:
+    radial-gradient(
+      96% 90% at 34% 42%,
+      rgba(255, 255, 255, 0.98) 0%,
+      rgba(255, 255, 255, 0.94) 18%,
+      rgba(255, 255, 255, 0.82) 38%,
+      rgba(255, 255, 255, 0.6) 56%,
+      rgba(255, 255, 255, 0.34) 72%,
+      rgba(255, 255, 255, 0.12) 86%,
+      rgba(255, 255, 255, 0.03) 94%,
+      rgba(255, 255, 255, 0) 100%
+    );
   --mask-hero-copy-wash:
     radial-gradient(
       144% 154% at 28% 42%,
@@ -523,6 +535,14 @@ h6 {
   background-image: var(--gradient-hero-signal-stage);
   background-repeat: no-repeat;
   background-size: 100% 100%;
+}
+
+/* This larger radial halo lets the copy wash fade out beyond the visible text block so the hero keeps a soft atmospheric edge. */
+.ds-overlay-hero-copy-halo {
+  background-image: var(--gradient-hero-copy-halo);
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  filter: blur(72px);
 }
 
 /* This shared overlay keeps the hero copy readable without flattening the full signal field. */

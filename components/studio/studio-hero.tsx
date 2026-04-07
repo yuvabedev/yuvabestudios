@@ -36,12 +36,15 @@ export function StudioHero({ content }: StudioHeroProps) {
       {/* The editorial wrapper becomes the desktop centering region so the full copy stack stays balanced above the trust strip. */}
       <StudioPageContainer className="relative z-10 flex items-start pb-6 pt-14 md:flex-1 md:items-center md:pb-12 md:pt-16">
         <div className="w-full">
-          {/* The wash is pinned to the copy block with soft negative bleed so it feels atmospheric instead of boxed in. */}
-          <div className="relative max-w-4xl lg:pl-4 xl:pl-4">
+          {/* The copy halo uses an overflow-visible radial field so the readability wash dies off softly instead of revealing a hard box edge. */}
+          <div className="relative max-w-4xl overflow-visible lg:pl-4 xl:pl-4">
             <div
               aria-hidden="true"
-              className="ds-overlay-hero-copy-wash pointer-events-none absolute -left-8 -top-8 h-[calc(100%+5rem)] w-[calc(100%+7rem)] max-w-[40rem] sm:-left-10 sm:-top-10 sm:h-[calc(100%+6rem)] sm:w-[calc(100%+9rem)] sm:max-w-[48rem] lg:-left-12 lg:-top-12 lg:h-[calc(100%+7rem)] lg:w-[calc(100%+10rem)] lg:max-w-[58rem]"
-            />
+              className="pointer-events-none absolute -left-16 -top-14 h-[calc(100%+10rem)] w-[calc(100%+20rem)] max-w-[54rem] overflow-visible sm:-left-20 sm:-top-16 sm:h-[calc(100%+13rem)] sm:w-[calc(100%+26rem)] sm:max-w-[64rem] lg:-left-28 lg:-top-24 lg:h-[calc(100%+18rem)] lg:w-[calc(100%+38rem)] lg:max-w-[88rem] xl:-left-32 xl:w-[calc(100%+44rem)] xl:max-w-[96rem]"
+            >
+              <div className="ds-overlay-hero-copy-halo absolute inset-0" />
+              <div className="ds-overlay-hero-copy-wash absolute inset-0" />
+            </div>
 
             {/* The left column follows Stripe's strong editorial layout with a compact badge, oversized headline, and one CTA. */}
             <div className="relative z-10 space-y-4">

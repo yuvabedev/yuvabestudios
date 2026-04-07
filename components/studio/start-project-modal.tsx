@@ -3,14 +3,11 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState, type FormEvent } from "react";
-import { Check } from "lucide-react";
+import { Check, LoaderCircle } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { ModalShell } from "@/components/ui/modal-shell";
-import {
-  START_PROJECT_EMAIL,
-  buildStartProjectMailto,
-} from "@/lib/start-project";
+import { START_PROJECT_EMAIL } from "@/lib/start-project";
 
 type StartProjectModalProps = {
   open: boolean;
@@ -51,6 +48,11 @@ export function StartProjectModal({
   const [phone, setPhone] = useState("");
   const [needs, setNeeds] = useState<string[]>([]);
   const [notes, setNotes] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitState, setSubmitState] = useState<"idle" | "success" | "error">(
+    "idle",
+  );
+  const [submitMessage, setSubmitMessage] = useState("");
 
   // Each open should feel like a fresh start, not a stale draft from a prior CTA click.
   useEffect(() => {
@@ -63,21 +65,59 @@ export function StartProjectModal({
     setPhone("");
     setNeeds([]);
     setNotes("");
+    setIsSubmitting(false);
+    setSubmitState("idle");
+    setSubmitMessage("");
   }, [open]);
 
-  function handleSubmit(event: FormEvent<HTMLFormElement>) {
+  // The modal submits to our route so the inquiry lands in Yuvabe's inbox without leaving the site.
+  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
-    const mailtoHref = buildStartProjectMailto({
-      name,
-      email,
-      phone,
-      needs,
-      notes,
-      source,
-    });
+    setIsSubmitting(true);
+    setSubmitState("idle");
+    setSubmitMessage("");
 
-    window.location.href = mailtoHref;
+    try {
+      const response = await fetch("/api/start-project", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name,
+          email,
+          phone,
+          needs,
+          notes,
+          source,
+        }),
+      });
+
+      const responseBody = (await response.json()) as { error?: string };
+
+      if (!response.ok) {
+        throw new Error(responseBody.error || "Unable to send your inquiry.");
+      }
+
+      setSubmitState("success");
+      setSubmitMessage("Your inquiry was sent. We’ll get back to you soon.");
+      setName("");
+      setEmail("");
+      setPhone("");
+      setNeeds([]);
+      setNotes("");
+      return;
+    } catch (error) {
+      setSubmitState("error");
+      setSubmitMessage(
+        error instanceof Error
+          ? error.message
+          : "Unable to send your inquiry right now.",
+      );
+    } finally {
+      setIsSubmitting(false);
+    }
   }
 
   return (
@@ -251,13 +291,30 @@ export function StartProjectModal({
               />
             </div>
 
-            {/* The helper keeps the first release honest: submit drafts the inquiry in the user's mail app. */}
+            {/* The submit area keeps status visible so founders know whether the inquiry actually went through. */}
             <div className="space-y-2 pt-1">
-              <Button type="submit" size="lg" className="w-full">
-                Send inquiry
+              <Button type="submit" size="lg" className="w-full" disabled={isSubmitting}>
+                {isSubmitting ? (
+                  <span className="inline-flex items-center gap-2">
+                    <LoaderCircle className="size-4 animate-spin" />
+                    Sending inquiry
+                  </span>
+                ) : (
+                  "Send inquiry"
+                )}
               </Button>
-              <p className="text-body-sm text-[var(--color-text-tertiary)]">
-                This opens your email app with the details prefilled.
+              <p
+                className={[
+                  "text-body-sm",
+                  submitState === "error"
+                    ? "text-red-600"
+                    : submitState === "success"
+                      ? "text-emerald-700"
+                      : "text-[var(--color-text-tertiary)]",
+                ].join(" ")}
+              >
+                {submitMessage ||
+                  "Your inquiry goes straight to our inbox with the details above."}
               </p>
             </div>
           </form>

@@ -16,8 +16,15 @@ export function isStartProjectHref(href: string) {
   return startProjectHrefSet.has(href.trim());
 }
 
-// This mailto builder keeps the first-pass modal functional without inventing a fake backend.
-export function buildStartProjectMailto({
+// The shared subject keeps both the UI and the email delivery route aligned on one inquiry label.
+export function buildStartProjectSubject({
+  name,
+}: Pick<StartProjectDraft, "name">) {
+  return name ? `Start project inquiry - ${name}` : "Start project inquiry";
+}
+
+// The inquiry body is shared so every delivery path formats submissions the same way.
+export function buildStartProjectMessage({
   name,
   email,
   phone,
@@ -25,9 +32,6 @@ export function buildStartProjectMailto({
   notes,
   source,
 }: StartProjectDraft) {
-  const subject = name
-    ? `Start project inquiry - ${name}`
-    : "Start project inquiry";
   const bodyLines = [
     `Name: ${name || "-"}`,
     `Email: ${email || "-"}`,
@@ -39,5 +43,5 @@ export function buildStartProjectMailto({
     notes || "-",
   ];
 
-  return `mailto:${START_PROJECT_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(bodyLines.join("\n"))}`;
+  return bodyLines.join("\n");
 }
