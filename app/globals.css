@@ -342,11 +342,12 @@
     radial-gradient(
       144% 154% at 28% 42%,
       rgba(0, 0, 0, 1) 0%,
-      rgba(0, 0, 0, 0.98) 42%,
-      rgba(0, 0, 0, 0.9) 58%,
-      rgba(0, 0, 0, 0.68) 74%,
-      rgba(0, 0, 0, 0.34) 88%,
-      rgba(0, 0, 0, 0.12) 96%,
+      rgba(0, 0, 0, 0.985) 36%,
+      rgba(0, 0, 0, 0.93) 54%,
+      rgba(0, 0, 0, 0.78) 68%,
+      rgba(0, 0, 0, 0.5) 82%,
+      rgba(0, 0, 0, 0.2) 92%,
+      rgba(0, 0, 0, 0.04) 98%,
       rgba(0, 0, 0, 0) 100%
     );
   --pattern-hero-signal-grid:
@@ -529,7 +530,7 @@ h6 {
   background-image: var(--gradient-hero-copy-wash);
   background-repeat: no-repeat;
   background-size: 100% 100%;
-  filter: blur(34px);
+  filter: blur(44px);
   -webkit-mask-image: var(--mask-hero-copy-wash);
   mask-image: var(--mask-hero-copy-wash);
 }
