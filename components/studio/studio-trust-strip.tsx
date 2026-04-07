@@ -5,26 +5,98 @@ import {
 import { cn } from "@/lib/utils";
 
 const companyLogos = [
-  { name: "Ageshift", src: "/assets/ageshift/logo.svg" },
-  { name: "AV Marathon", src: "/logos/av-marathon.svg" },
-  { name: "Bevolve AI", src: "/assets/bevolve/logo.svg" },
-  { name: "BMH", src: "/logos/bmh.svg" },
-  { name: "Buglerock", src: "/logos/buglerock.svg" },
-  { name: "CAT", src: "/logos/cat.svg" },
-  { name: "General Aeronautics", src: "/assets/general-aeronautics/logo.svg" },
-  { name: "Hemplanet", src: "/logos/hemplanet.svg" },
-  { name: "Indic", src: "/logos/indic.svg" },
-  { name: "Kittykat", src: "/assets/KK/logo.svg" },
-  { name: "Maatram", src: "/logos/maatram.svg" },
-  { name: "Matrimandir", src: "/logos/matrimandir.svg" },
-  { name: "NSF", src: "/logos/nsf.svg" },
-  { name: "Prakriti Sattva", src: "/logos/prakriti-sattva.svg" },
-  { name: "Quilt AI", src: "/logos/quilt.ai.svg" },
-  { name: "Rangsutra", src: "/logos/rangsutra.svg" },
-  { name: "Shraddha Yoga", src: "/logos/shraddha-yoga.svg" },
-  { name: "Solitude Farm", src: "/logos/solitude-farm.svg" },
-  { name: "Startup-O", src: "/logos/startup-o.svg" },
-  { name: "Tvam", src: "/assets/tvam/logo.svg" },
+  // imageClass: override h/w per logo so each mark reads at a consistent visual weight.
+  // Icon-only marks → equal h/w (square). Wide wordmarks → tall h + constrained max-w. Mixed marks → tuned pair.
+
+  {
+    name: "AV Marathon",
+    src: "/logos/av-marathon.svg",
+    imageClass: "h-18 w-auto max-w-42",
+  },
+  {
+    name: "Bevolve AI",
+    src: "/assets/bevolve/logo.svg",
+    imageClass: "h-16 w-auto max-w-28",
+  },
+  { name: "BMH", src: "/logos/bmh.svg", imageClass: "h-9 w-auto max-w-24" },
+  {
+    name: "Buglerock",
+    src: "/logos/buglerock.svg",
+    imageClass: "h-16 w-auto max-w-28",
+  },
+  { name: "CAT", src: "/logos/cat.svg", imageClass: "h-14 w-auto max-w-42" },
+  {
+    name: "Tvam",
+    src: "/assets/tvam/logo.svg",
+    imageClass: "h-14 w-auto max-w-28",
+  },
+  {
+    name: "General Aeronautics",
+    src: "/assets/general-aeronautics/logo.svg",
+    imageClass: "h-9 w-auto max-w-32",
+  },
+
+  {
+    name: "Hemplanet",
+    src: "/logos/hemplanet.svg",
+    imageClass: "h-14 w-auto max-w-28",
+  },
+  {
+    name: "Indic",
+    src: "/logos/indic.svg",
+    imageClass: "h-18 w-auto max-w-28",
+  },
+  {
+    name: "Kittykat",
+    src: "/assets/KK/logo.svg",
+    imageClass: "h-14 w-auto max-w-28",
+  },
+  {
+    name: "Maatram",
+    src: "/logos/maatram.svg",
+    imageClass: "h-14 w-auto max-w-28",
+  },
+  {
+    name: "Matrimandir",
+    src: "/logos/matrimandir.svg",
+    imageClass: "h-14 w-auto max-w-42",
+  },
+  { name: "NSF", src: "/logos/nsf.svg", imageClass: "h-14 w-auto max-w-42" },
+  {
+    name: "Prakriti Sattva",
+    src: "/logos/prakriti-sattva.svg",
+    imageClass: "h-16 w-auto max-w-24",
+  },
+  {
+    name: "Quilt AI",
+    src: "/logos/quilt.ai.svg",
+    imageClass: "h-10 w-auto max-w-28",
+  },
+  {
+    name: "Rangsutra",
+    src: "/logos/rangsutra.svg",
+    imageClass: "h-14 w-auto max-w-42",
+  },
+  {
+    name: "Ageshift",
+    src: "/assets/ageshift/logo.svg",
+    imageClass: "h-14 w-auto max-w-28",
+  },
+  {
+    name: "Shraddha Yoga",
+    src: "/logos/shraddha-yoga.svg",
+    imageClass: "h-14 w-auto max-w-42",
+  },
+  {
+    name: "Solitude Farm",
+    src: "/logos/solitude-farm.svg",
+    imageClass: "h-14 w-auto max-w-28",
+  },
+  {
+    name: "Startup-O",
+    src: "/logos/startup-o.svg",
+    imageClass: "h-14 w-auto max-w-28",
+  },
 ];
 
 // The frame guides keep the hero background and strip edges aligned to the same centered rail.
@@ -35,17 +107,21 @@ export function StudioTrustStripGuides() {
 type TrustStripLogoProps = {
   name: string;
   src: string;
+  imageClass?: string;
 };
 
-// Each logo sits in a fixed-height box so all SVGs render at the same visual scale regardless of viewBox.
-function TrustStripLogo({ name, src }: TrustStripLogoProps) {
+// Each logo uses its own imageClass so marks with very different aspect ratios read at the same visual weight.
+function TrustStripLogo({ name, src, imageClass = "h-8 w-auto max-w-28" }: TrustStripLogoProps) {
   return (
     <span className="inline-flex flex-none items-center justify-center">
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img
         src={src}
         alt={name}
-        className="h-8 w-auto max-w-30 object-contain opacity-60 grayscale transition-[opacity,filter] duration-200 hover:opacity-100 hover:grayscale-0"
+        className={cn(
+          imageClass,
+          "object-contain opacity-60 grayscale transition-[opacity,filter] duration-200 hover:opacity-100 hover:grayscale-0"
+        )}
         loading="lazy"
         decoding="async"
       />
@@ -62,8 +138,8 @@ type TrustStripGroupProps = {
 function TrustStripGroup({ groupKey, ariaHidden = false }: TrustStripGroupProps) {
   return (
     <div aria-hidden={ariaHidden || undefined} className="marquee-group">
-      {companyLogos.map(({ name, src }) => (
-        <TrustStripLogo key={`${groupKey}-${name}`} name={name} src={src} />
+      {companyLogos.map(({ name, src, imageClass }) => (
+        <TrustStripLogo key={`${groupKey}-${name}`} name={name} src={src} imageClass={imageClass} />
       ))}
     </div>
   );
