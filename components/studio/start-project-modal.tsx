@@ -2,19 +2,12 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import dynamic from "next/dynamic";
 import { useEffect, useState } from "react";
 import { Check, LoaderCircle } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { ModalShell } from "@/components/ui/modal-shell";
 import { START_PROJECT_EMAIL } from "@/lib/start-project";
-
-// Loaded client-side only — react-google-recaptcha uses browser globals at import time.
-const RecaptchaWidget = dynamic(
-  () => import("./recaptcha-widget").then((m) => m.RecaptchaWidget),
-  { ssr: false },
-);
 
 type StartProjectModalProps = {
   open: boolean;
@@ -44,7 +37,6 @@ function toggleSelection(currentValues: string[], value: string) {
     : [...currentValues, value];
 }
 
-// This shared modal turns every main CTA into one branded, founder-focused intake flow.
 export function StartProjectModal({
   open,
   onOpenChange,
@@ -58,18 +50,7 @@ export function StartProjectModal({
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitState, setSubmitState] = useState<"idle" | "success" | "error">("idle");
   const [submitMessage, setSubmitMessage] = useState("");
-  const [captchaDone, setCaptchaDone] = useState(false);
-  const [captchaToken, setCaptchaToken] = useState<string | null>(null);
-  // Incrementing this key forces the reCAPTCHA widget to remount and reset.
-  const [captchaKey, setCaptchaKey] = useState(0);
 
-  function resetCaptcha() {
-    setCaptchaDone(false);
-    setCaptchaToken(null);
-    setCaptchaKey((k) => k + 1);
-  }
-
-  // Each open should feel like a fresh start, not a stale draft from a prior CTA click.
   useEffect(() => {
     if (!open) return;
     setName("");
@@ -80,19 +61,10 @@ export function StartProjectModal({
     setIsSubmitting(false);
     setSubmitState("idle");
     setSubmitMessage("");
-    resetCaptcha();
   }, [open]);
 
-  // The modal submits to our route so the inquiry lands in Yuvabe's inbox without leaving the site.
   async function handleSubmit(event: { preventDefault(): void }) {
     event.preventDefault();
-
-    if (!captchaDone || !captchaToken) {
-      setSubmitState("error");
-      setSubmitMessage("Please complete the reCAPTCHA check.");
-      return;
-    }
-
     setIsSubmitting(true);
     setSubmitState("idle");
     setSubmitMessage("");
@@ -101,13 +73,13 @@ export function StartProjectModal({
       const response = await fetch("/api/start-project", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name, email, phone, needs, notes, source, recaptchaToken: captchaToken }),
+        body: JSON.stringify({ name, email, phone, needs, notes, source }),
       });
 
-      const responseBody = (await response.json()) as { error?: string };
+      const body = (await response.json()) as { error?: string };
 
       if (!response.ok) {
-        throw new Error(responseBody.error || "Unable to send your inquiry.");
+        throw new Error(body.error || "Unable to send your inquiry.");
       }
 
       setSubmitState("success");
@@ -117,13 +89,11 @@ export function StartProjectModal({
       setPhone("");
       setNeeds([]);
       setNotes("");
-      resetCaptcha();
     } catch (error) {
       setSubmitState("error");
       setSubmitMessage(
         error instanceof Error ? error.message : "Unable to send your inquiry right now.",
       );
-      resetCaptcha();
     } finally {
       setIsSubmitting(false);
     }
@@ -160,17 +130,15 @@ export function StartProjectModal({
               </p>
             </div>
           </div>
-          <div className="space-y-3">
-            <p className="text-body-sm text-(--color-text-tertiary)">
-              Prefer email?{" "}
-              <Link
-                href={`mailto:${START_PROJECT_EMAIL}`}
-                className="cursor-pointer lowercase text-(--neutral-700) underline-offset-4 transition-colors hover:text-(--color-text-brand) hover:underline"
-              >
-                {START_PROJECT_EMAIL}
-              </Link>
-            </p>
-          </div>
+          <p className="text-body-sm text-(--color-text-tertiary)">
+            Prefer email?{" "}
+            <Link
+              href={`mailto:${START_PROJECT_EMAIL}`}
+              className="cursor-pointer lowercase text-(--neutral-700) underline-offset-4 transition-colors hover:text-(--color-text-brand) hover:underline"
+            >
+              {START_PROJECT_EMAIL}
+            </Link>
+          </p>
         </div>
 
         {/* Right column — form */}
@@ -259,27 +227,8 @@ export function StartProjectModal({
               />
             </div>
 
-            {/* reCAPTCHA v2 checkbox — same pattern as previous site */}
-            <RecaptchaWidget
-              key={captchaKey}
-              sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY!}
-              onChange={(token) => {
-                setCaptchaDone(true);
-                setCaptchaToken(token);
-              }}
-              onExpired={() => {
-                setCaptchaDone(false);
-                setCaptchaToken(null);
-              }}
-            />
-
             <div className="space-y-2 pt-1">
-              <Button
-                type="submit"
-                size="lg"
-                className="w-full"
-                disabled={isSubmitting || !captchaDone}
-              >
+              <Button type="submit" size="lg" className="w-full" disabled={isSubmitting}>
                 {isSubmitting ? (
                   <span className="inline-flex items-center gap-2">
                     <LoaderCircle className="size-4 animate-spin" />

@@ -21,20 +21,6 @@ function normalizeSubmission(payload: Partial<StartProjectDraft>): StartProjectD
   };
 }
 
-async function verifyRecaptcha(token: string): Promise<boolean> {
-  const secret = process.env.RECAPTCHA_SECRET_KEY;
-  const response = await fetch("https://www.google.com/recaptcha/api/siteverify", {
-    method: "POST",
-    headers: { "Content-Type": "application/x-www-form-urlencoded" },
-    body: new URLSearchParams({ secret: secret ?? "", response: token }),
-  });
-  const data = (await response.json()) as { success: boolean; score?: number };
-  // v3 returns a score from 0.0 (bot) to 1.0 (human) — require at least 0.5
-  if (!data.success) return false;
-  if (typeof data.score === "number") return data.score >= 0.5;
-  return true;
-}
-
 async function sendAdminEmail(submission: StartProjectDraft) {
   const needsList =
     submission.needs.length > 0
@@ -98,9 +84,8 @@ async function sendUserReply(submission: StartProjectDraft) {
       </td>
     </tr>
 
-    ${
-      submission.needs.length > 0
-        ? `<tr>
+    ${submission.needs.length > 0 ? `
+    <tr>
       <td style="padding-top:25px;">
         <div style="background:#f9fafb;border:1px solid #e5e7eb;border-radius:8px;padding:18px;">
           <p style="margin:0;color:#6b7280;font-size:13px;">You asked about</p>
@@ -109,9 +94,7 @@ async function sendUserReply(submission: StartProjectDraft) {
           </p>
         </div>
       </td>
-    </tr>`
-        : ""
-    }
+    </tr>` : ""}
 
     <tr>
       <td style="padding-top:30px;text-align:center;">
@@ -137,41 +120,19 @@ async function sendUserReply(submission: StartProjectDraft) {
   });
 }
 
-// This route keeps inquiry delivery on the server so visitors do not need a local mail app.
 export async function POST(request: Request) {
-  let payload: Partial<StartProjectDraft> & { recaptchaToken?: string };
+  let payload: Partial<StartProjectDraft>;
 
   try {
-    payload = (await request.json()) as Partial<StartProjectDraft> & { recaptchaToken?: string };
+    payload = (await request.json()) as Partial<StartProjectDraft>;
   } catch {
-    return Response.json(
-      { error: "Invalid request payload." },
-      { status: 400 },
-    );
-  }
-
-  if (!payload.recaptchaToken) {
-    return Response.json(
-      { error: "reCAPTCHA token is missing." },
-      { status: 400 },
-    );
-  }
-
-  const recaptchaValid = await verifyRecaptcha(payload.recaptchaToken);
-  if (!recaptchaValid) {
-    return Response.json(
-      { error: "reCAPTCHA verification failed. Please try again." },
-      { status: 400 },
-    );
+    return Response.json({ error: "Invalid request payload." }, { status: 400 });
   }
 
   const submission = normalizeSubmission(payload);
 
   if (!submission.name || !submission.email) {
-    return Response.json(
-      { error: "Name and email are required." },
-      { status: 400 },
-    );
+    return Response.json({ error: "Name and email are required." }, { status: 400 });
   }
 
   try {
@@ -185,22 +146,12 @@ export async function POST(request: Request) {
     }
 
     // Fire-and-forget — a failed auto-reply should not block the success response.
-    sendUserReply(submission).catch((err) =>
-      console.error("User reply error:", err),
-    );
+    sendUserReply(submission).catch((err) => console.error("User reply error:", err));
 
-    return Response.json({
-      ok: true,
-      id: storedSubmission.id,
-    });
+    return Response.json({ ok: true, id: storedSubmission.id });
   } catch (error) {
     return Response.json(
-      {
-        error:
-          error instanceof Error
-            ? error.message
-            : "Unable to store your inquiry right now.",
-      },
+      { error: error instanceof Error ? error.message : "Unable to store your inquiry right now." },
       { status: 500 },
     );
   }
