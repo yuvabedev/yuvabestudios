@@ -2,13 +2,16 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useCallback, useEffect, useState } from "react";
+import dynamic from "next/dynamic";
+import { useEffect, useState } from "react";
 import { Check, LoaderCircle } from "lucide-react";
-import { useGoogleReCaptcha } from "react-google-recaptcha-v3";
 
 import { Button } from "@/components/ui/button";
 import { ModalShell } from "@/components/ui/modal-shell";
 import { START_PROJECT_EMAIL } from "@/lib/start-project";
+
+// Loaded client-side only — react-google-recaptcha accesses browser globals at import time.
+const ReCAPTCHA = dynamic(() => import("react-google-recaptcha"), { ssr: false });
 
 type StartProjectModalProps = {
   open: boolean;
@@ -50,11 +53,16 @@ export function StartProjectModal({
   const [needs, setNeeds] = useState<string[]>([]);
   const [notes, setNotes] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitState, setSubmitState] = useState<"idle" | "success" | "error">(
-    "idle",
-  );
+  const [submitState, setSubmitState] = useState<"idle" | "success" | "error">("idle");
   const [submitMessage, setSubmitMessage] = useState("");
-  const { executeRecaptcha } = useGoogleReCaptcha();
+  // Token captured via onChange; key forces a fresh widget mount on reset.
+  const [recaptchaToken, setRecaptchaToken] = useState<string | null>(null);
+  const [recaptchaKey, setRecaptchaKey] = useState(0);
+
+  function resetRecaptcha() {
+    setRecaptchaToken(null);
+    setRecaptchaKey((k) => k + 1);
+  }
 
   // Each open should feel like a fresh start, not a stale draft from a prior CTA click.
   useEffect(() => {
@@ -70,69 +78,54 @@ export function StartProjectModal({
     setIsSubmitting(false);
     setSubmitState("idle");
     setSubmitMessage("");
+    resetRecaptcha();
   }, [open]);
 
   // The modal submits to our route so the inquiry lands in Yuvabe's inbox without leaving the site.
-  const handleSubmit = useCallback(
-    async (event: { preventDefault(): void }) => {
-      event.preventDefault();
+  async function handleSubmit(event: { preventDefault(): void }) {
+    event.preventDefault();
 
-      if (!executeRecaptcha) {
-        setSubmitState("error");
-        setSubmitMessage("reCAPTCHA not ready. Please try again.");
-        return;
+    if (!recaptchaToken) {
+      setSubmitState("error");
+      setSubmitMessage("Please complete the reCAPTCHA check.");
+      return;
+    }
+
+    setIsSubmitting(true);
+    setSubmitState("idle");
+    setSubmitMessage("");
+
+    try {
+      const response = await fetch("/api/start-project", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name, email, phone, needs, notes, source, recaptchaToken }),
+      });
+
+      const responseBody = (await response.json()) as { error?: string };
+
+      if (!response.ok) {
+        throw new Error(responseBody.error || "Unable to send your inquiry.");
       }
 
-      setIsSubmitting(true);
-      setSubmitState("idle");
-      setSubmitMessage("");
-
-      try {
-        const recaptchaToken = await executeRecaptcha("start_project");
-
-        const response = await fetch("/api/start-project", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            name,
-            email,
-            phone,
-            needs,
-            notes,
-            source,
-            recaptchaToken,
-          }),
-        });
-
-        const responseBody = (await response.json()) as { error?: string };
-
-        if (!response.ok) {
-          throw new Error(responseBody.error || "Unable to send your inquiry.");
-        }
-
-        setSubmitState("success");
-        setSubmitMessage("Your inquiry was saved. We'll get back to you soon.");
-        setName("");
-        setEmail("");
-        setPhone("");
-        setNeeds([]);
-        setNotes("");
-        return;
-      } catch (error) {
-        setSubmitState("error");
-        setSubmitMessage(
-          error instanceof Error
-            ? error.message
-            : "Unable to send your inquiry right now.",
-        );
-      } finally {
-        setIsSubmitting(false);
-      }
-    },
-    [executeRecaptcha, name, email, phone, needs, notes, source],
-  );
+      setSubmitState("success");
+      setSubmitMessage("Your inquiry was saved. We'll get back to you soon.");
+      setName("");
+      setEmail("");
+      setPhone("");
+      setNeeds([]);
+      setNotes("");
+      resetRecaptcha();
+      return;
+    } catch (error) {
+      setSubmitState("error");
+      setSubmitMessage(
+        error instanceof Error ? error.message : "Unable to send your inquiry right now.",
+      );
+    } finally {
+      setIsSubmitting(false);
+    }
+  }
 
   return (
     <ModalShell
@@ -266,7 +259,7 @@ export function StartProjectModal({
                     <button
                       key={option}
                       type="button"
-                      aria-pressed={isSelected}
+                      aria-pressed={isSelected ? "true" : "false"}
                       onClick={() =>
                         setNeeds((currentValues) =>
                           toggleSelection(currentValues, option),
@@ -304,6 +297,13 @@ export function StartProjectModal({
                 onChange={(event) => setNotes(event.target.value)}
               />
             </div>
+
+            <ReCAPTCHA
+              key={recaptchaKey}
+              sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY!}
+              onChange={(token) => setRecaptchaToken(token)}
+              onExpired={() => setRecaptchaToken(null)}
+            />
 
             {/* The submit area keeps status visible so founders know whether the inquiry actually went through. */}
             <div className="space-y-2 pt-1">

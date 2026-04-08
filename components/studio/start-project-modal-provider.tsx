@@ -7,7 +7,6 @@ import {
   useState,
   type ReactNode,
 } from "react";
-import { GoogleReCaptchaProvider } from "react-google-recaptcha-v3";
 
 import { StartProjectModal } from "@/components/studio/start-project-modal";
 
@@ -40,12 +39,10 @@ export function StartProjectModalProvider({
   );
 
   return (
-    <GoogleReCaptchaProvider reCaptchaKey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY!}>
-      <StartProjectModalContext.Provider value={value}>
-        {children}
-        <StartProjectModal open={open} onOpenChange={setOpen} source={source} />
-      </StartProjectModalContext.Provider>
-    </GoogleReCaptchaProvider>
+    <StartProjectModalContext.Provider value={value}>
+      {children}
+      <StartProjectModal open={open} onOpenChange={setOpen} source={source} />
+    </StartProjectModalContext.Provider>
   );
 }
 
