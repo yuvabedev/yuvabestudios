@@ -38,9 +38,9 @@ export const showHeroEffectTuningPanels = false;
 export const defaultHeroInfinityCloudTuning: HeroInfinityCloudTuning = {
   scaleX: 1.85,
   scaleY: 1.41,
-  zoom: 1.9,
-  particleCount: 30000,
-  pointSpread: 0.155,
+  zoom: 2,
+  particleCount: 36000,
+  pointSpread: 0.135,
 };
 
 export const defaultHeroEffectBackdropTuning: HeroEffectBackdropTuning = {

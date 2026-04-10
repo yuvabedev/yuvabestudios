@@ -273,8 +273,8 @@ export function StudioHeroInfinityCloud({
     const particleGlowMaterial = new THREE.PointsMaterial({
       blending: THREE.AdditiveBlending,
       depthWrite: false,
-      opacity: reduceMotion ? 0.18 : 0.24,
-      size: 0.18,
+      opacity: reduceMotion ? 0.2 : 0.28,
+      size: 0.2,
       sizeAttenuation: true,
       transparent: true,
       vertexColors: true,
@@ -282,8 +282,8 @@ export function StudioHeroInfinityCloud({
     const particleCoreMaterial = new THREE.PointsMaterial({
       blending: THREE.AdditiveBlending,
       depthWrite: false,
-      opacity: reduceMotion ? 0.82 : 0.94,
-      size: 0.058,
+      opacity: reduceMotion ? 0.86 : 0.98,
+      size: 0.064,
       sizeAttenuation: true,
       transparent: true,
       vertexColors: true,

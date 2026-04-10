@@ -47,6 +47,19 @@ type LocalPointerPoint = {
 type StudioHeroNoiseBackdropProps = HTMLAttributes<HTMLElement>;
 
 const heroSignalEase = [0.22, 1, 0.36, 1] as const;
+const heroGridWaveColumns = [
+  { left: 7, opacity: 0.32 },
+  { left: 18, opacity: 0.36 },
+  { left: 31, opacity: 0.4 },
+  { left: 46, opacity: 0.46 },
+  { left: 58, opacity: 0.54 },
+  { left: 67, opacity: 0.64 },
+  { left: 74, opacity: 0.76 },
+  { left: 79, opacity: 0.88 },
+  { left: 83, opacity: 0.94 },
+  { left: 88, opacity: 0.74 },
+  { left: 96, opacity: 0.46 },
+] as const;
 
 function isBurstActive(burst: HeroSignalBurst, time: number) {
   return time - burst.start < burst.duration;
@@ -416,7 +429,17 @@ export function StudioHeroNoiseBackdrop({
       >
         {/* These shared utilities keep the hero atmosphere anchored to the design system instead of ad-hoc page styling. */}
         <div className="ds-surface-hero-signal absolute inset-0 opacity-90" />
-        <div className="ds-pattern-hero-signal-grid absolute inset-0 opacity-30" />
+        <div className="ds-pattern-hero-signal-grid absolute inset-0 opacity-50" />
+        {/* These art-directed vertical guides keep the grid wider behind the text, tighter at the mid-right crest, then wider again. */}
+        <div className="absolute inset-0">
+          {heroGridWaveColumns.map((column) => (
+            <div
+              key={column.left}
+              className="ds-line-hero-signal-grid absolute inset-y-0 w-px"
+              style={{ left: `${column.left}%`, opacity: column.opacity }}
+            />
+          ))}
+        </div>
 
         {/* Desktop uses a fixed top anchor plus responsive growth so ultra-wide monitors keep the same visual placement instead of dropping the loop lower. */}
         <div className="absolute left-1/2 top-1/2 flex -translate-x-1/2 -translate-y-1/2 justify-center md:top-[clamp(14rem,22vh,17rem)] md:-translate-y-0">
