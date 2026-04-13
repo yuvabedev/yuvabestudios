@@ -71,10 +71,6 @@ export function StudioHeader({ navigationItems }: StudioHeaderProps) {
   const headerBorderAlpha = useTransform(headerProgress, [0, 1], [0.56, 0.8]);
   const headerShadow = useMotionTemplate`0 ${headerShadowY}px ${headerShadowBlur}px rgba(15, 23, 42, ${headerShadowAlpha})`;
   const headerBorderColor = useMotionTemplate`rgba(255, 255, 255, ${headerBorderAlpha})`;
-  // Keep the AI-first DNA link out of the live nav for now without removing it from the shared content source.
-  const visibleNavigationItems = navigationItems.filter(
-    (item) => item.label !== "AI-first DNA",
-  );
 
   // Lock page scroll and flag the shell while the overlay menu is open so the background can blur and scale.
   useEffect(() => {
@@ -307,7 +303,7 @@ export function StudioHeader({ navigationItems }: StudioHeaderProps) {
                   animate="open"
                   exit="closed"
                 >
-                  {visibleNavigationItems.map((item) => (
+                  {navigationItems.map((item) => (
                     <motion.div key={item.label} variants={menuItemVariants}>
                       {renderNavigationItem(
                         item,
@@ -367,7 +363,7 @@ export function StudioHeader({ navigationItems }: StudioHeaderProps) {
 
               {/* Desktop navigation - right side */}
               <nav className="hidden items-center gap-8 lg:flex">
-                {visibleNavigationItems.map((item) =>
+                {navigationItems.map((item) =>
                   renderNavigationItem(
                     item,
                     "text-label-lg text-slate-900/90 transition-colors hover:text-[var(--purple-500)]",

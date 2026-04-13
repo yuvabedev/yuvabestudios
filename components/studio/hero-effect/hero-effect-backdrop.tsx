@@ -52,12 +52,12 @@ const heroGridWaveColumns = [
   { left: 18, opacity: 0.36 },
   { left: 31, opacity: 0.4 },
   { left: 46, opacity: 0.46 },
-  { left: 58, opacity: 0.54 },
-  { left: 67, opacity: 0.64 },
+  { left: 58, opacity: 0.50 },
+  { left: 67, opacity: 0.54 },
   { left: 74, opacity: 0.61 },
-  { left: 79, opacity: 0.7 },
-  { left: 83, opacity: 0.75 },
-  { left: 88, opacity: 0.59 },
+  { left: 79, opacity: 0.6 },
+  { left: 83, opacity: 0.62 },
+  { left: 88, opacity: 0.58 },
   { left: 96, opacity: 0.46 },
 ] as const;
 
