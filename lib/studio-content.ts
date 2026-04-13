@@ -113,6 +113,9 @@ const defaultTestimonialsContent: StudioHomepageTestimonialsContent = {
   ],
 };
 
+const aiWorkflowsNavLabel = "AI Workflows";
+const aiWorkflowsNavHref = "/ai-workflows";
+
 function assertRecord(
   value: unknown,
   label: string,
@@ -167,19 +170,72 @@ function normalizeStringArray(value: unknown, label: string) {
     .filter(Boolean);
 }
 
+function isAiWorkflowsNavItem(label: string, href: string) {
+  const normalizedLabel = label.trim().toLowerCase();
+  const normalizedHref = href.trim().toLowerCase().replace(/\/$/, "");
+
+  return (
+    normalizedLabel === "ai-first dna" ||
+    normalizedLabel === "ai workflows" ||
+    normalizedHref === "#ai-first-dna" ||
+    normalizedHref === "/#ai-first-dna" ||
+    normalizedHref === aiWorkflowsNavHref
+  );
+}
+
+function buildStudioNavItem(
+  label: string,
+  href: string,
+): StudioHomepageNavItem | null {
+  const nextLabel = label.trim();
+  const nextHref = normalizeStudioNavHref(href);
+
+  if (!nextLabel || !nextHref) {
+    return null;
+  }
+
+  if (isAiWorkflowsNavItem(nextLabel, nextHref)) {
+    return {
+      label: aiWorkflowsNavLabel,
+      href: aiWorkflowsNavHref,
+    };
+  }
+
+  return {
+    label: nextLabel,
+    href: nextHref,
+  };
+}
+
 function parseNavItem(value: unknown, label: string): StudioHomepageNavItem {
   assertRecord(value, label);
 
-  return {
-    label: expectString(value.label, `${label}.label`).trim(),
-    href: normalizeStudioNavHref(expectString(value.href, `${label}.href`)),
-  };
+  const navItem = buildStudioNavItem(
+    expectString(value.label, `${label}.label`),
+    expectString(value.href, `${label}.href`),
+  );
+
+  if (!navItem) {
+    throw new Error(`${label} is missing a valid navigation label or href.`);
+  }
+
+  return navItem;
 }
 
 // Keep legacy About nav payloads from falling back to homepage hash links in production.
 function normalizeStudioNavHref(href: string) {
   const trimmedHref = href.trim();
   const normalizedHref = trimmedHref.toLowerCase();
+
+  if (
+    normalizedHref === "ai-workflows" ||
+    normalizedHref === "./ai-workflows" ||
+    normalizedHref === "/ai-workflows/" ||
+    normalizedHref === "#ai-first-dna" ||
+    normalizedHref === "/#ai-first-dna"
+  ) {
+    return aiWorkflowsNavHref;
+  }
 
   if (
     normalizedHref === "about" ||
@@ -205,19 +261,10 @@ function normalizeNavItem(
 ): StudioHomepageNavItem | null {
   assertRecord(value, label);
 
-  const nextLabel = expectString(value.label, `${label}.label`).trim();
-  const nextHref = normalizeStudioNavHref(
+  return buildStudioNavItem(
+    expectString(value.label, `${label}.label`),
     expectString(value.href, `${label}.href`),
   );
-
-  if (!nextLabel || !nextHref) {
-    return null;
-  }
-
-  return {
-    label: nextLabel,
-    href: nextHref,
-  };
 }
 
 function parseHeroContent(
@@ -492,6 +539,12 @@ function mergeHomepageContentWithFallback(
   remoteContent: StudioHomepageContent,
   fallbackContent: StudioHomepageContent,
 ): StudioHomepageContent {
+  const hasAiWorkflowsNavItem = remoteContent.navigationItems.some(
+    (item) => item.href === aiWorkflowsNavHref,
+  );
+  const fallbackAiWorkflowsNavItems = fallbackContent.navigationItems.filter(
+    (item) => item.href === aiWorkflowsNavHref,
+  );
   const shouldUseFallbackTestimonials =
     remoteContent.testimonials.items.length <
     fallbackContent.testimonials.items.length;
@@ -508,6 +561,12 @@ function mergeHomepageContentWithFallback(
 
   return {
     ...remoteContent,
+    navigationItems: hasAiWorkflowsNavItem
+      ? remoteContent.navigationItems
+      : [
+          ...remoteContent.navigationItems,
+          ...fallbackAiWorkflowsNavItems,
+        ],
     afterServicesCta: shouldUseFallbackAfterServicesCta
       ? fallbackContent.afterServicesCta
       : remoteContent.afterServicesCta,
