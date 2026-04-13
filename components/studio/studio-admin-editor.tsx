@@ -6,10 +6,17 @@ import { useFormStatus } from "react-dom";
 
 import {
   saveAboutContentAction,
+  saveAiWorkflowsContentAction,
   saveCaseStudyContentAction,
   saveHomepageContentAction,
 } from "@/app/studio-admin/actions";
 import type { StudioAboutPageContent } from "@/components/studio/studio-about-content";
+import type {
+  StudioAiWorkflowsContent,
+  StudioAiWorkflowsDisciplineItem,
+  StudioAiWorkflowsGuardrailItem,
+  StudioAiWorkflowsStageContent,
+} from "@/components/studio/studio-ai-workflows-content";
 import type {
   StudioCaseStudyGalleryRow,
   StudioCaseStudyProofPoint,
@@ -28,9 +35,10 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 type StudioAdminEditorProps = {
   homepageContent: StudioHomepageContent;
   aboutContent: StudioAboutPageContent;
+  aiWorkflowsContent: StudioAiWorkflowsContent;
   caseStudies: StudioEditableCaseStudy[];
   initialCaseStudyId?: string;
-  initialTab: "homepage" | "about" | "case-studies";
+  initialTab: "homepage" | "about" | "ai-workflows" | "case-studies";
   savedState?: string;
 };
 
@@ -546,6 +554,329 @@ function AboutProofEntriesEditor({
   );
 }
 
+function AiWorkflowStagesEditor({
+  items,
+  onChange,
+}: {
+  items: StudioAiWorkflowsStageContent[];
+  onChange: (items: StudioAiWorkflowsStageContent[]) => void;
+}) {
+  return (
+    <div className="space-y-4">
+      <div className="flex items-center justify-between gap-3">
+        <p className="text-label-sm uppercase tracking-[0.16em] text-[var(--color-text-tertiary)]">
+          Workflow stages
+        </p>
+        <Button
+          type="button"
+          variant="secondary"
+          size="sm"
+          onClick={() =>
+            onChange([
+              ...items,
+              {
+                step: "",
+                title: "",
+                eyebrow: "",
+                description: "",
+                bullets: [],
+                iconKey: "",
+                tone: "tintLavender",
+              },
+            ])
+          }
+        >
+          Add stage
+        </Button>
+      </div>
+      {items.map((item, index) => (
+        <Card key={`ai-workflow-stage-${index}`}>
+          <CardHeader className="flex flex-row items-center justify-between gap-3">
+            <CardTitle className="text-body-lg">Stage {index + 1}</CardTitle>
+            <Button
+              type="button"
+              variant="secondary"
+              size="sm"
+              onClick={() => onChange(removeAt(items, index))}
+            >
+              Remove
+            </Button>
+          </CardHeader>
+          <CardContent className="space-y-4 pb-6">
+            <div className="grid gap-4 lg:grid-cols-3">
+              <Field label="Step">
+                <input
+                  className={formControlClassName}
+                  value={item.step}
+                  onChange={(event) =>
+                    onChange(
+                      replaceAt(items, index, { ...item, step: event.target.value }),
+                    )
+                  }
+                />
+              </Field>
+              <Field label="Title">
+                <input
+                  className={formControlClassName}
+                  value={item.title}
+                  onChange={(event) =>
+                    onChange(
+                      replaceAt(items, index, { ...item, title: event.target.value }),
+                    )
+                  }
+                />
+              </Field>
+              <Field label="Eyebrow">
+                <input
+                  className={formControlClassName}
+                  value={item.eyebrow}
+                  onChange={(event) =>
+                    onChange(
+                      replaceAt(items, index, {
+                        ...item,
+                        eyebrow: event.target.value,
+                      }),
+                    )
+                  }
+                />
+              </Field>
+            </div>
+            <div className="grid gap-4 lg:grid-cols-2">
+              <Field label="Icon key">
+                <input
+                  className={formControlClassName}
+                  value={item.iconKey}
+                  onChange={(event) =>
+                    onChange(
+                      replaceAt(items, index, {
+                        ...item,
+                        iconKey: event.target.value,
+                      }),
+                    )
+                  }
+                />
+              </Field>
+              <Field label="Tone">
+                <input
+                  className={formControlClassName}
+                  value={item.tone}
+                  onChange={(event) =>
+                    onChange(
+                      replaceAt(items, index, {
+                        ...item,
+                        tone: event.target.value as StudioAiWorkflowsStageContent["tone"],
+                      }),
+                    )
+                  }
+                />
+              </Field>
+            </div>
+            <Field label="Description">
+              <textarea
+                className={textareaClassName}
+                value={item.description}
+                onChange={(event) =>
+                  onChange(
+                    replaceAt(items, index, {
+                      ...item,
+                      description: event.target.value,
+                    }),
+                  )
+                }
+              />
+            </Field>
+            <StringListEditor
+              label="Bullets"
+              items={item.bullets}
+              addLabel="Add bullet"
+              onChange={(bullets) =>
+                onChange(replaceAt(items, index, { ...item, bullets }))
+              }
+            />
+          </CardContent>
+        </Card>
+      ))}
+    </div>
+  );
+}
+
+function AiDisciplineItemsEditor({
+  items,
+  onChange,
+}: {
+  items: StudioAiWorkflowsDisciplineItem[];
+  onChange: (items: StudioAiWorkflowsDisciplineItem[]) => void;
+}) {
+  return (
+    <div className="space-y-4">
+      <div className="flex items-center justify-between gap-3">
+        <p className="text-label-sm uppercase tracking-[0.16em] text-[var(--color-text-tertiary)]">
+          Discipline cards
+        </p>
+        <Button
+          type="button"
+          variant="secondary"
+          size="sm"
+          onClick={() =>
+            onChange([
+              ...items,
+              { title: "", description: "", bullets: [], iconKey: "" },
+            ])
+          }
+        >
+          Add discipline
+        </Button>
+      </div>
+      {items.map((item, index) => (
+        <Card key={`ai-discipline-${index}`}>
+          <CardHeader className="flex flex-row items-center justify-between gap-3">
+            <CardTitle className="text-body-lg">Discipline {index + 1}</CardTitle>
+            <Button
+              type="button"
+              variant="secondary"
+              size="sm"
+              onClick={() => onChange(removeAt(items, index))}
+            >
+              Remove
+            </Button>
+          </CardHeader>
+          <CardContent className="space-y-4 pb-6">
+            <div className="grid gap-4 lg:grid-cols-2">
+              <Field label="Title">
+                <input
+                  className={formControlClassName}
+                  value={item.title}
+                  onChange={(event) =>
+                    onChange(
+                      replaceAt(items, index, { ...item, title: event.target.value }),
+                    )
+                  }
+                />
+              </Field>
+              <Field label="Icon key">
+                <input
+                  className={formControlClassName}
+                  value={item.iconKey}
+                  onChange={(event) =>
+                    onChange(
+                      replaceAt(items, index, { ...item, iconKey: event.target.value }),
+                    )
+                  }
+                />
+              </Field>
+            </div>
+            <Field label="Description">
+              <textarea
+                className={textareaClassName}
+                value={item.description}
+                onChange={(event) =>
+                  onChange(
+                    replaceAt(items, index, {
+                      ...item,
+                      description: event.target.value,
+                    }),
+                  )
+                }
+              />
+            </Field>
+            <StringListEditor
+              label="Bullets"
+              items={item.bullets}
+              addLabel="Add bullet"
+              onChange={(bullets) =>
+                onChange(replaceAt(items, index, { ...item, bullets }))
+              }
+            />
+          </CardContent>
+        </Card>
+      ))}
+    </div>
+  );
+}
+
+function AiGuardrailItemsEditor({
+  items,
+  onChange,
+}: {
+  items: StudioAiWorkflowsGuardrailItem[];
+  onChange: (items: StudioAiWorkflowsGuardrailItem[]) => void;
+}) {
+  return (
+    <div className="space-y-4">
+      <div className="flex items-center justify-between gap-3">
+        <p className="text-label-sm uppercase tracking-[0.16em] text-[var(--color-text-tertiary)]">
+          Guardrails
+        </p>
+        <Button
+          type="button"
+          variant="secondary"
+          size="sm"
+          onClick={() =>
+            onChange([...items, { title: "", description: "", iconKey: "" }])
+          }
+        >
+          Add guardrail
+        </Button>
+      </div>
+      {items.map((item, index) => (
+        <Card key={`ai-guardrail-${index}`}>
+          <CardHeader className="flex flex-row items-center justify-between gap-3">
+            <CardTitle className="text-body-lg">Guardrail {index + 1}</CardTitle>
+            <Button
+              type="button"
+              variant="secondary"
+              size="sm"
+              onClick={() => onChange(removeAt(items, index))}
+            >
+              Remove
+            </Button>
+          </CardHeader>
+          <CardContent className="space-y-4 pb-6">
+            <div className="grid gap-4 lg:grid-cols-2">
+              <Field label="Title">
+                <input
+                  className={formControlClassName}
+                  value={item.title}
+                  onChange={(event) =>
+                    onChange(
+                      replaceAt(items, index, { ...item, title: event.target.value }),
+                    )
+                  }
+                />
+              </Field>
+              <Field label="Icon key">
+                <input
+                  className={formControlClassName}
+                  value={item.iconKey}
+                  onChange={(event) =>
+                    onChange(
+                      replaceAt(items, index, { ...item, iconKey: event.target.value }),
+                    )
+                  }
+                />
+              </Field>
+            </div>
+            <Field label="Description">
+              <textarea
+                className={textareaClassName}
+                value={item.description}
+                onChange={(event) =>
+                  onChange(
+                    replaceAt(items, index, {
+                      ...item,
+                      description: event.target.value,
+                    }),
+                  )
+                }
+              />
+            </Field>
+          </CardContent>
+        </Card>
+      ))}
+    </div>
+  );
+}
+
 function SectionsEditor({
   items,
   onChange,
@@ -773,6 +1104,7 @@ function GalleryRowsEditor({
 export function StudioAdminEditor({
   homepageContent,
   aboutContent,
+  aiWorkflowsContent,
   caseStudies,
   initialCaseStudyId,
   initialTab,
@@ -781,6 +1113,7 @@ export function StudioAdminEditor({
   const [activeTab, setActiveTab] = useState(initialTab);
   const [homepageDraft, setHomepageDraft] = useState(homepageContent);
   const [aboutDraft, setAboutDraft] = useState(aboutContent);
+  const [aiWorkflowsDraft, setAiWorkflowsDraft] = useState(aiWorkflowsContent);
   const [caseStudyDrafts, setCaseStudyDrafts] = useState(caseStudies);
   const [selectedCaseStudyId, setSelectedCaseStudyId] = useState(
     initialCaseStudyId ?? caseStudies[0]?.id ?? "",
@@ -811,6 +1144,8 @@ export function StudioAdminEditor({
             ? "Homepage content saved. Refresh the homepage to review it."
             : savedState === "about"
               ? "About content saved. Refresh the about page to review it."
+              : savedState === "ai-workflows"
+                ? "AI Workflows content saved. Refresh the AI Workflows page to review it."
             : "Case study saved. Refresh the homepage or the case-study route to review it."}
         </div>
       ) : null}
@@ -818,13 +1153,14 @@ export function StudioAdminEditor({
       <Tabs
         value={activeTab}
         onValueChange={(value) =>
-          setActiveTab(value as "homepage" | "about" | "case-studies")
+          setActiveTab(value as "homepage" | "about" | "ai-workflows" | "case-studies")
         }
         className="space-y-6"
       >
         <TabsList variant="line">
           <TabsTrigger value="homepage">Homepage</TabsTrigger>
           <TabsTrigger value="about">About</TabsTrigger>
+          <TabsTrigger value="ai-workflows">AI Workflows</TabsTrigger>
           <TabsTrigger value="case-studies">Case studies</TabsTrigger>
         </TabsList>
 
@@ -1160,6 +1496,376 @@ export function StudioAdminEditor({
             <StickySaveBar
               label="Save about content"
               previewHref="/about"
+            />
+          </form>
+        </TabsContent>
+
+        <TabsContent value="ai-workflows">
+          <form action={saveAiWorkflowsContentAction} className="space-y-6">
+            <input
+              type="hidden"
+              name="payload"
+              value={JSON.stringify(aiWorkflowsDraft)}
+              readOnly
+            />
+            <Card>
+              <CardHeader>
+                <CardTitle>AI Workflows content</CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-6 pb-6">
+                <Card>
+                  <CardHeader>
+                    <CardTitle className="text-body-lg">Hero</CardTitle>
+                  </CardHeader>
+                  <CardContent className="space-y-4 pb-6">
+                    <div className="grid gap-4 lg:grid-cols-3">
+                      <Field label="Eyebrow">
+                        <input
+                          className={formControlClassName}
+                          value={aiWorkflowsDraft.hero.eyebrow}
+                          onChange={(event) =>
+                            setAiWorkflowsDraft({
+                              ...aiWorkflowsDraft,
+                              hero: {
+                                ...aiWorkflowsDraft.hero,
+                                eyebrow: event.target.value,
+                              },
+                            })
+                          }
+                        />
+                      </Field>
+                      <Field label="Title line one">
+                        <input
+                          className={formControlClassName}
+                          value={aiWorkflowsDraft.hero.titleLineOne}
+                          onChange={(event) =>
+                            setAiWorkflowsDraft({
+                              ...aiWorkflowsDraft,
+                              hero: {
+                                ...aiWorkflowsDraft.hero,
+                                titleLineOne: event.target.value,
+                              },
+                            })
+                          }
+                        />
+                      </Field>
+                      <Field label="Title line two">
+                        <input
+                          className={formControlClassName}
+                          value={aiWorkflowsDraft.hero.titleLineTwo}
+                          onChange={(event) =>
+                            setAiWorkflowsDraft({
+                              ...aiWorkflowsDraft,
+                              hero: {
+                                ...aiWorkflowsDraft.hero,
+                                titleLineTwo: event.target.value,
+                              },
+                            })
+                          }
+                        />
+                      </Field>
+                    </div>
+                    <Field label="Description">
+                      <textarea
+                        className={textareaClassName}
+                        value={aiWorkflowsDraft.hero.description}
+                        onChange={(event) =>
+                          setAiWorkflowsDraft({
+                            ...aiWorkflowsDraft,
+                            hero: {
+                              ...aiWorkflowsDraft.hero,
+                              description: event.target.value,
+                            },
+                          })
+                        }
+                      />
+                    </Field>
+                  </CardContent>
+                </Card>
+
+                <Card>
+                  <CardHeader>
+                    <CardTitle className="text-body-lg">Workflow section</CardTitle>
+                  </CardHeader>
+                  <CardContent className="space-y-4 pb-6">
+                    <div className="grid gap-4 lg:grid-cols-2">
+                      <Field label="Eyebrow">
+                        <input
+                          className={formControlClassName}
+                          value={aiWorkflowsDraft.workflow.eyebrow}
+                          onChange={(event) =>
+                            setAiWorkflowsDraft({
+                              ...aiWorkflowsDraft,
+                              workflow: {
+                                ...aiWorkflowsDraft.workflow,
+                                eyebrow: event.target.value,
+                              },
+                            })
+                          }
+                        />
+                      </Field>
+                      <Field label="Title">
+                        <input
+                          className={formControlClassName}
+                          value={aiWorkflowsDraft.workflow.title}
+                          onChange={(event) =>
+                            setAiWorkflowsDraft({
+                              ...aiWorkflowsDraft,
+                              workflow: {
+                                ...aiWorkflowsDraft.workflow,
+                                title: event.target.value,
+                              },
+                            })
+                          }
+                        />
+                      </Field>
+                    </div>
+                    <Field label="Description">
+                      <textarea
+                        className={textareaClassName}
+                        value={aiWorkflowsDraft.workflow.description}
+                        onChange={(event) =>
+                          setAiWorkflowsDraft({
+                            ...aiWorkflowsDraft,
+                            workflow: {
+                              ...aiWorkflowsDraft.workflow,
+                              description: event.target.value,
+                            },
+                          })
+                        }
+                      />
+                    </Field>
+                    <AiWorkflowStagesEditor
+                      items={aiWorkflowsDraft.workflow.stages}
+                      onChange={(stages) =>
+                        setAiWorkflowsDraft({
+                          ...aiWorkflowsDraft,
+                          workflow: { ...aiWorkflowsDraft.workflow, stages },
+                        })
+                      }
+                    />
+                  </CardContent>
+                </Card>
+
+                <Card>
+                  <CardHeader>
+                    <CardTitle className="text-body-lg">Disciplines section</CardTitle>
+                  </CardHeader>
+                  <CardContent className="space-y-4 pb-6">
+                    <div className="grid gap-4 lg:grid-cols-2">
+                      <Field label="Eyebrow">
+                        <input
+                          className={formControlClassName}
+                          value={aiWorkflowsDraft.disciplines.eyebrow}
+                          onChange={(event) =>
+                            setAiWorkflowsDraft({
+                              ...aiWorkflowsDraft,
+                              disciplines: {
+                                ...aiWorkflowsDraft.disciplines,
+                                eyebrow: event.target.value,
+                              },
+                            })
+                          }
+                        />
+                      </Field>
+                      <Field label="Title">
+                        <input
+                          className={formControlClassName}
+                          value={aiWorkflowsDraft.disciplines.title}
+                          onChange={(event) =>
+                            setAiWorkflowsDraft({
+                              ...aiWorkflowsDraft,
+                              disciplines: {
+                                ...aiWorkflowsDraft.disciplines,
+                                title: event.target.value,
+                              },
+                            })
+                          }
+                        />
+                      </Field>
+                    </div>
+                    <Field label="Description">
+                      <textarea
+                        className={textareaClassName}
+                        value={aiWorkflowsDraft.disciplines.description}
+                        onChange={(event) =>
+                          setAiWorkflowsDraft({
+                            ...aiWorkflowsDraft,
+                            disciplines: {
+                              ...aiWorkflowsDraft.disciplines,
+                              description: event.target.value,
+                            },
+                          })
+                        }
+                      />
+                    </Field>
+                    <AiDisciplineItemsEditor
+                      items={aiWorkflowsDraft.disciplines.items}
+                      onChange={(items) =>
+                        setAiWorkflowsDraft({
+                          ...aiWorkflowsDraft,
+                          disciplines: { ...aiWorkflowsDraft.disciplines, items },
+                        })
+                      }
+                    />
+                  </CardContent>
+                </Card>
+
+                <Card>
+                  <CardHeader>
+                    <CardTitle className="text-body-lg">Guardrails section</CardTitle>
+                  </CardHeader>
+                  <CardContent className="space-y-4 pb-6">
+                    <div className="grid gap-4 lg:grid-cols-2">
+                      <Field label="Eyebrow">
+                        <input
+                          className={formControlClassName}
+                          value={aiWorkflowsDraft.guardrails.eyebrow}
+                          onChange={(event) =>
+                            setAiWorkflowsDraft({
+                              ...aiWorkflowsDraft,
+                              guardrails: {
+                                ...aiWorkflowsDraft.guardrails,
+                                eyebrow: event.target.value,
+                              },
+                            })
+                          }
+                        />
+                      </Field>
+                      <Field label="Title">
+                        <input
+                          className={formControlClassName}
+                          value={aiWorkflowsDraft.guardrails.title}
+                          onChange={(event) =>
+                            setAiWorkflowsDraft({
+                              ...aiWorkflowsDraft,
+                              guardrails: {
+                                ...aiWorkflowsDraft.guardrails,
+                                title: event.target.value,
+                              },
+                            })
+                          }
+                        />
+                      </Field>
+                    </div>
+                    <Field label="Description">
+                      <textarea
+                        className={textareaClassName}
+                        value={aiWorkflowsDraft.guardrails.description}
+                        onChange={(event) =>
+                          setAiWorkflowsDraft({
+                            ...aiWorkflowsDraft,
+                            guardrails: {
+                              ...aiWorkflowsDraft.guardrails,
+                              description: event.target.value,
+                            },
+                          })
+                        }
+                      />
+                    </Field>
+                    <AiGuardrailItemsEditor
+                      items={aiWorkflowsDraft.guardrails.items}
+                      onChange={(items) =>
+                        setAiWorkflowsDraft({
+                          ...aiWorkflowsDraft,
+                          guardrails: { ...aiWorkflowsDraft.guardrails, items },
+                        })
+                      }
+                    />
+                  </CardContent>
+                </Card>
+
+                <Card>
+                  <CardHeader>
+                    <CardTitle className="text-body-lg">Final CTA</CardTitle>
+                  </CardHeader>
+                  <CardContent className="space-y-4 pb-6">
+                    <div className="grid gap-4 lg:grid-cols-2">
+                      <Field label="Eyebrow">
+                        <input
+                          className={formControlClassName}
+                          value={aiWorkflowsDraft.cta.eyebrow}
+                          onChange={(event) =>
+                            setAiWorkflowsDraft({
+                              ...aiWorkflowsDraft,
+                              cta: {
+                                ...aiWorkflowsDraft.cta,
+                                eyebrow: event.target.value,
+                              },
+                            })
+                          }
+                        />
+                      </Field>
+                      <Field label="Title">
+                        <input
+                          className={formControlClassName}
+                          value={aiWorkflowsDraft.cta.title}
+                          onChange={(event) =>
+                            setAiWorkflowsDraft({
+                              ...aiWorkflowsDraft,
+                              cta: {
+                                ...aiWorkflowsDraft.cta,
+                                title: event.target.value,
+                              },
+                            })
+                          }
+                        />
+                      </Field>
+                    </div>
+                    <Field label="Description">
+                      <textarea
+                        className={textareaClassName}
+                        value={aiWorkflowsDraft.cta.description}
+                        onChange={(event) =>
+                          setAiWorkflowsDraft({
+                            ...aiWorkflowsDraft,
+                            cta: {
+                              ...aiWorkflowsDraft.cta,
+                              description: event.target.value,
+                            },
+                          })
+                        }
+                      />
+                    </Field>
+                    <div className="grid gap-4 lg:grid-cols-2">
+                      <Field label="Primary CTA label">
+                        <input
+                          className={formControlClassName}
+                          value={aiWorkflowsDraft.cta.primaryCtaLabel}
+                          onChange={(event) =>
+                            setAiWorkflowsDraft({
+                              ...aiWorkflowsDraft,
+                              cta: {
+                                ...aiWorkflowsDraft.cta,
+                                primaryCtaLabel: event.target.value,
+                              },
+                            })
+                          }
+                        />
+                      </Field>
+                      <Field label="Primary CTA href">
+                        <input
+                          className={formControlClassName}
+                          value={aiWorkflowsDraft.cta.primaryCtaHref}
+                          onChange={(event) =>
+                            setAiWorkflowsDraft({
+                              ...aiWorkflowsDraft,
+                              cta: {
+                                ...aiWorkflowsDraft.cta,
+                                primaryCtaHref: event.target.value,
+                              },
+                            })
+                          }
+                        />
+                      </Field>
+                    </div>
+                  </CardContent>
+                </Card>
+              </CardContent>
+            </Card>
+            <StickySaveBar
+              label="Save AI Workflows content"
+              previewHref="/ai-workflows"
             />
           </form>
         </TabsContent>

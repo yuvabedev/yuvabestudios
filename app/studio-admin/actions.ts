@@ -5,9 +5,11 @@ import { redirect } from "next/navigation";
 
 import {
   parseStudioAboutPageContentInput,
+  parseStudioAiWorkflowsContentInput,
   parseStudioEditableCaseStudyInput,
   parseStudioHomepageContentInput,
   saveStudioAboutPageContent,
+  saveStudioAiWorkflowsContent,
   saveStudioCaseStudy,
   saveStudioHomepageContent,
 } from "@/lib/studio-content";
@@ -40,6 +42,17 @@ export async function saveAboutContentAction(formData: FormData) {
   revalidatePath("/about");
   revalidatePath("/studio-admin");
   redirect("/studio-admin?tab=about&saved=about");
+}
+
+export async function saveAiWorkflowsContentAction(formData: FormData) {
+  const payload = expectString(formData.get("payload"), "AI workflows payload");
+  const parsedPayload = parseStudioAiWorkflowsContentInput(JSON.parse(payload));
+
+  await saveStudioAiWorkflowsContent(parsedPayload, { source: "supabase" });
+
+  revalidatePath("/ai-workflows");
+  revalidatePath("/studio-admin");
+  redirect("/studio-admin?tab=ai-workflows&saved=ai-workflows");
 }
 
 export async function saveCaseStudyContentAction(formData: FormData) {

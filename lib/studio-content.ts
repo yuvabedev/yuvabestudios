@@ -36,13 +36,30 @@ import type {
   StudioAboutValuesContent,
   StudioAboutWorkflowContent,
 } from "@/components/studio/studio-about-content";
+import type {
+  StudioAiWorkflowsContent,
+  StudioAiWorkflowsCtaContent,
+  StudioAiWorkflowsDisciplineItem,
+  StudioAiWorkflowsGuardrailItem,
+  StudioAiWorkflowsHeroContent,
+  StudioAiWorkflowsStageContent,
+} from "@/components/studio/studio-ai-workflows-content";
 import { getSupabaseAdminClient } from "@/lib/supabase-admin";
 
 const dataDirectory = path.join(process.cwd(), "components", "studio", "data");
 const caseStudiesFilePath = path.join(dataDirectory, "studio-case-studies.json");
 const homepageFilePath = path.join(dataDirectory, "studio-homepage-content.json");
 const aboutFilePath = path.join(dataDirectory, "studio-about-content.json");
+const aiWorkflowsFilePath = path.join(
+  dataDirectory,
+  "studio-ai-workflows-content.json",
+);
 const contentDocumentsTable = "content_documents";
+type StudioContentDocumentKey =
+  | "homepage"
+  | "case_studies"
+  | "about"
+  | "ai_workflows";
 type StudioContentSource = "auto" | "local" | "supabase";
 type StudioContentOptions = {
   source?: StudioContentSource;
@@ -955,6 +972,341 @@ export function parseStudioAboutPageContentInput(
   };
 }
 
+function parseAiWorkflowsHeroContent(
+  value: unknown,
+  label: string,
+): StudioAiWorkflowsHeroContent {
+  assertRecord(value, label);
+
+  return {
+    eyebrow: expectString(value.eyebrow, `${label}.eyebrow`),
+    titleLineOne: expectString(value.titleLineOne, `${label}.titleLineOne`),
+    titleLineTwo: expectString(value.titleLineTwo, `${label}.titleLineTwo`),
+    description: expectString(value.description, `${label}.description`),
+  };
+}
+
+function normalizeAiWorkflowsHeroContent(
+  value: unknown,
+  label: string,
+): StudioAiWorkflowsHeroContent {
+  const parsed = parseAiWorkflowsHeroContent(value, label);
+
+  return {
+    eyebrow: parsed.eyebrow.trim(),
+    titleLineOne: parsed.titleLineOne.trim(),
+    titleLineTwo: parsed.titleLineTwo.trim(),
+    description: parsed.description.trim(),
+  };
+}
+
+function parseAiWorkflowsStageContent(
+  value: unknown,
+  label: string,
+): StudioAiWorkflowsStageContent {
+  assertRecord(value, label);
+
+  return {
+    step: expectString(value.step, `${label}.step`),
+    title: expectString(value.title, `${label}.title`),
+    eyebrow: expectString(value.eyebrow, `${label}.eyebrow`),
+    description: expectString(value.description, `${label}.description`),
+    bullets: expectStringArray(value.bullets, `${label}.bullets`),
+    iconKey: expectString(value.iconKey, `${label}.iconKey`),
+    tone: expectString(value.tone, `${label}.tone`) as StudioAiWorkflowsStageContent["tone"],
+  };
+}
+
+function normalizeAiWorkflowsStageContent(
+  value: unknown,
+  label: string,
+): StudioAiWorkflowsStageContent | null {
+  const parsed = parseAiWorkflowsStageContent(value, label);
+  const step = parsed.step.trim();
+  const title = parsed.title.trim();
+  const eyebrow = parsed.eyebrow.trim();
+  const description = parsed.description.trim();
+  const bullets = parsed.bullets.map((bullet) => bullet.trim()).filter(Boolean);
+
+  if (!step && !title && !eyebrow && !description && bullets.length === 0) {
+    return null;
+  }
+
+  return {
+    step,
+    title,
+    eyebrow,
+    description,
+    bullets,
+    iconKey: parsed.iconKey.trim(),
+    tone: parsed.tone,
+  };
+}
+
+function parseAiWorkflowsDisciplineItem(
+  value: unknown,
+  label: string,
+): StudioAiWorkflowsDisciplineItem {
+  assertRecord(value, label);
+
+  return {
+    title: expectString(value.title, `${label}.title`),
+    description: expectString(value.description, `${label}.description`),
+    bullets: expectStringArray(value.bullets, `${label}.bullets`),
+    iconKey: expectString(value.iconKey, `${label}.iconKey`),
+  };
+}
+
+function normalizeAiWorkflowsDisciplineItem(
+  value: unknown,
+  label: string,
+): StudioAiWorkflowsDisciplineItem | null {
+  const parsed = parseAiWorkflowsDisciplineItem(value, label);
+  const title = parsed.title.trim();
+  const description = parsed.description.trim();
+  const bullets = parsed.bullets.map((bullet) => bullet.trim()).filter(Boolean);
+
+  if (!title && !description && bullets.length === 0) {
+    return null;
+  }
+
+  return {
+    title,
+    description,
+    bullets,
+    iconKey: parsed.iconKey.trim(),
+  };
+}
+
+function parseAiWorkflowsGuardrailItem(
+  value: unknown,
+  label: string,
+): StudioAiWorkflowsGuardrailItem {
+  assertRecord(value, label);
+
+  return {
+    title: expectString(value.title, `${label}.title`),
+    description: expectString(value.description, `${label}.description`),
+    iconKey: expectString(value.iconKey, `${label}.iconKey`),
+  };
+}
+
+function normalizeAiWorkflowsGuardrailItem(
+  value: unknown,
+  label: string,
+): StudioAiWorkflowsGuardrailItem | null {
+  const parsed = parseAiWorkflowsGuardrailItem(value, label);
+  const title = parsed.title.trim();
+  const description = parsed.description.trim();
+
+  if (!title && !description) {
+    return null;
+  }
+
+  return {
+    title,
+    description,
+    iconKey: parsed.iconKey.trim(),
+  };
+}
+
+function parseAiWorkflowsCtaContent(
+  value: unknown,
+  label: string,
+): StudioAiWorkflowsCtaContent {
+  assertRecord(value, label);
+
+  return {
+    eyebrow: expectString(value.eyebrow, `${label}.eyebrow`),
+    title: expectString(value.title, `${label}.title`),
+    description: expectString(value.description, `${label}.description`),
+    primaryCtaLabel: expectString(
+      value.primaryCtaLabel,
+      `${label}.primaryCtaLabel`,
+    ),
+    primaryCtaHref: expectString(value.primaryCtaHref, `${label}.primaryCtaHref`),
+  };
+}
+
+function normalizeAiWorkflowsCtaContent(
+  value: unknown,
+  label: string,
+): StudioAiWorkflowsCtaContent {
+  const parsed = parseAiWorkflowsCtaContent(value, label);
+
+  return {
+    eyebrow: parsed.eyebrow.trim(),
+    title: parsed.title.trim(),
+    description: parsed.description.trim(),
+    primaryCtaLabel: parsed.primaryCtaLabel.trim(),
+    primaryCtaHref: parsed.primaryCtaHref.trim(),
+  };
+}
+
+function parseAiWorkflowsContent(value: unknown): StudioAiWorkflowsContent {
+  assertRecord(value, "ai workflows content");
+  assertRecord(value.workflow, "ai workflows content.workflow");
+  assertRecord(value.disciplines, "ai workflows content.disciplines");
+  assertRecord(value.guardrails, "ai workflows content.guardrails");
+
+  return {
+    hero: parseAiWorkflowsHeroContent(value.hero, "ai workflows content.hero"),
+    workflow: {
+      eyebrow: expectString(value.workflow.eyebrow, "ai workflows content.workflow.eyebrow"),
+      title: expectString(value.workflow.title, "ai workflows content.workflow.title"),
+      description: expectString(
+        value.workflow.description,
+        "ai workflows content.workflow.description",
+      ),
+      stages: expectArray(value.workflow.stages, "ai workflows content.workflow.stages").map(
+        (stage, index) =>
+          parseAiWorkflowsStageContent(
+            stage,
+            `ai workflows content.workflow.stages[${index}]`,
+          ),
+      ),
+    },
+    disciplines: {
+      eyebrow: expectString(
+        value.disciplines.eyebrow,
+        "ai workflows content.disciplines.eyebrow",
+      ),
+      title: expectString(
+        value.disciplines.title,
+        "ai workflows content.disciplines.title",
+      ),
+      description: expectString(
+        value.disciplines.description,
+        "ai workflows content.disciplines.description",
+      ),
+      items: expectArray(value.disciplines.items, "ai workflows content.disciplines.items").map(
+        (item, index) =>
+          parseAiWorkflowsDisciplineItem(
+            item,
+            `ai workflows content.disciplines.items[${index}]`,
+          ),
+      ),
+    },
+    guardrails: {
+      eyebrow: expectString(
+        value.guardrails.eyebrow,
+        "ai workflows content.guardrails.eyebrow",
+      ),
+      title: expectString(
+        value.guardrails.title,
+        "ai workflows content.guardrails.title",
+      ),
+      description: expectString(
+        value.guardrails.description,
+        "ai workflows content.guardrails.description",
+      ),
+      items: expectArray(value.guardrails.items, "ai workflows content.guardrails.items").map(
+        (item, index) =>
+          parseAiWorkflowsGuardrailItem(
+            item,
+            `ai workflows content.guardrails.items[${index}]`,
+          ),
+      ),
+    },
+    cta: parseAiWorkflowsCtaContent(value.cta, "ai workflows content.cta"),
+  };
+}
+
+export function parseStudioAiWorkflowsContentInput(
+  value: unknown,
+): StudioAiWorkflowsContent {
+  assertRecord(value, "ai workflows content payload");
+  assertRecord(value.workflow, "ai workflows content payload.workflow");
+  assertRecord(value.disciplines, "ai workflows content payload.disciplines");
+  assertRecord(value.guardrails, "ai workflows content payload.guardrails");
+
+  return {
+    hero: normalizeAiWorkflowsHeroContent(value.hero, "ai workflows content payload.hero"),
+    workflow: {
+      eyebrow: expectString(
+        value.workflow.eyebrow,
+        "ai workflows content payload.workflow.eyebrow",
+      ).trim(),
+      title: expectString(
+        value.workflow.title,
+        "ai workflows content payload.workflow.title",
+      ).trim(),
+      description: expectString(
+        value.workflow.description,
+        "ai workflows content payload.workflow.description",
+      ).trim(),
+      stages: expectArray(
+        value.workflow.stages,
+        "ai workflows content payload.workflow.stages",
+      )
+        .map((stage, index) =>
+          normalizeAiWorkflowsStageContent(
+            stage,
+            `ai workflows content payload.workflow.stages[${index}]`,
+          ),
+        )
+        .filter(
+          (stage): stage is StudioAiWorkflowsStageContent => Boolean(stage),
+        ),
+    },
+    disciplines: {
+      eyebrow: expectString(
+        value.disciplines.eyebrow,
+        "ai workflows content payload.disciplines.eyebrow",
+      ).trim(),
+      title: expectString(
+        value.disciplines.title,
+        "ai workflows content payload.disciplines.title",
+      ).trim(),
+      description: expectString(
+        value.disciplines.description,
+        "ai workflows content payload.disciplines.description",
+      ).trim(),
+      items: expectArray(
+        value.disciplines.items,
+        "ai workflows content payload.disciplines.items",
+      )
+        .map((item, index) =>
+          normalizeAiWorkflowsDisciplineItem(
+            item,
+            `ai workflows content payload.disciplines.items[${index}]`,
+          ),
+        )
+        .filter(
+          (item): item is StudioAiWorkflowsDisciplineItem => Boolean(item),
+        ),
+    },
+    guardrails: {
+      eyebrow: expectString(
+        value.guardrails.eyebrow,
+        "ai workflows content payload.guardrails.eyebrow",
+      ).trim(),
+      title: expectString(
+        value.guardrails.title,
+        "ai workflows content payload.guardrails.title",
+      ).trim(),
+      description: expectString(
+        value.guardrails.description,
+        "ai workflows content payload.guardrails.description",
+      ).trim(),
+      items: expectArray(
+        value.guardrails.items,
+        "ai workflows content payload.guardrails.items",
+      )
+        .map((item, index) =>
+          normalizeAiWorkflowsGuardrailItem(
+            item,
+            `ai workflows content payload.guardrails.items[${index}]`,
+          ),
+        )
+        .filter(
+          (item): item is StudioAiWorkflowsGuardrailItem => Boolean(item),
+        ),
+    },
+    cta: normalizeAiWorkflowsCtaContent(value.cta, "ai workflows content payload.cta"),
+  };
+}
+
 function parseProofPoint(
   value: unknown,
   label: string,
@@ -1247,7 +1599,7 @@ async function writeJsonFile(filePath: string, payload: unknown) {
   await fs.writeFile(filePath, `${JSON.stringify(payload, null, 2)}\n`, "utf8");
 }
 
-async function readContentDocument(key: "homepage" | "case_studies" | "about") {
+async function readContentDocument(key: StudioContentDocumentKey) {
   noStore();
 
   const supabase = getSupabaseAdminClient();
@@ -1281,7 +1633,7 @@ function shouldUseLocalContentFallback(error: unknown) {
 }
 
 async function writeContentDocument(
-  key: "homepage" | "case_studies" | "about",
+  key: StudioContentDocumentKey,
   payload: unknown,
 ) {
   const supabase = getSupabaseAdminClient();
@@ -1295,7 +1647,7 @@ async function writeContentDocument(
 }
 
 async function getOrBootstrapDocument<T>(
-  key: "homepage" | "case_studies" | "about",
+  key: StudioContentDocumentKey,
   fallbackFilePath: string,
 ) {
   // Prefer Supabase when it's reachable, but keep the site renderable when local
@@ -1361,7 +1713,7 @@ function getStudioContentSource(): StudioContentSource {
 }
 
 async function getStudioContentDocument<T>(
-  key: "homepage" | "case_studies" | "about",
+  key: StudioContentDocumentKey,
   fallbackFilePath: string,
   options?: StudioContentOptions,
 ) {
@@ -1386,7 +1738,7 @@ async function getStudioContentDocument<T>(
 
 // Saving follows the active content source so local development edits do not disappear after the redirect.
 async function saveStudioContentDocument(
-  key: "homepage" | "case_studies" | "about",
+  key: StudioContentDocumentKey,
   fallbackFilePath: string,
   payload: unknown,
   options?: StudioContentOptions,
@@ -1453,6 +1805,30 @@ export async function saveStudioAboutPageContent(
   options?: StudioContentOptions,
 ) {
   await saveStudioContentDocument("about", aboutFilePath, content, options);
+}
+
+export async function getStudioAiWorkflowsContent(
+  options?: StudioContentOptions,
+) {
+  const rawContent = await getStudioContentDocument<unknown>(
+    "ai_workflows",
+    aiWorkflowsFilePath,
+    options,
+  );
+
+  return parseAiWorkflowsContent(rawContent);
+}
+
+export async function saveStudioAiWorkflowsContent(
+  content: StudioAiWorkflowsContent,
+  options?: StudioContentOptions,
+) {
+  await saveStudioContentDocument(
+    "ai_workflows",
+    aiWorkflowsFilePath,
+    content,
+    options,
+  );
 }
 
 export async function getStudioCaseStudies(options?: StudioContentOptions) {

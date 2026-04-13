@@ -1,0 +1,139 @@
+{
+  "hero": {
+    "eyebrow": "AI Workflows",
+    "titleLineOne": "AI belongs inside every",
+    "titleLineTwo": "product loop.",
+    "description": "AI compresses the path from ambiguity to traction, helping founders frame better bets, test sooner, and decide with more confidence."
+  },
+  "workflow": {
+    "eyebrow": "How We Infuse AI",
+    "title": "AI is woven into the loop, not bolted on afterward.",
+    "description": "The point is not to replace product thinking. It is to move faster through the moments that matter most: framing, prototyping, testing, and deciding.",
+    "stages": [
+      {
+        "step": "01",
+        "title": "Frame",
+        "eyebrow": "Sharper problem selection",
+        "description": "We use AI to compress research, founder context, user signals, and adjacent patterns into a tighter point of view before roadmaps harden.",
+        "bullets": [
+          "Synthesize messy inputs into testable assumptions",
+          "Pressure-test wedges, priorities, and sequencing earlier"
+        ],
+        "iconKey": "compass",
+        "tone": "tintLavender"
+      },
+      {
+        "step": "02",
+        "title": "Prototype",
+        "eyebrow": "Richer thinking, sooner",
+        "description": "Ideas become believable flows, interfaces, and lightweight concepts much faster, so we can learn from something concrete instead of debating abstractions.",
+        "bullets": [
+          "Explore multiple directions before committing design effort",
+          "Get to realistic product artifacts without full production cost"
+        ],
+        "iconKey": "blocks",
+        "tone": "tintWarm"
+      },
+      {
+        "step": "03",
+        "title": "Test",
+        "eyebrow": "Faster evidence loops",
+        "description": "We turn early concepts into sharper experiments, feedback prompts, and validation passes so founders can learn what matters before scaling the build.",
+        "bullets": [
+          "Use prototypes and launch surfaces to gather real signal",
+          "Translate feedback into the next best decision, not more noise"
+        ],
+        "iconKey": "flaskConical",
+        "tone": "tintCyan"
+      },
+      {
+        "step": "04",
+        "title": "Decide",
+        "eyebrow": "Judgment stays central",
+        "description": "AI expands the option space. Our job is to narrow it with product judgment, strategic clarity, and execution discipline so the next move is actually worth making.",
+        "bullets": [
+          "Decide what not to build while the cost of change is still low",
+          "Keep momentum tied to traction, not just output volume"
+        ],
+        "iconKey": "brainCircuit",
+        "tone": "tintGreen"
+      }
+    ]
+  },
+  "disciplines": {
+    "eyebrow": "Across The Stack",
+    "title": "Strategy, design, engineering, and growth stay in one learning system.",
+    "description": "We use AI across the full delivery chain so the product direction, the build, and the go-to-market work reinforce each other instead of drifting apart.",
+    "items": [
+      {
+        "title": "Strategy",
+        "description": "AI helps us move from scattered context to a clearer wedge, faster.",
+        "bullets": [
+          "Research synthesis and founder context mapping",
+          "Assumption ranking and experiment planning",
+          "Sharper positioning and roadmap tradeoff discussions"
+        ],
+        "iconKey": "searchCheck"
+      },
+      {
+        "title": "Design",
+        "description": "We generate, compare, and refine more directions before committing to one.",
+        "bullets": [
+          "Concept exploration with tighter feedback loops",
+          "Higher-fidelity MVP thinking much earlier",
+          "Interfaces built to test clarity, trust, and behavior"
+        ],
+        "iconKey": "sparkles"
+      },
+      {
+        "title": "Engineering",
+        "description": "Build speed increases, but the bigger win is a tighter path from idea to working system.",
+        "bullets": [
+          "AI-assisted implementation, automation, and internal tooling",
+          "Faster iteration on app logic and workflow-heavy products",
+          "More room to focus engineering effort on what matters most"
+        ],
+        "iconKey": "code2"
+      },
+      {
+        "title": "Growth",
+        "description": "Launches become learning systems when messaging, campaigns, and product loops stay connected.",
+        "bullets": [
+          "Landing-page and campaign iteration with less production drag",
+          "Faster copy, content, and experimentation support",
+          "Growth execution tied back to what the product is learning"
+        ],
+        "iconKey": "megaphone"
+      }
+    ]
+  },
+  "guardrails": {
+    "eyebrow": "What Stays Human",
+    "title": "AI raises leverage. Judgment keeps the work valuable.",
+    "description": "We are AI-first by DNA, but that does not mean outsourcing the hard decisions. The strongest outcomes still come from better framing, sharper prioritization, and honest evidence.",
+    "items": [
+      {
+        "title": "Problem framing still needs humans",
+        "description": "AI can expand possibilities quickly, but it cannot decide which founder problem is strategically worth solving next.",
+        "iconKey": "compass"
+      },
+      {
+        "title": "Judgment decides what ships",
+        "description": "We still need taste, prioritization, and context to filter what is coherent, trustworthy, and worth putting in front of users.",
+        "iconKey": "brainCircuit"
+      },
+      {
+        "title": "Evidence beats novelty",
+        "description": "The point is not to sprinkle AI across the workflow. The point is to create better bets, richer MVPs, and faster learning with less waste.",
+        "iconKey": "bot"
+      }
+    ]
+  },
+  "cta": {
+    "eyebrow": "AI-first execution",
+    "title": "If you want AI inside the operating model, not added as theater.",
+    "description": "We help founders use AI to tighten decisions, move faster through product loops, and ship with stronger conviction.",
+    "primaryCtaLabel": "Start Your Project",
+    "primaryCtaHref": "#"
+  }
+}

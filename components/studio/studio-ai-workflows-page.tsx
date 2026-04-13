@@ -11,6 +11,12 @@ import {
   Sparkles,
 } from "lucide-react";
 
+import type {
+  StudioAiWorkflowsContent,
+  StudioAiWorkflowsDisciplineItem,
+  StudioAiWorkflowsGuardrailItem,
+  StudioAiWorkflowsStageContent,
+} from "@/components/studio/studio-ai-workflows-content";
 import type { StudioHomepageNavItem } from "@/components/studio/studio-homepage-content";
 import { StudioAiFirstSection } from "@/components/studio/studio-ai-first-section";
 import { StudioCtaCard } from "@/components/studio/studio-cta-card";
@@ -23,160 +29,21 @@ import { StudioTrustStripGuides } from "@/components/studio/studio-trust-strip";
 import { Badge } from "@/components/ui/badge";
 import { PremiumSurface } from "@/components/ui/premium-surface";
 
-type WorkflowSurfaceTone =
-  | "tintLavender"
-  | "tintWarm"
-  | "tintCyan"
-  | "tintGreen";
-
-type WorkflowStage = {
-  step: string;
-  title: string;
-  eyebrow: string;
-  description: string;
-  bullets: string[];
-  icon: LucideIcon;
-  tone: WorkflowSurfaceTone;
+const aiWorkflowsIconMap: Record<string, LucideIcon> = {
+  blocks: Blocks,
+  bot: Bot,
+  brainCircuit: BrainCircuit,
+  code2: Code2,
+  compass: Compass,
+  flaskConical: FlaskConical,
+  megaphone: Megaphone,
+  searchCheck: SearchCheck,
+  sparkles: Sparkles,
 };
-
-type DisciplineArea = {
-  title: string;
-  description: string;
-  bullets: string[];
-  icon: LucideIcon;
-};
-
-type Guardrail = {
-  title: string;
-  description: string;
-  icon: LucideIcon;
-};
-
-const workflowStages: WorkflowStage[] = [
-  {
-    step: "01",
-    title: "Frame",
-    eyebrow: "Sharper problem selection",
-    description:
-      "We use AI to compress research, founder context, user signals, and adjacent patterns into a tighter point of view before roadmaps harden.",
-    bullets: [
-      "Synthesize messy inputs into testable assumptions",
-      "Pressure-test wedges, priorities, and sequencing earlier",
-    ],
-    icon: Compass,
-    tone: "tintLavender",
-  },
-  {
-    step: "02",
-    title: "Prototype",
-    eyebrow: "Richer thinking, sooner",
-    description:
-      "Ideas become believable flows, interfaces, and lightweight concepts much faster, so we can learn from something concrete instead of debating abstractions.",
-    bullets: [
-      "Explore multiple directions before committing design effort",
-      "Get to realistic product artifacts without full production cost",
-    ],
-    icon: Blocks,
-    tone: "tintWarm",
-  },
-  {
-    step: "03",
-    title: "Test",
-    eyebrow: "Faster evidence loops",
-    description:
-      "We turn early concepts into sharper experiments, feedback prompts, and validation passes so founders can learn what matters before scaling the build.",
-    bullets: [
-      "Use prototypes and launch surfaces to gather real signal",
-      "Translate feedback into the next best decision, not more noise",
-    ],
-    icon: FlaskConical,
-    tone: "tintCyan",
-  },
-  {
-    step: "04",
-    title: "Decide",
-    eyebrow: "Judgment stays central",
-    description:
-      "AI expands the option space. Our job is to narrow it with product judgment, strategic clarity, and execution discipline so the next move is actually worth making.",
-    bullets: [
-      "Decide what not to build while the cost of change is still low",
-      "Keep momentum tied to traction, not just output volume",
-    ],
-    icon: BrainCircuit,
-    tone: "tintGreen",
-  },
-];
-
-const disciplineAreas: DisciplineArea[] = [
-  {
-    title: "Strategy",
-    description:
-      "AI helps us move from scattered context to a clearer wedge, faster.",
-    bullets: [
-      "Research synthesis and founder context mapping",
-      "Assumption ranking and experiment planning",
-      "Sharper positioning and roadmap tradeoff discussions",
-    ],
-    icon: SearchCheck,
-  },
-  {
-    title: "Design",
-    description:
-      "We generate, compare, and refine more directions before committing to one.",
-    bullets: [
-      "Concept exploration with tighter feedback loops",
-      "Higher-fidelity MVP thinking much earlier",
-      "Interfaces built to test clarity, trust, and behavior",
-    ],
-    icon: Sparkles,
-  },
-  {
-    title: "Engineering",
-    description:
-      "Build speed increases, but the bigger win is a tighter path from idea to working system.",
-    bullets: [
-      "AI-assisted implementation, automation, and internal tooling",
-      "Faster iteration on app logic and workflow-heavy products",
-      "More room to focus engineering effort on what matters most",
-    ],
-    icon: Code2,
-  },
-  {
-    title: "Growth",
-    description:
-      "Launches become learning systems when messaging, campaigns, and product loops stay connected.",
-    bullets: [
-      "Landing-page and campaign iteration with less production drag",
-      "Faster copy, content, and experimentation support",
-      "Growth execution tied back to what the product is learning",
-    ],
-    icon: Megaphone,
-  },
-];
-
-const guardrails: Guardrail[] = [
-  {
-    title: "Problem framing still needs humans",
-    description:
-      "AI can expand possibilities quickly, but it cannot decide which founder problem is strategically worth solving next.",
-    icon: Compass,
-  },
-  {
-    title: "Judgment decides what ships",
-    description:
-      "We still need taste, prioritization, and context to filter what is coherent, trustworthy, and worth putting in front of users.",
-    icon: BrainCircuit,
-  },
-  {
-    title: "Evidence beats novelty",
-    description:
-      "The point is not to sprinkle AI across the workflow. The point is to create better bets, richer MVPs, and faster learning with less waste.",
-    icon: Bot,
-  },
-];
 
 type StudioAiWorkflowsPageProps = {
   navigationItems: StudioHomepageNavItem[];
+  content: StudioAiWorkflowsContent;
 };
 
 type SectionIntroProps = {
@@ -201,8 +68,8 @@ function SectionIntro({ eyebrow, title, description }: SectionIntroProps) {
   );
 }
 
-function WorkflowStageCard({ stage }: { stage: WorkflowStage }) {
-  const Icon = stage.icon;
+function WorkflowStageCard({ stage }: { stage: StudioAiWorkflowsStageContent }) {
+  const Icon = aiWorkflowsIconMap[stage.iconKey] ?? Compass;
 
   return (
     <PremiumSurface
@@ -256,8 +123,8 @@ function WorkflowStageCard({ stage }: { stage: WorkflowStage }) {
   );
 }
 
-function DisciplineCard({ area }: { area: DisciplineArea }) {
-  const Icon = area.icon;
+function DisciplineCard({ area }: { area: StudioAiWorkflowsDisciplineItem }) {
+  const Icon = aiWorkflowsIconMap[area.iconKey] ?? Sparkles;
 
   return (
     <PremiumSurface
@@ -298,8 +165,8 @@ function DisciplineCard({ area }: { area: DisciplineArea }) {
   );
 }
 
-function GuardrailCard({ item }: { item: Guardrail }) {
-  const Icon = item.icon;
+function GuardrailCard({ item }: { item: StudioAiWorkflowsGuardrailItem }) {
+  const Icon = aiWorkflowsIconMap[item.iconKey] ?? Compass;
 
   return (
     <PremiumSurface
@@ -325,7 +192,7 @@ function GuardrailCard({ item }: { item: Guardrail }) {
   );
 }
 
-function AiWorkflowsHero() {
+function AiWorkflowsHero({ content }: { content: StudioAiWorkflowsContent["hero"] }) {
   return (
     <section className="relative overflow-hidden border-b border-slate-200/80 bg-white pb-14 pt-14 md:pb-20 md:pt-16">
       <div aria-hidden="true" className="absolute inset-0 overflow-hidden">
@@ -348,19 +215,17 @@ function AiWorkflowsHero() {
 
           <div className="relative z-10 space-y-5">
             <Badge variant="brandTagSubtle" className="w-fit">
-              AI Workflows
+              {content.eyebrow}
             </Badge>
 
             <div className="space-y-5">
               <h1 className="max-w-5xl text-hero-display text-[var(--neutral-950)]">
-                AI belongs inside every
+                {content.titleLineOne}
                 <br />
-                product loop.
+                {content.titleLineTwo}
               </h1>
               <p className="max-w-4xl text-hero-support text-[var(--color-text-secondary)]">
-                AI compresses the path from ambiguity to traction, helping
-                founders frame better bets, test sooner, and decide with more
-                confidence.
+                {content.description}
               </p>
             </div>
           </div>
@@ -370,7 +235,11 @@ function AiWorkflowsHero() {
   );
 }
 
-function AiWorkflowStagesSection() {
+function AiWorkflowStagesSection({
+  content,
+}: {
+  content: StudioAiWorkflowsContent["workflow"];
+}) {
   return (
     <section className="relative overflow-hidden border-b border-slate-200/80 bg-[var(--color-background-canvas)] py-14 md:py-20">
       {/* This section redraws the page rails locally so they stay visible through its own canvas background. */}
@@ -382,14 +251,14 @@ function AiWorkflowStagesSection() {
 
       <StudioPageContainer className="space-y-10">
         <SectionIntro
-          eyebrow="How We Infuse AI"
-          title="AI is woven into the loop, not bolted on afterward."
-          description="The point is not to replace product thinking. It is to move faster through the moments that matter most: framing, prototyping, testing, and deciding."
+          eyebrow={content.eyebrow}
+          title={content.title}
+          description={content.description}
         />
 
         {/* The four cards turn the research into a founder-readable operating model instead of a tools page. */}
         <div className="grid gap-4 lg:grid-cols-2 lg:pl-4 xl:pl-6">
-          {workflowStages.map((stage) => (
+          {content.stages.map((stage) => (
             <WorkflowStageCard key={stage.title} stage={stage} />
           ))}
         </div>
@@ -398,7 +267,11 @@ function AiWorkflowStagesSection() {
   );
 }
 
-function AiDisciplineSection() {
+function AiDisciplineSection({
+  content,
+}: {
+  content: StudioAiWorkflowsContent["disciplines"];
+}) {
   return (
     <section className="relative overflow-hidden border-b border-slate-200/80 bg-white py-14 md:py-20">
       {/* The discipline section mirrors the homepage pattern by owning its own rail/grid layer. */}
@@ -410,14 +283,14 @@ function AiDisciplineSection() {
 
       <StudioPageContainer className="space-y-10">
         <SectionIntro
-          eyebrow="Across The Stack"
-          title="Strategy, design, engineering, and growth stay in one learning system."
-          description="We use AI across the full delivery chain so the product direction, the build, and the go-to-market work reinforce each other instead of drifting apart."
+          eyebrow={content.eyebrow}
+          title={content.title}
+          description={content.description}
         />
 
         {/* This grid shows where AI creates leverage in each discipline while keeping the story outcome-first. */}
         <div className="grid gap-4 lg:grid-cols-2 lg:pl-4 xl:pl-6">
-          {disciplineAreas.map((area) => (
+          {content.items.map((area) => (
             <DisciplineCard key={area.title} area={area} />
           ))}
         </div>
@@ -426,7 +299,11 @@ function AiDisciplineSection() {
   );
 }
 
-function AiGuardrailsSection() {
+function AiGuardrailsSection({
+  content,
+}: {
+  content: StudioAiWorkflowsContent["guardrails"];
+}) {
   return (
     <section className="relative overflow-hidden border-b border-slate-200/80 bg-[var(--color-background-canvas)] py-14 md:py-20">
       {/* The closing section keeps the rails visible by drawing them inside the section background layer too. */}
@@ -438,14 +315,14 @@ function AiGuardrailsSection() {
 
       <StudioPageContainer className="space-y-10">
         <SectionIntro
-          eyebrow="What Stays Human"
-          title="AI raises leverage. Judgment keeps the work valuable."
-          description="We are AI-first by DNA, but that does not mean outsourcing the hard decisions. The strongest outcomes still come from better framing, sharper prioritization, and honest evidence."
+          eyebrow={content.eyebrow}
+          title={content.title}
+          description={content.description}
         />
 
         {/* The closing guardrails keep the page aligned to the brand thesis: faster making increases the value of judgment. */}
         <div className="grid gap-4 lg:grid-cols-3 lg:pl-4 xl:pl-6">
-          {guardrails.map((item) => (
+          {content.items.map((item) => (
             <GuardrailCard key={item.title} item={item} />
           ))}
         </div>
@@ -456,6 +333,7 @@ function AiGuardrailsSection() {
 
 export function StudioAiWorkflowsPage({
   navigationItems,
+  content,
 }: StudioAiWorkflowsPageProps) {
   return (
     <main
@@ -471,17 +349,17 @@ export function StudioAiWorkflowsPage({
       <StudioHeader navigationItems={navigationItems} />
 
       <article className="relative">
-        <AiWorkflowsHero />
-        <AiWorkflowStagesSection />
+        <AiWorkflowsHero content={content.hero} />
+        <AiWorkflowStagesSection content={content.workflow} />
         <StudioAiFirstSection />
-        <AiDisciplineSection />
-        <AiGuardrailsSection />
+        <AiDisciplineSection content={content.disciplines} />
+        <AiGuardrailsSection content={content.guardrails} />
         <StudioCtaCard
-          eyebrow="AI-first execution"
-          title="If you want AI inside the operating model, not added as theater."
-          description="We help founders use AI to tighten decisions, move faster through product loops, and ship with stronger conviction."
-          primaryCtaLabel="Start Your Project"
-          primaryCtaHref="#"
+          eyebrow={content.cta.eyebrow}
+          title={content.cta.title}
+          description={content.cta.description}
+          primaryCtaLabel={content.cta.primaryCtaLabel}
+          primaryCtaHref={content.cta.primaryCtaHref}
         />
       </article>
     </main>

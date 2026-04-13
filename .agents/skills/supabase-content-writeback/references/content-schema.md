@@ -1,6 +1,6 @@
 # Content Schema Reference
 
-Use this reference when writing homepage, about, or case-study content through the script.
+Use this reference when writing homepage, about, AI Workflows, or case-study content through the script.
 
 ## Local Source Of Truth
 - The only local source of truth is the JSON files in `components/studio/data/`.
@@ -10,7 +10,7 @@ Use this reference when writing homepage, about, or case-study content through t
 
 ## Supabase Target
 - Table: `content_documents`
-- Primary keys: `homepage`, `about`, `case_studies`
+- Primary keys: `homepage`, `about`, `ai_workflows`, `case_studies`
 - Project ref: `dremhlpuxcgjtkxxgfyw`
 
 ## Homepage Document Shape
@@ -100,6 +100,66 @@ Use this reference when writing homepage, about, or case-study content through t
     "primaryCtaHref": "/#process",
     "secondaryCtaLabel": "See Our Work",
     "secondaryCtaHref": "/#work"
+  }
+}
+```
+
+## AI Workflows Document Shape
+```json
+{
+  "hero": {
+    "eyebrow": "AI Workflows",
+    "titleLineOne": "AI belongs inside every",
+    "titleLineTwo": "product loop.",
+    "description": "AI compresses the path from ambiguity to traction..."
+  },
+  "workflow": {
+    "eyebrow": "How We Infuse AI",
+    "title": "AI is woven into the loop, not bolted on afterward.",
+    "description": "...",
+    "stages": [
+      {
+        "step": "01",
+        "title": "Frame",
+        "eyebrow": "Sharper problem selection",
+        "description": "...",
+        "bullets": ["..."],
+        "iconKey": "compass",
+        "tone": "tintLavender"
+      }
+    ]
+  },
+  "disciplines": {
+    "eyebrow": "Across The Stack",
+    "title": "Strategy, design, engineering, and growth stay in one learning system.",
+    "description": "...",
+    "items": [
+      {
+        "title": "Strategy",
+        "description": "...",
+        "bullets": ["..."],
+        "iconKey": "searchCheck"
+      }
+    ]
+  },
+  "guardrails": {
+    "eyebrow": "What Stays Human",
+    "title": "AI raises leverage. Judgment keeps the work valuable.",
+    "description": "...",
+    "items": [
+      {
+        "title": "Problem framing still needs humans",
+        "description": "...",
+        "iconKey": "compass"
+      }
+    ]
+  },
+  "cta": {
+    "eyebrow": "AI-first execution",
+    "title": "If you want AI inside the operating model, not added as theater.",
+    "description": "...",
+    "primaryCtaLabel": "Start Your Project",
+    "primaryCtaHref": "#"
   }
 }
 ```

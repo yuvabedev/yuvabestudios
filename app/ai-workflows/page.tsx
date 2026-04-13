@@ -2,7 +2,10 @@ import type { Metadata } from "next";
 
 import { StudioAiWorkflowsPage } from "@/components/studio/studio-ai-workflows-page";
 import { getAbsoluteUrl } from "@/lib/site";
-import { getStudioHomepageContent } from "@/lib/studio-content";
+import {
+  getStudioAiWorkflowsContent,
+  getStudioHomepageContent,
+} from "@/lib/studio-content";
 
 export const dynamic = "force-dynamic";
 
@@ -27,7 +30,10 @@ export const metadata: Metadata = {
 };
 
 export default async function AiWorkflowsPage() {
-  const homepageContent = await getStudioHomepageContent();
+  const [homepageContent, aiWorkflowsContent] = await Promise.all([
+    getStudioHomepageContent(),
+    getStudioAiWorkflowsContent(),
+  ]);
   const structuredData = {
     "@context": "https://schema.org",
     "@type": "WebPage",
@@ -52,7 +58,10 @@ export default async function AiWorkflowsPage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
       />
-      <StudioAiWorkflowsPage navigationItems={homepageContent.navigationItems} />
+      <StudioAiWorkflowsPage
+        navigationItems={homepageContent.navigationItems}
+        content={aiWorkflowsContent}
+      />
     </>
   );
 }

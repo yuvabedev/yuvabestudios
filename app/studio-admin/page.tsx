@@ -5,6 +5,7 @@ import {
 import { StudioAdminEditor } from "@/components/studio/studio-admin-editor";
 import {
   getStudioAboutPageContent,
+  getStudioAiWorkflowsContent,
   getStudioCaseStudies,
   getStudioHomepageContent,
 } from "@/lib/studio-content";
@@ -22,13 +23,19 @@ type StudioAdminPageProps = {
 export default async function StudioAdminPage({
   searchParams,
 }: StudioAdminPageProps) {
-  const [{ caseStudyId, saved, tab }, homepageContent, aboutContent, caseStudies] =
-    await Promise.all([
-      searchParams,
-      getStudioHomepageContent({ source: "supabase" }),
-      getStudioAboutPageContent({ source: "supabase" }),
-      getStudioCaseStudies({ source: "supabase" }),
-    ]);
+  const [
+    { caseStudyId, saved, tab },
+    homepageContent,
+    aboutContent,
+    aiWorkflowsContent,
+    caseStudies,
+  ] = await Promise.all([
+    searchParams,
+    getStudioHomepageContent({ source: "supabase" }),
+    getStudioAboutPageContent({ source: "supabase" }),
+    getStudioAiWorkflowsContent(),
+    getStudioCaseStudies({ source: "supabase" }),
+  ]);
 
   const editableCaseStudies = caseStudies.map(createStudioEditableCaseStudy);
   const defaultCaseStudyId = editableCaseStudies[0]?.id;
@@ -37,26 +44,34 @@ export default async function StudioAdminPage({
       ? caseStudyId
       : defaultCaseStudyId;
   const initialTab =
-    tab === "case-studies" ? "case-studies" : tab === "about" ? "about" : "homepage";
+    tab === "case-studies"
+      ? "case-studies"
+      : tab === "about"
+        ? "about"
+        : tab === "ai-workflows"
+          ? "ai-workflows"
+          : "homepage";
 
   return (
     <main className="min-h-screen bg-[linear-gradient(180deg,rgba(255,255,255,0.98),rgba(246,247,250,0.98))] px-6 py-10 text-foreground md:px-10">
       <div className="mx-auto max-w-7xl space-y-8">
-        {/* The route intro keeps the internal editor focused on the three current content sources. */}
+        {/* The route intro keeps the internal editor focused on the current studio content sources. */}
         <section className="space-y-3">
           <p className="text-label-sm uppercase tracking-[0.22em] text-[var(--color-text-tertiary)]">
             Internal / Content editor
           </p>
           <h1 className="text-heading-xl text-foreground">Minimal content CMS</h1>
           <p className="max-w-3xl text-body-lg text-muted-foreground">
-            Edit homepage, about-page, and case-study content, save to Supabase,
-            then refresh the site to review the change immediately.
+            Edit homepage, about-page, AI Workflows, and case-study content,
+            save to Supabase, then refresh the site to review the change
+            immediately.
           </p>
         </section>
 
         <StudioAdminEditor
           homepageContent={homepageContent}
           aboutContent={aboutContent}
+          aiWorkflowsContent={aiWorkflowsContent}
           caseStudies={editableCaseStudies}
           initialCaseStudyId={selectedCaseStudyId}
           initialTab={initialTab}
