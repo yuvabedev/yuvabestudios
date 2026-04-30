@@ -25,13 +25,16 @@ const itemVariants = {
 
 type ServiceCaseStudyGridProps = {
   items: DigitalMarketingCaseStudy[];
+  /** When true, the first (hero) card opens the preview modal on click. */
+  heroClickable?: boolean;
 };
 
 /**
- * Equal 2-column grid matching the reference design — all cards the same size.
- * Stagger entry animation orchestrated here; cards open a preview modal on click.
+ * 1 + 3 layout: full-width hero card on top, then a 3-column compact grid.
+ * The hero card is clickable only when heroClickable is true.
+ * Compact cards are always non-clickable (display only).
  */
-export function ServiceCaseStudyGrid({ items }: ServiceCaseStudyGridProps) {
+export function ServiceCaseStudyGrid({ items, heroClickable = false }: ServiceCaseStudyGridProps) {
   const [activeItem, setActiveItem] = useState<DigitalMarketingCaseStudy | null>(null);
   const [isPreviewOpen, setIsPreviewOpen] = useState(false);
 
@@ -40,27 +43,38 @@ export function ServiceCaseStudyGrid({ items }: ServiceCaseStudyGridProps) {
     setIsPreviewOpen(true);
   }
 
+  const [hero, ...rest] = items;
+
   return (
     <>
       <motion.div
         variants={containerVariants}
         initial="hidden"
         whileInView="show"
-        viewport={{ once: true, amount: 0.12 }}
-        className="grid gap-4 md:grid-cols-2"
+        viewport={{ once: true, amount: 0.1 }}
+        className="flex flex-col gap-4"
       >
-        {items.map((item) => (
-          <motion.div
-            key={item.slug}
-            variants={itemVariants}
-            className="flex h-full flex-col"
-          >
+        {/* Hero card — full width */}
+        {hero && (
+          <motion.div variants={itemVariants}>
             <ServiceCaseStudyCard
-              caseStudy={item}
-              onOpenPreview={() => handleOpenPreview(item)}
+              caseStudy={hero}
+              variant="hero"
+              onOpenPreview={heroClickable ? () => handleOpenPreview(hero) : undefined}
             />
           </motion.div>
-        ))}
+        )}
+
+        {/* Compact cards — 3 columns */}
+        {rest.length > 0 && (
+          <div className="grid gap-4 sm:grid-cols-2 md:grid-cols-3">
+            {rest.map((item) => (
+              <motion.div key={item.slug} variants={itemVariants} className="flex h-full flex-col">
+                <ServiceCaseStudyCard caseStudy={item} variant="compact" />
+              </motion.div>
+            ))}
+          </div>
+        )}
       </motion.div>
 
       <ServiceCaseStudyPreviewDialog

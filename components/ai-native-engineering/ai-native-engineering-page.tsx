@@ -135,7 +135,7 @@ export function AiNativeEngineeringPage({
               </p>
             </div>
             <div className="lg:pl-4 xl:pl-6">
-              <ServiceCaseStudyGrid items={content.caseStudies} />
+              <ServiceCaseStudyGrid items={content.caseStudies} heroClickable />
             </div>
           </StudioPageContainer>
         </section>

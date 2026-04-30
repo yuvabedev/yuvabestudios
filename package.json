@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "validate:studio-content": "node scripts/validate-studio-content.mjs"
   },
   "dependencies": {
     "@lottiefiles/react-lottie-player": "^3.6.0",
