@@ -177,7 +177,7 @@ export function AiNativeEngineeringPage({
                         <div className="h-px flex-1 bg-linear-to-r from-[rgba(88,41,199,0.12)] to-transparent" />
                       </div>
 
-                      <h3 className="text-heading-md text-(--neutral-950)">
+                      <h3 className="text-heading-md font-semibold tracking-wide text-(--neutral-950)">
                         {principle.title}
                       </h3>
                       <p className="text-body-md leading-relaxed text-(--color-text-secondary)">
@@ -216,7 +216,7 @@ export function AiNativeEngineeringPage({
                         <Icon className="size-5" />
                       </div>
                       <div className="space-y-2">
-                        <h3 className="text-heading-md text-(--neutral-950)">
+                        <h3 className="text-heading-md font-semibold tracking-wide text-(--neutral-950)">
                           {service.title}
                         </h3>
                         <p className="text-body-md text-(--color-text-secondary)">

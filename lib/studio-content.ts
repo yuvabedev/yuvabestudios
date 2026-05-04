@@ -599,6 +599,12 @@ function mergeHomepageContentWithFallback(
   const fallbackAiWorkflowsNavItems = fallbackContent.navigationItems.filter(
     (item) => item.href === aiWorkflowsNavHref,
   );
+  const hasCareersNavItem = remoteContent.navigationItems.some(
+    (item) => item.href === "/careers",
+  );
+  const fallbackCareersNavItems = fallbackContent.navigationItems.filter(
+    (item) => item.href === "/careers",
+  );
   const shouldUseFallbackTestimonials =
     remoteContent.testimonials.items.length <
     fallbackContent.testimonials.items.length;
@@ -636,12 +642,12 @@ function mergeHomepageContentWithFallback(
 
   return {
     ...remoteContent,
-    navigationItems: hasAiWorkflowsNavItem
-      ? remoteContent.navigationItems
-      : [
-          ...remoteContent.navigationItems,
-          ...fallbackAiWorkflowsNavItems,
-        ],
+    navigationItems: (() => {
+      let items = remoteContent.navigationItems;
+      if (!hasAiWorkflowsNavItem) items = [...items, ...fallbackAiWorkflowsNavItems];
+      if (!hasCareersNavItem) items = [...items, ...fallbackCareersNavItems];
+      return items;
+    })(),
     afterServicesCta: shouldUseFallbackAfterServicesCta
       ? fallbackContent.afterServicesCta
       : remoteContent.afterServicesCta,

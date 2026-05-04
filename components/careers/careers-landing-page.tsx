@@ -211,6 +211,9 @@ export function CareersLandingPage({
                         For curious starters ready to grow fast. Real projects,
                         real mentorship, real scope from day one.
                       </p>
+                      <p className="text-label-sm text-[var(--color-text-tertiary)]">
+                        Experience: 0–2 years
+                      </p>
                     </div>
                     <div className="border-t border-[var(--color-border-default)] pt-5">
                       <span className="text-label-md font-semibold text-[var(--color-text-brand)]">
@@ -259,6 +262,9 @@ export function CareersLandingPage({
                         For senior practitioners who want ownership. Lead
                         engagements, shape the discipline, and mentor the next
                         generation.
+                      </p>
+                      <p className="text-label-sm text-[var(--color-text-tertiary)]">
+                        Experience: 2+ years
                       </p>
                     </div>
                     <div className="border-t border-[var(--color-border-default)] pt-5">

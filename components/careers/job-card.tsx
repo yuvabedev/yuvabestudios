@@ -16,6 +16,7 @@ type JobCardProps = {
 export function JobCard({ job, index = 0 }: JobCardProps) {
   return (
     <motion.div
+      className="h-full"
       initial={{ opacity: 0, y: 16 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.4, delay: index * 0.07, ease: [0.22, 1, 0.36, 1] }}
@@ -23,7 +24,7 @@ export function JobCard({ job, index = 0 }: JobCardProps) {
       <Link
         href={`/careers/${job.slug}`}
         className={cn(
-          "group flex flex-col gap-4 rounded-xl border border-[var(--color-border-default)] bg-[var(--color-background-surface)] p-6",
+          "group flex h-full flex-col gap-4 rounded-xl border border-[var(--color-border-default)] bg-[var(--color-background-surface)] p-6",
           "shadow-[var(--ds-shadow-sm)] transition-shadow duration-300 hover:shadow-[var(--ds-shadow-md)]",
           "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-border-focus)]",
         )}

@@ -170,6 +170,59 @@ export function CareersJobDetail({
                     />
                   </div>
                 )}
+
+                {job.portfolioRequirement && (
+                  <div className="pt-10 flex flex-col gap-3">
+                    <SectionHeading>Portfolio Requirement</SectionHeading>
+                    <p className="text-body-md text-[var(--color-text-secondary)]">
+                      {job.portfolioRequirement}
+                    </p>
+                  </div>
+                )}
+
+                {job.benefits && (
+                  <div className="pt-10 flex flex-col gap-6">
+                    <SectionHeading>Benefits</SectionHeading>
+                    <div className="flex flex-col gap-6">
+                      {job.benefits.remote && job.benefits.remote.length > 0 && (
+                        <div className="flex flex-col gap-3">
+                          <h3 className="text-label-md font-semibold text-[var(--color-text-primary)]">
+                            Remote
+                          </h3>
+                          <ul className="flex flex-col gap-2.5">
+                            {job.benefits.remote.map((item) => (
+                              <li
+                                key={item}
+                                className="flex gap-3 text-body-md text-[var(--color-text-secondary)]"
+                              >
+                                <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-[var(--color-text-brand)]" />
+                                {item}
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                      )}
+                      {job.benefits.inPerson && job.benefits.inPerson.length > 0 && (
+                        <div className="flex flex-col gap-3">
+                          <h3 className="text-label-md font-semibold text-[var(--color-text-primary)]">
+                            In-Person (Auroville)
+                          </h3>
+                          <ul className="flex flex-col gap-2.5">
+                            {job.benefits.inPerson.map((item) => (
+                              <li
+                                key={item}
+                                className="flex gap-3 text-body-md text-[var(--color-text-secondary)]"
+                              >
+                                <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-[var(--color-text-brand)]" />
+                                {item}
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                )}
               </motion.div>
 
               {/* Sidebar */}
