@@ -126,7 +126,7 @@ export function CareersLandingPage({
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.18, ease: [0.22, 1, 0.36, 1] }}
-              className="grid gap-10 border-b border-[var(--color-border-default)] md:grid-cols-2 md:gap-16"
+              className="grid gap-10 border-b border-[var(--color-border-default)] md:grid-cols-2 md:gap-16 pt-20"
             >
               {/* Image self-stretches flush to the bottom border, no bottom rounding */}
               <div className="self-stretch overflow-hidden rounded-t-2xl">
@@ -310,7 +310,7 @@ export function CareersLandingPage({
                   }}
                   className="flex flex-col gap-3 rounded-xl border border-[var(--color-border-default)] bg-[var(--color-background-surface-subtle)] p-6"
                 >
-                  <h3 className="text-heading-sm text-[var(--color-text-primary)]">
+                  <h3 className="text-heading-sm text-[var(--color-text-brand)]">
                     {v.title}
                   </h3>
                   <p className="text-body-sm text-[var(--color-text-secondary)]">

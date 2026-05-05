@@ -164,7 +164,7 @@ export function AiNativeEngineeringPage({
                       />
                     )}
                     <PremiumSurface
-                      tone="glass"
+                      tone={(["tintLavender", "tintWarm", "tintCyan"] as const)[index % 3]}
                       elevation="sm"
                       blur="md"
                       radius="xl"
@@ -295,8 +295,6 @@ export function AiNativeEngineeringPage({
           title="We scope AI systems from architecture to deployment — so you ship something that works, not just something that demos."
           primaryCtaLabel="Start a project"
           primaryCtaHref="/#process"
-          secondaryCtaLabel={content.secondaryCtaLabel}
-          secondaryCtaHref={content.secondaryCtaHref}
           sectionOverlay={gridOverlay}
           sectionClassName="border-t border-slate-200/80 bg-white py-16 md:py-20"
         />

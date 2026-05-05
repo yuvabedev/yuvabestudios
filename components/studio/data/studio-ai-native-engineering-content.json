@@ -25,7 +25,7 @@
         "Delivered a production-ready system integrated into the team's existing workflow.",
         "Enabled the team to scale content output without scaling headcount."
       ],
-      "thumbnailSrc": "/assets/bevolve/cover-summary.png",
+      "thumbnailSrc": "/assets/kk/cover-summary.png",
       "ctaLabel": "View Case Study",
       "workGallery": [
         { "src": "/assets/KK/Cover-home.png", "alt": "System interface", "label": "SYSTEM INTERFACE" },
@@ -177,7 +177,7 @@
   ],
   "pageTestimonial": {
     "label": "Client perspective",
-    "quote": "What mattered most here was orchestration. Multiple AI tools, retrieval workflows, and cloud systems were brought into one product experience that felt useful, reliable, and much easier to navigate.",
+    "quote": "Partnering with Yuvabe Studios for over a year, we've seen exceptional results. Their deep understanding of our vision and customer segments, combined with prompt responsiveness, has strengthened our brand.",
     "name": "TVAM engagement",
     "attribution": "Health Insurance AI"
   },

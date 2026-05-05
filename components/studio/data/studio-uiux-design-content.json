@@ -25,7 +25,7 @@
         "Delivered a visual language that felt quiet, intentional, and culturally resonant.",
         "Made information about visiting and programs easier to discover."
       ],
-      "thumbnailSrc": "/assets/martimandir/matrimandir.png",
+      "thumbnailSrc": "/assets/martimandir/cover.png",
       "ctaLabel": "View Case Study",
       "workGallery": [
         { "src": "/assets/martimandir/homepage.webp", "alt": "Homepage design", "label": "HOMEPAGE DESIGN" },
@@ -41,36 +41,6 @@
       "testimonial": {
         "quote": "The design gave the space a digital presence that felt as considered as the place itself. Visitors could finally feel the quality of the experience before arriving.",
         "attribution": "Matrimandir digital team"
-      }
-    },
-    {
-      "slug": "buglerock",
-      "title": "Buglerock",
-      "description": "Designed the product identity and interface architecture for a music-driven platform connecting artists, venues, and event creators.",
-      "category": "Platform Design",
-      "services": ["Product Design", "Design System", "Brand Identity"],
-      "outcomes": [
-        "Defined a product identity making the platform's value immediately legible.",
-        "Designed an interface reducing friction for artists, venues, and creators.",
-        "Built a design system that accelerated the team's development cycles.",
-        "Improved onboarding completion through clearer user flow design."
-      ],
-      "thumbnailSrc": "/assets/buglerock/homepage.png",
-      "ctaLabel": "View Case Study",
-      "workGallery": [
-        { "src": "/assets/buglerock/homepage.png", "alt": "Homepage", "label": "HOMEPAGE" },
-        { "src": "/assets/buglerock/about-us.png", "alt": "About page", "label": "ABOUT PAGE" },
-        { "src": "/assets/buglerock/contact-us.png", "alt": "Contact page", "label": "CONTACT PAGE" },
-        { "src": "/assets/buglerock/testimonial-banner.png", "alt": "Testimonial section", "label": "TESTIMONIAL" }
-      ],
-      "proofPoints": [
-        { "iconKey": "sparkles", "title": "Clear product identity", "description": "Defined a product identity that made the platform's value immediately legible to artists, venues, and creators." },
-        { "iconKey": "layoutGrid", "title": "Reduced onboarding friction", "description": "Improved onboarding completion through clearer user flows and a more coherent interface hierarchy." },
-        { "iconKey": "scanSearch", "title": "Scalable design system", "description": "Built a design system that accelerated development cycles and kept the product consistent as it grew." }
-      ],
-      "testimonial": {
-        "quote": "The design system gave us a foundation we could ship from faster. The product finally looked and felt like the platform it was meant to be.",
-        "attribution": "Buglerock product team"
       }
     },
     {
@@ -134,8 +104,8 @@
       }
     },
     {
-      "slug": "bevikve",
-      "title": "Bevikve",
+      "slug": "bevolve",
+      "title": "bevolve",
       "description": "Designed the core product UI and onboarding flows for a B2B platform built around operational clarity and team workflows.",
       "category": "B2B Product Design",
       "services": ["Product UX", "Onboarding Design", "UI Systems"],

@@ -4,9 +4,11 @@ import Link from "next/link";
 import { motion, useReducedMotion } from "framer-motion";
 
 import type { DigitalMarketingHeroContent } from "@/components/digital-marketing/digital-marketing-content";
+import { StartProjectButton } from "@/components/studio/start-project-button";
 import { StudioPageContainer } from "@/components/studio/studio-page-shell";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { isStartProjectHref } from "@/lib/start-project";
 
 type PageHeroProps = {
   content: DigitalMarketingHeroContent;
@@ -91,9 +93,15 @@ export function PageHero({ content }: PageHeroProps) {
 
           {content.ctaLabel && content.ctaHref ? (
             <motion.div {...buildFadeUp(0.46, reduceMotion)}>
-              <Button asChild size="lg" className="mt-2">
-                <Link href={content.ctaHref}>{content.ctaLabel}</Link>
-              </Button>
+              {isStartProjectHref(content.ctaHref) ? (
+                <StartProjectButton size="lg" className="mt-2" source="service-page-hero">
+                  {content.ctaLabel}
+                </StartProjectButton>
+              ) : (
+                <Button asChild size="lg" className="mt-2">
+                  <Link href={content.ctaHref}>{content.ctaLabel}</Link>
+                </Button>
+              )}
             </motion.div>
           ) : null}
         </div>
