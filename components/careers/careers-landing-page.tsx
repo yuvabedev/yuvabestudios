@@ -281,7 +281,7 @@ export function CareersLandingPage({
         </section>
 
         {/* Values */}
-        <section className="pb-28 md:pb-36">
+        <section className="pb-28 ">
           <StudioPageContainer>
             <motion.div
               initial={{ opacity: 0, y: 16 }}
