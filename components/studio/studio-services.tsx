@@ -99,6 +99,7 @@ export function StudioServices({ content }: StudioServicesProps) {
                 const cardClassName = [
                   "relative min-h-[18rem] rounded-none border-0 px-5 py-5 sm:p-5 md:min-h-[19rem] md:p-6 lg:p-7",
                   "border-b border-slate-200/80 md:border-b-0",
+                  "transition-colors duration-300 hover:bg-violet-50",
                   showDesktopDivider
                     ? "md:border-r md:border-slate-200/80"
                     : "",

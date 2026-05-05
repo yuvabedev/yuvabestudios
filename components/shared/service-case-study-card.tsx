@@ -36,12 +36,12 @@ export function ServiceCaseStudyCard({
   const tagPills = (
     <div className="flex flex-wrap gap-2">
       {services && services.length > 0
-        ? services.map((service) => (
-            <Badge key={service} variant="service">
+        ? services.map((service, i) => (
+            <Badge key={service} variant="service" colorIndex={i}>
               {service}
             </Badge>
           ))
-        : <Badge variant="service">{category}</Badge>}
+        : <Badge variant="service" colorIndex={0}>{category}</Badge>}
     </div>
   );
 
@@ -66,7 +66,7 @@ export function ServiceCaseStudyCard({
               )}
             </div>
             <div className="space-y-3">
-              <h3 className="text-[clamp(1.6rem,2.4vw,2.2rem)] leading-[1.06] tracking-[-0.032em] text-(--neutral-950)">
+              <h3 className="text-[clamp(1.6rem,2.4vw,2.2rem)] leading-[1.06] tracking-[-0.032em] font-semibold text-(--neutral-950)">
                 {title}
               </h3>
               <p className="text-body-md max-w-[42ch] text-(--color-text-secondary)">
@@ -78,15 +78,15 @@ export function ServiceCaseStudyCard({
         </div>
 
         {/* Right — image */}
-        <div className="relative min-h-[260px] flex-1 overflow-hidden md:min-h-0">
+        <div className="relative w-[420px] shrink-0 overflow-hidden">
           {thumbnailSrc ? (
             <Image
               src={thumbnailSrc}
               alt={`${title} preview`}
               fill
-              sizes="(min-width: 768px) 62vw, 100vw"
+              sizes="420px"
               className={cn(
-                "object-cover object-top",
+                "object-cover",
                 clickable && "transition-transform duration-500 ease-out group-hover:scale-[1.04]",
               )}
             />
@@ -108,7 +108,7 @@ export function ServiceCaseStudyCard({
             role="button"
             tabIndex={0}
             aria-label={`Preview ${title} case study`}
-            className="flex h-full min-h-[400px] cursor-pointer flex-col overflow-hidden rounded-[36px] border border-slate-100 bg-white shadow-[0_2px_24px_rgba(15,23,42,0.06)] md:flex-row"
+            className="flex h-full min-h-[400px] cursor-pointer flex-row overflow-hidden rounded-[36px] border border-slate-100 bg-white shadow-[0_2px_24px_rgba(15,23,42,0.06)]"
             onClick={onOpenPreview}
             onKeyDown={handleKeyDown}
           >
@@ -120,7 +120,7 @@ export function ServiceCaseStudyCard({
 
     return (
       <div className="group h-full">
-        <div className="flex h-full min-h-[400px] cursor-default flex-col overflow-hidden rounded-[36px] border border-slate-100 bg-white shadow-[0_2px_24px_rgba(15,23,42,0.06)] md:flex-row">
+        <div className="flex h-full min-h-[400px] cursor-default flex-row overflow-hidden rounded-[36px] border border-slate-100 bg-white shadow-[0_2px_24px_rgba(15,23,42,0.06)]">
           {heroContent}
         </div>
       </div>
@@ -136,7 +136,7 @@ export function ServiceCaseStudyCard({
             {category}
           </p>
           <div className="space-y-2">
-            <h3 className="text-[clamp(1.2rem,1.6vw,1.5rem)] leading-[1.06] tracking-[-0.028em] text-(--neutral-950)">
+            <h3 className="text-[clamp(1.2rem,1.6vw,1.5rem)] leading-[1.06] tracking-[-0.028em] font-semibold text-(--neutral-950)">
               {title}
             </h3>
             <p className="text-body-sm max-w-[36ch] text-(--color-text-secondary)">

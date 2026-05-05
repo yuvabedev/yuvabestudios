@@ -7,6 +7,7 @@ import { ArrowRight } from "lucide-react";
 
 import type { DigitalMarketingCaseStudy } from "@/components/digital-marketing/digital-marketing-content";
 import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 import { ServiceCaseStudyPreviewDialog } from "@/components/shared/service-case-study-preview-dialog";
 import { cn } from "@/lib/utils";
 
@@ -72,14 +73,14 @@ export function ServiceCaseStudyGrid({ items, heroClickable = false }: ServiceCa
               : undefined
           }
         >
-          <div className="grid md:grid-cols-[1fr,380px]">
+          <div className="flex flex-row">
             {/* Content */}
-            <div className="space-y-5 border-b border-slate-200/80 p-8 md:border-b-0 md:border-r md:p-12">
+            <div className="flex flex-1 flex-col justify-center space-y-5 p-8 md:p-12">
               <div className="space-y-3">
                 <p className="text-label-sm uppercase tracking-[0.22em] text-(--color-text-tertiary)">
                   {hero.category}
                 </p>
-                <h3 className="text-xl font-bold leading-snug tracking-tight text-(--neutral-950) md:text-2xl">
+                <h3 className="text-xl font-semibold leading-snug tracking-tight text-(--neutral-950) md:text-2xl">
                   {hero.title}
                 </h3>
                 <p className="max-w-[52ch] text-body-md text-(--color-text-secondary)">
@@ -89,29 +90,29 @@ export function ServiceCaseStudyGrid({ items, heroClickable = false }: ServiceCa
 
               {hero.services && hero.services.length > 0 && (
                 <div className="flex flex-wrap gap-2">
-                  {hero.services.map((s) => (
-                    <Badge key={s} variant="service">{s}</Badge>
+                  {hero.services.map((s, i) => (
+                    <Badge key={s} variant="service" colorIndex={i}>{s}</Badge>
                   ))}
                 </div>
               )}
 
               {heroClickable && (
-                <div className="flex items-center gap-2 text-sm font-medium text-(--color-text-brand) transition-[gap] duration-200 group-hover:gap-3">
+                <Button size="sm" className="self-start bg-violet-600 text-white hover:bg-violet-700">
                   {hero.ctaLabel || "View case study"}
                   <ArrowRight className="size-4" />
-                </div>
+                </Button>
               )}
             </div>
 
-            {/* Thumbnail — always shown; gradient fallback when no src */}
-            <div className="relative min-h-70 overflow-hidden md:min-h-0">
+            {/* Thumbnail — right side */}
+            <div className="relative w-[380px] min-h-70 shrink-0 overflow-hidden pr-4">
               {hero.thumbnailSrc ? (
                 <Image
                   src={hero.thumbnailSrc}
                   alt={`${hero.title} preview`}
                   fill
-                  sizes="(min-width: 768px) 380px, 100vw"
-                  className="object-cover object-top transition-transform duration-500 group-hover:scale-[1.03]"
+                  sizes="380px"
+                  className="object-contain transition-transform duration-500 group-hover:scale-[1.03]"
                 />
               ) : (
                 <div className="h-full w-full bg-[linear-gradient(135deg,rgba(88,41,199,0.10),rgba(255,202,45,0.10))]" />
@@ -122,7 +123,7 @@ export function ServiceCaseStudyGrid({ items, heroClickable = false }: ServiceCa
 
         {/* ── Remaining case studies — text only, bordered grid cells ────────── */}
         {rest.length > 0 && (
-          <div className="grid border-l border-slate-200/80 sm:grid-cols-2 md:grid-cols-3">
+          <div className="grid border-l border-slate-200/80 sm:grid-cols-2">
             {rest.map((item) => (
               <motion.div
                 key={item.slug}
@@ -134,7 +135,7 @@ export function ServiceCaseStudyGrid({ items, heroClickable = false }: ServiceCa
                     <p className="text-label-sm uppercase tracking-[0.22em] text-(--color-text-tertiary)">
                       {item.category}
                     </p>
-                    <h3 className="font-bold leading-snug tracking-tight text-(--neutral-950)">
+                    <h3 className="font-semibold leading-snug tracking-tight text-(--neutral-950)">
                       {item.title}
                     </h3>
                     <p className="text-body-sm text-(--color-text-secondary)">
@@ -144,8 +145,8 @@ export function ServiceCaseStudyGrid({ items, heroClickable = false }: ServiceCa
 
                   {item.services && item.services.length > 0 && (
                     <div className="flex flex-wrap gap-1.5">
-                      {item.services.map((s) => (
-                        <Badge key={s} variant="service">{s}</Badge>
+                      {item.services.map((s, i) => (
+                        <Badge key={s} variant="service" colorIndex={i}>{s}</Badge>
                       ))}
                     </div>
                   )}

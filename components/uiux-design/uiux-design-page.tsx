@@ -165,7 +165,7 @@ export function UiuxDesignPage({
                       />
                     )}
                     <PremiumSurface
-                      tone="glass"
+                      tone={(["tintLavender", "tintWarm", "tintCyan"] as const)[index % 3]}
                       elevation="sm"
                       blur="md"
                       radius="xl"
@@ -296,8 +296,6 @@ export function UiuxDesignPage({
           title="We design product experiences from first flow to final component — built to ship, built to scale."
           primaryCtaLabel="Start a project"
           primaryCtaHref="/#process"
-          secondaryCtaLabel={content.secondaryCtaLabel}
-          secondaryCtaHref={content.secondaryCtaHref}
           sectionOverlay={gridOverlay}
           sectionClassName="border-t border-slate-200/80 bg-white py-16 md:py-20"
         />

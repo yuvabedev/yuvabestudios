@@ -168,7 +168,7 @@ export function DigitalMarketingPage({
                       />
                     )}
                     <PremiumSurface
-                      tone="glass"
+                      tone={(["tintLavender", "tintWarm", "tintCyan"] as const)[index % 3]}
                       elevation="sm"
                       blur="md"
                       radius="xl"
@@ -300,8 +300,6 @@ export function DigitalMarketingPage({
           description="We align positioning, landing pages, campaign execution, and analytics so every launch teaches you what to scale next."
           primaryCtaLabel="Start a project"
           primaryCtaHref="/#process"
-          secondaryCtaLabel={content.secondaryCtaLabel}
-          secondaryCtaHref={content.secondaryCtaHref}
           sectionOverlay={gridOverlay}
           sectionClassName="border-t border-slate-200/80 bg-white py-16 md:py-20"
         />
