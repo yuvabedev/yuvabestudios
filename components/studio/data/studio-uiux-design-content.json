@@ -1,0 +1,230 @@
+{
+  "hero": {
+    "title": "Interfaces designed for clarity, speed, and real use.",
+    "subtitle": "UI/UX Design",
+    "description": "From first interaction to daily workflows, we create experiences that feel intuitive, guide users seamlessly, and support better decisions.",
+    "ctaLabel": "Start Your Project",
+    "ctaHref": "/#process"
+  },
+  "bestFit": {
+    "label": "Best fit",
+    "description": "Founders whose product has grown faster than its interface — or teams shipping something new that needs to feel trustworthy from day one."
+  },
+  "caseStudiesTitle": "UI/UX Design Case Studies",
+  "caseStudiesDescription": "Proof from product design systems, interface builds, and visual language work shipped for founders who care about how things feel.",
+  "caseStudies": [
+    {
+      "slug": "matrimandir",
+      "title": "Matrimandir",
+      "description": "Designed a contemplative digital presence for the iconic Auroville meditation center — balancing sacred depth with accessible clarity.",
+      "category": "Spiritual Design",
+      "services": ["UX Design", "Visual Identity", "Web Design"],
+      "outcomes": [
+        "Designed a contemplative presence balancing sacred depth with accessibility.",
+        "Created navigation guiding visitors through multiple levels of experience.",
+        "Delivered a visual language that felt quiet, intentional, and culturally resonant.",
+        "Made information about visiting and programs easier to discover."
+      ],
+      "thumbnailSrc": "/assets/martimandir/matrimandir.png",
+      "ctaLabel": "View Case Study",
+      "workGallery": [
+        { "src": "/assets/martimandir/homepage.webp", "alt": "Homepage design", "label": "HOMEPAGE DESIGN" },
+        { "src": "/assets/martimandir/aboutpage.webp", "alt": "About page", "label": "ABOUT PAGE" },
+        { "src": "/assets/martimandir/lakepage.png", "alt": "Lake page", "label": "LAKE PAGE" },
+        { "src": "/assets/martimandir/petalspage.png", "alt": "Inner pages", "label": "INNER PAGES" }
+      ],
+      "proofPoints": [
+        { "iconKey": "sparkles", "title": "Contemplative design language", "description": "Delivered a visual system that felt quiet, intentional, and aligned with the center's spiritual character." },
+        { "iconKey": "layoutGrid", "title": "Layered navigation clarity", "description": "Created a navigation structure that guided visitors through multiple levels of experience without friction." },
+        { "iconKey": "scanSearch", "title": "Accessible information architecture", "description": "Made visiting information and programs significantly easier to discover across device types." }
+      ],
+      "testimonial": {
+        "quote": "The design gave the space a digital presence that felt as considered as the place itself. Visitors could finally feel the quality of the experience before arriving.",
+        "attribution": "Matrimandir digital team"
+      }
+    },
+    {
+      "slug": "buglerock",
+      "title": "Buglerock",
+      "description": "Designed the product identity and interface architecture for a music-driven platform connecting artists, venues, and event creators.",
+      "category": "Platform Design",
+      "services": ["Product Design", "Design System", "Brand Identity"],
+      "outcomes": [
+        "Defined a product identity making the platform's value immediately legible.",
+        "Designed an interface reducing friction for artists, venues, and creators.",
+        "Built a design system that accelerated the team's development cycles.",
+        "Improved onboarding completion through clearer user flow design."
+      ],
+      "thumbnailSrc": "/assets/buglerock/homepage.png",
+      "ctaLabel": "View Case Study",
+      "workGallery": [
+        { "src": "/assets/buglerock/homepage.png", "alt": "Homepage", "label": "HOMEPAGE" },
+        { "src": "/assets/buglerock/about-us.png", "alt": "About page", "label": "ABOUT PAGE" },
+        { "src": "/assets/buglerock/contact-us.png", "alt": "Contact page", "label": "CONTACT PAGE" },
+        { "src": "/assets/buglerock/testimonial-banner.png", "alt": "Testimonial section", "label": "TESTIMONIAL" }
+      ],
+      "proofPoints": [
+        { "iconKey": "sparkles", "title": "Clear product identity", "description": "Defined a product identity that made the platform's value immediately legible to artists, venues, and creators." },
+        { "iconKey": "layoutGrid", "title": "Reduced onboarding friction", "description": "Improved onboarding completion through clearer user flows and a more coherent interface hierarchy." },
+        { "iconKey": "scanSearch", "title": "Scalable design system", "description": "Built a design system that accelerated development cycles and kept the product consistent as it grew." }
+      ],
+      "testimonial": {
+        "quote": "The design system gave us a foundation we could ship from faster. The product finally looked and felt like the platform it was meant to be.",
+        "attribution": "Buglerock product team"
+      }
+    },
+    {
+      "slug": "prakiti-sattva",
+      "title": "Prakiti Sattva",
+      "description": "Built an Ayurvedic wellness brand's digital touchpoints around a natural design system that made product trust visible.",
+      "category": "Wellness UX",
+      "services": ["UX Research", "Product Design", "Design System"],
+      "outcomes": [
+        "Built a natural design system making product trust visible before purchase.",
+        "Improved conversion paths through cleaner product discovery flows.",
+        "Designed assets that cohered into a single brand experience.",
+        "Helped communicate Ayurvedic credibility to modern wellness buyers."
+      ],
+      "thumbnailSrc": "/assets/prakritisattva/product.png",
+      "ctaLabel": "View Case Study",
+      "workGallery": [
+        { "src": "/assets/prakritisattva/product.png", "alt": "Product design", "label": "PRODUCT DESIGN" },
+        { "src": "/assets/prakritisattva/snapshot1.png", "alt": "Brand identity", "label": "BRAND IDENTITY" },
+        { "src": "/assets/prakritisattva/snapshot2.png", "alt": "Campaign visual", "label": "CAMPAIGN VISUAL" },
+        { "src": "/assets/prakritisattva/bodycare.webp", "alt": "Category page", "label": "CATEGORY PAGE" }
+      ],
+      "proofPoints": [
+        { "iconKey": "sparkles", "title": "Trust-first design system", "description": "Built a natural visual language that communicated product credibility before the buyer reached the cart." },
+        { "iconKey": "layoutGrid", "title": "Cleaner discovery flows", "description": "Improved conversion paths by reducing friction in product browsing and category navigation." },
+        { "iconKey": "scanSearch", "title": "Cohesive brand experience", "description": "Designed assets that cohered into a single, consistent brand presence across the wellness platform." }
+      ],
+      "testimonial": {
+        "quote": "The design made our Ayurvedic credentials feel accessible without losing authenticity. Buyers could see the quality before they'd even read a label.",
+        "attribution": "Prakiti Sattva team"
+      }
+    },
+    {
+      "slug": "general-aeronautics",
+      "title": "General Aeronautics",
+      "description": "Redesigned the product messaging and visual hierarchy across a complex multi-product platform to improve navigability and trust.",
+      "category": "Interface Design",
+      "services": ["Interface Design", "Information Architecture", "UX"],
+      "outcomes": [
+        "Reframed a broad drone portfolio into a sharper market story.",
+        "Made technical capabilities easier for non-technical audiences to understand.",
+        "Improved credibility across web, applications, and communication assets.",
+        "Built a stronger platform for future product and growth decisions."
+      ],
+      "thumbnailSrc": "/assets/general-aeronautics/cover-home.png",
+      "ctaLabel": "View Case Study",
+      "workGallery": [
+        { "src": "/assets/general-aeronautics/cover-home.png", "alt": "Drone system visual", "label": "DRONE SYSTEM VISUAL" },
+        { "src": "/assets/general-aeronautics/cover-mock.png", "alt": "Flight dashboard view", "label": "FLIGHT DASHBOARD VIEW" },
+        { "src": "/assets/general-aeronautics/mock1.png", "alt": "Ops planner surface", "label": "OPS PLANNER SURFACE" },
+        { "src": "/assets/general-aeronautics/mock13.png", "alt": "Mission planning mock", "label": "MISSION PLANNING MOCK" }
+      ],
+      "proofPoints": [
+        { "iconKey": "scanSearch", "title": "Sharpened market story", "description": "Turned a complex product portfolio into a clearer business narrative that buyers and partners could understand and trust faster." },
+        { "iconKey": "layoutGrid", "title": "Unified touchpoints", "description": "Aligned website, product UX, and supporting communication assets into one more coherent system." },
+        { "iconKey": "sparkles", "title": "Built for scale", "description": "Created a stronger platform for future launches, campaigns, and product communication decisions." }
+      ],
+      "testimonial": {
+        "quote": "The work made a technically complex drone business easier to understand and easier to trust. Website, product UX, and supporting assets finally reinforced the same story instead of fragmenting it.",
+        "attribution": "General Aeronautics team"
+      }
+    },
+    {
+      "slug": "bevikve",
+      "title": "Bevikve",
+      "description": "Designed the core product UI and onboarding flows for a B2B platform built around operational clarity and team workflows.",
+      "category": "B2B Product Design",
+      "services": ["Product UX", "Onboarding Design", "UI Systems"],
+      "outcomes": [
+        "Reduced onboarding time through cleaner flow design and task sequencing.",
+        "Designed a UI making complex B2B workflows visually navigable.",
+        "Improved team adoption rates by prioritizing clarity over feature density.",
+        "Created a component system ready to scale with the product roadmap."
+      ],
+      "ctaLabel": "View Case Study"
+    },
+    {
+      "slug": "kittykat",
+      "title": "KittyKat",
+      "description": "Designed the visual language and production system that turned AI-generated assets into a repeatable creative engine for campaigns.",
+      "category": "Visual Design System",
+      "services": ["Design System", "Visual Language", "Creative Ops"],
+      "outcomes": [
+        "Built a production system turning AI assets into campaign-ready creatives.",
+        "Reduced creative turnaround time from days to hours.",
+        "Established a visual language keeping AI-generated assets brand-consistent.",
+        "Created a scalable system usable across multiple campaigns and channels."
+      ],
+      "thumbnailSrc": "/assets/KK/Cover-summary.png",
+      "ctaLabel": "View Case Study",
+      "workGallery": [
+        { "src": "/assets/KK/Cover-summary.png", "alt": "Visual design overview", "label": "VISUAL DESIGN" },
+        { "src": "/assets/KK/mock1.png", "alt": "Campaign interface", "label": "CAMPAIGN INTERFACE" },
+        { "src": "/assets/KK/mock2.png", "alt": "AI output view", "label": "AI OUTPUT" },
+        { "src": "/assets/KK/mock3.png", "alt": "Creative system", "label": "CREATIVE SYSTEM" }
+      ],
+      "proofPoints": [
+        { "iconKey": "sparkles", "title": "Automated product-to-model generation", "description": "Turned product photos into model visuals through a faster AI-led production workflow." },
+        { "iconKey": "layoutGrid", "title": "Improved realism and quality", "description": "Used data preprocessing and hierarchical refinement to improve proportion accuracy and premium visual output." },
+        { "iconKey": "scanSearch", "title": "Scaled brand visual production", "description": "Reduced image creation time and made it easier to produce larger volumes of usable campaign assets." }
+      ],
+      "testimonial": {
+        "quote": "The value of the work was not just faster image generation. It was building an AI visual pipeline that improved realism, reduced production delay, and made large-scale branded output far more usable.",
+        "attribution": "KittyKat product team"
+      }
+    }
+  ],
+  "approach": {
+    "label": "How we design it",
+    "headline": "Design that earns trust before users read a word.",
+    "principles": [
+      {
+        "title": "Clarity before aesthetics",
+        "description": "A beautiful interface that confuses people is a failed interface. We design for comprehension first — then make it look like it means business."
+      },
+      {
+        "title": "Design and engineering in the same room",
+        "description": "Our design decisions are made with the build in mind. No specs that can't be shipped. No handoff surprises."
+      },
+      {
+        "title": "Systems, not screens",
+        "description": "We design component systems that scale with the product — so the tenth screen is as considered as the first."
+      }
+    ]
+  },
+  "servicesTitle": "UI/UX Design Services",
+  "services": [
+    {
+      "title": "Product UX and flow design",
+      "description": "User flows, information architecture, and interaction design for products that need to feel intuitive on first contact — not after onboarding.",
+      "iconKey": "palette"
+    },
+    {
+      "title": "Interface design and design systems",
+      "description": "Component libraries, visual systems, and screen design built to be consistent, scalable, and fast for engineering to implement.",
+      "iconKey": "layout"
+    },
+    {
+      "title": "Mobile and cross-platform design",
+      "description": "iOS, Android, and responsive web — designed as one coherent experience, not three separate projects adapted from each other.",
+      "iconKey": "smartphone"
+    },
+    {
+      "title": "Admin and operator interfaces",
+      "description": "Dashboards, control surfaces, and data-heavy interfaces designed for the people who run the product — not just the people who buy it.",
+      "iconKey": "layoutDashboard"
+    }
+  ],
+  "pageTestimonial": {
+    "label": "Client perspective",
+    "quote": "The work made a technically complex drone business easier to understand and easier to trust. Website, product UX, and supporting assets finally reinforced the same story instead of fragmenting it.",
+    "name": "General Aeronautics engagement",
+    "attribution": "Aviation Technology"
+  },
+  "secondaryCtaLabel": "See how we'd approach your product",
+  "secondaryCtaHref": "/#process"
+}

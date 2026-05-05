@@ -1,0 +1,186 @@
+{
+  "hero": {
+    "title": "Build AI into the product. Not on top of it.",
+    "subtitle": "AI-Native Engineering",
+    "description": "We design and ship AI systems that are native to the product — shaping how it works, adapts, and delivers value.",
+    "ctaLabel": "Start Your Project",
+    "ctaHref": "/#process"
+  },
+  "bestFit": {
+    "label": "Best fit",
+    "description": "Founders building products where AI is the core experience — not a feature. Especially teams moving from prototype to production, or replacing brittle integrations with something that actually scales."
+  },
+  "caseStudiesTitle": "AI-Native Engineering Case Studies",
+  "caseStudiesDescription": "Proof from AI product builds, copilot deployments, and full-stack systems shipped for founders moving fast.",
+  "caseStudies": [
+    {
+      "slug": "kittykat",
+      "title": "KittyKat",
+      "description": "Built the AI-powered creative production system that enabled a brand studio to launch high-volume campaigns with AI-generated visuals.",
+      "category": "AI Creative Production",
+      "services": ["AI Integration", "Workflow Engineering", "Automation"],
+      "outcomes": [
+        "Reduced creative production time by 80% through AI-powered automation.",
+        "Built a repeatable content generation pipeline for high-volume campaigns.",
+        "Delivered a production-ready system integrated into the team's existing workflow.",
+        "Enabled the team to scale content output without scaling headcount."
+      ],
+      "thumbnailSrc": "/assets/bevolve/cover-summary.png",
+      "ctaLabel": "View Case Study",
+      "workGallery": [
+        { "src": "/assets/KK/Cover-home.png", "alt": "System interface", "label": "SYSTEM INTERFACE" },
+        { "src": "/assets/KK/mock1.png", "alt": "AI production pipeline", "label": "AI PRODUCTION" },
+        { "src": "/assets/KK/mock-detail.png", "alt": "Creative pipeline detail", "label": "CREATIVE PIPELINE" },
+        { "src": "/assets/KK/full-screenshot.png", "alt": "Campaign output", "label": "CAMPAIGN OUTPUT" }
+      ],
+      "proofPoints": [
+        { "iconKey": "sparkles", "title": "Automated product-to-model generation", "description": "Turned product photos into model visuals through a faster AI-led production workflow." },
+        { "iconKey": "layoutGrid", "title": "Improved realism and quality", "description": "Used data preprocessing and hierarchical refinement to improve proportion accuracy and premium visual output." },
+        { "iconKey": "scanSearch", "title": "Scaled brand visual production", "description": "Reduced image creation time and made it easier to produce larger volumes of usable campaign assets." }
+      ],
+      "testimonial": {
+        "quote": "The value of the work was not just faster image generation. It was building an AI visual pipeline that improved realism, reduced production delay, and made large-scale branded output far more usable.",
+        "attribution": "KittyKat product team"
+      }
+    },
+    {
+      "slug": "bevolve",
+      "title": "Bevolve AI",
+      "description": "Turned fragmented sustainability reporting into an AI-guided system teams could trust for faster, evidence-based decisions.",
+      "category": "ESG Intelligence",
+      "services": ["AI Integration", "Reporting Automation", "Decision Support"],
+      "outcomes": [
+        "Automated ESG data collection from fragmented sources into a unified dashboard.",
+        "Reduced reporting time from weeks to hours with AI-assisted generation.",
+        "Made compliance evidence traceable and auditable at report time.",
+        "Built an intelligence layer teams trusted for faster sustainability decisions."
+      ],
+      "thumbnailSrc": "/assets/bevolve/cover-summary.png",
+      "ctaLabel": "View Case Study",
+      "workGallery": [
+        { "src": "/assets/bevolve/cover-home.png", "alt": "ESG dashboard", "label": "ESG DASHBOARD" },
+        { "src": "/assets/bevolve/mock1.png", "alt": "Data interface", "label": "DATA INTERFACE" },
+        { "src": "/assets/bevolve/mock2.png", "alt": "Report view", "label": "REPORT VIEW" },
+        { "src": "/assets/bevolve/mock3.png", "alt": "Analytics layer", "label": "ANALYTICS LAYER" }
+      ],
+      "proofPoints": [
+        { "iconKey": "bot", "title": "Connected fragmented data", "description": "Unified diverse ESG and GHG inputs into one more manageable reporting and compliance flow." },
+        { "iconKey": "barChart3", "title": "Improved decision support", "description": "Added AI-guided insight generation, benchmarking, and natural-language access to speed up review workflows." },
+        { "iconKey": "sparkles", "title": "Raised trust and usability", "description": "Made complex sustainability reporting easier to understand while preserving transparency and rigor." }
+      ],
+      "testimonial": {
+        "quote": "The strongest shift was not just automation, but coherence. Reporting, benchmarking, and AI-guided analysis started feeling like one usable system, which made complex ESG work easier to navigate and easier to act on.",
+        "attribution": "Bevolve.ai engagement"
+      }
+    },
+    {
+      "slug": "ageshift",
+      "title": "AgeShift",
+      "description": "Engineered the AI-driven wellness intelligence layer that personalized aging journeys for a health-first consumer platform.",
+      "category": "Health AI",
+      "services": ["AI Engineering", "Full-Stack Build", "Product Strategy"],
+      "outcomes": [
+        "Delivered personalized aging wellness recommendations at scale.",
+        "Built an AI layer that adapted journeys based on real behavioral signals.",
+        "Reduced manual care coordination overhead through intelligent automation.",
+        "Launched a production system handling 10K+ user personalization events daily."
+      ],
+      "thumbnailSrc": "/assets/ageshift/ageshift_cover.png",
+      "ctaLabel": "View Case Study",
+      "workGallery": [
+        { "src": "/assets/ageshift/ageshift_cover.png", "alt": "Platform overview", "label": "PLATFORM OVERVIEW" },
+        { "src": "/assets/ageshift/web-ss1.png", "alt": "User journey", "label": "USER JOURNEY" },
+        { "src": "/assets/ageshift/web-ss2.png", "alt": "Wellness interface", "label": "WELLNESS INTERFACE" },
+        { "src": "/assets/ageshift/onboarding1.png", "alt": "Onboarding flow", "label": "ONBOARDING FLOW" }
+      ],
+      "proofPoints": [
+        { "iconKey": "sparkles", "title": "Personalization at scale", "description": "Delivered adaptive wellness recommendations based on real behavioral signals for each user." },
+        { "iconKey": "bot", "title": "Intelligent automation", "description": "Reduced manual care coordination overhead through an AI layer that handled routine decisions automatically." },
+        { "iconKey": "barChart3", "title": "Production-ready system", "description": "Launched a platform handling 10K+ personalization events daily, built for institutional growth." }
+      ],
+      "testimonial": {
+        "quote": "The AI layer didn't just speed things up. It made the product feel genuinely personalised in a way that users noticed and trusted.",
+        "attribution": "AgeShift product team"
+      }
+    },
+    {
+      "slug": "tvam",
+      "title": "tvam",
+      "description": "Unified product narrative and campaign touchpoints to improve trust, response quality, and acquisition efficiency.",
+      "category": "Health Insurance AI",
+      "services": ["AI Integration", "Product Engineering", "Cloud Deployment"],
+      "outcomes": [
+        "Unified product messaging across all digital touchpoints.",
+        "Improved lead quality through clearer positioning on landing pages.",
+        "Reduced cost-per-acquisition with tighter campaign targeting.",
+        "Built a scalable analytics foundation for ongoing optimization."
+      ],
+      "thumbnailSrc": "/assets/tvam/cover-summary.png",
+      "ctaLabel": "View Case Study",
+      "workGallery": [
+        { "src": "/assets/tvam/cover-home.png", "alt": "Website cover", "label": "WEBSITE COVER" },
+        { "src": "/assets/tvam/mock1.png", "alt": "Product interface", "label": "PRODUCT INTERFACE" },
+        { "src": "/assets/tvam/mock2.png", "alt": "UI design", "label": "UI DESIGN" },
+        { "src": "/assets/tvam/mock3.png", "alt": "Campaign mock", "label": "CAMPAIGN MOCK" }
+      ],
+      "proofPoints": [
+        { "iconKey": "sparkles", "title": "Unified product messaging", "description": "Aligned all digital touchpoints around a clearer product narrative that improved trust and response quality." },
+        { "iconKey": "layoutGrid", "title": "Improved acquisition efficiency", "description": "Tighter campaign targeting reduced cost-per-acquisition while clearer positioning improved lead quality." },
+        { "iconKey": "barChart3", "title": "Scalable analytics foundation", "description": "Set up tracking and insight loops that turned campaign data into smarter, faster growth decisions." }
+      ],
+      "testimonial": {
+        "quote": "Partnering with Yuvabe Studios for over a year, we've seen exceptional results. Their deep understanding of our vision and customer segments, combined with prompt responsiveness, has strengthened our brand.",
+        "attribution": "Aruna Sampige, tvam Technologies Pvt. Ltd."
+      }
+    }
+  ],
+  "approach": {
+    "label": "How we build it",
+    "headline": "AI that works in production, not just in demos.",
+    "principles": [
+      {
+        "title": "Product-first, AI-second",
+        "description": "We start with what the user actually needs to do, then decide where AI creates the most leverage. Not the other way around."
+      },
+      {
+        "title": "Built to be reliable",
+        "description": "Retrieval, orchestration, validation, fallback. We build the infrastructure that makes AI behaviour predictable at scale."
+      },
+      {
+        "title": "Shipped, not prototyped",
+        "description": "Every AI workstream is paired with the cloud infrastructure, deployment pipelines, and scaling patterns it needs to stay up in production — not just pass a demo."
+      }
+    ]
+  },
+  "servicesTitle": "AI-Native Engineering Services",
+  "services": [
+    {
+      "title": "AI product architecture",
+      "description": "Designing the AI layer before writing the first line of code. Model selection, retrieval strategy, orchestration, and the system logic that holds it together.",
+      "iconKey": "cpu"
+    },
+    {
+      "title": "RAG and retrieval systems",
+      "description": "Vector search, document ingestion, and retrieval pipelines that give AI the right context at the right moment — without hallucinating the rest.",
+      "iconKey": "database"
+    },
+    {
+      "title": "LLM integration and orchestration",
+      "description": "GPT, Claude, Gemini, or open-source — integrated into product flows with prompt engineering, output validation, and fallback logic built in.",
+      "iconKey": "bot"
+    },
+    {
+      "title": "Cloud infrastructure and deployment",
+      "description": "CI/CD pipelines, secure cloud deployment, and scalable backend architecture. AI products that stay up, stay fast, and stay auditable.",
+      "iconKey": "cloud"
+    }
+  ],
+  "pageTestimonial": {
+    "label": "Client perspective",
+    "quote": "What mattered most here was orchestration. Multiple AI tools, retrieval workflows, and cloud systems were brought into one product experience that felt useful, reliable, and much easier to navigate.",
+    "name": "TVAM engagement",
+    "attribution": "Health Insurance AI"
+  },
+  "secondaryCtaLabel": "See how we'd approach your build",
+  "secondaryCtaHref": "/#process"
+}

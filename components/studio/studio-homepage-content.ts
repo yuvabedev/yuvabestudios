@@ -33,6 +33,7 @@ export type StudioHomepageServiceItem = {
   title: string;
   shortLabel: string;
   description: string;
+  href?: string;
 };
 
 export type StudioHomepageServicesContent = {

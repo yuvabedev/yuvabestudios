@@ -1,0 +1,186 @@
+{
+  "hero": {
+    "title": "Digital Marketing",
+    "subtitle": "Campaigns built for traction",
+    "description": "Positioning, pages, campaigns, and analytics — built as one system, so every launch compounds on the last.",
+    "ctaLabel": "Start Your Project",
+    "ctaHref": "/#process"
+  },
+  "bestFit": {
+    "label": "Best fit",
+    "description": "Founders who need marketing to work harder than their budget — at launch, at reposition, or when spend needs to become a system."
+  },
+  "caseStudiesTitle": "Digital Marketing Case Studies",
+  "caseStudiesDescription": "Proof from launch campaigns, positioning systems, and growth loops built for founders moving fast.",
+  "caseStudies": [
+    {
+      "slug": "av-marathon",
+      "title": "AV Marathon",
+      "description": "Built a full-funnel campaign system for a city running community — turning each race season into repeatable growth.",
+      "category": "Sports Marketing",
+      "services": ["Campaign Strategy", "Brand Activation", "Community Growth"],
+      "outcomes": [
+        "Doubled race season registrations with a community-first campaign system.",
+        "Built repeatable email and social templates used across 4 race editions.",
+        "Increased sponsor visibility through a professional brand identity rollout.",
+        "Created word-of-mouth growth loops through post-race content."
+      ],
+      "thumbnailSrc": "/assets/av-marathon/marathon.png",
+      "ctaLabel": "View Case Study",
+      "workGallery": [
+        { "src": "/assets/av-marathon/poster_01.png", "alt": "Campaign poster", "label": "CAMPAIGN POSTER" },
+        { "src": "/assets/av-marathon/marathon.png", "alt": "Race visual", "label": "RACE VISUAL" },
+        { "src": "/assets/av-marathon/m1.png", "alt": "Community content", "label": "COMMUNITY CONTENT" },
+        { "src": "/assets/av-marathon/bib.png", "alt": "Event assets", "label": "EVENT ASSETS" }
+      ],
+      "proofPoints": [
+        { "iconKey": "sparkles", "title": "Doubled registrations", "description": "Built a community-first campaign system that turned each race season into repeatable registration growth." },
+        { "iconKey": "layoutGrid", "title": "Repeatable campaign system", "description": "Created email and social templates reused across 4 race editions, reducing campaign setup time significantly." },
+        { "iconKey": "scanSearch", "title": "Grew brand awareness", "description": "Increased sponsor visibility and word-of-mouth through a consistent brand identity and post-race content." }
+      ],
+      "testimonial": {
+        "quote": "Every race season felt more organised and better attended than the last. The campaign system made it easy to keep the momentum going without starting from scratch each time.",
+        "attribution": "AV Marathon team"
+      }
+    },
+    {
+      "slug": "rangasutra",
+      "title": "Rangasutra",
+      "description": "Crafted a digital brand narrative for an artisan collective turning Rajasthani craft heritage into a modern lifestyle story.",
+      "category": "Brand Storytelling",
+      "services": ["Brand Strategy", "Content System", "Community Growth"],
+      "outcomes": [
+        "Elevated artisan stories into a premium lifestyle narrative.",
+        "Built a content system connecting craft heritage to modern buyers.",
+        "Increased community engagement through authentic visual storytelling.",
+        "Created assets usable across e-commerce, social, and wholesale."
+      ],
+      "thumbnailSrc": "/assets/rangsutra/banner.png",
+      "ctaLabel": "View Case Study",
+      "workGallery": [
+        { "src": "/assets/rangsutra/banner.png", "alt": "Brand banner", "label": "BRAND BANNER" },
+        { "src": "/assets/rangsutra/handloom.png", "alt": "Craft heritage", "label": "CRAFT HERITAGE" },
+        { "src": "/assets/rangsutra/newsletter-1.png", "alt": "Newsletter design", "label": "NEWSLETTER DESIGN" },
+        { "src": "/assets/rangsutra/women-1.png", "alt": "Visual story", "label": "VISUAL STORY" }
+      ],
+      "proofPoints": [
+        { "iconKey": "sparkles", "title": "Premium brand narrative", "description": "Elevated artisan stories into a lifestyle narrative that resonated with modern buyers across channels." },
+        { "iconKey": "layoutGrid", "title": "Cross-channel content system", "description": "Built assets usable across e-commerce, social, and wholesale — reducing production overhead per campaign." },
+        { "iconKey": "scanSearch", "title": "Community engagement growth", "description": "Authentic visual storytelling drove measurable increases in community engagement and brand recognition." }
+      ],
+      "testimonial": {
+        "quote": "The brand narrative finally gave us a way to talk about the craft that felt both premium and honest. It translated across every channel we used.",
+        "attribution": "Rangasutra brand team"
+      }
+    },
+    {
+      "slug": "tvam",
+      "title": "tvam",
+      "description": "Unified product narrative and campaign touchpoints to improve trust, response quality, and acquisition efficiency.",
+      "category": "Campaign Strategy",
+      "services": ["Positioning", "Landing Pages", "Analytics"],
+      "outcomes": [
+        "Unified product messaging across all digital touchpoints.",
+        "Improved lead quality through clearer positioning on landing pages.",
+        "Reduced cost-per-acquisition with tighter campaign targeting.",
+        "Built a scalable analytics foundation for ongoing optimization."
+      ],
+      "thumbnailSrc": "/assets/tvam/cover-summary.png",
+      "ctaLabel": "View Case Study",
+      "workGallery": [
+        { "src": "/assets/tvam/cover-home.png", "alt": "Website cover", "label": "WEBSITE COVER" },
+        { "src": "/assets/tvam/mock1.png", "alt": "Product interface", "label": "PRODUCT INTERFACE" },
+        { "src": "/assets/tvam/mock2.png", "alt": "UI design", "label": "UI DESIGN" },
+        { "src": "/assets/tvam/mock3.png", "alt": "Campaign mock", "label": "CAMPAIGN MOCK" }
+      ],
+      "proofPoints": [
+        { "iconKey": "sparkles", "title": "Unified product messaging", "description": "Aligned all digital touchpoints around a clearer product narrative that improved trust and response quality." },
+        { "iconKey": "layoutGrid", "title": "Improved acquisition efficiency", "description": "Tighter campaign targeting reduced cost-per-acquisition while clearer positioning improved lead quality." },
+        { "iconKey": "barChart3", "title": "Scalable analytics foundation", "description": "Set up tracking and insight loops that turned campaign data into smarter, faster growth decisions." }
+      ],
+      "testimonial": {
+        "quote": "Partnering with Yuvabe Studios for over a year, we've seen exceptional results. Their deep understanding of our vision and customer segments, combined with prompt responsiveness, has strengthened our brand.",
+        "attribution": "Aruna Sampige, tvam Technologies Pvt. Ltd."
+      }
+    },
+    {
+      "slug": "hemplanet",
+      "title": "Hemplanet",
+      "description": "Positioned a hemp-first lifestyle brand for digital growth with SEO-led content and performance campaigns.",
+      "category": "Sustainable Growth",
+      "services": ["Content Strategy", "SEO", "Campaign Ops"],
+      "outcomes": [
+        "Grew organic search traffic through a structured SEO content system.",
+        "Improved brand clarity for a hemp-first category still building trust.",
+        "Launched performance campaigns that improved ROAS quarter over quarter.",
+        "Built a content and distribution system usable across product launches."
+      ],
+      "thumbnailSrc": "/assets/hemplanet/hemplanet.webp",
+      "ctaLabel": "View Case Study",
+      "workGallery": [
+        { "src": "/assets/hemplanet/brand-1.png", "alt": "Brand identity", "label": "BRAND IDENTITY" },
+        { "src": "/assets/hemplanet/brand-2.png", "alt": "Brand visual", "label": "BRAND VISUAL" },
+        { "src": "/assets/hemplanet/design1.png", "alt": "Design asset", "label": "DESIGN ASSET" },
+        { "src": "/assets/hemplanet/workshop1.png", "alt": "Workshop content", "label": "WORKSHOP CONTENT" }
+      ],
+      "proofPoints": [
+        { "iconKey": "barChart3", "title": "Organic traffic growth", "description": "Grew search visibility through a structured SEO content system built around the hemp wellness category." },
+        { "iconKey": "sparkles", "title": "Improved brand clarity", "description": "Made the brand easier to understand and trust in a category still building consumer confidence." },
+        { "iconKey": "layoutGrid", "title": "Better ROAS quarter over quarter", "description": "Performance campaigns became more efficient over time, with a content and distribution system ready for each product launch." }
+      ],
+      "testimonial": {
+        "quote": "The content system gave us a consistent voice in a noisy category. We were able to scale campaigns without losing the brand clarity we'd built.",
+        "attribution": "Hemplanet growth team"
+      }
+    }
+  ],
+  "approach": {
+    "label": "How we approach it",
+    "headline": "Positioning before promotion. Always.",
+    "principles": [
+      {
+        "title": "Positioning before promotion",
+        "description": "We don't run campaigns on unclear messages. Story first, system second."
+      },
+      {
+        "title": "Strategy and execution together",
+        "description": "The team that shapes the message builds the pages and runs the campaigns. No handoffs."
+      },
+      {
+        "title": "Every campaign teaches you something",
+        "description": "We build the analytics in from the start — so you know what to scale, not just what ran."
+      }
+    ]
+  },
+  "servicesTitle": "Digital Marketing Services",
+  "services": [
+    {
+      "title": "Positioning and launch messaging",
+      "description": "Before a campaign can work, the message has to be right. We develop the positioning founders can use across every channel.",
+      "iconKey": "megaphone"
+    },
+    {
+      "title": "Landing pages and conversion systems",
+      "description": "Pages that convert aren't built by instinct. We build systems with tested offer hierarchy, clear CTAs, and trust signals that move the right visitors to act.",
+      "iconKey": "layout"
+    },
+    {
+      "title": "Campaign planning and creative operations",
+      "description": "One-off campaigns don't compound. We build the calendar, the workflow, and the execution rhythm — so teams ship consistently.",
+      "iconKey": "penTool"
+    },
+    {
+      "title": "Analytics and growth experimentation",
+      "description": "Spend without measurement is a guess. We set up tracking, run experiments, and build the loops that tell you what to scale.",
+      "iconKey": "lineChart"
+    }
+  ],
+  "pageTestimonial": {
+    "label": "Client perspective",
+    "quote": "Yuvabe is a talented team of creative, digital marketing professionals who have been instrumental in quite a few campaigns for us in various forms which we have deployed across email, social media campaigns. This has helped us get our message out to our constituents in an engaging manner. The team has a good breadth and deep knowledge of tools and the creative process work. It has been a pleasure to work with them and I would highly recommend them.",
+    "name": "Visa Meyyappan",
+    "attribution": "Chief Administrative Officer, NorthSouth Foundation"
+  },
+  "secondaryCtaLabel": "See how we'd approach your problem",
+  "secondaryCtaHref": "/#process"
+}

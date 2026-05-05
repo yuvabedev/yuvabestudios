@@ -15,6 +15,10 @@
     {
       "label": "AI Workflows",
       "href": "/ai-workflows"
+    },
+    {
+      "label": "Careers",
+      "href": "/careers"
     }
   ],
   "hero": {
@@ -34,19 +38,22 @@
     "supportSuffix": "we help founders decide what to build, launch it well, and scale what works.",
     "items": [
       {
-        "title": "Product Engineering",
+        "title": "AI-Native Engineering",
         "shortLabel": "From product strategy to launch",
-        "description": "Product shaping, roadmap planning, launch clarity, and scaling support for what starts working."
+        "description": "Product shaping, roadmap planning, launch clarity, and scaling support for what starts working.",
+        "href": "/ai-native-engineering"
       },
       {
-        "title": "AI-Native Apps",
+        "title": "UI/UX Design",
         "shortLabel": "AI-native apps and workflows",
-        "description": "Complex AI workflows, copilots, and application-layer products for B2B and B2C teams."
+        "description": "Complex AI workflows, copilots, and application-layer products for B2B and B2C teams.",
+        "href": "/uiux-design"
       },
       {
         "title": "Digital Marketing",
         "shortLabel": "Campaigns built for traction",
-        "description": "Positioning, landing pages, campaigns, and analytics that turn launches into growth."
+        "description": "Positioning, landing pages, campaigns, and analytics that turn launches into growth.",
+        "href": "/digital-marketing"
       }
     ]
   },

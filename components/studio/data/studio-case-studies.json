@@ -408,6 +408,254 @@
     }
   },
   {
+    "id": "av-marathon",
+    "title": "AV Marathon",
+    "sector": "Sports Marketing",
+    "summary": "Built the campaign and brand system for a city running community, turning each race season into a full-funnel growth engine.",
+    "seoTitle": "AV Marathon Case Study",
+    "seoDescription": "See how Yuvabe helped AV Marathon build a campaign system that grew their running community and drove measurable race registrations.",
+    "services": ["Campaign Strategy", "Brand Activation", "Community Growth"],
+    "mediaIconKey": "barChart3",
+    "mockViewport": "landscape",
+    "heroMockHeadline": "Full-funnel race season campaign",
+    "modalIntro": "AV Marathon needed a campaign system that could grow the running community, increase race registrations, and build loyalty across each race season — moving beyond one-off promotions into a repeatable growth engine.",
+    "modalOutcomes": [
+      "Built a full-funnel campaign system across awareness, consideration, and registration stages.",
+      "Strengthened brand identity across digital channels and race-day touchpoints.",
+      "Grew community engagement through social content and email activation loops.",
+      "Created a repeatable seasonal campaign framework for future race editions."
+    ],
+    "modalSections": [
+      { "title": "Context", "body": "AV Marathon was building a city running movement, but campaign execution was inconsistent across seasons — without a systematic approach to turning interest into registrations." },
+      { "title": "Challenge", "body": "The community had energy but lacked a campaign architecture that could reliably move runners from discovery through registration without heavy manual effort each season." },
+      { "title": "What we changed", "body": "Yuvabe built a full-funnel campaign system covering social storytelling, email activation, and registration pathways tied to each race edition's narrative." },
+      { "title": "Outcome", "body": "A more confident campaign operation, stronger community growth, and a repeatable launch system that made each new race season easier to execute." }
+    ],
+    "modalProofPoints": [
+      { "title": "Built a repeatable campaign engine", "iconKey": "barChart3", "description": "Designed a seasonal campaign framework that made each race edition easier to launch with consistent community growth." },
+      { "title": "Strengthened community storytelling", "iconKey": "sparkles", "description": "Connected brand narrative to runner identity to drive organic sharing and word-of-mouth across the community." },
+      { "title": "Improved registration conversion", "iconKey": "scanSearch", "description": "Built clearer activation loops from awareness content through to race registration." }
+    ],
+    "modalTestimonial": { "quote": "The campaign system gave us a clearer way to grow the community and drive registrations every season instead of rebuilding the approach from scratch each time.", "attribution": "AV Marathon team" }
+  },
+  {
+    "id": "rangasutra",
+    "title": "Rangasutra",
+    "sector": "Artisan Commerce",
+    "summary": "Crafted a digital brand narrative for an artisan collective turning Rajasthani craft heritage into a modern lifestyle commerce story.",
+    "seoTitle": "Rangasutra Case Study",
+    "seoDescription": "See how Yuvabe helped Rangasutra translate artisan craft heritage into a compelling digital brand narrative and content system.",
+    "services": ["Brand Storytelling", "Digital Presence", "Content Strategy"],
+    "mediaIconKey": "sparkles",
+    "mockViewport": "landscape",
+    "heroMockHeadline": "Craft heritage meets modern brand story",
+    "modalIntro": "Rangasutra needed to bring their artisan story into the digital space without losing the authenticity and depth that makes handmade craft meaningful — while still communicating clearly to modern lifestyle buyers.",
+    "modalOutcomes": [
+      "Created a cohesive digital brand narrative connecting artisan heritage to modern consumer identity.",
+      "Built a content system that made the craft story visible across social, commerce, and digital touchpoints.",
+      "Improved brand credibility and product trust through more intentional storytelling.",
+      "Laid a stronger foundation for community growth and international brand recognition."
+    ],
+    "modalSections": [
+      { "title": "Context", "body": "Rangasutra is a social enterprise built around Rajasthani artisans. The challenge was translating deep craft heritage into a modern digital presence without flattening the story." },
+      { "title": "Challenge", "body": "Craft brands often default to nostalgia. Rangasutra needed a narrative that honored tradition while resonating with contemporary buyers who care about both craft and ethics." },
+      { "title": "What we changed", "body": "Yuvabe shaped a content strategy and digital brand system centered on the people, process, and community behind the craft — making the story feel specific and real, not generic." },
+      { "title": "Outcome", "body": "A more coherent brand story, stronger digital content, and a clearer foundation for building community and credibility across digital channels." }
+    ],
+    "modalProofPoints": [
+      { "title": "Translated heritage into digital narrative", "iconKey": "sparkles", "description": "Built a content framework that made Rangasutra's artisan story accessible and resonant without losing authenticity." },
+      { "title": "Strengthened product trust", "iconKey": "layoutGrid", "description": "Brought story, craft process, and community into clearer alignment across digital touchpoints." },
+      { "title": "Built for community growth", "iconKey": "barChart3", "description": "Created a brand content system the team could use consistently to grow digital presence and recognition." }
+    ],
+    "modalTestimonial": { "quote": "The work helped us find a way to tell the artisan story clearly in digital spaces — one that felt true to where we came from and compelling to where we're going.", "attribution": "Rangasutra team" }
+  },
+  {
+    "id": "hemplanet",
+    "title": "Hemplanet",
+    "sector": "Sustainable Commerce",
+    "summary": "Built an SEO-led content strategy and performance campaign system for a hemp-based lifestyle brand navigating a new market category.",
+    "seoTitle": "Hemplanet Case Study",
+    "seoDescription": "See how Yuvabe helped Hemplanet build an SEO-led content and campaign system to drive growth in the hemp lifestyle category.",
+    "services": ["Content Strategy", "SEO", "Campaign Execution"],
+    "mediaIconKey": "barChart3",
+    "mockViewport": "landscape",
+    "heroMockHeadline": "Category-led content and growth system",
+    "modalIntro": "Hemplanet was building in a new consumer category with low awareness and mixed signals from buyers — the challenge was building credibility and discovery at the same time through a content-first growth approach.",
+    "modalOutcomes": [
+      "Built an SEO-led content strategy that improved organic discovery across the hemp category.",
+      "Created educational content that turned category skepticism into buyer confidence.",
+      "Launched performance campaigns aligned to content-driven product discovery.",
+      "Established a sustainable content operation for ongoing category leadership."
+    ],
+    "modalSections": [
+      { "title": "Context", "body": "Hemplanet was one of the early hemp lifestyle brands in India — which meant educating the market and building trust while simultaneously driving product discovery and conversion." },
+      { "title": "Challenge", "body": "Low category awareness and buyer hesitation required a content-first approach that could drive trust, improve SEO discoverability, and connect to purchase intent at the same time." },
+      { "title": "What we changed", "body": "Yuvabe built an SEO content strategy and supporting performance campaigns tied to category education and product benefits, with a repeatable content operation the team could sustain." },
+      { "title": "Outcome", "body": "Better organic visibility, more confident buyer journeys, and a content system that gave Hemplanet a stronger foundation for long-term category leadership." }
+    ],
+    "modalProofPoints": [
+      { "title": "Built category discovery engine", "iconKey": "scanSearch", "description": "SEO-led content strategy improved organic visibility across hemp lifestyle keywords and buyer intent signals." },
+      { "title": "Turned education into conversion", "iconKey": "sparkles", "description": "Educational content reduced buyer hesitation and improved the path from discovery to product purchase." },
+      { "title": "Created repeatable content system", "iconKey": "barChart3", "description": "Built a sustainable content operation aligned to category growth and ongoing campaign execution." }
+    ],
+    "modalTestimonial": { "quote": "The content strategy gave us a clearer way to grow organic discovery and build buyer trust in a category where most people still had questions.", "attribution": "Hemplanet team" }
+  },
+  {
+    "id": "matrimandir",
+    "title": "Matrimandir",
+    "sector": "Spiritual & Cultural",
+    "summary": "Designed a contemplative digital presence for the iconic meditation center at Auroville, balancing sacred depth with accessible visual clarity.",
+    "seoTitle": "Matrimandir Case Study",
+    "seoDescription": "See how Yuvabe designed a digital presence for Matrimandir that honored its contemplative depth while becoming more accessible to visitors and seekers.",
+    "services": ["UX Design", "Visual Identity", "Web Design"],
+    "mediaIconKey": "layoutGrid",
+    "mockViewport": "landscape",
+    "heroMockHeadline": "Sacred space meets accessible digital design",
+    "modalIntro": "Matrimandir is a globally recognized meditation center at Auroville. The digital challenge was honoring its spiritual significance and visual beauty while making the experience more navigable for first-time visitors and international seekers.",
+    "modalOutcomes": [
+      "Created a digital presence that reflected the contemplative and sacred character of the space.",
+      "Improved information clarity for visitors planning their first experience.",
+      "Built a visual system that extended the architecture's calm aesthetic into digital interfaces.",
+      "Made the site more accessible to international audiences while preserving the depth of the story."
+    ],
+    "modalSections": [
+      { "title": "Context", "body": "Matrimandir sits at the heart of Auroville and draws thousands of visitors and seekers from around the world. The digital touchpoint needed to prepare visitors meaningfully — not just inform them." },
+      { "title": "Challenge", "body": "Designing for a sacred space requires restraint. The aesthetic and content had to convey depth and calm without overcrowding the experience or reducing the space to a tourist checklist." },
+      { "title": "What we changed", "body": "Yuvabe developed a contemplative visual language, information architecture centered on the visitor journey, and a content system that matched the dignity of the physical space." },
+      { "title": "Outcome", "body": "A more intentional digital presence that gave visitors and seekers a clearer, more resonant way to connect with Matrimandir before they arrived." }
+    ],
+    "modalProofPoints": [
+      { "title": "Honored the space's sacred character", "iconKey": "sparkles", "description": "Designed a visual system and content architecture that matched the calm depth of the physical meditation center." },
+      { "title": "Improved visitor preparation", "iconKey": "layoutGrid", "description": "Restructured visitor information to reduce confusion and make the first-time experience more welcoming." },
+      { "title": "Extended the aesthetic into digital", "iconKey": "scanSearch", "description": "Created a consistent visual language that carried the architecture's calm into the digital interface." }
+    ],
+    "modalTestimonial": { "quote": "The design found a way to represent the space with the restraint and depth it deserves — making the digital touchpoint feel like a genuine extension of Matrimandir rather than a promotion of it.", "attribution": "Matrimandir engagement" }
+  },
+  {
+    "id": "buglerock",
+    "title": "Buglerock",
+    "sector": "Music & Entertainment",
+    "summary": "Designed the product identity and interface architecture for a music-driven platform connecting artists, venues, and event creators.",
+    "seoTitle": "Buglerock Case Study",
+    "seoDescription": "See how Yuvabe designed Buglerock's product identity and platform interface for artists, venues, and event communities.",
+    "services": ["Product Design", "Design System", "Brand Identity"],
+    "mediaIconKey": "layoutGrid",
+    "mockViewport": "landscape",
+    "heroMockHeadline": "Platform identity for live music communities",
+    "modalIntro": "Buglerock needed a product identity and interface system that could serve a diverse community of artists, event promoters, and venues — while feeling alive, energetic, and distinctly music-first.",
+    "modalOutcomes": [
+      "Built a platform identity that connected the music community's energy with product usability.",
+      "Designed an interface architecture that made multi-sided community features easier to navigate.",
+      "Created a design system enabling consistent product development across features.",
+      "Improved discoverability for events, artists, and venues across the platform."
+    ],
+    "modalSections": [
+      { "title": "Context", "body": "Buglerock was building a discovery and connection platform for the live music ecosystem — where artists, venues, and event creators all needed to find each other more easily." },
+      { "title": "Challenge", "body": "Designing for a multi-sided platform means balancing competing needs without sacrificing clarity. The interface needed to serve three different user types with one coherent visual identity." },
+      { "title": "What we changed", "body": "Yuvabe built a design system and product identity rooted in the energy of live music while keeping the interface navigable across artist, venue, and promoter perspectives." },
+      { "title": "Outcome", "body": "A more distinctive brand, a cleaner product interface, and a design system that gave the team a faster, more consistent foundation for future feature development." }
+    ],
+    "modalProofPoints": [
+      { "title": "Built a music-first visual identity", "iconKey": "sparkles", "description": "Created a brand and design system that felt alive and energetic while staying clear and usable across user types." },
+      { "title": "Simplified multi-sided navigation", "iconKey": "layoutGrid", "description": "Designed a platform interface that served artists, venues, and promoters without fragmenting the experience." },
+      { "title": "Accelerated product development", "iconKey": "scanSearch", "description": "A consistent design system gave the team faster, more reliable building blocks for new features." }
+    ],
+    "modalTestimonial": { "quote": "The design system gave us a product identity that felt right for the music community and a component foundation that made it faster to build new features without drifting visually.", "attribution": "Buglerock team" }
+  },
+  {
+    "id": "prakiti-sattva",
+    "title": "Prakiti Sattva",
+    "sector": "Wellness",
+    "summary": "Built an Ayurvedic wellness brand's digital touchpoints around a natural design system that made product trust visible across discovery and purchase.",
+    "seoTitle": "Prakiti Sattva Case Study",
+    "seoDescription": "See how Yuvabe designed Prakiti Sattva's digital product experience to build buyer trust in Ayurvedic wellness.",
+    "services": ["UX Research", "Product Design", "Design System"],
+    "mediaIconKey": "layoutGrid",
+    "mockViewport": "landscape",
+    "heroMockHeadline": "Natural design system for wellness trust",
+    "modalIntro": "Prakiti Sattva needed a digital experience that matched the authenticity and care of Ayurvedic wellness — where product trust is built through transparency, sensory language, and a visual system that felt genuinely natural.",
+    "modalOutcomes": [
+      "Created a design system rooted in natural wellness aesthetics that improved product trust.",
+      "Improved discovery and purchase flows through clearer information and visual hierarchy.",
+      "Built interface patterns that made ingredient transparency and product benefits feel accessible.",
+      "Strengthened brand cohesion across digital touchpoints from discovery through checkout."
+    ],
+    "modalSections": [
+      { "title": "Context", "body": "Prakiti Sattva was building a premium Ayurvedic product line where buyer trust depends on transparency, ingredient clarity, and a visual language that feels consistent with the wellness ethos." },
+      { "title": "Challenge", "body": "Most wellness brands either over-design or under-invest in digital experience. The opportunity was to find a middle path — natural and credible, not clinical or cluttered." },
+      { "title": "What we changed", "body": "Yuvabe built a design system from the brand's visual language, then shaped product discovery, ingredient communication, and purchase flows around what buyers needed to feel confident." },
+      { "title": "Outcome", "body": "A more credible digital presence, clearer product pages, and a design system that made the brand's Ayurvedic depth visible and trustworthy in digital spaces." }
+    ],
+    "modalProofPoints": [
+      { "title": "Built trust through visual clarity", "iconKey": "sparkles", "description": "Design system rooted in natural wellness aesthetics that reduced visual noise and improved product credibility." },
+      { "title": "Improved ingredient transparency", "iconKey": "scanSearch", "description": "Redesigned product pages to surface ingredient information clearly without overwhelming the buyer." },
+      { "title": "Strengthened discovery to purchase flow", "iconKey": "layoutGrid", "description": "Simplified the path from product discovery to checkout through clearer hierarchy and decision cues." }
+    ],
+    "modalTestimonial": { "quote": "The design made our product trust visible in a way we hadn't been able to before — making it easier for buyers to understand what we're about before they committed to a purchase.", "attribution": "Prakiti Sattva team" }
+  },
+  {
+    "id": "bevikve",
+    "title": "Bevikve",
+    "sector": "B2B SaaS",
+    "summary": "Designed the core product UI and onboarding experience for a B2B platform built around operational clarity and team workflows.",
+    "seoTitle": "Bevikve Case Study",
+    "seoDescription": "See how Yuvabe designed Bevikve's core product UI and onboarding flows to improve operational clarity for B2B teams.",
+    "services": ["Product UX", "Onboarding Design", "UI Systems"],
+    "mediaIconKey": "layoutGrid",
+    "mockViewport": "landscape",
+    "heroMockHeadline": "Operational clarity for B2B team workflows",
+    "modalIntro": "Bevikve needed a product UI that could make complex team workflows feel manageable — where first-time users could find their footing quickly and experienced users could move through operations without friction.",
+    "modalOutcomes": [
+      "Designed an onboarding experience that reduced time-to-value for new team users.",
+      "Created a UI system that made complex operations feel clear and predictable.",
+      "Improved workflow legibility through better visual hierarchy and information density management.",
+      "Built a consistent component system for faster, more reliable product iteration."
+    ],
+    "modalSections": [
+      { "title": "Context", "body": "Bevikve was building a B2B operational platform where clarity is the product. Teams needed to navigate complex workflows without a steep learning curve or heavy support dependency." },
+      { "title": "Challenge", "body": "B2B platforms often sacrifice usability for feature completeness. The challenge was designing an interface dense enough for power users while remaining accessible to new team members." },
+      { "title": "What we changed", "body": "Yuvabe rearchitected the onboarding flow to surface value faster and redesigned core workflow screens around the decisions users actually needed to make." },
+      { "title": "Outcome", "body": "A more approachable product, faster first-use experiences, and a cleaner UI foundation that made the team's ongoing development more consistent." }
+    ],
+    "modalProofPoints": [
+      { "title": "Faster onboarding to value", "iconKey": "sparkles", "description": "Redesigned onboarding flows so new users understood the product's value and core actions without heavy guidance." },
+      { "title": "Clearer workflow navigation", "iconKey": "layoutGrid", "description": "Improved visual hierarchy and information architecture across core operational screens." },
+      { "title": "Built consistent UI foundations", "iconKey": "scanSearch", "description": "Component system gave the team reliable building blocks for faster, more consistent product iteration." }
+    ],
+    "modalTestimonial": { "quote": "The redesign made the product feel approachable for new users without taking away the depth our power users needed. That balance was exactly what we were looking for.", "attribution": "Bevikve team" }
+  },
+  {
+    "id": "yuvanext",
+    "title": "YuvaNext",
+    "sector": "EdTech",
+    "summary": "Built the AI-powered career coaching system connecting youth talent to structured learning paths and professional opportunity networks.",
+    "seoTitle": "YuvaNext Case Study",
+    "seoDescription": "See how Yuvabe built YuvaNext's AI career coaching platform to connect youth talent with structured learning and opportunity.",
+    "services": ["AI Architecture", "Full-Stack Engineering", "Product Strategy"],
+    "mediaIconKey": "bot",
+    "mockViewport": "landscape",
+    "heroMockHeadline": "AI career coaching for youth talent",
+    "modalIntro": "YuvaNext was building an AI-powered platform to guide young professionals through skill development, career planning, and opportunity discovery — the challenge was making AI-driven guidance feel personal, structured, and trustworthy.",
+    "modalOutcomes": [
+      "Built an AI career coaching system that personalized learning and opportunity matching for youth users.",
+      "Integrated structured learning paths with AI-driven guidance and progress tracking.",
+      "Connected talent profiles to opportunity networks through intelligent matching.",
+      "Created a scalable platform architecture ready for growing user base and feature depth."
+    ],
+    "modalSections": [
+      { "title": "Context", "body": "YuvaNext was building an EdTech platform where AI coaching could make career development more structured and accessible for young professionals navigating early career decisions." },
+      { "title": "Challenge", "body": "AI coaching needs to feel relevant and trustworthy — not generic. The system had to adapt to individual user goals while maintaining a structured progression through skills and opportunities." },
+      { "title": "What we changed", "body": "Yuvabe built the AI coaching architecture, learning path system, and opportunity matching layer — tying together user profiling, goal setting, and personalized guidance into one coherent product." },
+      { "title": "Outcome", "body": "A platform that gave young users a clearer, more personalized path through career development while giving YuvaNext a scalable AI foundation to grow on." }
+    ],
+    "modalProofPoints": [
+      { "title": "Built AI coaching system", "iconKey": "bot", "description": "Designed and shipped the AI career guidance architecture that personalized development paths for each user." },
+      { "title": "Connected talent to opportunity", "iconKey": "scanSearch", "description": "Built intelligent matching that surfaced relevant opportunities aligned to each user's profile and goals." },
+      { "title": "Scalable platform architecture", "iconKey": "sparkles", "description": "Full-stack engineering foundation designed to grow with the user base and support deeper AI feature development." }
+    ],
+    "modalTestimonial": { "quote": "The AI coaching system made career guidance feel personal and structured in a way that's hard to achieve at scale. Yuvabe's engineering and product thinking made that possible.", "attribution": "YuvaNext team" }
+  },
+  {
     "id": "ageshift",
     "title": "AgeShift",
     "sector": "AI wellness platform",

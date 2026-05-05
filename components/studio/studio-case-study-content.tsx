@@ -14,15 +14,23 @@ import type {
   StudioCaseStudyMockViewport,
 } from "@/components/studio/studio-case-study-mock-card";
 
-export const studioCaseStudyIds = [
+export const studioCaseStudyIds: readonly string[] = [
   "general-aeronautics",
   "bevolve",
   "tvam",
   "kittykat",
   "ageshift",
-] as const;
+  "av-marathon",
+  "rangasutra",
+  "hemplanet",
+  "matrimandir",
+  "buglerock",
+  "prakiti-sattva",
+  "bevikve",
+  "yuvanext",
+];
 
-export type StudioCaseStudyId = (typeof studioCaseStudyIds)[number];
+export type StudioCaseStudyId = string;
 
 export type StudioCaseStudyIconKey =
   | "barChart3"
@@ -185,9 +193,7 @@ const studioCaseStudyLabelToIdMap: Partial<Record<string, StudioCaseStudyId>> = 
 };
 
 // Each case study can override the shared hero contract with logo-led colors while still using the same layout and markup.
-const studioCaseStudyHeroPalettes: Partial<
-  Record<StudioCaseStudyId, StudioCaseStudyHeroPalette>
-> = {
+const studioCaseStudyHeroPalettes: Partial<Record<string, StudioCaseStudyHeroPalette>> = {
   "general-aeronautics": {
     topWash:
       "radial-gradient(circle_at_18%_22%,color-mix(in srgb,var(--cyan-500) 14%,white),rgba(255,255,255,0)_30%),radial-gradient(circle_at_76%_18%,color-mix(in srgb,var(--green-500) 12%,white),rgba(255,255,255,0)_24%),radial-gradient(circle_at_62%_72%,color-mix(in srgb,var(--cyan-200) 14%,white),rgba(255,255,255,0)_34%)",
@@ -247,8 +253,8 @@ export const homepageCaseStudyIds: StudioCaseStudyId[] = [
   "tvam",
 ];
 
-export function isStudioCaseStudyId(value: string): value is StudioCaseStudyId {
-  return studioCaseStudyIds.includes(value as StudioCaseStudyId);
+export function isStudioCaseStudyId(value: string): boolean {
+  return /^[a-z0-9]+(-[a-z0-9]+)*$/.test(value);
 }
 
 export function getStudioCaseStudyHref(id: string) {

@@ -360,14 +360,92 @@
     radial-gradient(78% 56% at 92% 84%, color-mix(in srgb, var(--yellow-500) 78%, white) 0%, color-mix(in srgb, var(--orange-200) 84%, white) 26%, rgba(255, 202, 45, 0.28) 52%, rgba(255, 202, 45, 0) 78%),
     linear-gradient(180deg, #f9fcff 0%, #ffffff 22%, #e9f7ff 48%, #e8ddff 100%);
   --gradient-brand-night-section:
-    radial-gradient(54% 42% at 88% 10%, rgb(150 136 192 / 0.24) 0%, rgb(150 136 192 / 0) 100%),
-    radial-gradient(40% 28% at 52% 100%, rgb(255 202 45 / 0.08) 0%, rgb(255 202 45 / 0) 100%),
-    radial-gradient(48% 42% at 18% 26%, rgb(88 41 199 / 0.18) 0%, rgb(88 41 199 / 0) 100%),
-    linear-gradient(180deg, #1a1237 0%, #140f2b 46%, #0f0c22 100%);
+    radial-gradient(58% 46% at 88% 8%, rgb(150 136 192 / 0.34) 0%, rgb(150 136 192 / 0) 100%),
+    radial-gradient(56% 44% at 12% 22%, rgb(88 41 199 / 0.3) 0%, rgb(88 41 199 / 0) 100%),
+    radial-gradient(44% 30% at 50% 98%, rgb(255 202 45 / 0.12) 0%, rgb(255 202 45 / 0) 100%),
+    linear-gradient(180deg, #111921 0%, #111921 100%);
   --gradient-brand-night-card:
     linear-gradient(180deg, rgb(255 255 255 / 0.06) 0%, rgb(36 23 74 / 0.82) 100%);
   --pattern-brand-night-dots:
     radial-gradient(circle, rgb(150 136 192 / 0.24) 0 1px, transparent 1.3px);
+  --color-workflow-accent: #c8b895;
+  --color-workflow-node-old: #4b6071;
+  --color-workflow-node-old-border: color-mix(in srgb, var(--color-workflow-accent) 46%, white);
+  --color-workflow-native-gold: #e8d5a3;
+  --color-workflow-native-gold-soft: color-mix(in srgb, var(--color-workflow-native-gold) 78%, white);
+  --color-workflow-native-node-fill: #283138;
+  --color-workflow-native-node-stroke: #e0d6bd;
+  --color-workflow-native-arrow-fill: #e0d6bd;
+  --color-workflow-native-node-border: color-mix(in srgb, var(--color-workflow-native-gold) 72%, white);
+  --gradient-workflow-native-canvas:
+    linear-gradient(
+      90deg,
+      color-mix(in srgb, var(--neutral-950) 92%, #02060c) 0%,
+      color-mix(in srgb, var(--color-background-brand-deep) 76%, #02060c) 50%,
+      color-mix(in srgb, var(--neutral-950) 94%, #02060c) 100%
+    );
+  --gradient-workflow-native-streaks:
+    radial-gradient(58% 76% at 18% 54%, color-mix(in srgb, var(--cyan-500) 26%, transparent) 0%, transparent 74%),
+    radial-gradient(56% 78% at 52% 52%, color-mix(in srgb, var(--purple-500) 18%, transparent) 0%, transparent 76%),
+    radial-gradient(48% 70% at 82% 46%, color-mix(in srgb, var(--cyan-500) 24%, transparent) 0%, transparent 74%);
+  --pattern-workflow-native-noise:
+    radial-gradient(circle at 1px 1px, rgb(232 213 163 / 0.08) 0.7px, transparent 0.9px);
+  --gradient-workflow-native-node:
+    linear-gradient(
+      180deg,
+      color-mix(in srgb, var(--color-workflow-node-old) 70%, transparent) 0%,
+      color-mix(in srgb, var(--neutral-950) 78%, var(--color-background-brand-deep)) 100%
+    );
+  --gradient-workflow-native-beam:
+    linear-gradient(
+      90deg,
+      color-mix(in srgb, var(--color-workflow-native-gold) 8%, transparent) 0%,
+      color-mix(in srgb, var(--color-workflow-native-gold) 66%, white) 50%,
+      color-mix(in srgb, var(--color-workflow-native-gold) 8%, transparent) 100%
+    );
+  --color-speed-workflow-accent: #e8d5a3;
+  --color-speed-workflow-border: color-mix(in srgb, var(--cyan-200) 44%, white);
+  --gradient-speed-workflow-canvas:
+    linear-gradient(
+      90deg,
+      color-mix(in srgb, var(--neutral-950) 94%, #02050b) 0%,
+      color-mix(in srgb, var(--color-background-brand-deep) 70%, #02050b) 50%,
+      color-mix(in srgb, var(--neutral-950) 95%, #02050b) 100%
+    );
+  --gradient-speed-workflow-streaks:
+    radial-gradient(62% 70% at 14% 50%, color-mix(in srgb, var(--cyan-500) 20%, transparent) 0%, transparent 74%),
+    radial-gradient(52% 64% at 50% 44%, color-mix(in srgb, var(--purple-500) 22%, transparent) 0%, transparent 76%),
+    radial-gradient(58% 72% at 86% 52%, color-mix(in srgb, var(--cyan-500) 24%, transparent) 0%, transparent 74%);
+  --pattern-speed-workflow-noise:
+    radial-gradient(circle at 1px 1px, rgb(232 213 163 / 0.07) 0.7px, transparent 0.9px);
+  --gradient-speed-prototype-glow:
+    radial-gradient(
+      78% 70% at 50% 48%,
+      color-mix(in srgb, var(--color-speed-workflow-accent) 42%, transparent) 0%,
+      color-mix(in srgb, var(--color-speed-workflow-accent) 12%, transparent) 52%,
+      transparent 100%
+    );
+  --color-speed-workflow-text-strong: color-mix(in srgb, var(--cyan-200) 74%, white);
+  --color-speed-workflow-text-muted: color-mix(in srgb, var(--cyan-200) 54%, white);
+  --color-speed-workflow-panel-bg:
+    linear-gradient(
+      180deg,
+      color-mix(in srgb, var(--color-workflow-node-old) 38%, transparent) 0%,
+      color-mix(in srgb, var(--neutral-950) 76%, transparent) 100%
+    );
+  --color-workflow-node-new-border: color-mix(in srgb, var(--color-workflow-accent) 72%, white);
+  --gradient-workflow-node-new:
+    linear-gradient(
+      180deg,
+      color-mix(in srgb, var(--color-workflow-node-old) 62%, white) 0%,
+      color-mix(in srgb, var(--purple-500) 54%, black) 100%
+    );
+  --gradient-workflow-shift-card:
+    linear-gradient(
+      180deg,
+      color-mix(in srgb, var(--color-workflow-node-old) 24%, white) 0%,
+      color-mix(in srgb, var(--purple-500) 30%, var(--color-background-brand-deep)) 100%
+    );
   --color-border-default: var(--neutral-200);
   --color-border-strong: var(--neutral-300);
   --color-border-brand: var(--purple-500);
@@ -578,6 +656,96 @@ h6 {
   background-image: var(--pattern-brand-night-dots);
   background-repeat: repeat;
   background-size: 12px 12px;
+}
+
+/* This shared utility gives the AI-native lane a premium dark canvas with subtle spectral streaks. */
+.ds-workflow-native-surface {
+  background-image: var(--gradient-workflow-native-canvas);
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+}
+
+/* This shared utility layers soft streak lighting over the native workflow lane without custom per-component recipes. */
+.ds-workflow-native-streaks {
+  background-image: var(--gradient-workflow-native-streaks);
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+}
+
+/* This shared utility adds restrained technical grain so the dark lane feels premium instead of flat. */
+.ds-workflow-native-noise {
+  background-image: var(--pattern-workflow-native-noise);
+  background-repeat: repeat;
+  background-size: 14px 14px;
+}
+
+/* This shared utility provides a reusable pulse for key workflow nodes in the AI-native lane. */
+.ds-workflow-node-pulse {
+  animation: workflow-node-pulse 3.2s ease-in-out infinite;
+}
+
+/* This utility applies a warm outer glow to custom AI-native SVG nodes and keeps the effect reusable. */
+.ds-workflow-native-svg-glow {
+  filter:
+    drop-shadow(0 0 8px rgb(224 214 189 / 0.44))
+    drop-shadow(0 0 22px rgb(224 214 189 / 0.34))
+    drop-shadow(0 0 48px rgb(224 214 189 / 0.22));
+}
+
+/* This shared utility provides the dark premium shell for the Making workflow visualization. */
+.ds-speed-workflow-surface {
+  background-image: var(--gradient-speed-workflow-canvas);
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+}
+
+/* This shared utility overlays atmospheric streak lighting across the workflow shell. */
+.ds-speed-workflow-streaks {
+  background-image: var(--gradient-speed-workflow-streaks);
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+}
+
+/* This shared utility adds subtle grain so the workflow shell feels premium rather than flat. */
+.ds-speed-workflow-noise {
+  background-image: var(--pattern-speed-workflow-noise);
+  background-repeat: repeat;
+  background-size: 14px 14px;
+}
+
+/* This utility adds center-stage emphasis to the prototype card with reusable bloom behavior. */
+.ds-speed-prototype-focus {
+  background-image: var(--gradient-speed-prototype-glow);
+  box-shadow:
+    0 0 0 1px color-mix(in srgb, var(--color-speed-workflow-accent) 42%, transparent),
+    0 0 26px color-mix(in srgb, var(--color-speed-workflow-accent) 34%, transparent),
+    0 0 72px color-mix(in srgb, var(--color-speed-workflow-accent) 22%, transparent),
+    inset 0 0 24px color-mix(in srgb, var(--color-speed-workflow-accent) 18%, transparent);
+  animation: speed-prototype-pulse 3.6s ease-in-out infinite;
+}
+
+/* This utility animates subtle forward particle travel across flow connectors. */
+.ds-speed-flow-particles {
+  stroke-dasharray: 2 10;
+  animation: speed-flow-particles 4s linear infinite;
+}
+
+/* This utility gives loop arrows a slower cadence than primary forward flow. */
+.ds-speed-loop-particles {
+  stroke-dasharray: 2 12;
+  animation: speed-flow-particles 5.8s linear infinite;
+}
+
+/* This stroke utility animates particle-like highlights across path geometry in the workflow SVG. */
+.ds-workflow-flow-particles {
+  stroke-dasharray: 2 10;
+  animation: workflow-flow-particles 4s linear infinite;
+}
+
+/* This variant slows loop-back particle motion so secondary cycles feel calmer than the primary flow. */
+.ds-workflow-loop-particles {
+  stroke-dasharray: 2 12;
+  animation: workflow-flow-particles 5.4s linear infinite;
 }
 
 /* This shared utility provides the default frosted pill fill for badges and chips. */
@@ -957,10 +1125,99 @@ body[data-mobile-nav-open="true"] [data-studio-shell] {
   }
 }
 
+@keyframes workflow-node-pulse {
+  0% {
+    filter: drop-shadow(0 0 8px rgb(232 213 163 / 0.2));
+  }
+
+  50% {
+    filter: drop-shadow(0 0 22px rgb(232 213 163 / 0.45));
+  }
+
+  100% {
+    filter: drop-shadow(0 0 8px rgb(232 213 163 / 0.2));
+  }
+}
+
+@keyframes workflow-flow-particles {
+  from {
+    stroke-dashoffset: 0;
+  }
+
+  to {
+    stroke-dashoffset: -180;
+  }
+}
+
+@keyframes speed-prototype-pulse {
+  0% {
+    box-shadow:
+      0 0 0 1px color-mix(in srgb, var(--color-speed-workflow-accent) 36%, transparent),
+      0 0 20px color-mix(in srgb, var(--color-speed-workflow-accent) 28%, transparent),
+      0 0 54px color-mix(in srgb, var(--color-speed-workflow-accent) 18%, transparent),
+      inset 0 0 18px color-mix(in srgb, var(--color-speed-workflow-accent) 14%, transparent);
+  }
+
+  50% {
+    box-shadow:
+      0 0 0 1px color-mix(in srgb, var(--color-speed-workflow-accent) 52%, transparent),
+      0 0 32px color-mix(in srgb, var(--color-speed-workflow-accent) 44%, transparent),
+      0 0 84px color-mix(in srgb, var(--color-speed-workflow-accent) 28%, transparent),
+      inset 0 0 28px color-mix(in srgb, var(--color-speed-workflow-accent) 22%, transparent);
+  }
+
+  100% {
+    box-shadow:
+      0 0 0 1px color-mix(in srgb, var(--color-speed-workflow-accent) 36%, transparent),
+      0 0 20px color-mix(in srgb, var(--color-speed-workflow-accent) 28%, transparent),
+      0 0 54px color-mix(in srgb, var(--color-speed-workflow-accent) 18%, transparent),
+      inset 0 0 18px color-mix(in srgb, var(--color-speed-workflow-accent) 14%, transparent);
+  }
+}
+
+@keyframes speed-flow-particles {
+  from {
+    stroke-dashoffset: 0;
+  }
+
+  to {
+    stroke-dashoffset: -180;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .hand-drawn-underline {
     animation: none;
     transform: scaleX(1);
     opacity: 1;
+  }
+}
+
+/* Animated signal flow line — used on SVG strokes in the framing funnel graphic. */
+@keyframes signal-flow {
+  0% { stroke-dashoffset: 200; opacity: 0.2; }
+  50% { opacity: 1; }
+  100% { stroke-dashoffset: 0; opacity: 0.2; }
+}
+
+.animate-signal {
+  stroke-dasharray: 8 12;
+  animation: signal-flow 3s linear infinite;
+}
+
+/* Subtle vertical float for SVG streak particles in the framing funnel background. */
+@keyframes float-particle {
+  0%, 100% { transform: translateY(0); opacity: 0.3; }
+  50% { transform: translateY(-4px); opacity: 1; }
+}
+
+.animate-float-particle {
+  animation: float-particle 2.5s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-signal,
+  .animate-float-particle {
+    animation: none;
   }
 }
