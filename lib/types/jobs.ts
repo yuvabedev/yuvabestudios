@@ -20,6 +20,7 @@ export type Job = {
   niceToHave: string[];
   portfolioRequirement?: string;
   benefits?: JobBenefits;
+  workCulture?: string[];
   compensation?: string;
 };
 

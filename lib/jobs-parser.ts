@@ -146,9 +146,8 @@ export function parseJobRow(row: JobRow): Job {
     extractSection(desc, "Key Responsibilities"),
   );
   const requirements = extractBullets(extractSection(desc, "Requirements"));
-  const niceToHaveSection = extractBullets(extractSection(desc, "Nice to Have"));
-  const workCultureSection = extractBullets(extractSection(desc, "Work Culture at Yuvabe"));
-  const niceToHave = [...niceToHaveSection, ...workCultureSection];
+  const niceToHave = extractBullets(extractSection(desc, "Nice to Have"));
+  const workCulture = extractBullets(extractSection(desc, "Work Culture at Yuvabe")) || undefined;
   const portfolioRequirement =
     extractSection(desc, "Portfolio Requirement") || undefined;
   const benefitsText = extractSection(desc, "Benefits");
@@ -171,6 +170,7 @@ export function parseJobRow(row: JobRow): Job {
     niceToHave,
     portfolioRequirement,
     benefits,
+    workCulture: workCulture && workCulture.length > 0 ? workCulture : undefined,
     compensation: undefined,
   };
 }
