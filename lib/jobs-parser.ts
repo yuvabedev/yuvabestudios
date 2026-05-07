@@ -171,6 +171,5 @@ export function parseJobRow(row: JobRow): Job {
     portfolioRequirement,
     benefits,
     workCulture: workCulture && workCulture.length > 0 ? workCulture : undefined,
-    compensation: undefined,
   };
 }

@@ -21,7 +21,6 @@ export type Job = {
   portfolioRequirement?: string;
   benefits?: JobBenefits;
   workCulture?: string[];
-  compensation?: string;
 };
 
 // Shape of a row returned from Supabase jobs_duplicate table
