@@ -13,11 +13,11 @@ const SLUG_OVERRIDES: Record<string, string> = {
 
 function extractSection(text: string, heading: string): string {
   const escapedHeading = heading.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
-  // Match: ### [anything] heading [anything] : [newline] [content]
-  // More forgiving: handles bold **, spaces, etc. around the heading
+  // Match: ### [**]heading[**]: or similar
+  // Captures everything until next ### or ## or # or end
   const pattern = new RegExp(
-    `###.*?${escapedHeading}.*?:?\\s*\\n([\\s\\S]*?)(?=###|##|#|$)`,
-    "i",
+    `^###\\s+[*]*${escapedHeading}[*:]*\\s*$\\n([\\s\\S]*?)(?=^###|^##|^#|$)`,
+    "im",
   );
   const match = text.match(pattern);
   return match ? match[1].trim() : "";
@@ -126,15 +126,13 @@ function parseBenefits(benefitsText: string): JobBenefits | undefined {
 export function parseJobRow(row: JobRow): Job {
   const desc = row.description;
 
-  // Department: from "# Department" heading (may have ** bold formatting **)
-  // Match: # [optional **] text [optional **]
-  const deptMatch = desc.match(/^#\s+\*\*?(.+?)\*\*?[\s:]*$/m);
-  const department = deptMatch ? deptMatch[1].trim().replace(/\*\*/g, "") : "";
+  // Department: from "# **Department**" heading
+  const deptMatch = desc.match(/^#\s+(?:\*{0,2})([^*\n]+)(?:\*{0,2})\s*$/m);
+  const department = deptMatch ? deptMatch[1].trim() : "";
 
-  // Title: from "## Title" heading (may have ** bold formatting **)
-  // Match: ## [optional **] text [optional **]
-  const titleMatch = desc.match(/^##\s+\*\*?(.+?)\*\*?[\s:]*$/m);
-  const title = titleMatch ? titleMatch[1].trim().replace(/\*\*/g, "") : "";
+  // Title: from "## **Title**" heading
+  const titleMatch = desc.match(/^##\s+(?:\*{0,2})([^*\n]+)(?:\*{0,2})\s*$/m);
+  const title = titleMatch ? titleMatch[1].trim() : "";
 
   // Slug: slugify from title (includes static overrides for SEO)
   const slug = makeSlug(title);
