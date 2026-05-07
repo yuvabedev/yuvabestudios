@@ -126,13 +126,13 @@ function parseBenefits(benefitsText: string): JobBenefits | undefined {
 export function parseJobRow(row: JobRow): Job {
   const desc = row.description;
 
-  // Department: from "# **Department**" heading
-  const deptMatch = desc.match(/^#\s+(?:\*{0,2})([^*\n]+)(?:\*{0,2})\s*$/m);
-  const department = deptMatch ? deptMatch[1].trim() : "";
+  // Department: from "# **Department**" heading - match anything between # and next line
+  const deptMatch = desc.match(/^#\s+(.+?)[\s*]*$/m);
+  const department = deptMatch ? deptMatch[1].trim().replace(/\*/g, "") : "";
 
   // Title: from "## **Title**" heading
-  const titleMatch = desc.match(/^##\s+(?:\*{0,2})([^*\n]+)(?:\*{0,2})\s*$/m);
-  const title = titleMatch ? titleMatch[1].trim() : "";
+  const titleMatch = desc.match(/^##\s+(.+?)[\s*]*$/m);
+  const title = titleMatch ? titleMatch[1].trim().replace(/\*/g, "") : "";
 
   // Slug: slugify from title (includes static overrides for SEO)
   const slug = makeSlug(title);
