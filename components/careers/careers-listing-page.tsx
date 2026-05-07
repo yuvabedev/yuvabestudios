@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { motion } from "framer-motion";
 
-import type { Job, JobLevel } from "@/lib/careers-data";
+import type { Job, JobLevel } from "@/lib/types/jobs";
 import type { StudioHomepageNavItem } from "@/components/studio/studio-homepage-content";
 import { StudioHeader } from "@/components/studio/studio-header";
 import {

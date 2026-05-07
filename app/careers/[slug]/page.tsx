@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 
 import { CareersJobDetail } from "@/components/careers/careers-job-detail";
-import { getJobBySlug, jobListings } from "@/lib/careers-data";
+import { getJobBySlug, getAllJobs } from "@/lib/services/jobs";
 import { getAbsoluteUrl } from "@/lib/site";
 import { getStudioHomepageContent } from "@/lib/studio-content";
 
@@ -11,12 +11,13 @@ type JobPageProps = {
 };
 
 export async function generateStaticParams() {
-  return jobListings.map((job) => ({ slug: job.slug }));
+  const jobs = await getAllJobs();
+  return jobs.map((job) => ({ slug: job.slug }));
 }
 
 export async function generateMetadata({ params }: JobPageProps): Promise<Metadata> {
   const { slug } = await params;
-  const job = getJobBySlug(slug);
+  const job = await getJobBySlug(slug);
 
   if (!job) {
     return { title: "Role Not Found" };
@@ -46,7 +47,7 @@ export async function generateMetadata({ params }: JobPageProps): Promise<Metada
 export default async function JobDetailPage({ params }: JobPageProps) {
   const { slug } = await params;
   const [job, homepageContent] = await Promise.all([
-    Promise.resolve(getJobBySlug(slug)),
+    getJobBySlug(slug),
     getStudioHomepageContent(),
   ]);
 

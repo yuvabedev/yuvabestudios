@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 
 import { CareersLandingPage } from "@/components/careers/careers-landing-page";
-import { getJobsByLevel } from "@/lib/careers-data";
+import { getJobsByLevel } from "@/lib/services/jobs";
 import { getAbsoluteUrl } from "@/lib/site";
 import { getStudioHomepageContent } from "@/lib/studio-content";
 
@@ -26,9 +26,11 @@ export const metadata: Metadata = {
 };
 
 export default async function CareersPage() {
-  const homepageContent = await getStudioHomepageContent();
-  const entryJobs = getJobsByLevel("entry");
-  const experiencedJobs = getJobsByLevel("experienced");
+  const [homepageContent, entryJobs, experiencedJobs] = await Promise.all([
+    getStudioHomepageContent(),
+    getJobsByLevel("entry"),
+    getJobsByLevel("experienced"),
+  ]);
 
   const structuredData = {
     "@context": "https://schema.org",

@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 
 import { CareersListingPage } from "@/components/careers/careers-listing-page";
-import { getJobsByLevel } from "@/lib/careers-data";
+import { getJobsByLevel } from "@/lib/services/jobs";
 import { getAbsoluteUrl } from "@/lib/site";
 import { getStudioHomepageContent } from "@/lib/studio-content";
 
@@ -28,7 +28,7 @@ export const metadata: Metadata = {
 export default async function ExperiencedCareersPage() {
   const [homepageContent, jobs] = await Promise.all([
     getStudioHomepageContent(),
-    Promise.resolve(getJobsByLevel("experienced")),
+    getJobsByLevel("experienced"),
   ]);
 
   const structuredData = {

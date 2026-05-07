@@ -4,7 +4,7 @@ import Link from "next/link";
 import { MapPin, Briefcase, Building2, CalendarDays } from "lucide-react";
 import { motion } from "framer-motion";
 
-import type { Job } from "@/lib/careers-data";
+import type { Job } from "@/lib/types/jobs";
 import type { StudioHomepageNavItem } from "@/components/studio/studio-homepage-content";
 import { StudioHeader } from "@/components/studio/studio-header";
 import {
