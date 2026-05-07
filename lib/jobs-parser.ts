@@ -13,11 +13,11 @@ const SLUG_OVERRIDES: Record<string, string> = {
 
 function extractSection(text: string, heading: string): string {
   const escapedHeading = heading.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
-  // Match: ### [**]heading[**]: or similar
-  // Captures everything until next ### or ## or # or end
+  // Match: ### [anything] heading [anything] [newline] [content until next ###]
+  // Simple and forgiving: works with any formatting around the heading
   const pattern = new RegExp(
-    `^###\\s+[*]*${escapedHeading}[*:]*\\s*$\\n([\\s\\S]*?)(?=^###|^##|^#|$)`,
-    "im",
+    `###.*?${escapedHeading}.*?\\n([\\s\\S]*?)(?=###|$)`,
+    "i",
   );
   const match = text.match(pattern);
   return match ? match[1].trim() : "";
