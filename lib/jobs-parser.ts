@@ -146,7 +146,9 @@ export function parseJobRow(row: JobRow): Job {
     extractSection(desc, "Key Responsibilities"),
   );
   const requirements = extractBullets(extractSection(desc, "Requirements"));
-  const niceToHave = extractBullets(extractSection(desc, "Nice to Have"));
+  const niceToHaveSection = extractBullets(extractSection(desc, "Nice to Have"));
+  const workCultureSection = extractBullets(extractSection(desc, "Work Culture at Yuvabe"));
+  const niceToHave = [...niceToHaveSection, ...workCultureSection];
   const portfolioRequirement =
     extractSection(desc, "Portfolio Requirement") || undefined;
   const benefitsText = extractSection(desc, "Benefits");
