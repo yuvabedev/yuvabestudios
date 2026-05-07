@@ -126,14 +126,14 @@ export function parseJobRow(row: JobRow): Job {
 
   // Department: from "# Department" heading
   const deptMatch = desc.match(/^#\s+(.+)/m);
-  const department = deptMatch ? deptMatch[1].trim() : row.department ?? "";
+  const department = deptMatch ? deptMatch[1].trim() : "";
 
   // Title: from "## Title" heading
   const titleMatch = desc.match(/^##\s+(.+)/m);
-  const title = titleMatch ? titleMatch[1].trim() : row.title ?? "";
+  const title = titleMatch ? titleMatch[1].trim() : "";
 
-  // Slug: prefer explicit DB slug, fall back to slugify(title)
-  const slug = row.slug ?? makeSlug(title);
+  // Slug: slugify from title (includes static overrides for SEO)
+  const slug = makeSlug(title);
 
   // Level determination from min experience text
   const minExpText = extractSection(desc, "Minimum Experience");
@@ -151,16 +151,16 @@ export function parseJobRow(row: JobRow): Job {
   const benefitsText = extractSection(desc, "Benefits");
   const benefits = parseBenefits(benefitsText);
 
-  // Format posted date: use created_at if available, convert to YYYY-MM-DD
-  const posted = row.posted ?? row.created_at?.split("T")[0] ?? new Date().toISOString().split("T")[0];
+  // Format posted date from created_at (convert to YYYY-MM-DD)
+  const posted = row.created_at?.split("T")[0] ?? new Date().toISOString().split("T")[0];
 
   return {
     slug,
     title,
     level,
     department,
-    location: row.location ?? "Auroville, India",
-    type: normalizeJobType(row.type ?? "Full-time"),
+    location: "Auroville, India",
+    type: "Full-time",
     posted,
     summary,
     responsibilities,

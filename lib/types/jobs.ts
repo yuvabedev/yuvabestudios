@@ -28,10 +28,4 @@ export type JobRow = {
   id: number | string;
   description: string;
   created_at: string;
-  title?: string | null;
-  department?: string | null;
-  slug?: string | null;
-  location?: string | null;
-  type?: string | null;
-  posted?: string | null;
 };

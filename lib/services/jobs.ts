@@ -11,7 +11,7 @@ async function fetchAllJobsFromDb(): Promise<Job[]> {
   const supabase = getSupabasePeopleClient();
   const { data, error } = await supabase
     .from("jobs_duplicate")
-    .select("id, description, created_at, title, department, slug, location, type, posted")
+    .select("id, description, created_at")
     .order("created_at");
 
   if (error) throw new Error(`Failed to fetch jobs: ${error.message}`);
