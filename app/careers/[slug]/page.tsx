@@ -73,7 +73,7 @@ export default async function JobDetailPage({ params }: JobPageProps) {
     },
     url: getAbsoluteUrl(`/careers/${job.slug}`),
     occupationalCategory: job.department,
-    ...(job.compensation ? { baseSalary: { "@type": "MonetaryAmount", description: job.compensation } } : {}),
+    ...(job.benefits?.compensation ? { baseSalary: { "@type": "MonetaryAmount", description: job.compensation } } : {}),
   };
 
   return (
