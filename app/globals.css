@@ -1067,6 +1067,48 @@ h6 {
   }
 }
 
+/* ── Careers page utilities ─────────────────────────────────────────────────── */
+
+.text-careers-hero {
+  font-family: var(--font-display-family);
+  font-size: clamp(68px, 9.4vw, 64px);
+  font-weight: 700;
+  line-height: 0.86;
+  letter-spacing: -0.045em;
+}
+
+.text-careers-cta {
+  font-family: var(--font-display-family);
+  font-size: clamp(48px, 6vw, 92px);
+  font-weight: 600;
+  line-height: 0.98;
+  letter-spacing: -0.035em;
+}
+
+.careers-glow-purple {
+  background: radial-gradient(circle, #efe9fe 0%, transparent 70%);
+  filter: blur(40px);
+}
+
+.careers-glow-yellow {
+  background: radial-gradient(circle, #fff4d1 0%, transparent 70%);
+  filter: blur(40px);
+}
+
+.careers-cta-glow-purple {
+  background: radial-gradient(circle, #5829c7 0%, transparent 70%);
+  filter: blur(80px);
+}
+
+.careers-cta-glow-yellow {
+  background: radial-gradient(circle, #ffca2d 0%, transparent 70%);
+  filter: blur(80px);
+}
+
+.careers-process-progress {
+  background: linear-gradient(90deg, #5829c7, #ffca2d);
+}
+
 [data-studio-shell] {
   transform-origin: top center;
   transition: transform 320ms cubic-bezier(0.22, 1, 0.36, 1), filter 320ms cubic-bezier(0.22, 1, 0.36, 1), opacity 220ms ease-out;

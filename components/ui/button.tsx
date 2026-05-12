@@ -135,6 +135,7 @@ function Button({
     <MotionButton
       aria-busy={loading || undefined}
       aria-disabled={undefined}
+      suppressHydrationWarning
       className={cn(buttonVariants({ variant: resolvedVariant, size, className }))}
       disabled={resolvedDisabled}
       {...motionProps}
