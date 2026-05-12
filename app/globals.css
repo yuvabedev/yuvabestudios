@@ -1071,10 +1071,10 @@ h6 {
 
 .text-careers-hero {
   font-family: var(--font-display-family);
-  font-size: clamp(52px, 7.2vw, 96px);
-  font-weight: 600;
-  line-height: 0.94;
-  letter-spacing: -0.035em;
+  font-size: clamp(68px, 9.4vw, 64px);
+  font-weight: 700;
+  line-height: 0.86;
+  letter-spacing: -0.045em;
 }
 
 .text-careers-cta {

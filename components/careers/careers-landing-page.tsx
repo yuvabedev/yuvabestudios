@@ -85,7 +85,9 @@ export function CareersLandingPage({ navigationItems }: CareersLandingPageProps)
   const [query, setQuery] = useState("");
   const [expanded, setExpanded] = useState<string | null>(null);
   const [activeTestimonial, setActiveTestimonial] = useState(0);
-  const [hoveredStep, setHoveredStep] = useState<number | null>(null);
+  const [hoveredStep, setHoveredStep] = useState<number | null>(
+    processSteps.length - 1,
+  );
 
   const filteredJobs = useMemo(() => {
     let list = jobListings.filter((j) => matchesFilter(j, filter));
@@ -103,14 +105,16 @@ export function CareersLandingPage({ navigationItems }: CareersLandingPageProps)
 
   return (
     <main className="relative overflow-x-clip bg-[#fafaf8] text-[#111]">
-      <div aria-hidden="true" className="pointer-events-none absolute inset-0 z-0">
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0 z-0"
+      >
         <StudioPageRails />
       </div>
 
       <StudioHeader navigationItems={navigationItems} />
 
       <div className="relative z-10">
-
         {/* ── HERO ────────────────────────────────────────────────────────── */}
         <section className="relative pb-16 pt-28 md:pt-36">
           {/* Ambient glows */}
@@ -131,14 +135,16 @@ export function CareersLandingPage({ navigationItems }: CareersLandingPageProps)
               className="max-w-[680px]"
             >
               <h1 className="text-careers-hero mb-7 text-[#111]">
-                Build the<br />
+                Build the
+                <br />
                 future{" "}
                 <em className="font-medium italic text-[#5829c7]">with us.</em>
               </h1>
 
               <p className="mb-9 max-w-[620px] text-[19px] leading-relaxed text-[#5a5a5a]">
-                Yuvabe Studios is an AI-first studio building real products for ambitious founders.
-                We hire makers who care, ship fast, and grow through doing.
+                Yuvabe Studios is an AI-first studio building real products for
+                ambitious founders. We hire makers who care, ship fast, and grow
+                through doing.
               </p>
 
               <div className="flex flex-wrap gap-3">
@@ -170,22 +176,30 @@ export function CareersLandingPage({ navigationItems }: CareersLandingPageProps)
                 The principles we hire for.
               </h2>
               <p className="mt-5 max-w-[460px] text-[17.5px] leading-[1.55] text-[#5a5a5a]">
-                We don&apos;t have a careers page to fill seats. We have one so the right people find us.
+                We don&apos;t have a careers page to fill seats. We have one so
+                the right people find us.
               </p>
             </div>
 
             <div className="flex flex-col gap-5">
-
               {/* Row 1 — full-width primary card */}
               <div className="flex flex-col overflow-hidden rounded-[28px] bg-[#5829c7] p-[34px] text-white transition duration-300 hover:-translate-y-1 hover:shadow-[0_4px_16px_rgba(17,17,17,0.06),0_20px_48px_rgba(17,17,17,0.08)] md:flex-row md:items-center md:gap-16 md:p-[48px]">
                 <div className="flex-1">
                   <div className="mb-7 flex items-center justify-between">
-                    <span className="font-mono text-[11.5px] font-medium uppercase tracking-[0.04em] opacity-60">01 — Principle</span>
-                    <span className="font-display text-[22px] opacity-45 md:hidden">①</span>
+                    <span className="font-mono text-[11.5px] font-medium uppercase tracking-[0.04em] opacity-60">
+                      01 — Principle
+                    </span>
+                    <span className="font-display text-[22px] opacity-45 md:hidden">
+                      ①
+                    </span>
                   </div>
-                  <h3 className="text-heading-xl mb-4 tracking-tight text-white">AI-first mindset.</h3>
+                  <h3 className="text-heading-xl mb-4 tracking-tight text-white">
+                    AI-first mindset.
+                  </h3>
                   <p className="max-w-[480px] text-[16px] leading-[1.55] opacity-85">
-                    We build at the intersection of design, engineering, and AI. Every person ships real things to real clients from week one — including you.
+                    We build at the intersection of design, engineering, and AI.
+                    Every person ships real things to real clients from week one
+                    — including you.
                   </p>
                 </div>
                 <div className="mt-8 shrink-0 md:mt-0 md:w-[44%]">
@@ -202,21 +216,37 @@ export function CareersLandingPage({ navigationItems }: CareersLandingPageProps)
 
               {/* Row 2 — three equal cards */}
               <div className="grid grid-cols-1 gap-5 md:grid-cols-3">
-
                 {/* Card 2 — white */}
                 <div className="flex flex-col overflow-hidden rounded-[28px] border border-[rgba(17,17,17,0.08)] bg-white p-[34px] transition duration-300 hover:-translate-y-1 hover:shadow-[0_4px_16px_rgba(17,17,17,0.06),0_20px_48px_rgba(17,17,17,0.08)]">
                   <div className="mb-7 flex items-center justify-between">
-                    <span className="font-mono text-[11.5px] font-medium uppercase tracking-[0.04em] text-[#5a5a5a]/60">02 — Principle</span>
-                    <span className="font-display text-[22px] text-[#111]/45">②</span>
+                    <span className="font-mono text-[11.5px] font-medium uppercase tracking-[0.04em] text-[#5a5a5a]/60">
+                      02 — Principle
+                    </span>
+                    <span className="font-display text-[22px] text-[#111]/45">
+                      ②
+                    </span>
                   </div>
-                  <h3 className="text-heading-lg mb-3.5 tracking-tight text-[#111]">Rooted in Auroville.</h3>
+                  <h3 className="text-heading-lg mb-3.5 tracking-tight text-[#111]">
+                    Rooted in Auroville.
+                  </h3>
                   <p className="text-[15.5px] leading-[1.5] text-[#5a5a5a]/85">
-                    Our studio sits inside one of the world&apos;s most unique townships — where deep work meets purpose, and great thinking meets real execution.
+                    Our studio sits inside one of the world&apos;s most unique
+                    townships — where deep work meets purpose, and great
+                    thinking meets real execution.
                   </p>
                   <div className="mt-auto flex flex-wrap gap-6 border-t border-[rgba(17,17,17,0.08)] pt-6 mt-8">
-                    {[["Auroville", "HQ"], ["Async", "Friendly"], ["Flexible", "Hours"]].map(([label, desc]) => (
-                      <div key={label} className="flex flex-col text-sm text-[#5a5a5a]">
-                        <b className="font-display text-[22px] font-semibold leading-none tracking-[-0.02em] text-[#111]">{label}</b>
+                    {[
+                      ["Auroville", "HQ"],
+                      ["Async", "Friendly"],
+                      ["Flexible", "Hours"],
+                    ].map(([label, desc]) => (
+                      <div
+                        key={label}
+                        className="flex flex-col text-sm text-[#5a5a5a]"
+                      >
+                        <b className="font-display text-[22px] font-semibold leading-none tracking-[-0.02em] text-[#111]">
+                          {label}
+                        </b>
                         <span className="mt-1">{desc}</span>
                       </div>
                     ))}
@@ -226,12 +256,20 @@ export function CareersLandingPage({ navigationItems }: CareersLandingPageProps)
                 {/* Card 3 — soft */}
                 <div className="flex flex-col overflow-hidden rounded-[28px] border border-[rgba(17,17,17,0.08)] bg-[#f4f3ee] p-[34px] transition duration-300 hover:-translate-y-1 hover:shadow-[0_4px_16px_rgba(17,17,17,0.06),0_20px_48px_rgba(17,17,17,0.08)]">
                   <div className="mb-7 flex items-center justify-between">
-                    <span className="font-mono text-[11.5px] font-medium uppercase tracking-[0.04em] text-[#5a5a5a]/60">03 — Principle</span>
-                    <span className="font-display text-[22px] text-[#111]/45">③</span>
+                    <span className="font-mono text-[11.5px] font-medium uppercase tracking-[0.04em] text-[#5a5a5a]/60">
+                      03 — Principle
+                    </span>
+                    <span className="font-display text-[22px] text-[#111]/45">
+                      ③
+                    </span>
                   </div>
-                  <h3 className="text-heading-lg mb-3.5 tracking-tight text-[#111]">Real ownership.</h3>
+                  <h3 className="text-heading-lg mb-3.5 tracking-tight text-[#111]">
+                    Real ownership.
+                  </h3>
                   <p className="text-[15.5px] leading-[1.5] text-[#5a5a5a]/85">
-                    No tickets without context. No work without purpose. Every person owns their craft end-to-end, from first brief to shipped product.
+                    No tickets without context. No work without purpose. Every
+                    person owns their craft end-to-end, from first brief to
+                    shipped product.
                   </p>
                   <div className="mt-8 aspect-4/3 overflow-hidden rounded-[20px]">
                     <Image
@@ -247,19 +285,30 @@ export function CareersLandingPage({ navigationItems }: CareersLandingPageProps)
                 {/* Card 4 — accent */}
                 <div className="flex flex-col overflow-hidden rounded-[28px] bg-[#ffca2d] p-[34px] transition duration-300 hover:-translate-y-1 hover:shadow-[0_4px_16px_rgba(17,17,17,0.06),0_20px_48px_rgba(17,17,17,0.08)]">
                   <div className="mb-7 flex items-center justify-between">
-                    <span className="font-mono text-[11.5px] font-medium uppercase tracking-[0.04em] text-[#111]/60">04 — Principle</span>
-                    <span className="font-display text-[22px] text-[#111]/45">④</span>
+                    <span className="font-mono text-[11.5px] font-medium uppercase tracking-[0.04em] text-[#111]/60">
+                      04 — Principle
+                    </span>
+                    <span className="font-display text-[22px] text-[#111]/45">
+                      ④
+                    </span>
                   </div>
-                  <h3 className="text-heading-lg mb-3.5 tracking-tight text-[#111]">Always learning.</h3>
+                  <h3 className="text-heading-lg mb-3.5 tracking-tight text-[#111]">
+                    Always learning.
+                  </h3>
                   <p className="flex-1 text-[15.5px] leading-normal text-[#111]/85">
-                    Mentorship, real client projects, and a culture where growth comes from making — not just watching. Your mentor is your teammate.
+                    Mentorship, real client projects, and a culture where growth
+                    comes from making — not just watching. Your mentor is your
+                    teammate.
                   </p>
                   <div className="mt-8 border-t border-[rgba(17,17,17,0.15)] pt-5">
-                    <div className="font-display text-[28px] font-semibold leading-none tracking-[-0.03em] text-[#111]">100%</div>
-                    <div className="mt-2 text-[13px] text-[#111]/75">of the team works on live client projects</div>
+                    <div className="font-display text-[28px] font-semibold leading-none tracking-[-0.03em] text-[#111]">
+                      100%
+                    </div>
+                    <div className="mt-2 text-[13px] text-[#111]/75">
+                      of the team works on live client projects
+                    </div>
                   </div>
                 </div>
-
               </div>
             </div>
           </StudioPageContainer>
@@ -274,12 +323,15 @@ export function CareersLandingPage({ navigationItems }: CareersLandingPageProps)
                   — Why join us
                 </span>
                 <h2 className="text-heading-xl tracking-tight text-[#111]">
-                  Built for people<br />who plan to stay.
+                  Built for people
+                  <br />
+                  who plan to stay.
                 </h2>
               </div>
               <p className="max-w-[460px] text-[17.5px] leading-[1.55] text-[#5a5a5a]">
-                Benefits aren&apos;t a hiring lever — they&apos;re a signal of what we believe.
-                Great work comes from people who are well-supported and deeply invested.
+                Benefits aren&apos;t a hiring lever — they&apos;re a signal of
+                what we believe. Great work comes from people who are
+                well-supported and deeply invested.
               </p>
             </div>
 
@@ -289,15 +341,25 @@ export function CareersLandingPage({ navigationItems }: CareersLandingPageProps)
                   key={b.k}
                   initial={{ opacity: 0, y: 16 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.4, delay: i * 0.07, ease: [0.22, 1, 0.36, 1] }}
+                  transition={{
+                    duration: 0.4,
+                    delay: i * 0.07,
+                    ease: [0.22, 1, 0.36, 1],
+                  }}
                   className="group relative flex min-h-[220px] flex-col rounded-[28px] border border-[rgba(17,17,17,0.08)] bg-white p-8 transition duration-300 hover:-translate-y-0.5 hover:border-[#8c8b86] hover:shadow-[0_4px_16px_rgba(17,17,17,0.06),0_20px_48px_rgba(17,17,17,0.08)]"
                 >
                   <div className="mb-7 flex items-center justify-between">
-                    <span className="font-mono text-[12px] font-medium uppercase tracking-[0.08em] text-[#5829c7]">{b.k}</span>
+                    <span className="font-mono text-[12px] font-medium uppercase tracking-[0.08em] text-[#5829c7]">
+                      {b.k}
+                    </span>
                     <span className="h-2 w-2 rounded-full bg-[#ffca2d] shadow-[0_0_0_4px_#fff4d1]" />
                   </div>
-                  <h3 className="text-heading-md mb-2.5 tracking-tight text-[#111]">{b.title}</h3>
-                  <p className="text-[15px] leading-[1.5] text-[#5a5a5a]">{b.body}</p>
+                  <h3 className="text-heading-md mb-2.5 tracking-tight text-[#111]">
+                    {b.title}
+                  </h3>
+                  <p className="text-[15px] leading-[1.5] text-[#5a5a5a]">
+                    {b.body}
+                  </p>
                   <span
                     aria-hidden="true"
                     className="absolute right-7 top-8 text-[18px] text-[#8c8b86] opacity-0 transition-all duration-200 group-hover:opacity-100"
@@ -319,30 +381,37 @@ export function CareersLandingPage({ navigationItems }: CareersLandingPageProps)
                   — Open positions
                 </span>
                 <h2 className="text-heading-xl tracking-tight text-[#111]">
-                  {jobListings.length}&nbsp;roles open<br />right now.
+                  {jobListings.length}&nbsp;roles open
+                  <br />
+                  right now.
                 </h2>
               </div>
               <p className="max-w-[460px] text-[17.5px] leading-[1.55] text-[#5a5a5a]">
-                We hire deliberately. If you don&apos;t see the right fit, reach out —
-                we open new roles every month and love hearing from makers.
+                We hire deliberately. If you don&apos;t see the right fit, reach
+                out — we open new roles every month and love hearing from
+                makers.
               </p>
             </div>
 
             {/* Controls */}
             <div className="mb-6 flex flex-wrap items-center gap-4">
               <div className="relative min-w-[280px] flex-1">
-                <span className="absolute left-5 top-1/2 -translate-y-1/2 text-[18px] text-[#8c8b86]">⌕</span>
+                <span className="absolute left-5 top-1/2 -translate-y-1/2 text-[18px] text-[#8c8b86]">
+                  ⌕
+                </span>
                 <input
                   type="text"
                   placeholder="Search by role, team, or skill"
                   value={query}
                   onChange={(e) => setQuery(e.target.value)}
+                  suppressHydrationWarning
                   className="w-full rounded-full border border-[rgba(17,17,17,0.14)] bg-white py-[18px] pl-[52px] pr-[52px] text-[15px] outline-none transition focus:border-[#5829c7] focus:shadow-[0_0_0_4px_#efe9fe]"
                 />
                 {query && (
                   <button
                     type="button"
                     onClick={() => setQuery("")}
+                    suppressHydrationWarning
                     className="absolute right-4 top-1/2 flex h-[26px] w-[26px] -translate-y-1/2 items-center justify-center rounded-full bg-[#edebe3] text-[18px] text-[#2e2e2e]"
                     aria-label="Clear search"
                   >
@@ -357,6 +426,7 @@ export function CareersLandingPage({ navigationItems }: CareersLandingPageProps)
                     type="button"
                     key={f}
                     onClick={() => setFilter(f)}
+                    suppressHydrationWarning
                     className={`inline-flex items-center gap-2 rounded-full border px-[18px] py-3 text-sm font-medium transition ${
                       filter === f
                         ? "border-[#111] bg-[#111] text-white"
@@ -381,7 +451,11 @@ export function CareersLandingPage({ navigationItems }: CareersLandingPageProps)
                   key={job.slug}
                   initial={{ opacity: 0, x: -10 }}
                   animate={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.35, delay: i * 0.05, ease: [0.22, 1, 0.36, 1] }}
+                  transition={{
+                    duration: 0.35,
+                    delay: i * 0.05,
+                    ease: [0.22, 1, 0.36, 1],
+                  }}
                 >
                   <div
                     className={`cursor-pointer rounded-[28px] border bg-white p-7 transition duration-300 ${
@@ -389,14 +463,18 @@ export function CareersLandingPage({ navigationItems }: CareersLandingPageProps)
                         ? "border-[#5829c7] shadow-[0_16px_40px_rgba(88,41,199,0.12)]"
                         : "border-[rgba(17,17,17,0.08)] hover:-translate-y-0.5 hover:border-[#5829c7] hover:shadow-[0_12px_32px_rgba(88,41,199,0.10)]"
                     }`}
-                    onClick={() => setExpanded(expanded === job.slug ? null : job.slug)}
+                    onClick={() =>
+                      setExpanded(expanded === job.slug ? null : job.slug)
+                    }
                   >
                     <div className="flex flex-wrap items-center justify-between gap-4">
                       <div className="min-w-65 flex-1">
                         <div className="mb-1.5 font-mono text-[11.5px] font-medium uppercase tracking-[0.06em] text-[#5829c7]">
                           {getDeptLabel(job.department)}
                         </div>
-                        <h3 className="text-heading-md mb-2 tracking-tight text-[#111]">{job.title}</h3>
+                        <h3 className="text-heading-md mb-2 tracking-tight text-[#111]">
+                          {job.title}
+                        </h3>
                         <div className="flex flex-wrap gap-2.5 text-sm text-[#5a5a5a]">
                           <span>{job.location}</span>
                           <span className="text-[#8c8b86]">·</span>
@@ -420,25 +498,36 @@ export function CareersLandingPage({ navigationItems }: CareersLandingPageProps)
                     {expanded === job.slug && (
                       <div className="mt-7 grid gap-9 border-t border-[rgba(17,17,17,0.08)] pt-6 md:grid-cols-[1.4fr_1fr]">
                         <div>
-                          <div className="mb-2.5 font-mono text-[11px] uppercase tracking-[0.06em] text-[#8c8b86]">About the role</div>
-                          <p className="text-[14.5px] leading-[1.55] text-[#2e2e2e]">{job.summary}</p>
+                          <div className="mb-2.5 font-mono text-[11px] uppercase tracking-[0.06em] text-[#8c8b86]">
+                            About the role
+                          </div>
+                          <p className="text-[14.5px] leading-[1.55] text-[#2e2e2e]">
+                            {job.summary}
+                          </p>
                         </div>
                         <div>
-                          <div className="mb-2.5 font-mono text-[11px] uppercase tracking-[0.06em] text-[#8c8b86]">What we offer</div>
+                          <div className="mb-2.5 font-mono text-[11px] uppercase tracking-[0.06em] text-[#8c8b86]">
+                            What we offer
+                          </div>
                           <ul className="mb-6 space-y-1.5">
-                            {(job.benefits?.inPerson ?? job.benefits?.remote ?? [
-                              "Competitive salary",
-                              "Mentor network access",
-                              "Real project exposure",
-                              "Career growth opportunities",
-                            ]).slice(0, 4).map((benefit) => (
-                              <li
-                                key={benefit}
-                                className="relative pl-4 text-[14.5px] leading-[1.55] text-[#2e2e2e] before:absolute before:left-0 before:top-2.25 before:h-2 before:w-2 before:rounded-full before:bg-[#ffca2d] before:content-['']"
-                              >
-                                {benefit}
-                              </li>
-                            ))}
+                            {(
+                              job.benefits?.inPerson ??
+                              job.benefits?.remote ?? [
+                                "Competitive salary",
+                                "Mentor network access",
+                                "Real project exposure",
+                                "Career growth opportunities",
+                              ]
+                            )
+                              .slice(0, 4)
+                              .map((benefit) => (
+                                <li
+                                  key={benefit}
+                                  className="relative pl-4 text-[14.5px] leading-[1.55] text-[#2e2e2e] before:absolute before:left-0 before:top-2.25 before:h-2 before:w-2 before:rounded-full before:bg-[#ffca2d] before:content-['']"
+                                >
+                                  {benefit}
+                                </li>
+                              ))}
                           </ul>
                           <Link
                             href={`/careers/${job.slug}`}
@@ -456,7 +545,8 @@ export function CareersLandingPage({ navigationItems }: CareersLandingPageProps)
 
               {filteredJobs.length === 0 && (
                 <div className="flex flex-col items-center gap-4 rounded-[28px] border border-dashed border-[rgba(17,17,17,0.14)] px-10 py-10 text-center text-[#5a5a5a]">
-                  No roles match that filter — but we&apos;d still love to hear from you.
+                  No roles match that filter — but we&apos;d still love to hear
+                  from you.
                   <a
                     href="mailto:join@yuvabestudios.com"
                     className="inline-flex items-center gap-2 rounded-full border border-[rgba(17,17,17,0.14)] px-4 py-2 text-sm font-medium text-[#111] transition hover:border-[#111]"
@@ -477,7 +567,9 @@ export function CareersLandingPage({ navigationItems }: CareersLandingPageProps)
                 — In their words
               </span>
               <h2 className="text-heading-xl tracking-tight text-[#111]">
-                The team,<br />unfiltered.
+                The team,
+                <br />
+                unfiltered.
               </h2>
             </div>
 
@@ -494,7 +586,9 @@ export function CareersLandingPage({ navigationItems }: CareersLandingPageProps)
                 >
                   <div
                     className={`mb-4 font-display text-[64px] leading-[0.7] ${
-                      activeTestimonial === i ? "text-[#ffca2d]" : "text-[#5829c7]"
+                      activeTestimonial === i
+                        ? "text-[#ffca2d]"
+                        : "text-[#5829c7]"
                     }`}
                   >
                     &ldquo;
@@ -504,11 +598,18 @@ export function CareersLandingPage({ navigationItems }: CareersLandingPageProps)
                   </blockquote>
                   <div className="flex items-center gap-3.5 border-t border-[rgba(17,17,17,0.08)] pt-5">
                     <div className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-[#edebe3] font-mono text-[12px] font-medium text-[#5a5a5a]">
-                      {t.name.split(" ").map((n) => n[0]).join("")}
+                      {t.name
+                        .split(" ")
+                        .map((n) => n[0])
+                        .join("")}
                     </div>
                     <div>
-                      <div className="text-[15px] font-semibold tracking-[-0.01em] text-[#111]">{t.name}</div>
-                      <div className="mt-0.5 text-[13px] text-[#8c8b86]">{t.role}</div>
+                      <div className="text-[15px] font-semibold tracking-[-0.01em] text-[#111]">
+                        {t.name}
+                      </div>
+                      <div className="mt-0.5 text-[13px] text-[#8c8b86]">
+                        {t.role}
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -526,12 +627,15 @@ export function CareersLandingPage({ navigationItems }: CareersLandingPageProps)
                   — Hiring process
                 </span>
                 <h2 className="text-heading-xl tracking-tight text-[#111]">
-                  Five steps,<br />four weeks.
+                  Five steps,
+                  <br />
+                  four weeks.
                 </h2>
               </div>
               <p className="text-body-lg max-w-[460px] text-[#5a5a5a]">
-                We respect your time. No ghosting, no endless rounds, no take-homes longer than a few hours.
-                You&apos;ll always know where you stand.
+                We respect your time. No ghosting, no endless rounds, no
+                take-homes longer than a few hours. You&apos;ll always know
+                where you stand.
               </p>
             </div>
 
@@ -542,7 +646,10 @@ export function CareersLandingPage({ navigationItems }: CareersLandingPageProps)
               <div
                 className="careers-process-progress absolute left-[8%] top-15 hidden h-0.5 max-w-[84%] rounded-full transition-all duration-400 ease-[cubic-bezier(0.22,1,0.36,1)] md:block"
                 style={{
-                  width: hoveredStep !== null ? `${((hoveredStep + 1) / processSteps.length) * 100}%` : "20%",
+                  width:
+                    hoveredStep !== null
+                      ? `${((hoveredStep + 1) / processSteps.length) * 100}%`
+                      : "100%",
                 }}
               />
 
@@ -553,7 +660,7 @@ export function CareersLandingPage({ navigationItems }: CareersLandingPageProps)
                     hoveredStep === i ? "md:-translate-y-1" : ""
                   }`}
                   onMouseEnter={() => setHoveredStep(i)}
-                  onMouseLeave={() => setHoveredStep(null)}
+                  onMouseLeave={() => setHoveredStep(processSteps.length - 1)}
                 >
                   <div
                     className={`text-label-sm relative z-10 mb-0 flex h-[60px] w-[60px] flex-shrink-0 items-center justify-center rounded-full border-2 font-semibold transition duration-300 md:mb-6 ${
@@ -572,8 +679,12 @@ export function CareersLandingPage({ navigationItems }: CareersLandingPageProps)
                     >
                       {step.when}
                     </div>
-                    <h3 className="text-heading-sm mb-2 tracking-tight text-[#111]">{step.title}</h3>
-                    <p className="text-body-sm max-w-[220px] text-[#5a5a5a]">{step.body}</p>
+                    <h3 className="text-heading-sm mb-2 tracking-tight text-[#111]">
+                      {step.title}
+                    </h3>
+                    <p className="text-body-sm max-w-[220px] text-[#5a5a5a]">
+                      {step.body}
+                    </p>
                   </div>
                 </div>
               ))}
@@ -599,11 +710,16 @@ export function CareersLandingPage({ navigationItems }: CareersLandingPageProps)
               — Open invitation
             </span>
             <h2 className="text-careers-cta relative mb-6 text-[#111]">
-              Let&apos;s build something<br />
-              <em className="font-medium italic text-[#5829c7]">extraordinary</em>&nbsp;together.
+              Let&apos;s build something
+              <br />
+              <em className="font-medium italic text-[#5829c7]">
+                extraordinary
+              </em>
+              &nbsp;together.
             </h2>
             <p className="relative mx-auto mb-10 max-w-[560px] text-[19px] leading-[1.5] text-[#5a5a5a]">
-              The roles you see are the ones we know we need. The role you imagine? Tell us about it.
+              The roles you see are the ones we know we need. The role you
+              imagine? Tell us about it.
             </p>
 
             <div className="relative flex flex-wrap justify-center gap-3">
@@ -622,7 +738,6 @@ export function CareersLandingPage({ navigationItems }: CareersLandingPageProps)
             </div>
           </div>
         </section>
-
       </div>
     </main>
   );
