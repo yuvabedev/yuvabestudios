@@ -4,7 +4,7 @@ import Link from "next/link";
 import { ArrowRight, MapPin, Briefcase } from "lucide-react";
 import { motion } from "framer-motion";
 
-import type { Job } from "@/lib/careers-data";
+import type { Job } from "@/types/careers";
 import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
 
