@@ -72,7 +72,7 @@ export async function getJobBySlug(slug: string): Promise<Job | undefined> {
       .from("jobs")
       .select("*")
       .or(`code.eq.${slug},id.eq.${slug}`)
-      .is("archived_at", null)
+      .eq("status", "active")
       .single();
 
     if (error || !data) return undefined;
@@ -88,7 +88,7 @@ export async function getAllJobs(): Promise<Job[]> {
     const { data, error } = await client
       .from("jobs")
       .select("*")
-      .is("archived_at", null)
+      .eq("status", "active")
       .order("created_at", { ascending: false });
 
     if (error || !data) return [];
@@ -109,7 +109,7 @@ export async function getAllJobSlugs(): Promise<string[]> {
     const { data, error } = await client
       .from("jobs")
       .select("id, code")
-      .is("archived_at", null);
+      .eq("status", "active");
 
     if (error || !data) return [];
     return (data as Array<{ id: string; code: string | null }>).map(
