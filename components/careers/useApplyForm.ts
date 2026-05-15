@@ -40,12 +40,18 @@ export function useApplyForm({ jobCode }: UseApplyFormProps) {
       fd.append("email", values.email);
       fd.append("resume", values.resume);
 
-      const res = await fetch("/api/careers/apply", {
+      const supabaseUrl = process.env.NEXT_PUBLIC_YUVABE_PEOPLE_SUPABASE_URL;
+      const apiKey = process.env.NEXT_PUBLIC_YUVABE_PEOPLE_SUPABASE_KEY;
+
+      const res = await fetch(`${supabaseUrl}/functions/v1/apply-function`, {
         method: "POST",
+        headers: {
+          Authorization: `Bearer ${apiKey}`,
+        },
         body: fd,
       });
 
-      const data = (await res.json()) as { error?: string };
+      const data = (await res.json()) as { applicationId?: string; error?: string };
 
       if (!res.ok) {
         throw new Error(data.error || `Request failed (${res.status})`);

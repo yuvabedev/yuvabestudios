@@ -47,6 +47,11 @@ export function ApplyModal({
       className="mx-auto max-w-[32rem] sm:max-h-[calc(100svh-1.5rem)]"
       contentClassName="px-5 pb-6 pt-12 sm:px-8 sm:pb-6 lg:px-8"
     >
+      <div className="mb-5 sm:mb-6">
+        <p className="text-body-sm text-(--color-text-tertiary)">Job application</p>
+        <h2 className="text-heading-sm sm:text-heading-md text-(--neutral-900)">{jobTitle}</h2>
+      </div>
+
       <form onSubmit={onSubmit} className="space-y-4 sm:space-y-5">
         {/* Duplicate warning */}
         {alreadyApplied && (
