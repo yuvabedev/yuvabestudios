@@ -149,8 +149,8 @@ export function ModalShell({
                   {/* The scrim and panel now share one timing system so exit cleanly reverses entry. */}
                   <div
                     className={cn(
-                      "flex min-h-screen items-start justify-center p-4 sm:p-6 lg:p-8",
-                      isMobileFullscreen && "items-stretch p-0 sm:items-start sm:p-6 lg:p-8",
+                      "flex min-h-screen items-center justify-center p-4 sm:p-6 lg:p-8",
+                      isMobileFullscreen && "items-stretch p-0 sm:items-center sm:p-6 lg:p-8",
                     )}
                   >
                     <DialogContent

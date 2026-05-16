@@ -1,10 +1,11 @@
 "use client";
 
+import { useState } from "react";
 import Link from "next/link";
 import { MapPin, Briefcase, Building2, CalendarDays } from "lucide-react";
 import { motion } from "framer-motion";
 
-import type { Job } from "@/lib/careers-data";
+import type { Job } from "@/types/careers";
 import type { StudioHomepageNavItem } from "@/components/studio/studio-homepage-content";
 import { StudioHeader } from "@/components/studio/studio-header";
 import {
@@ -13,6 +14,7 @@ import {
 } from "@/components/studio/studio-page-shell";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { ApplyModal } from "./apply-modal";
 
 type CareersJobDetailProps = {
   navigationItems: StudioHomepageNavItem[];
@@ -64,6 +66,7 @@ export function CareersJobDetail({
   navigationItems,
   job,
 }: CareersJobDetailProps) {
+  const [applyOpen, setApplyOpen] = useState(false);
   const levelPath = job.level === "entry" ? "entry-level" : "experienced";
   const levelLabel = job.level === "entry" ? "Entry Level" : "Experienced";
 
@@ -272,18 +275,14 @@ export function CareersJobDetail({
 
                   <div className="border-t border-[var(--color-border-default)] pt-5">
                     <Button
-                      asChild
+                      onClick={() => setApplyOpen(true)}
                       size="lg"
                       className="w-full justify-center"
                     >
-                      <a
-                        href={`mailto:careers@yuvabestudios.com?subject=Application: ${job.title}`}
-                      >
-                        Apply for this role
-                      </a>
+                      Apply for this role
                     </Button>
                     <p className="mt-3 text-center text-caption text-[var(--color-text-tertiary)]">
-                      Send your portfolio and a brief intro.
+                      Upload your resume to apply instantly.
                     </p>
                   </div>
                 </div>
@@ -292,6 +291,13 @@ export function CareersJobDetail({
           </StudioPageContainer>
         </section>
       </article>
+
+      <ApplyModal
+        open={applyOpen}
+        onOpenChange={setApplyOpen}
+        jobCode={job.slug}
+        jobTitle={job.title}
+      />
     </main>
   );
 }
