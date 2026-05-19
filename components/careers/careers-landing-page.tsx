@@ -18,11 +18,9 @@ import { jobListings, type Job } from "@/lib/careers-data";
 
 const benefits = [
   { k: "01", title: "Competitive salary", body: "Aligned with your skills and experience, reviewed as you grow within the team." },
-  { k: "02", title: "Free lunch daily", body: "Nourishment covered every working day — on us, no exceptions." },
-  { k: "03", title: "eBike for commute", body: "Roll in sustainably. A perk that fits the Auroville ethos perfectly." },
-  { k: "04", title: "Mentor network", body: "Direct access to experienced builders, designers, and founders from day one." },
-  { k: "05", title: "Real client work", body: "Hands-on exposure to live products shipped for real, ambitious founders." },
-  { k: "06", title: "Career growth", body: "Clear advancement paths with increasing ownership and responsibility over time." },
+  { k: "02", title: "eBike for commute", body: "Roll in sustainably. A perk that fits the Auroville ethos perfectly." },
+  { k: "03", title: "Mentor network", body: "Direct access to experienced builders, designers, and founders from day one." },
+  { k: "04", title: "Career growth", body: "Clear advancement paths with increasing ownership and responsibility over time." },
 ];
 
 const processSteps = [
@@ -118,25 +116,18 @@ export function CareersLandingPage({ navigationItems }: CareersLandingPageProps)
         {/* ── HERO ────────────────────────────────────────────────────────── */}
         <section className="relative pb-16 pt-28 md:pt-36">
           {/* Ambient glows */}
-          <div
-            aria-hidden="true"
-            className="careers-glow-purple pointer-events-none absolute right-0 top-[10%] h-[520px] w-[520px] -translate-x-[15%] rounded-full opacity-70"
-          />
-          <div
-            aria-hidden="true"
-            className="careers-glow-yellow pointer-events-none absolute bottom-[5%] left-0 h-[380px] w-[380px] translate-x-[20%] rounded-full opacity-70"
-          />
+         
 
           <StudioPageContainer>
             <motion.div
               initial={{ opacity: 0, y: 24 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-              className="max-w-[680px]"
+              className="max-w-[720px]"
             >
               <h1 className="text-careers-hero mb-7 text-[#111]">
                 Build the
-                <br />
+                
                 future{" "}
                 <em className="font-medium italic text-[#5829c7]">with us.</em>
               </h1>
@@ -189,9 +180,6 @@ export function CareersLandingPage({ navigationItems }: CareersLandingPageProps)
                     <span className="font-mono text-[11.5px] font-medium uppercase tracking-[0.04em] opacity-60">
                       01 — Principle
                     </span>
-                    <span className="font-display text-[22px] opacity-45 md:hidden">
-                      ①
-                    </span>
                   </div>
                   <h3 className="text-heading-xl mb-4 tracking-tight text-white">
                     AI-first mindset.
@@ -219,11 +207,8 @@ export function CareersLandingPage({ navigationItems }: CareersLandingPageProps)
                 {/* Card 2 — white */}
                 <div className="flex flex-col overflow-hidden rounded-[28px] border border-[rgba(17,17,17,0.08)] bg-white p-[34px] transition duration-300 hover:-translate-y-1 hover:shadow-[0_4px_16px_rgba(17,17,17,0.06),0_20px_48px_rgba(17,17,17,0.08)]">
                   <div className="mb-7 flex items-center justify-between">
-                    <span className="font-mono text-[11.5px] font-medium uppercase tracking-[0.04em] text-[#5a5a5a]/60">
+                    <span className="font-mono text-[11.5px] font-medium uppercase tracking-[0.04em] text-[#5829c7]">
                       02 — Principle
-                    </span>
-                    <span className="font-display text-[22px] text-[#111]/45">
-                      ②
                     </span>
                   </div>
                   <h3 className="text-heading-lg mb-3.5 tracking-tight text-[#111]">
@@ -256,11 +241,8 @@ export function CareersLandingPage({ navigationItems }: CareersLandingPageProps)
                 {/* Card 3 — soft */}
                 <div className="flex flex-col overflow-hidden rounded-[28px] border border-[rgba(17,17,17,0.08)] bg-[#f4f3ee] p-[34px] transition duration-300 hover:-translate-y-1 hover:shadow-[0_4px_16px_rgba(17,17,17,0.06),0_20px_48px_rgba(17,17,17,0.08)]">
                   <div className="mb-7 flex items-center justify-between">
-                    <span className="font-mono text-[11.5px] font-medium uppercase tracking-[0.04em] text-[#5a5a5a]/60">
+                    <span className="font-mono text-[11.5px] font-medium uppercase tracking-[0.04em] text-[#5829c7]">
                       03 — Principle
-                    </span>
-                    <span className="font-display text-[22px] text-[#111]/45">
-                      ③
                     </span>
                   </div>
                   <h3 className="text-heading-lg mb-3.5 tracking-tight text-[#111]">
@@ -285,11 +267,8 @@ export function CareersLandingPage({ navigationItems }: CareersLandingPageProps)
                 {/* Card 4 — accent */}
                 <div className="flex flex-col overflow-hidden rounded-[28px] bg-[#ffca2d] p-[34px] transition duration-300 hover:-translate-y-1 hover:shadow-[0_4px_16px_rgba(17,17,17,0.06),0_20px_48px_rgba(17,17,17,0.08)]">
                   <div className="mb-7 flex items-center justify-between">
-                    <span className="font-mono text-[11.5px] font-medium uppercase tracking-[0.04em] text-[#111]/60">
+                    <span className="font-mono text-[11.5px] font-medium uppercase tracking-[0.04em] text-[#5829c7]">
                       04 — Principle
-                    </span>
-                    <span className="font-display text-[22px] text-[#111]/45">
-                      ④
                     </span>
                   </div>
                   <h3 className="text-heading-lg mb-3.5 tracking-tight text-[#111]">
@@ -381,7 +360,7 @@ export function CareersLandingPage({ navigationItems }: CareersLandingPageProps)
                   — Open positions
                 </span>
                 <h2 className="text-heading-xl tracking-tight text-[#111]">
-                  {jobListings.length}&nbsp;roles open
+                  Roles open
                   <br />
                   right now.
                 </h2>
@@ -429,16 +408,11 @@ export function CareersLandingPage({ navigationItems }: CareersLandingPageProps)
                     suppressHydrationWarning
                     className={`inline-flex items-center gap-2 rounded-full border px-[18px] py-3 text-sm font-medium transition ${
                       filter === f
-                        ? "border-[#111] bg-[#111] text-white"
-                        : "border-[rgba(17,17,17,0.14)] bg-white text-[#2e2e2e] hover:border-[#111]"
+                        ? "border-[#5829c7] bg-[#5829c7] text-white"
+                        : "border-[rgba(17,17,17,0.14)] bg-white text-[#2e2e2e] hover:border-[#5829c7]"
                     }`}
                   >
                     {f}
-                    {filter === f && (
-                      <span className="rounded-full bg-[#ffca2d] px-1.5 py-0.5 font-mono text-[11px] font-semibold text-[#111]">
-                        {filteredJobs.length}
-                      </span>
-                    )}
                   </button>
                 ))}
               </div>
@@ -458,7 +432,7 @@ export function CareersLandingPage({ navigationItems }: CareersLandingPageProps)
                   }}
                 >
                   <div
-                    className={`cursor-pointer rounded-[28px] border bg-white p-7 transition duration-300 ${
+                    className={`relative cursor-pointer rounded-[28px] border bg-white p-7 transition duration-300 ${
                       expanded === job.slug
                         ? "border-[#5829c7] shadow-[0_16px_40px_rgba(88,41,199,0.12)]"
                         : "border-[rgba(17,17,17,0.08)] hover:-translate-y-0.5 hover:border-[#5829c7] hover:shadow-[0_12px_32px_rgba(88,41,199,0.10)]"
@@ -467,31 +441,29 @@ export function CareersLandingPage({ navigationItems }: CareersLandingPageProps)
                       setExpanded(expanded === job.slug ? null : job.slug)
                     }
                   >
-                    <div className="flex flex-wrap items-center justify-between gap-4">
-                      <div className="min-w-65 flex-1">
-                        <div className="mb-1.5 font-mono text-[11.5px] font-medium uppercase tracking-[0.06em] text-[#5829c7]">
-                          {getDeptLabel(job.department)}
-                        </div>
-                        <h3 className="text-heading-md mb-2 tracking-tight text-[#111]">
-                          {job.title}
-                        </h3>
-                        <div className="flex flex-wrap gap-2.5 text-sm text-[#5a5a5a]">
-                          <span>{job.location}</span>
-                          <span className="text-[#8c8b86]">·</span>
-                          <span>{job.type}</span>
-                          {job.compensation && (
-                            <>
-                              <span className="text-[#8c8b86]">·</span>
-                              <span>{job.compensation}</span>
-                            </>
-                          )}
-                        </div>
+                    <div className="flex h-9 w-9 items-center justify-center rounded-full border border-[rgba(17,17,17,0.14)] text-[#5a5a5a] transition duration-300 absolute top-5 right-5 hover:border-[#5829c7] hover:text-[#5829c7]">
+                      <ChevronDown
+                        size={16}
+                        className={`transition-transform duration-300 ${expanded === job.slug ? "rotate-180" : ""}`}
+                      />
+                    </div>
+                    <div className="pr-12">
+                      <div className="mb-1.5 font-mono text-[11.5px] font-medium uppercase tracking-[0.06em] text-[#5829c7]">
+                        {getDeptLabel(job.department)}
                       </div>
-                      <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-[rgba(17,17,17,0.14)] text-[#5a5a5a] transition duration-300 hover:border-[#5829c7] hover:text-[#5829c7]">
-                        <ChevronDown
-                          size={16}
-                          className={`transition-transform duration-300 ${expanded === job.slug ? "rotate-180" : ""}`}
-                        />
+                      <h3 className="text-heading-md mb-2 tracking-tight text-[#111]">
+                        {job.title}
+                      </h3>
+                      <div className="flex flex-wrap gap-2.5 text-sm text-[#5a5a5a]">
+                        <span>{job.location}</span>
+                        <span className="text-[#8c8b86]">·</span>
+                        <span>{job.type}</span>
+                        {job.compensation && (
+                          <>
+                            <span className="text-[#8c8b86]">·</span>
+                            <span>{job.compensation}</span>
+                          </>
+                        )}
                       </div>
                     </div>
 
@@ -672,13 +644,6 @@ export function CareersLandingPage({ navigationItems }: CareersLandingPageProps)
                     {step.k}
                   </div>
                   <div>
-                    <div
-                      className={`text-label-sm mb-2 uppercase tracking-[0.06em] transition duration-300 ${
-                        hoveredStep === i ? "text-[#5829c7]" : "text-[#8c8b86]"
-                      }`}
-                    >
-                      {step.when}
-                    </div>
                     <h3 className="text-heading-sm mb-2 tracking-tight text-[#111]">
                       {step.title}
                     </h3>
@@ -694,7 +659,7 @@ export function CareersLandingPage({ navigationItems }: CareersLandingPageProps)
 
         {/* ── CTA BANNER ──────────────────────────────────────────────────── */}
         <section id="apply" className="px-6 py-16 md:px-10">
-          <div className="relative mx-auto max-w-7xl overflow-hidden rounded-[36px] bg-white px-8 py-25 text-center ring-1 ring-[rgba(88,41,199,0.12)] md:px-15 md:py-27.5">
+          <div className="relative mx-auto max-w-7xl overflow-hidden rounded-[36px] bg-white px-8 py-16 text-center ring-1 ring-[rgba(88,41,199,0.12)] md:px-15 md:py-20">
             {/* Light purple glow */}
             <div
               aria-hidden="true"
@@ -710,12 +675,8 @@ export function CareersLandingPage({ navigationItems }: CareersLandingPageProps)
               — Open invitation
             </span>
             <h2 className="text-careers-cta relative mb-6 text-[#111]">
-              Let&apos;s build something
-              <br />
-              <em className="font-medium italic text-[#5829c7]">
-                extraordinary
-              </em>
-              &nbsp;together.
+              Let&apos;s build something{" "}
+              <em className="mr-2 font-medium italic text-[#5829c7]">extraordinary</em>{" "}together.
             </h2>
             <p className="relative mx-auto mb-10 max-w-[560px] text-[19px] leading-[1.5] text-[#5a5a5a]">
               The roles you see are the ones we know we need. The role you

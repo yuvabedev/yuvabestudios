@@ -1072,17 +1072,17 @@ h6 {
 .text-careers-hero {
   font-family: var(--font-display-family);
   font-size: clamp(68px, 9.4vw, 64px);
-  font-weight: 700;
+  font-weight: 500;
   line-height: 0.86;
   letter-spacing: -0.045em;
 }
 
 .text-careers-cta {
   font-family: var(--font-display-family);
-  font-size: clamp(48px, 6vw, 92px);
+  font-size: clamp(22px, 5vw, 68px);
   font-weight: 600;
-  line-height: 0.98;
-  letter-spacing: -0.035em;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
 }
 
 .careers-glow-purple {
