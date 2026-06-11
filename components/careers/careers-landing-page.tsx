@@ -155,48 +155,6 @@ function BenefitCard({ b }: { b: { title: string; body: string; k: string } }) {
 
 // ─── Main component ───────────────────────────────────────────────────────────
 
-// ─── Testimonials ────────────────────────────────────────────────────────────
-
-function TestimonialGrid({ testimonials }: { testimonials: { quote: string; name: string; role: string }[] }) {
-  const [active, setActive] = useState(0);
-  return (
-    <div className="grid grid-cols-1 gap-5 md:grid-cols-3">
-      {testimonials.map((t, i) => (
-        <article
-          key={t.name}
-          onMouseEnter={() => setActive(i)}
-          className={`flex flex-col rounded-3xl border bg-white p-8 transition-all duration-300 ${
-            active === i
-              ? "-translate-y-1 border-(--purple-500) shadow-[0_20px_48px_rgba(88,41,199,0.12)]"
-              : "border-(--color-border-default)"
-          }`}
-        >
-          <div
-            className={`mb-4 font-[family-name:var(--font-display-family)] text-6xl leading-[0.7] transition-colors duration-300 ${
-              active === i ? "text-(--yellow-500)" : "text-(--purple-500)"
-            }`}
-            aria-hidden="true"
-          >
-            &ldquo;
-          </div>
-          <blockquote className="mb-8 flex-1 font-[family-name:var(--font-display-family)] text-[19px] font-medium leading-[1.35] tracking-[-0.015em] text-(--neutral-900)">
-            {t.quote}
-          </blockquote>
-          <div className="flex items-center gap-3 border-t border-(--color-border-default) pt-6">
-            <div className="size-12 shrink-0 rounded-full bg-(--neutral-200)" />
-            <div>
-              <div className="text-[15px] font-semibold leading-tight tracking-[-0.01em]">
-                {t.name}
-              </div>
-              <div className="mt-0.5 text-[13px] text-(--neutral-500)">{t.role}</div>
-            </div>
-          </div>
-        </article>
-      ))}
-    </div>
-  );
-}
-
 // ─── Job board ───────────────────────────────────────────────────────────────
 
 function JobBoard({ jobs }: { jobs: Job[] }) {
@@ -545,22 +503,6 @@ export function CareersLandingPage({
             </div>
 
             <JobBoard jobs={jobs} />
-          </StudioPageContainer>
-        </section>
-
-        {/* ── 06 Testimonials ───────────────────────────────────────────────── */}
-        <section className="bg-(--neutral-100) py-24 md:py-32">
-          <StudioPageContainer>
-            <div className="mb-14">
-              <Kicker>— In their words</Kicker>
-              <h2 className="text-heading-xl text-(--color-text-primary)">
-                The team,
-                <br />
-                unfiltered.
-              </h2>
-            </div>
-
-            <TestimonialGrid testimonials={content.testimonials} />
           </StudioPageContainer>
         </section>
 
