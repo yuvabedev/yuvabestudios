@@ -5,6 +5,10 @@ import { notFound } from "next/navigation";
 import { StudioCaseStudyDetail } from "@/components/studio/studio-case-study-detail";
 import { StudioCaseStudyOutcomesStrip } from "@/components/studio/studio-case-study-outcomes-strip";
 import { StudioCaseStudyPageHero } from "@/components/studio/studio-case-study-page-hero";
+import { TvamCinematicHero } from "@/components/studio/tvam-cinematic-hero";
+import { TvamCaseStudyContent } from "@/components/studio/tvam-case-study-content";
+import { PrakritiSattvaCaseStudy } from "@/components/studio/prakriti-sattva-case-study";
+import { GaCinematicCaseStudy } from "@/components/studio/ga-cinematic-case-study";
 import { StudioHeader } from "@/components/studio/studio-header";
 import {
   StudioPageContainer,
@@ -87,6 +91,16 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
     notFound();
   }
 
+  // Prakriti Sattva gets a fully custom immersive page
+  if (slug === "prakiti-sattva") {
+    return <PrakritiSattvaCaseStudy />;
+  }
+
+  // General Aeronautics — cinematic scroll experience
+  if (slug === "general-aeronautics") {
+    return <GaCinematicCaseStudy />;
+  }
+
   const displayCaseStudy = applyStudioCaseStudyDisplayOverrides(caseStudy);
   const detail = resolveStudioCaseStudyDetail(caseStudy);
   const href = getStudioCaseStudyHref(caseStudy.id);
@@ -129,41 +143,50 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
       {/* The page rails keep the case-study route visually connected to the homepage shell. */}
       <div aria-hidden="true" className="pointer-events-none absolute inset-0 z-0">
         <StudioPageRails />
-        <div className="absolute inset-x-0 top-0 h-[24rem] bg-[radial-gradient(circle_at_18%_10%,rgba(88,41,199,0.07),rgba(255,255,255,0)_34%),radial-gradient(circle_at_82%_0%,rgba(255,202,45,0.08),rgba(255,255,255,0)_32%)]" />
+        <div className="absolute inset-x-0 top-0 h-96 bg-[radial-gradient(circle_at_18%_10%,rgba(88,41,199,0.07),rgba(255,255,255,0)_34%),radial-gradient(circle_at_82%_0%,rgba(255,202,45,0.08),rgba(255,255,255,0)_32%)]" />
       </div>
 
       {/* The detail route now reuses the homepage navbar so navigation stays on one shared contract. */}
       <StudioHeader navigationItems={homepageContent.navigationItems} />
 
       <article className="relative z-10">
-        <StudioPageContainer className="py-5">
-          <nav
-            aria-label="Breadcrumb"
-            className="flex flex-wrap items-center gap-2 text-label-sm uppercase tracking-[0.16em] text-[var(--color-text-tertiary)]"
-          >
-            <Link href="/">Home</Link>
-            <span>/</span>
-            <Link href="/#work">Case studies</Link>
-            <span>/</span>
-            <span className="text-[var(--color-text-brand)]">{caseStudy.title}</span>
-          </nav>
-        </StudioPageContainer>
-
-        <StudioCaseStudyPageHero caseStudy={displayCaseStudy} />
-        <StudioCaseStudyOutcomesStrip caseStudy={displayCaseStudy} />
-
-        {/* The rest of the page keeps the deeper proof content, but it now starts below a dedicated landing-style hero. */}
-        <section className="py-10 md:py-12">
-          <StudioPageContainer>
-            <div className="px-2 sm:px-4 lg:px-6">
-            <StudioCaseStudyDetail
-              caseStudy={displayCaseStudy}
-              variant="page"
-              showHero={false}
-            />
-            </div>
+        {slug !== "tvam" && (
+          <StudioPageContainer className="py-5">
+            <nav
+              aria-label="Breadcrumb"
+              className="flex flex-wrap items-center gap-2 text-label-sm uppercase tracking-[0.16em] text-(--color-text-tertiary)"
+            >
+              <Link href="/">Home</Link>
+              <span>/</span>
+              <Link href="/#work">Case studies</Link>
+              <span>/</span>
+              <span className="text-(--color-text-brand)">{caseStudy.title}</span>
+            </nav>
           </StudioPageContainer>
-        </section>
+        )}
+
+        {slug === "tvam" ? (
+          <>
+            <TvamCinematicHero />
+            <TvamCaseStudyContent />
+          </>
+        ) : (
+          <>
+            <StudioCaseStudyPageHero caseStudy={displayCaseStudy} />
+            <StudioCaseStudyOutcomesStrip caseStudy={displayCaseStudy} />
+            <section className="py-10 md:py-12">
+              <StudioPageContainer>
+                <div className="px-2 sm:px-4 lg:px-6">
+                  <StudioCaseStudyDetail
+                    caseStudy={displayCaseStudy}
+                    variant="page"
+                    showHero={false}
+                  />
+                </div>
+              </StudioPageContainer>
+            </section>
+          </>
+        )}
       </article>
     </main>
   );

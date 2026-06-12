@@ -215,11 +215,17 @@ export function StudioHeroInfinityCloud({
     }
 
     const palette = readInfinityPalette();
-    const renderer = new THREE.WebGLRenderer({
-      alpha: true,
-      antialias: true,
-      powerPreference: "high-performance",
-    });
+    let renderer: THREE.WebGLRenderer;
+    try {
+      renderer = new THREE.WebGLRenderer({
+        alpha: true,
+        antialias: true,
+        powerPreference: "high-performance",
+      });
+    } catch {
+      // WebGL unavailable (sandboxed / disabled GPU) — skip the effect silently.
+      return;
+    }
     renderer.setClearColor(0x000000, 0);
     renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.75));
     container.appendChild(renderer.domElement);

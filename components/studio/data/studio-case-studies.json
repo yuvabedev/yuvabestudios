@@ -206,17 +206,18 @@
   },
   {
     "id": "tvam",
-    "title": "tvam",
-    "sector": "Health insurance AI",
-    "summary": "Built Health and Policy Advisors plus a USMLE prep workflow that turned complex guidance tasks into one AI product experience users could navigate with confidence.",
-    "seoTitle": "tvam Case Study",
+    "title": "TVAM",
+    "sector": "Health & Fintech",
+    "summary": "Unified health insurance advisory, doctor consultations, and gold investment under one trusted super-app — reducing CPA by 40% and reaching 2L+ users.",
+    "seoTitle": "TVAM Case Study — Health & Wealth Super-App",
+    "seoDescription": "See how Yuvabe rebuilt TVAM's brand architecture and product design system to unify health, insurance, and wealth features into one trusted super-app — cutting CPA by 40%.",
     "services": [
-      "AI integration",
-      "Product design",
-      "RAG workflows"
+      "Brand Identity",
+      "UI/UX Design",
+      "Product Design"
     ],
     "mockLayout": "wide",
-    "modalIntro": "TVAM set out to simplify health guidance, policy support, and exam-prep workflows through advisor-style AI tools. The real challenge was making chat, retrieval, voice, and secure knowledge flows feel like one dependable product experience instead of a stack of separate AI features.",
+    "modalIntro": "TVAM set out to unify health insurance advisory, doctor consultations, and gold investments under one trusted super-app — built for India's next 200 million smartphone users. The challenge was making three separate worlds feel like one coherent product people could trust.",
     "mockVariant": "aurora",
     "mediaIconKey": "bot",
     "mockImageAlt": "TVAM case study cover",
@@ -229,78 +230,69 @@
     "mockViewport": "landscape",
     "mockPresentation": "fullImage",
     "modalOutcomes": [
-      "Built AI-powered Health and Policy Advisors plus a USMLE preparation tool.",
-      "Integrated chat-based AI, secure conversation storage, TTS/STT support, vector search, and file uploads.",
-      "Used RAG patterns and cloud deployment workflows across Google Cloud, Azure, and secure storage services.",
-      "Made complex health and policy workflows easier to navigate through clearer advisor-style product flows."
+      "40% reduction in customer acquisition cost post-redesign.",
+      "2L+ users on the platform.",
+      "Three core modules — health, insurance, and wealth — unified under one design system.",
+      "RAG-powered AI advisor embedded as a trusted companion across all modules."
     ],
     "modalSections": [
       {
-        "body": "TVAM was building AI tools across health guidance, policy support, and exam prep. As the scope expanded, those experiences had to feel like one usable product rather than a set of disconnected utilities.",
-        "title": "Context"
+        "title": "Context",
+        "body": "TVAM was building a super-app spanning health insurance advisory, doctor consultations, and gold investments — a broad product scope that needed to feel like one coherent experience rather than three separate utilities."
       },
       {
-        "body": "The work had to combine chat-based AI, voice interaction, document retrieval, secure conversation history, and file handling without making high-stakes workflows harder to trust or navigate.",
-        "title": "Challenge"
+        "title": "Challenge",
+        "body": "Users faced a fragmented experience across health, insurance, and investment features. There was no coherent visual language, onboarding felt clinical, and the AI advisor had no clear identity to anchor user trust."
       },
       {
-        "body": "Yuvabe designed and deployed Health and Policy Advisors plus a USMLE support workflow, tying them together with RAG-backed retrieval, vector search, TTS/STT, secure storage, and cloud-ready infrastructure.",
-        "title": "What we changed"
+        "title": "What we changed",
+        "body": "Yuvabe rebuilt the brand architecture from the ground up — creating a design system that works across all three modules, positioning the AI advisor as a trusted companion, and shipping a UI that reduced CPA by 40%."
       },
       {
-        "body": "The result was a more coherent advisor-style AI product suite that automated complex support flows, improved engagement, and gave users clearer help across health, policy, and exam-prep tasks.",
-        "title": "Outcome"
+        "title": "Outcome",
+        "body": "A more coherent super-app with a unified brand identity, a design system spanning health, insurance, and wealth, and measurable results — 40% lower CPA and 2L+ users on the platform."
       }
     ],
-    "seoDescription": "Explore how Yuvabe built TVAM's Health Advisor, Policy Advisor, and exam-prep workflows using RAG, secure storage, and cloud-ready deployment patterns.",
-    "heroMockHeadline": "Advisor-style AI tools in one system",
+    "heroMockHeadline": "Health & wealth — one trusted super-app",
     "modalGalleryRows": [
       {
-        "title": "Multi-domain advisor experience",
+        "title": "App screens",
         "items": [
           {
-            "imageKey": "Health Advisor workspace",
-            "title": "Wealth advisor flow",
-            "description": "A structured investment experience that brings financial guidance — portfolio tracking, goal-setting, and investment prompts — into the same product space as health and insurance. One app, multiple advisory domains, no context-switching."
+            "title": "Health module",
+            "description": "Doctor consultation and health guidance flows designed to feel conversational and easy to navigate — not clinical."
           },
           {
-            "imageKey": "Policy Advisor journey",
-            "title": "Conversational health guidance",
-            "description": "A chat-first health advisor with voice input support, designed to make clinical and wellness guidance feel like a natural conversation rather than a form or a search. Users get structured responses without navigating complex medical language."
+            "title": "Policy advisor",
+            "description": "RAG-backed policy guidance with a clear information hierarchy that made complex insurance decisions more accessible."
           }
         ]
       },
       {
-        "title": "AI infrastructure and onboarding",
+        "title": "Wealth module",
         "items": [
           {
-            "imageKey": "Document-aware assistant",
-            "title": "AI assistant entry point",
-            "description": "The conversational scaffold that greets users and surfaces the right starting point, whether they need health guidance, financial support, or policy help. Built on a RAG stack with secure storage, so responses stay contextually accurate across domains."
-          },
-          {
-            "imageKey": "Exam-prep support",
-            "title": "Product onboarding and value narrative",
-            "description": "The onboarding flow that introduces tvam's full scope : health, wealth, and well-being as a connected offering rather than separate products. Designed to help users understand what the platform can do before they need to navigate it themselves."
+            "title": "Gold investment",
+            "description": "A wealth management module that brought financial guidance into the same trusted product space as health and insurance — one app, multiple advisory domains."
           }
         ]
       }
     ],
     "modalProofPoints": [
       {
-        "title": "Built multiple advisor workflows",
-        "iconKey": "bot",
-        "description": "Delivered Health Advisor, Policy Advisor, and USMLE support experiences instead of a narrow single-use prototype."
-      },
-      {
-        "title": "Connected retrieval, voice, and secure history",
-        "iconKey": "scanSearch",
-        "description": "Combined RAG, vector search, TTS/STT, file handling, and secure conversation storage into a usable AI product system."
-      },
-      {
-        "title": "Deployed for real-world scale",
+        "title": "Rebuilt brand architecture",
         "iconKey": "sparkles",
-        "description": "Shipped cloud-ready workflows across Docker, Google Cloud, Azure, and secure storage patterns built for growth."
+        "description": "Created a unified visual language and design system that worked consistently across all three modules — health, insurance, and wealth."
+      },
+      {
+        "title": "40% lower acquisition cost",
+        "iconKey": "barChart3",
+        "description": "Clearer product narrative and improved UI directly reduced CPA by 40% after the redesign shipped."
+      },
+      {
+        "title": "AI advisor as trusted companion",
+        "iconKey": "bot",
+        "description": "Positioned the RAG-powered health and policy advisor with a clear product identity that users could navigate with confidence."
       }
     ],
     "modalTestimonial": {
