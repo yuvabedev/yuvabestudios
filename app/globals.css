@@ -1,5 +1,4 @@
 ﻿@import "tailwindcss";
-@import "lenis/dist/lenis.css";
 
 /* ─── Studio-admin login background ──────────────────────────────────────── */
 .admin-login-ambient {
@@ -13,24 +12,6 @@
     linear-gradient(to right, rgba(148, 163, 184, 0.06) 1px, transparent 1px),
     linear-gradient(to bottom, rgba(148, 163, 184, 0.06) 1px, transparent 1px);
   background-size: 48px 48px;
-}
-
-/* ─── Lenis smooth scroll ─────────────────────────────────────────────────── */
-html.lenis,
-html.lenis body {
-  height: auto;
-}
-
-.lenis.lenis-smooth {
-  scroll-behavior: auto !important;
-}
-
-.lenis.lenis-smooth [data-lenis-prevent] {
-  overscroll-behavior: contain;
-}
-
-.lenis.lenis-stopped {
-  overflow: hidden;
 }
 
 /* ─── Clash Display (titles / headings) ──────────────────────────────────── */
@@ -580,7 +561,6 @@ html.lenis body {
 
 html {
   background: var(--color-background-canvas);
-  scroll-behavior: smooth;
 }
 
 body {

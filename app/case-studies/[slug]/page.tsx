@@ -93,12 +93,22 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
 
   // Prakriti Sattva gets a fully custom immersive page
   if (slug === "prakiti-sattva") {
-    return <PrakritiSattvaCaseStudy />;
+    return (
+      <main data-studio-shell className="relative min-h-screen bg-white text-foreground">
+        <StudioHeader navigationItems={homepageContent.navigationItems} />
+        <PrakritiSattvaCaseStudy />
+      </main>
+    );
   }
 
   // General Aeronautics — cinematic scroll experience
   if (slug === "general-aeronautics") {
-    return <GaCinematicCaseStudy />;
+    return (
+      <main data-studio-shell className="relative min-h-screen bg-white text-foreground">
+        <StudioHeader navigationItems={homepageContent.navigationItems} />
+        <GaCinematicCaseStudy />
+      </main>
+    );
   }
 
   const displayCaseStudy = applyStudioCaseStudyDisplayOverrides(caseStudy);
