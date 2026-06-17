@@ -164,7 +164,10 @@ export function TvamCaseStudyContent() {
 
         <div className="mx-auto max-w-[1400px] px-6 md:px-12 lg:px-20">
           <div className="overflow-hidden rounded-3xl bg-[#efedf8]">
-            <TvamInViewVideo src="/assets/tvam/health.mp4" className="w-full h-auto" />
+            <TvamInViewVideo
+              src="/assets/tvam/health.mp4"
+              className="w-full h-auto"
+            />
           </div>
         </div>
       </section>
@@ -172,7 +175,6 @@ export function TvamCaseStudyContent() {
       {/* ══════════════════════════════════════════════════
           6 — Cover detail (contained, not full-bleed)
       ══════════════════════════════════════════════════ */}
-    
 
       <ScaleReveal className="w-full overflow-hidden">
         {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -270,43 +272,72 @@ export function TvamCaseStudyContent() {
       </section>
 
       {/* ══════════════════════════════════════════════════
+          9 — Testimonial (image + quote)
+      ══════════════════════════════════════════════════ */}
+      <section className="bg-[#efedf8] py-20 md:py-28">
+        <div className="mx-auto grid max-w-[1400px] items-center gap-12 px-6 md:grid-cols-2 md:px-12 lg:gap-16 lg:px-20">
+          <ScaleReveal className="overflow-hidden rounded-3xl">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/assets/tvam/cover-detail.png"
+              alt="TVAM app experience"
+              className="h-[60vh] w-full object-cover"
+              loading="lazy"
+            />
+          </ScaleReveal>
+          <div>
+            <div className="mb-6 flex size-10 items-center justify-center rounded-full bg-[#ef8829]/15">
+              <svg
+                viewBox="0 0 24 24"
+                className="size-5 fill-[#ef8829]"
+                aria-hidden="true"
+              >
+                <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" />
+              </svg>
+            </div>
+            <blockquote
+              className="mb-6 font-medium italic leading-relaxed text-[#2D1F6E]"
+              style={{ fontSize: "clamp(18px, 2vw, 26px)" }}
+            >
+              &ldquo;Partnering with Yuvabe Studios for over a year, we&apos;ve
+              seen exceptional results. Their deep understanding of our vision
+              and customer segments, combined with prompt responsiveness, has
+              strengthened our brand.&rdquo;
+            </blockquote>
+            <div>
+              <p className="font-semibold text-[#0A0A0A]">Aruna Sampige</p>
+              <p className="text-sm text-[#6B5A3A]">
+                tvam Technologies Pvt. Ltd.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ══════════════════════════════════════════════════
           11 —  closing card
       ══════════════════════════════════════════════════ */}
-      <section className="px-6 pb-24 pt-12 md:px-12 lg:px-20">
+      <section className="bg-[#efedf8] px-6 pb-24 pt-12 md:px-12 lg:px-20">
         <div className="mx-auto max-w-[1400px]">
-          <div className="rounded-3xl bg-[#efedf8] border border-[#e2dff5] px-10 py-20 md:px-20 md:py-24 flex flex-col md:flex-row items-center md:items-end justify-between gap-12">
-            <div className="flex-1">
+          <div className="flex flex-col items-center justify-between gap-8 rounded-3xl bg-[#f5b87f] px-8 py-14 text-center sm:px-14 md:flex-row md:text-left">
+            <div>
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
-                src="/assets/tvam/logo.svg"
+                src="/assets/tvam/logo.png"
                 alt="TVAM"
-                className="h-16 w-auto mb-8"
+                className="mb-4 h-24 w-auto md:mb-0"
               />
-              <h2
-                className="font-bold text-[#0A0A0A] tracking-tight leading-[1.05]"
-                style={{ fontSize: "clamp(32px, 4vw, 56px)" }}
-              >
-                Healthier decisions.
-                <br />
-                Richer lives.
-              </h2>
             </div>
-
-            <div className="flex-shrink-0 text-center md:text-right">
-              <p className="text-[15px] text-[#555] mb-8 max-w-xs">
-                An AI-first health and wealth super-app, built for India&apos;s
-                next wave of digital users.
-              </p>
-              <Link
-                href="/#process"
-                className="inline-flex items-center gap-3 rounded-full bg-[#ef8829] px-8 py-4 text-[14px] font-semibold text-white transition-all hover:-translate-y-0.5 hover:shadow-[0_12px_32px_rgba(239,136,41,0.50)]"
-              >
-                Start a project
-                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
-                  <path d="M1 7h12M7 1l6 6-6 6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                </svg>
-              </Link>
-            </div>
+            <p className="max-w-sm text-[20px] leading-relaxed text-black/65">
+              An AI-first health and wealth super-app, built for India&apos;s
+              next wave of digital users.
+            </p>
+            <Link
+              href="/#process"
+              className="shrink-0 inline-flex items-center gap-2 rounded-full bg-[#fff] px-7 py-3.5 text-[14px] font-semibold text-black shadow-[0_6px_20px_rgba(239,136,41,0.4)] transition-all hover:-translate-y-0.5 hover:shadow-[0_10px_28px_rgba(239,136,41,0.5)]"
+            >
+              Start a project
+            </Link>
           </div>
         </div>
       </section>

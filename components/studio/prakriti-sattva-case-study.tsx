@@ -392,13 +392,13 @@ export function PrakritiSattvaCaseStudy() {
       ══════════════════════════════════════════ */}
       <section className="px-6 pb-24 pt-10 md:px-12 lg:px-20">
         <div className="mx-auto max-w-7xl">
-          <div className="ps-scale-in flex flex-col items-center justify-between gap-8 rounded-3xl bg-[#1C1108] px-8 py-14 text-center sm:px-14 md:flex-row md:text-left">
+          <div className="ps-scale-in flex flex-col items-center justify-between gap-8 rounded-3xl bg-[#606d1d] px-8 py-14 text-center sm:px-14 md:flex-row md:text-left">
             <div>
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src="/assets/prakritisattva/logo.png"
                 alt="Prakriti Sattva"
-                className="mb-4 h-10 w-auto brightness-0 invert md:mb-0"
+                className="mb-4 h-24 w-auto brightness-0 invert md:mb-0"
               />
             </div>
             <p className="max-w-sm text-[17px] leading-relaxed text-white/65">
@@ -406,7 +406,7 @@ export function PrakritiSattvaCaseStudy() {
             </p>
             <Link
               href="/#process"
-              className="shrink-0 inline-flex items-center gap-2 rounded-full bg-[#5A7A3A] px-7 py-3.5 text-[14px] font-semibold text-white shadow-[0_6px_20px_rgba(90,122,58,0.4)] transition-all hover:-translate-y-0.5 hover:shadow-[0_10px_28px_rgba(90,122,58,0.5)]"
+              className="shrink-0 inline-flex items-center gap-2 rounded-full bg-[#d37f6e] px-7 py-3.5 text-[14px] font-semibold text-white shadow-[0_6px_20px_rgba(90,122,58,0.4)] transition-all hover:-translate-y-0.5 hover:shadow-[0_10px_28px_rgba(90,122,58,0.5)]"
             >
               Start your project
             </Link>

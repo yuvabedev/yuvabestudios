@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import Link from "next/link";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import ScrollExpandMedia from "@/components/ui/scroll-expansion-hero";
@@ -153,9 +154,9 @@ export function GaCinematicCaseStudy() {
         <div className="ga-img-reveal ga-fullbleed overflow-hidden">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
-            src="/assets/general-aeronautics/cover-detail.png"
+            src="/assets/general-aeronautics/cover.png"
             alt="General Aeronautics — drone system"
-            className="h-[56vh] w-full object-cover object-center md:h-[88vh]"
+            className="h-[56vh] w-full object-contain object-bottom-center md:h-[88vh]"
           />
         </div>
       </section>
@@ -167,17 +168,31 @@ export function GaCinematicCaseStudy() {
           <div className="ga-fade-up space-y-12">
             <dl className="space-y-6">
               {META.map(({ label, value }) => (
-                <div key={label} className="flex items-baseline justify-between gap-6 border-b border-slate-200 pb-4">
-                  <dt className="font-mono text-[10px] uppercase tracking-[0.18em] text-slate-400">{label}</dt>
-                  <dd className="text-right text-base font-semibold text-slate-800">{value}</dd>
+                <div
+                  key={label}
+                  className="flex items-baseline justify-between gap-6 border-b border-slate-200 pb-4"
+                >
+                  <dt className="font-mono text-[10px] uppercase tracking-[0.18em] text-slate-400">
+                    {label}
+                  </dt>
+                  <dd className="text-right text-base font-semibold text-slate-800">
+                    {value}
+                  </dd>
                 </div>
               ))}
             </dl>
             <div>
-              <p className="mb-4 font-mono text-[10px] uppercase tracking-[0.18em] text-slate-400">Services</p>
+              <p className="mb-4 font-mono text-[10px] uppercase tracking-[0.18em] text-slate-400">
+                Services
+              </p>
               <ul>
                 {SERVICES.map((s) => (
-                  <li key={s} className="ga-row px-1 py-4 text-[15px] font-medium text-slate-700">{s}</li>
+                  <li
+                    key={s}
+                    className="ga-row px-1 py-4 text-[15px] font-medium text-slate-700"
+                  >
+                    {s}
+                  </li>
                 ))}
               </ul>
             </div>
@@ -186,14 +201,16 @@ export function GaCinematicCaseStudy() {
           {/* Overview lead */}
           <div className="ga-fade-up">
             <p className="ga-lead text-slate-800">
-              General Aeronautics builds drone systems across agriculture, defense,
-              humanitarian response, and warehouse automation. As the portfolio grew,
-              communicating that breadth clearly became the defining challenge.
+              General Aeronautics builds drone systems across agriculture,
+              defense, humanitarian response, and warehouse automation. As the
+              portfolio grew, communicating that breadth clearly became the
+              defining challenge.
             </p>
             <p className="mt-7 text-[clamp(15px,1.4vw,19px)] leading-relaxed text-slate-500">
-              Yuvabe paired a website revamp with a brand refresh, UI/UX direction, and
-              supporting content — so product communication and credibility cues reinforced
-              each other across every touchpoint instead of fragmenting it.
+              Yuvabe paired a website revamp with a brand refresh, UI/UX
+              direction, and supporting content — so product communication and
+              credibility cues reinforced each other across every touchpoint
+              instead of fragmenting it.
             </p>
           </div>
         </div>
@@ -203,16 +220,20 @@ export function GaCinematicCaseStudy() {
       <section className="px-6 pt-20 md:px-12 lg:px-20 md:pt-28 border-t border-slate-200/80">
         <div className="mx-auto grid max-w-7xl gap-8 lg:grid-cols-[1fr_1fr] lg:items-end lg:gap-16">
           <div className="ga-fade-up">
-            <p className="mb-6 font-mono text-[11px] uppercase tracking-[0.2em] text-slate-400">01 — The Challenge</p>
+            <p className="mb-6 font-mono text-[11px] uppercase tracking-[0.2em] text-slate-400">
+              01 — The Challenge
+            </p>
             <h3 className="ga-section-head text-slate-900">
-              Technical breadth,<br />
+              Technical breadth,
+              <br />
               <span className="text-slate-400">broken narrative.</span>
             </h3>
           </div>
           <p className="ga-fade-up text-[clamp(15px,1.4vw,19px)] leading-relaxed text-slate-500">
-            Across four very different verticals, depth of engineering was the strength —
-            but without a single story to hold it together, that breadth risked reading
-            as fragmentation to buyers, partners, and operators alike.
+            Across four very different verticals, depth of engineering was the
+            strength — but without a single story to hold it together, that
+            breadth risked reading as fragmentation to buyers, partners, and
+            operators alike.
           </p>
         </div>
       </section>
@@ -234,16 +255,20 @@ export function GaCinematicCaseStudy() {
       <section className="px-6 pt-12 md:px-12 lg:px-20 md:pt-16">
         <div className="mx-auto grid max-w-7xl gap-8 lg:grid-cols-[1fr_1fr] lg:items-end lg:gap-16">
           <div className="ga-fade-up">
-            <p className="mb-6 font-mono text-[11px] uppercase tracking-[0.2em] text-slate-400">02 — The Approach</p>
+            <p className="mb-6 font-mono text-[11px] uppercase tracking-[0.2em] text-slate-400">
+              02 — The Approach
+            </p>
             <h3 className="ga-section-head text-slate-900">
-              Four verticals,<br />
+              Four verticals,
+              <br />
               <span className="text-slate-400">one clear story.</span>
             </h3>
           </div>
           <p className="ga-fade-up text-[clamp(15px,1.4vw,19px)] leading-relaxed text-slate-500">
-            We built a navigation and messaging system that lets each vertical stand on
-            its own while laddering up to a single, confident brand — so a defense buyer
-            and an agriculture operator each find their story without losing the whole.
+            We built a navigation and messaging system that lets each vertical
+            stand on its own while laddering up to a single, confident brand —
+            so a defense buyer and an agriculture operator each find their story
+            without losing the whole.
           </p>
         </div>
       </section>
@@ -252,12 +277,21 @@ export function GaCinematicCaseStudy() {
         <div className="mx-auto max-w-7xl">
           <ul className="ga-grid-stagger">
             {DOMAINS.map((d, i) => (
-              <li key={d.label} className="ga-row flex flex-col gap-2 py-7 md:flex-row md:items-baseline md:gap-10">
+              <li
+                key={d.label}
+                className="ga-row flex flex-col gap-2 py-7 md:flex-row md:items-baseline md:gap-10"
+              >
                 <div className="flex items-baseline gap-5 md:w-1/3">
-                  <span className="font-mono text-[11px] text-slate-400">{String(i + 1).padStart(2, "0")}</span>
-                  <span className="text-[clamp(20px,2.4vw,30px)] font-semibold tracking-tight text-slate-900">{d.label}</span>
+                  <span className="font-mono text-[11px] text-slate-400">
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
+                  <span className="text-[clamp(20px,2.4vw,30px)] font-semibold tracking-tight text-slate-900">
+                    {d.label}
+                  </span>
                 </div>
-                <p className="text-[15px] leading-relaxed text-slate-500 md:w-2/3">{d.desc}</p>
+                <p className="text-[15px] leading-relaxed text-slate-500 md:w-2/3">
+                  {d.desc}
+                </p>
               </li>
             ))}
           </ul>
@@ -285,32 +319,36 @@ export function GaCinematicCaseStudy() {
       <section className="px-6 pt-16 md:px-12 lg:px-20 md:pt-24">
         <div className="mx-auto grid max-w-7xl gap-8 lg:grid-cols-[1fr_1fr] lg:items-end lg:gap-16">
           <div className="ga-fade-up">
-            <p className="mb-6 font-mono text-[11px] uppercase tracking-[0.2em] text-slate-400">03 — The Work</p>
+            <p className="mb-6 font-mono text-[11px] uppercase tracking-[0.2em] text-slate-400">
+              03 — The Work
+            </p>
             <h3 className="ga-section-head text-slate-900">
-              A site that sells<br />
+              A site that sells
+              <br />
               <span className="text-slate-400">the whole system.</span>
             </h3>
           </div>
           <p className="ga-fade-up text-[clamp(15px,1.4vw,19px)] leading-relaxed text-slate-500">
-            Website, product UI, and brand assets were rebuilt to reinforce the same
-            story — pairing credible engineering detail with a clean, modern interface
-            that non-technical buyers can navigate with confidence.
+            Website, product UI, and brand assets were rebuilt to reinforce the
+            same story — pairing credible engineering detail with a clean,
+            modern interface that non-technical buyers can navigate with
+            confidence.
           </p>
         </div>
       </section>
 
       <section className="px-6 py-14 md:px-12 lg:px-20">
-        <div className="mx-auto max-w-7xl space-y-4">
+        <div className="mx-auto max-w-7xl space-y-8">
           <div className="ga-img-reveal overflow-hidden rounded-2xl">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
-              src="/assets/general-aeronautics/mock13.png"
+              src="/assets/general-aeronautics/cover-mock.png"
               alt="General Aeronautics — product UI"
               className="h-[44vh] w-full object-cover object-top transition-transform duration-700 hover:scale-[1.02] md:h-[60vh]"
             />
           </div>
           <div className="ga-grid-stagger grid gap-4 sm:grid-cols-2">
-            {["mock5", "cover-mock"].map((name) => (
+            {["mock5", "mock13"].map((name) => (
               <div key={name} className="overflow-hidden rounded-2xl">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
@@ -333,28 +371,83 @@ export function GaCinematicCaseStudy() {
           <div className="ga-grid-stagger grid gap-x-10 gap-y-12 sm:grid-cols-2 lg:grid-cols-4">
             {OUTCOMES.map((o) => (
               <div key={o.num} className="border-t-2 border-slate-900 pt-6">
-                <span className="mb-4 block font-mono text-[12px] text-slate-400">{o.num}</span>
-                <p className="text-[clamp(17px,1.6vw,21px)] font-semibold leading-snug text-slate-900">{o.text}</p>
+                <span className="mb-4 block font-mono text-[12px] text-slate-400">
+                  {o.num}
+                </span>
+                <p className="text-[clamp(17px,1.6vw,21px)] font-semibold leading-snug text-slate-900">
+                  {o.text}
+                </p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* ─── Testimonial ─── */}
+      {/* ─── Testimonial (image + quote) ─── */}
       <section className="px-6 py-20 md:px-12 lg:px-20 md:py-28 border-t border-slate-200/80">
-        <div className="mx-auto max-w-5xl text-center">
-          <blockquote className="ga-fade-up ga-bigquote text-slate-900">
-            &ldquo;The work made a technically complex drone business easier to understand
-            and easier to trust — website, product UX, and brand finally reinforcing the
-            same story instead of fragmenting it.&rdquo;
-          </blockquote>
-          <p className="ga-fade-up mt-10 font-mono text-[11px] uppercase tracking-[0.2em] text-slate-400">
-            General Aeronautics team
-          </p>
+        <div className="mx-auto grid max-w-7xl items-center gap-12 lg:grid-cols-2 lg:gap-16">
+          <div className="ga-img-reveal overflow-hidden rounded-2xl">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/assets/general-aeronautics/cover-detail.png"
+              alt="General Aeronautics — drone system"
+              className="h-[60vh] w-full object-cover object-center"
+            />
+          </div>
+          <div className="ga-fade-up">
+            <div className="mb-6 flex size-10 items-center justify-center rounded-full bg-slate-900/10">
+              <svg
+                viewBox="0 0 24 24"
+                className="size-5 fill-slate-900"
+                aria-hidden="true"
+              >
+                <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" />
+              </svg>
+            </div>
+            <blockquote
+              className="mb-6 font-medium italic leading-relaxed text-slate-900"
+              style={{ fontSize: "clamp(18px, 2vw, 26px)" }}
+            >
+              &ldquo;The work made a technically complex drone business easier
+              to understand and easier to trust — website, product UX, and brand
+              finally reinforcing the same story instead of fragmenting
+              it.&rdquo;
+            </blockquote>
+            <div>
+              <p className="font-semibold text-slate-900">
+                General Aeronautics team
+              </p>
+              <p className="text-sm text-slate-500">Aviation Technology</p>
+            </div>
+          </div>
         </div>
       </section>
 
+      {/* ─── End CTA ─── */}
+      <section className="px-6 pb-24 pt-4 md:px-12 lg:px-20">
+        <div className="mx-auto max-w-7xl">
+          <div className="ga-fade-up flex flex-col items-center justify-between gap-8 rounded-3xl bg-[#333333] px-8 py-14 text-center sm:px-14 md:flex-row md:text-left">
+            <div>
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src="/assets/general-aeronautics/logo.svg"
+                alt="General Aeronautics"
+                className="mb-4 h-10 w-auto brightness-0 invert md:mb-0"
+              />
+            </div>
+            <p className="max-w-sm text-[17px] leading-relaxed text-white/60">
+              Technical breadth made legible — one clear story, ready to scale
+              across every vertical.
+            </p>
+            <Link
+              href="/#process"
+              className="shrink-0 inline-flex items-center gap-2 rounded-full bg-white px-7 py-3.5 text-[14px] font-semibold text-slate-900 transition-all hover:-translate-y-0.5 hover:shadow-[0_10px_28px_rgba(15,23,42,0.4)]"
+            >
+              Start your project
+            </Link>
+          </div>
+        </div>
+      </section>
     </div>
   );
 }
