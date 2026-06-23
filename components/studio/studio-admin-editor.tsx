@@ -14,6 +14,8 @@ import {
   saveHomepageContentAction,
   saveUiuxDesignContentAction,
 } from "@/app/studio-admin/actions";
+import type { BlogPost } from "@/lib/blog";
+import { BlogAdminTab } from "@/components/studio/studio-blog-admin-tab";
 import type {
   CareersBenefitItem,
   CareersPageContent,
@@ -67,8 +69,9 @@ type StudioAdminEditorProps = {
   uiuxDesignContent: StudioUiuxDesignContent;
   caseStudies: StudioEditableCaseStudy[];
   careersContent: CareersPageContent;
+  blogPosts: BlogPost[];
   initialCaseStudyId?: string;
-  initialTab: "homepage" | "about" | "ai-workflows" | "services" | "case-studies" | "careers";
+  initialTab: "homepage" | "about" | "ai-workflows" | "services" | "case-studies" | "careers" | "blog";
   savedState?: string;
 };
 
@@ -1140,6 +1143,7 @@ export function StudioAdminEditor({
   uiuxDesignContent,
   caseStudies,
   careersContent,
+  blogPosts,
   initialCaseStudyId,
   initialTab,
   savedState,
@@ -1236,6 +1240,7 @@ export function StudioAdminEditor({
           <TabsTrigger value="services">Services</TabsTrigger>
           <TabsTrigger value="case-studies">Case studies</TabsTrigger>
           <TabsTrigger value="careers">Careers</TabsTrigger>
+          <TabsTrigger value="blog">Blog</TabsTrigger>
         </TabsList>
 
         <TabsContent value="homepage">
@@ -3613,6 +3618,11 @@ export function StudioAdminEditor({
 
             <StickySaveBar label="Save careers content" previewHref="/careers" />
           </form>
+        </TabsContent>
+
+        {/* ── Blog ─────────────────────────────────────────────────────────── */}
+        <TabsContent value="blog">
+          <BlogAdminTab initialPosts={blogPosts} />
         </TabsContent>
       </Tabs>
     </div>

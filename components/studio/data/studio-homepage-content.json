@@ -10,11 +10,15 @@
     },
     {
       "label": "Work",
-      "href": "#work"
+      "href": "/work"
     },
     {
       "label": "AI Workflows",
       "href": "/ai-workflows"
+    },
+    {
+      "label": "Blog",
+      "href": "/blog"
     },
     {
       "label": "Careers",
@@ -41,19 +45,19 @@
         "title": "AI-Native Engineering",
         "shortLabel": "From product strategy to launch",
         "description": "Product shaping, roadmap planning, launch clarity, and scaling support for what starts working.",
-        "href": "/ai-native-engineering"
+        "href": "/services#ai-native-engineering"
       },
       {
         "title": "UI/UX Design",
         "shortLabel": "AI-native apps and workflows",
         "description": "Complex AI workflows, copilots, and application-layer products for B2B and B2C teams.",
-        "href": "/uiux-design"
+        "href": "/services#uiux-design"
       },
       {
         "title": "Digital Marketing",
         "shortLabel": "Campaigns built for traction",
         "description": "Positioning, landing pages, campaigns, and analytics that turn launches into growth.",
-        "href": "/digital-marketing"
+        "href": "/services#digital-marketing"
       }
     ]
   },

@@ -149,7 +149,7 @@ export function ModalShell({
                   {/* The scrim and panel now share one timing system so exit cleanly reverses entry. */}
                   <div
                     className={cn(
-                      "flex min-h-screen items-center justify-center p-4 sm:p-6 lg:p-8",
+                      "flex min-h-screen items-start justify-center p-4 sm:items-center sm:p-6 lg:p-8",
                       isMobileFullscreen && "items-stretch p-0 sm:items-center sm:p-6 lg:p-8",
                     )}
                   >
@@ -189,7 +189,7 @@ export function ModalShell({
                           blur="lg"
                           radius="xl"
                           className={cn(
-                            "relative border border-white/72 bg-[linear-gradient(180deg,rgba(255,255,255,0.56),rgba(255,255,255,0.34))] shadow-[0_20px_56px_rgba(15,23,42,0.045)] backdrop-blur-[20px]",
+                            "relative border border-white/72 bg-[linear-gradient(180deg,rgba(255,255,255,0.56),rgba(255,255,255,0.34))] shadow-[0_20px_56px_rgba(15,23,42,0.045)] backdrop-blur-[20px] sm:max-h-[88vh] sm:overflow-y-auto",
                             isMobileFullscreen &&
                               "min-h-screen rounded-none border-0 bg-white shadow-none backdrop-blur-none sm:min-h-0 sm:rounded-[inherit] sm:border sm:border-white/72 sm:bg-[linear-gradient(180deg,rgba(255,255,255,0.56),rgba(255,255,255,0.34))] sm:shadow-[0_20px_56px_rgba(15,23,42,0.045)] sm:backdrop-blur-[20px]",
                             className,
@@ -199,7 +199,7 @@ export function ModalShell({
 
                           {/* The panel stays simple: translucent fill, subtle top highlight, and content above it. */}
                           <div aria-hidden="true" className="pointer-events-none absolute inset-0 rounded-[inherit]">
-                            <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white to-transparent" />
+                            <div className="absolute inset-x-0 top-0 h-px bg-linear-to-r from-transparent via-white to-transparent" />
                             <div className="absolute inset-0 rounded-[inherit] bg-[linear-gradient(180deg,rgba(255,255,255,0.20),rgba(255,255,255,0.08)_24%,rgba(255,255,255,0.02)_56%)]" />
                           </div>
 

@@ -11,6 +11,7 @@ import {
   getStudioUiuxDesignContent,
 } from "@/lib/studio-content";
 import { getStudioCareersPageContent } from "@/lib/careers-content";
+import { getAllBlogPosts } from "@/lib/blog";
 
 export const dynamic = "force-dynamic";
 
@@ -35,6 +36,7 @@ export default async function StudioAdminPage({
     uiuxDesignContent,
     caseStudies,
     careersContent,
+    blogPosts,
   ] = await Promise.all([
     searchParams,
     getStudioHomepageContent({ source: "supabase" }),
@@ -45,6 +47,7 @@ export default async function StudioAdminPage({
     getStudioUiuxDesignContent({ source: "supabase" }),
     getStudioCaseStudies({ source: "supabase" }),
     getStudioCareersPageContent(),
+    getAllBlogPosts().catch(() => []),
   ]);
 
   const editableCaseStudies = caseStudies.map(createStudioEditableCaseStudy);
@@ -64,7 +67,9 @@ export default async function StudioAdminPage({
             ? "services"
             : tab === "careers"
               ? "careers"
-              : "homepage";
+              : tab === "blog"
+                ? "blog"
+                : "homepage";
 
   return (
     <main className="min-h-screen bg-[linear-gradient(180deg,rgba(255,255,255,0.98),rgba(246,247,250,0.98))] px-6 py-10 text-foreground md:px-10">
@@ -105,6 +110,7 @@ export default async function StudioAdminPage({
           uiuxDesignContent={uiuxDesignContent}
           caseStudies={editableCaseStudies}
           careersContent={careersContent}
+          blogPosts={blogPosts}
           initialCaseStudyId={selectedCaseStudyId}
           initialTab={initialTab}
           savedState={saved}

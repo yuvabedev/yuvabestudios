@@ -301,11 +301,12 @@ export function TvamCinematicHero() {
         // Phase 2: card expands to full screen
         .to(".tvam-main-card", { width: "100%", height: "100%", borderRadius: "0px", ease: "power3.inOut", duration: 1.5 })
 
-        // Phase 3: phone swoops in with 3D entry
+        // Phase 3: phone swoops in WITH the card (starts during the rise so the
+        // panel never sits empty before the mockup arrives)
         .fromTo(".tvam-mockup-wrap",
           { y: 300, z: -500, rotationX: 50, rotationY: -30, autoAlpha: 0, scale: 0.6 },
           { y: 0, z: 0, rotationX: 0, rotationY: 0, autoAlpha: 1, scale: 1, ease: "expo.out", duration: 2.5 },
-          "-=0.8")
+          1.2)
 
         // Phase 4: Hold on Slide 1
         .to({}, { duration: 1.0 })

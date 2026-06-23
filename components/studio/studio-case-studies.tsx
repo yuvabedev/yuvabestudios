@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useRouter } from "next/navigation";
 
 import type { StudioHomepageWorkContent } from "@/components/studio/studio-homepage-content";
 import {
@@ -17,7 +17,6 @@ import {
   StudioPageContainer,
   StudioPageRails,
 } from "@/components/studio/studio-page-shell";
-import { StudioCaseStudySummaryDialog } from "@/components/studio/studio-case-study-summary-dialog";
 
 type StudioCaseStudiesProps = {
   caseStudies: StudioCaseStudySummary[];
@@ -62,17 +61,14 @@ export function StudioCaseStudies({
   caseStudies,
   workContent,
 }: StudioCaseStudiesProps) {
+  const router = useRouter();
   const homepageCaseStudies = homepageCaseStudyOrder
     .map((id) => caseStudies.find((caseStudy) => caseStudy.id === id))
     .filter((caseStudy): caseStudy is StudioCaseStudySummary => Boolean(caseStudy));
-  const [activeCaseStudy, setActiveCaseStudy] =
-    useState<StudioCaseStudySummary | null>(null);
-  const [isCaseStudyDialogOpen, setIsCaseStudyDialogOpen] = useState(false);
 
-  // Keeping the selected study in parent state lets the modal animate out before content is cleared.
+  // Cards now navigate straight to the full case study instead of opening a modal.
   function handleOpenCaseStudy(caseStudy: StudioCaseStudySummary) {
-    setActiveCaseStudy(caseStudy);
-    setIsCaseStudyDialogOpen(true);
+    router.push(getStudioCaseStudyHref(caseStudy.id));
   }
 
   return (
@@ -150,15 +146,6 @@ export function StudioCaseStudies({
           </div>
         </StudioPageContainer>
       </section>
-
-      <StudioCaseStudySummaryDialog
-        caseStudy={activeCaseStudy}
-        open={isCaseStudyDialogOpen}
-        onOpenChange={setIsCaseStudyDialogOpen}
-        onAfterClose={() => {
-          setActiveCaseStudy(null);
-        }}
-      />
     </>
   );
 }

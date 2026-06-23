@@ -11,6 +11,7 @@ import { StudioPageContainer } from "@/components/studio/studio-page-shell";
 import { StartProjectButton } from "@/components/studio/start-project-button";
 
 type ServiceBlock = {
+  slug: string;
   title: string;
   shortLabel: string;
   description: string;
@@ -22,6 +23,7 @@ type ServiceBlock = {
 
 const services: ServiceBlock[] = [
   {
+    slug: "digital-marketing",
     title: "Digital Marketing",
     shortLabel: "Campaigns built for traction",
     description:
@@ -39,6 +41,7 @@ const services: ServiceBlock[] = [
     href: "/digital-marketing",
   },
   {
+    slug: "uiux-design",
     title: "UI/UX Design & Development",
     shortLabel: "Interfaces people actually use",
     description:
@@ -56,6 +59,7 @@ const services: ServiceBlock[] = [
     href: "/uiux-design",
   },
   {
+    slug: "ai-native-engineering",
     title: "AI-Native Engineering",
     shortLabel: "End-to-end build, shipped right",
     description:
@@ -73,6 +77,7 @@ const services: ServiceBlock[] = [
     href: "/ai-native-engineering",
   },
   {
+    slug: "market-research",
     title: "Market Research",
     shortLabel: "Decisions backed by evidence",
     description:
@@ -205,7 +210,8 @@ export function ServicesPage({ navigationItems }: ServicesPageProps) {
                 return (
                   <motion.div
                     key={service.title}
-                    className="grid items-center gap-12 lg:grid-cols-2 lg:gap-20"
+                    id={service.slug}
+                    className="grid scroll-mt-28 items-center gap-12 lg:grid-cols-2 lg:gap-20 md:scroll-mt-32"
                     variants={blockStagger}
                     initial="hidden"
                     whileInView="show"

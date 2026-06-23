@@ -25,7 +25,7 @@
         "Delivered a visual language that felt quiet, intentional, and culturally resonant.",
         "Made information about visiting and programs easier to discover."
       ],
-      "thumbnailSrc": "/assets/martimandir/cover.png",
+      "thumbnailSrc": "/assets/martimandir/bg.png",
       "ctaLabel": "View Case Study",
       "workGallery": [
         { "src": "/assets/martimandir/homepage.webp", "alt": "Homepage design", "label": "HOMEPAGE DESIGN" },
@@ -55,7 +55,7 @@
         "Designed assets that cohered into a single brand experience.",
         "Helped communicate Ayurvedic credibility to modern wellness buyers."
       ],
-      "thumbnailSrc": "/assets/prakritisattva/product.png",
+      "thumbnailSrc": "/assets/prakritisattva/balm.png",
       "ctaLabel": "View Case Study",
       "workGallery": [
         { "src": "/assets/prakritisattva/product.png", "alt": "Product design", "label": "PRODUCT DESIGN" },
@@ -85,7 +85,7 @@
         "Improved credibility across web, applications, and communication assets.",
         "Built a stronger platform for future product and growth decisions."
       ],
-      "thumbnailSrc": "/assets/general-aeronautics/cover-home.png",
+      "thumbnailSrc": "/assets/general-aeronautics/cover-summary.jpeg",
       "ctaLabel": "View Case Study",
       "workGallery": [
         { "src": "/assets/general-aeronautics/cover-home.png", "alt": "Drone system visual", "label": "DRONE SYSTEM VISUAL" },
@@ -108,6 +108,7 @@
       "title": "bevolve",
       "description": "Designed the core product UI and onboarding flows for a B2B platform built around operational clarity and team workflows.",
       "category": "B2B Product Design",
+      "thumbnailSrc": "/assets/bevolve/cover-detail.png",
       "services": ["Product UX", "Onboarding Design", "UI Systems"],
       "outcomes": [
         "Reduced onboarding time through cleaner flow design and task sequencing.",
