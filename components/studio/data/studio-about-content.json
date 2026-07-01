@@ -84,15 +84,15 @@
     "operatingPrinciples": [
       {
         "title": "Decide faster",
-        "description": "Get to the real priority before the roadmap fills up."
+        "description": "Get to the real priority before the roadmap fills up. Focus on what delivers the greatest impact instead of chasing every new request. Make confident decisions backed by clear goals and data, so your team spends less time debating and more time building what truly matters. Eliminate unnecessary delays, align stakeholders quickly, and keep your product moving forward with purpose. Every decision becomes clearer when priorities are visible and actionable."
       },
       {
         "title": "Build smarter",
-        "description": "Use AI and strong product judgment to ship without drifting."
+        "description": "Use AI and strong product judgment to ship without drifting. Turn ideas into well-executed features with confidence, balancing speed, quality, and user needs. Leverage intelligent insights to reduce repetitive work, uncover opportunities, and make informed decisions throughout the product lifecycle. Build with clarity, iterate faster, and deliver products that create lasting value."
       },
       {
-        "title": "Learn sooner",
-        "description": "Stay close to the signal so the next move gets clearer."
+        "title": "Learn Sooner",
+        "description": "Validate ideas early by putting real solutions in front of users instead of relying on assumptions. Every release becomes a source of insight, helping your team learn faster and refine the next decision. Continuous feedback keeps momentum high, reduces wasted effort, and leads to products that truly solve customer needs."
       }
     ]
   },

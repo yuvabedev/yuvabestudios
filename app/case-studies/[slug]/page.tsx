@@ -9,6 +9,8 @@ import { TvamCinematicHero } from "@/components/studio/tvam-cinematic-hero";
 import { TvamCaseStudyContent } from "@/components/studio/tvam-case-study-content";
 import { PrakritiSattvaCaseStudy } from "@/components/studio/prakriti-sattva-case-study";
 import { GaCinematicCaseStudy } from "@/components/studio/ga-cinematic-case-study";
+import { KittyKatCaseStudy } from "@/components/studio/kittykat-case-study";
+import { BevolveCaseStudy } from "@/components/studio/bevolve-case-study";
 import { StudioHeader } from "@/components/studio/studio-header";
 import {
   StudioPageContainer,
@@ -139,6 +141,35 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
     },
     about: [caseStudy.sector, ...caseStudy.services],
   };
+
+  // KittyKat — bespoke immersive page: shared studio header, but no rails,
+  // container, or breadcrumb shell.
+  if (slug === "kittykat") {
+    return (
+      <>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+        />
+        <StudioHeader navigationItems={homepageContent.navigationItems} />
+        <KittyKatCaseStudy caseStudy={displayCaseStudy} detail={detail} />
+      </>
+    );
+  }
+
+  // Bevolve — bespoke immersive page (nuant-style): shared header, no shell.
+  if (slug === "bevolve") {
+    return (
+      <>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+        />
+        <StudioHeader navigationItems={homepageContent.navigationItems} />
+        <BevolveCaseStudy caseStudy={displayCaseStudy} detail={detail} />
+      </>
+    );
+  }
 
   return (
     <main
