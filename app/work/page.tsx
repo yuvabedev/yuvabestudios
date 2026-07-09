@@ -5,6 +5,7 @@ import {
   getStudioCaseStudies,
   getStudioHomepageContent,
 } from "@/lib/studio-content";
+import { getStudioWorkPageContent } from "@/lib/work-content";
 import { getAbsoluteUrl } from "@/lib/site";
 
 export const dynamic = "force-dynamic";
@@ -26,15 +27,17 @@ export const metadata: Metadata = {
 };
 
 export default async function WorkRoutePage() {
-  const [caseStudies, homepageContent] = await Promise.all([
+  const [caseStudies, homepageContent, workContent] = await Promise.all([
     getStudioCaseStudies().catch(() => []),
-    getStudioHomepageContent({ source: "supabase" }),
+    getStudioHomepageContent(),
+    getStudioWorkPageContent(),
   ]);
 
   return (
     <WorkPage
       navigationItems={homepageContent.navigationItems}
       caseStudies={caseStudies}
+      content={workContent}
     />
   );
 }

@@ -2,7 +2,10 @@ import Image from "next/image";
 
 import type { StudioHomepageNavItem } from "@/components/studio/studio-homepage-content";
 import {
+  type StudioAboutNameMeaningContent,
   type StudioAboutPageContent,
+  type StudioAboutPhilosophyContent,
+  type StudioAboutStatsContent,
   type StudioAboutStoryContent,
 } from "@/components/studio/studio-about-content";
 import {
@@ -10,7 +13,6 @@ import {
   AboutHoverGallery,
   AboutPillarImage,
   AboutTestimonials,
-  type AboutTestimonial,
 } from "@/components/studio/about-interactive";
 import { StudioCtaCard } from "@/components/studio/studio-cta-card";
 import { StudioHeader } from "@/components/studio/studio-header";
@@ -38,59 +40,30 @@ function Rail({
 
 const aboutAssets = {
   cover: {
-    src: "/assets/about/yuvabe-cover.jpeg",
-    alt: "The Yuvabe team gathered outdoors on the studio campus in Auroville.",
+    src: "/assets/about-cover.jpeg",
+    alt: "The full Yuvabe team gathered on the studio campus in Auroville.",
   },
 } as const;
 
-// Clay-style stat metrics — factual studio numbers, not fabricated counts.
-const ABOUT_STATS = [
-  { value: "2020", label: "Founded in Auroville" },
-  { value: "40+", label: "Yuvabeans on the team" },
-  { value: "4", label: "Disciplines, one connected loop" },
-] as const;
-const ABOUT_HOME = { value: "Auroville", label: "Where we're based" } as const;
-
 // Horizontal culture/work gallery imagery.
 const ABOUT_GALLERY_IMAGES = [
-  { src: "/assets/careers/group.png", alt: "Yuvabeans building together at the studio" },
-  { src: "/assets/about/saracon_02.jpg", alt: "The Auroville campus where we work" },
-  { src: "/assets/careers/people.png", alt: "A team huddle around an early prototype" },
-  { src: "/assets/about/yuvabe-image.jpeg", alt: "An earlier Yuvabe team photo under a tree" },
-  { src: "/assets/KK/Cover-home.png", alt: "KittyKat product visuals" },
-  { src: "/assets/bevolve/cover-detail.png", alt: "Bevolve ESG platform" },
-  { src: "/assets/tvam/cover.png", alt: "TVAM wellness product" },
-  { src: "/assets/general-aeronautics/cover-summary.jpeg", alt: "General Aeronautics drone platform" },
+  { src: "/assets/about-carousel/web/1.webp", alt: "Life at the Yuvabe studio" },
+  { src: "/assets/about-carousel/web/2.webp", alt: "Life at the Yuvabe studio" },
+  { src: "/assets/about-carousel/web/3.webp", alt: "Life at the Yuvabe studio" },
+  { src: "/assets/about-carousel/web/4.webp", alt: "Life at the Yuvabe studio" },
+  { src: "/assets/about-carousel/web/5.webp", alt: "Life at the Yuvabe studio" },
+  { src: "/assets/about-carousel/web/6.webp", alt: "Life at the Yuvabe studio" },
+  { src: "/assets/about-carousel/web/7.webp", alt: "Life at the Yuvabe studio" },
+  { src: "/assets/about-carousel/web/8.webp", alt: "Life at the Yuvabe studio" },
+  { src: "/assets/about-carousel/web/9.webp", alt: "Life at the Yuvabe studio" },
 ];
 
-// "Why Yuvabe" pillar imagery, paired by index with the operating principles.
+// "What drives us" pillar imagery, paired by index with the operating principles.
 const WHY_PILLAR_IMAGES = [
-  { src: "/assets/careers/group.png", alt: "Yuvabe team working side by side" },
-  { src: "/assets/careers/people.png", alt: "Reviewing an early prototype together" },
-  { src: "/assets/about/saracon_02.jpg", alt: "The Auroville campus" },
+  { src: "/assets/about/web/thinkdeep.webp", alt: "Thinking deeply about the right problem to solve" },
+  { src: "/assets/about/web/intentionally.webp", alt: "Building intentionally, with craft and judgment" },
+  { src: "/assets/about/web/learnsooner.webp", alt: "Learning sooner by putting work in front of people" },
 ] as const;
-
-// Placeholder testimonials — replace with real, attributed client quotes.
-const ABOUT_TESTIMONIALS: AboutTestimonial[] = [
-  {
-    quote:
-      "Yuvabe felt like part of our team. They helped us decide what to build, not just build it — and that changed how fast we found traction.",
-    name: "Founder",
-    role: "Early-stage SaaS",
-  },
-  {
-    quote:
-      "One team carried us from strategy to a shipped product. Fewer handoffs, sharper decisions, and people who stayed close as things changed.",
-    name: "Co-founder",
-    role: "Climate-tech startup",
-  },
-  {
-    quote:
-      "They brought real product judgment, not just execution. The AI work was genuinely useful, and the thinking behind it was even better.",
-    name: "Product lead",
-    role: "Fintech platform",
-  },
-];
 
 // Client logo wall — sourced from /public/logos.
 const ABOUT_CLIENT_LOGOS = [
@@ -112,46 +85,133 @@ const ABOUT_CLIENT_LOGOS = [
 ] as const;
 
 // ─── Clay-style stats strip — big factual numbers + a large location word ─────
-function AboutStatsStrip() {
+function AboutStatsStrip({ stats }: { stats: StudioAboutStatsContent }) {
   return (
     <section className="border-b border-slate-200/80 bg-white py-16 md:py-24">
       <Rail>
-        <div className="grid gap-12 sm:grid-cols-3 lg:gap-16 lg:pl-4 xl:pl-6">
-          {ABOUT_STATS.map((stat) => (
-            <div key={stat.label}>
-              <p className="font-[family-name:var(--font-display-family)] text-[clamp(3.5rem,7vw,6rem)] font-semibold leading-none tracking-[-0.04em] text-[var(--neutral-950)]">
+        <div className="grid grid-cols-2 gap-x-8 gap-y-10 sm:grid-cols-4 lg:gap-x-12 lg:pl-4 xl:pl-6">
+          {[...stats.items, stats.feature].map((stat, index) => (
+            <div key={`${stat.label}-${index}`}>
+              <p className="font-[family-name:var(--font-display-family)] text-[clamp(1.75rem,3.4vw,2.75rem)] font-semibold leading-none tracking-[-0.03em] text-[var(--neutral-950)]">
                 {stat.value}
               </p>
-              <p className="mt-4 text-body-md text-[var(--color-text-secondary)]">
+              <p className="mt-3 text-body-lg text-[var(--color-text-secondary)]">
                 {stat.label}
               </p>
             </div>
           ))}
-        </div>
-        <div className="mt-14 lg:pl-4 xl:pl-6">
-          <p className="font-[family-name:var(--font-display-family)] text-[clamp(3rem,11vw,8rem)] font-semibold leading-none tracking-[-0.05em] text-[var(--neutral-950)]">
-            {ABOUT_HOME.value}
-          </p>
-          <p className="mt-3 text-body-md text-[var(--color-text-secondary)]">
-            {ABOUT_HOME.label}
-          </p>
         </div>
       </Rail>
     </section>
   );
 }
 
-// ─── Why Yuvabe — clay-style numbered pillars with large imagery ──────────────
+// ─── What does Yuvabe mean — name origin, paired with the "Who we are" band ────
+function AboutNameMeaning({
+  content,
+}: {
+  content: StudioAboutNameMeaningContent;
+}) {
+  return (
+    <section className="border-b border-slate-200/80 bg-white py-16 text-[var(--neutral-950)] md:py-24">
+      <Rail>
+        <div className="grid items-center gap-12 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)] lg:gap-16 lg:pl-4 xl:pl-6">
+          <div>
+            <p className="text-label-sm uppercase tracking-[0.22em] text-[var(--color-text-tertiary)]">
+              {content.eyebrow}
+            </p>
+            <h2
+              className="mt-4 max-w-xl leading-[1.05] tracking-[-0.032em] text-[var(--neutral-950)]"
+              style={{ fontSize: "clamp(2.25rem,5vw,3.5rem)", fontWeight: 600 }}
+            >
+              {content.title}
+            </h2>
+            <div className="mt-8 space-y-6">
+              {content.paragraphs.map((paragraph, index) => (
+                <p
+                  key={index}
+                  className="max-w-2xl text-body-lg leading-[1.6] text-[var(--color-text-secondary)]"
+                >
+                  {paragraph}
+                </p>
+              ))}
+            </div>
+          </div>
+          <div className="flex justify-center lg:justify-end">
+            <Image
+              src="/yb-logo.png"
+              alt="Yuvabe Studios"
+              width={2000}
+              height={730}
+              sizes="(min-width: 1024px) 40vw, 80vw"
+              className="h-auto w-full max-w-md"
+            />
+          </div>
+        </div>
+      </Rail>
+    </section>
+  );
+}
+
+// ─── Our philosophy — Work. Serve. Evolve. principle trio ─────────────────────
+function AboutPhilosophy({
+  content,
+}: {
+  content: StudioAboutPhilosophyContent;
+}) {
+  return (
+    <section className="border-b border-slate-200/80 bg-[var(--color-background-canvas)] py-16 text-[var(--neutral-950)] md:py-24">
+      <Rail>
+        <div className="lg:pl-4 xl:pl-6">
+          <p className="text-label-sm uppercase tracking-[0.22em] text-[var(--color-text-tertiary)]">
+            {content.eyebrow}
+          </p>
+          <h2
+            className="mt-4 max-w-2xl tracking-[-0.032em] text-[var(--neutral-950)]"
+            style={{ fontSize: "clamp(2.25rem,5vw,3.5rem)", fontWeight: 600 }}
+          >
+            {content.title}
+          </h2>
+          {content.intro ? (
+            <p className="mt-5 max-w-2xl text-body-lg leading-[1.6] text-[var(--color-text-secondary)]">
+              {content.intro}
+            </p>
+          ) : null}
+        </div>
+
+        <div className="mt-14 grid gap-10 md:mt-20 md:grid-cols-3 lg:gap-14 lg:pl-4 xl:pl-6">
+          {content.principles.map((principle) => (
+            <div key={principle.title}>
+              <h3 className="text-heading-lg text-[var(--color-text-brand)]">
+                {principle.title}
+              </h3>
+              <p className="mt-4 text-body-lg leading-[1.6] text-[var(--color-text-secondary)]">
+                {principle.description}
+              </p>
+            </div>
+          ))}
+        </div>
+      </Rail>
+    </section>
+  );
+}
+
+// ─── What drives us — clay-style numbered pillars with large imagery ──────────
 function AboutWhyPillars({ story }: { story: StudioAboutStoryContent }) {
   return (
     <section className="border-b border-slate-200/80 bg-[var(--color-background-canvas)] py-14 md:py-24">
       <Rail className="space-y-14 md:space-y-24">
-        <h2
-          className="text-display-muted-editorial tracking-[-0.032em] text-[var(--neutral-950)] lg:pl-4 xl:pl-6"
-          style={{ fontSize: "clamp(2.5rem,6vw,4rem)", fontWeight: 600 }}
-        >
-          Why Yuvabe
-        </h2>
+        <div className="lg:pl-4 xl:pl-6">
+          <p className="text-label-sm uppercase tracking-[0.22em] text-[var(--color-text-tertiary)]">
+            {story.eyebrow}
+          </p>
+          <h2
+            className="mt-4 text-display-muted-editorial tracking-[-0.032em] text-[var(--neutral-950)]"
+            style={{ fontSize: "clamp(2.5rem,6vw,4rem)", fontWeight: 600 }}
+          >
+            {story.title}
+          </h2>
+        </div>
 
         {story.operatingPrinciples.map((principle, index) => {
           const asset = WHY_PILLAR_IMAGES[index % WHY_PILLAR_IMAGES.length];
@@ -235,7 +295,8 @@ function AboutFinalCta({ content }: { content: StudioAboutPageContent["cta"] }) 
 }
 
 export function StudioAboutPage({ navigationItems, content }: StudioAboutPageProps) {
-  const { hero, story, cta } = content;
+  const { hero, stats, nameMeaning, philosophy, story, testimonials, cta } =
+    content;
 
   return (
     <main
@@ -255,15 +316,21 @@ export function StudioAboutPage({ navigationItems, content }: StudioAboutPagePro
           coverSrc={aboutAssets.cover.src}
           coverAlt={aboutAssets.cover.alt}
         />
-        <AboutStatsStrip />
+        <AboutStatsStrip stats={stats} />
         <AboutHoverGallery
           images={ABOUT_GALLERY_IMAGES}
-          eyebrow="Life at the studio"
-          title="A close team, in one room."
+          eyebrow="Who we are"
+          title="A collective of thinkers, creators and builders."
+          subheading="A multidisciplinary team united by curiosity, craft and the drive to create impact."
         />
+        <AboutNameMeaning content={nameMeaning} />
+        <AboutPhilosophy content={philosophy} />
         <AboutWhyPillars story={story} />
         <AboutClients />
-        <AboutTestimonials eyebrow="What partners say" testimonials={ABOUT_TESTIMONIALS} />
+        <AboutTestimonials
+          eyebrow={testimonials.eyebrow}
+          testimonials={testimonials.items}
+        />
         <AboutFinalCta content={cta} />
       </article>
     </main>

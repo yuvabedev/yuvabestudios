@@ -11,6 +11,8 @@ import {
   getStudioUiuxDesignContent,
 } from "@/lib/studio-content";
 import { getStudioCareersPageContent } from "@/lib/careers-content";
+import { getStudioWorkPageContent } from "@/lib/work-content";
+import { getStudioServicesPageContent } from "@/lib/services-content";
 import { getAllBlogPosts } from "@/lib/blog";
 
 export const dynamic = "force-dynamic";
@@ -36,17 +38,21 @@ export default async function StudioAdminPage({
     uiuxDesignContent,
     caseStudies,
     careersContent,
+    workContent,
+    servicesPageContent,
     blogPosts,
   ] = await Promise.all([
     searchParams,
-    getStudioHomepageContent({ source: "supabase" }),
-    getStudioAboutPageContent({ source: "supabase" }),
+    getStudioHomepageContent(),
+    getStudioAboutPageContent(),
     getStudioAiWorkflowsContent(),
-    getStudioAiNativeEngineeringContent({ source: "supabase" }),
-    getStudioDigitalMarketingContent({ source: "supabase" }),
-    getStudioUiuxDesignContent({ source: "supabase" }),
-    getStudioCaseStudies({ source: "supabase" }),
+    getStudioAiNativeEngineeringContent(),
+    getStudioDigitalMarketingContent(),
+    getStudioUiuxDesignContent(),
+    getStudioCaseStudies(),
     getStudioCareersPageContent(),
+    getStudioWorkPageContent(),
+    getStudioServicesPageContent(),
     getAllBlogPosts().catch(() => []),
   ]);
 
@@ -67,9 +73,13 @@ export default async function StudioAdminPage({
             ? "services"
             : tab === "careers"
               ? "careers"
-              : tab === "blog"
-                ? "blog"
-                : "homepage";
+              : tab === "work"
+                ? "work"
+                : tab === "services-page"
+                  ? "services-page"
+                  : tab === "blog"
+                    ? "blog"
+                    : "homepage";
 
   return (
     <main className="min-h-screen bg-[linear-gradient(180deg,rgba(255,255,255,0.98),rgba(246,247,250,0.98))] px-6 py-10 text-foreground md:px-10">
@@ -110,6 +120,8 @@ export default async function StudioAdminPage({
           uiuxDesignContent={uiuxDesignContent}
           caseStudies={editableCaseStudies}
           careersContent={careersContent}
+          workContent={workContent}
+          servicesPageContent={servicesPageContent}
           blogPosts={blogPosts}
           initialCaseStudyId={selectedCaseStudyId}
           initialTab={initialTab}

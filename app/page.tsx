@@ -16,40 +16,6 @@ import {
 
 export const dynamic = "force-dynamic";
 
-// Homepage FAQs — plain-language answers to what founders ask first.
-const HOME_FAQS = [
-  {
-    question: "What does Yuvabe actually do?",
-    answer:
-      "We're an AI-first studio for founders. We help you decide what to build, then design, engineer, and grow it — strategy, product, and delivery in one connected team instead of scattered handoffs.",
-  },
-  {
-    question: "Who do you work best with?",
-    answer:
-      "0-to-1 and traction-stage startups that need clarity and speed — teams who want a close partner that can move from idea to shipped product without losing context.",
-  },
-  {
-    question: "How does an engagement start?",
-    answer:
-      "It starts with a conversation about what you're building and the decision you're facing. From there we frame the real priority, agree on scope, and get moving quickly.",
-  },
-  {
-    question: "How is AI part of your process?",
-    answer:
-      "Practically, not as a buzzword. We use frontier AI to compress the path from idea to artifact, sharpen research and decisions, and build AI-native features where they genuinely help the product.",
-  },
-  {
-    question: "Do you only work with early-stage startups?",
-    answer:
-      "That's our sweet spot, but we also partner with traction-stage teams and established organizations on focused product, design, and growth work.",
-  },
-  {
-    question: "Where are you based, and can you work remotely?",
-    answer:
-      "We're based in Auroville, India, and work closely with founders across timezones. The people shaping the product stay in the conversation throughout.",
-  },
-];
-
 export default async function Home() {
   const [homepageContent, caseStudies] = await Promise.all([
     getStudioHomepageContent(),
@@ -82,11 +48,7 @@ export default async function Home() {
       />
 
       {/* 05 — Case studies + view all work */}
-      <HomeCaseStudies
-        caseStudies={caseStudies}
-        eyebrow={homepageContent.work.eyebrow}
-        headline={homepageContent.work.headline}
-      />
+      <HomeCaseStudies caseStudies={caseStudies} work={homepageContent.work} />
 
       {/* 06 — Hover carousel (with View our services inside) */}
       <HomeCarousel />
@@ -103,7 +65,7 @@ export default async function Home() {
           >
             Frequently asked questions
           </h2>
-          <FaqSection faqs={HOME_FAQS} />
+          <FaqSection faqs={homepageContent.faqs} />
         </div>
       </section>
     </main>

@@ -24,23 +24,7 @@ import type { Job } from "@/types/careers";
 import type { CareersPageContent } from "@/lib/careers-content";
 import { StudioHeader } from "@/components/studio/studio-header";
 import { StudioPageContainer } from "@/components/studio/studio-page-shell";
-import { ArcGalleryHero } from "@/components/ui/arc-gallery-hero";
-
-// Curated arc images — culture/team photos lead, a few case-study covers fill
-// out the fan so the hero reads as "life + the work we ship".
-const ARC_IMAGES = [
-  "/assets/careers/group.png",
-  "/assets/general-aeronautics/cover-summary.jpeg",
-  "/assets/careers/people.png",
-  "/assets/tvam/cover.png",
-  "/assets/about/yuvabe-cover.jpeg",
-  "/assets/KK/mock-detail.png",
-  "/assets/about/saracon_02.jpg",
-  "/assets/bevolve/cover-detail.png",
-  "/assets/about/yuvabe-image.jpeg",
-  "/assets/ageshift/ageshift_cover.png",
-  "/assets/hemplanet/cover.png",
-] as const;
+import MagicRings from "@/components/ui/magic-rings";
 
 const easeOut = [0.22, 1, 0.36, 1] as const;
 
@@ -406,21 +390,36 @@ export function CareersLandingPage({
       <StudioHeader navigationItems={navigationItems} />
 
       <article className="relative">
-        {/* ── 01 Hero — arc gallery ─────────────────────────────────────────── */}
+        {/* ── 01 Hero — MagicRings glow on white, centered content ─────────── */}
         <section
-          className="bg-white pt-28 pb-16 md:pt-32 md:pb-24"
           id="culture"
+          className="relative overflow-hidden bg-white text-(--neutral-950)"
         >
-          <ArcGalleryHero
-            images={[...ARC_IMAGES]}
-            className="bg-white"
-            radiusLg={640}
-            radiusMd={460}
-            radiusSm={280}
-            cardSizeLg={172}
-            cardSizeMd={130}
-            cardSizeSm={96}
-          >
+          {/* WebGL ring glow background (brand purple → cyan reads on white). */}
+          <div className="pointer-events-none absolute inset-0">
+            <MagicRings
+              color="#5829C7"
+              colorTwo="#2BB7C7"
+              ringCount={7}
+              speed={0.9}
+              attenuation={9}
+              lineThickness={2}
+              baseRadius={0.34}
+              radiusStep={0.11}
+              opacity={0.45}
+              noiseAmount={0.03}
+              followMouse
+              mouseInfluence={0.14}
+              parallax={0.06}
+            />
+          </div>
+          {/* White vignette fades the rings into the page and frames the copy. */}
+          <div
+            aria-hidden="true"
+            className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_45%,rgba(255,255,255,0)_28%,rgba(255,255,255,0.88)_72%)]"
+          />
+
+          <StudioPageContainer className="relative z-10 flex min-h-[82vh] flex-col items-center justify-center py-32 text-center md:py-40">
             <h1 className="text-display-xl text-(--neutral-950)">
               {content.hero.headingLine1}{" "}
               <em className="font-medium not-italic text-brand">
@@ -443,7 +442,7 @@ export function CareersLandingPage({
                 {jobs.length} open {jobs.length === 1 ? "role" : "roles"}
               </span>
             </div>
-          </ArcGalleryHero>
+          </StudioPageContainer>
         </section>
 
         <section

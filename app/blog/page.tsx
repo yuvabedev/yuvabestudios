@@ -9,7 +9,7 @@ export const metadata = {
 };
 
 export default async function BlogPage() {
-  const homepageContent = await getStudioHomepageContent({ source: "supabase" });
+  const homepageContent = await getStudioHomepageContent();
 
   return (
     <BlogListingPage

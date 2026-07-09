@@ -18,72 +18,13 @@ import {
 } from "@/components/studio/studio-case-study-content";
 import { StudioHeader } from "@/components/studio/studio-header";
 import { StudioPageContainer } from "@/components/studio/studio-page-shell";
+import type { WorkPageContent } from "@/lib/work-content";
 
 type WorkPageProps = {
   navigationItems: StudioHomepageNavItem[];
   caseStudies: StudioCaseStudySummary[];
+  content: WorkPageContent;
 };
-
-// Curated discipline buckets keep the filter rail clean instead of exposing the
-// long, inconsistent service-tag list stored per case study.
-const WORK_CATEGORY = {
-  product: "AI & Product",
-  web: "Web & Brand",
-  growth: "Growth & Marketing",
-} as const;
-
-type WorkCategory = (typeof WORK_CATEGORY)[keyof typeof WORK_CATEGORY];
-
-const categoryById: Record<string, WorkCategory> = {
-  "general-aeronautics": WORK_CATEGORY.web,
-  tvam: WORK_CATEGORY.product,
-  kittykat: WORK_CATEGORY.product,
-  bevolve: WORK_CATEGORY.product,
-  "prakiti-sattva": WORK_CATEGORY.web,
-  ageshift: WORK_CATEGORY.product,
-  hemplanet: WORK_CATEGORY.growth,
-  "av-marathon": WORK_CATEGORY.growth,
-  buglerock: WORK_CATEGORY.product,
-  rangasutra: WORK_CATEGORY.web,
-  matrimandir: WORK_CATEGORY.web,
-  yuvanext: WORK_CATEGORY.product,
-};
-
-// Display order leads with the strongest visual covers, then fills out the roster.
-const workOrder = [
-  "general-aeronautics",
-  "tvam",
-  "kittykat",
-  "bevolve",
-  "prakiti-sattva",
-  "ageshift",
-  "hemplanet",
-  "av-marathon",
-  "buglerock",
-  "rangasutra",
-  "matrimandir",
-  "yuvanext",
-] as const;
-
-// Hand-picked wide covers for the work grid. Falls back to the shared cover
-// resolver, then to a branded gradient when no asset exists yet.
-const workCoverOverrides: Record<string, string> = {
-  "general-aeronautics": "/assets/general-aeronautics/cover-summary.jpeg",
-  tvam: "/assets/tvam/cover.png",
-  kittykat: "/assets/KK/mock-detail.png",
-  bevolve: "/assets/bevolve/cover-detail.png",
-  "prakiti-sattva": "/assets/prakritisattva/hair-care.webp",
-  ageshift: "/assets/ageshift/ageshift_cover.png",
-  hemplanet: "/assets/hemplanet/cover.png",
-  "av-marathon": "/assets/av-marathon/cover.png",
-  buglerock: "/assets/buglerock/homepage.png",
-  // Asset folders are spelled rangsutra/martimandir (IDs use rangasutra/matrimandir).
-  rangasutra: "/assets/rangsutra/poster_1.jpg",
-  matrimandir: "/assets/martimandir/bg.png",
-};
-
-// Covers that come alive on hover. The still cover above acts as the poster.
-const workVideoOverrides: Record<string, string> = {};
 
 const gradientFallbacks = [
   "bg-[radial-gradient(circle_at_30%_25%,rgba(88,41,199,0.22),transparent_62%),radial-gradient(circle_at_82%_75%,rgba(249,169,31,0.18),transparent_58%)]",
@@ -98,7 +39,7 @@ type WorkItem = {
   sector: string;
   services: string[];
   href: string;
-  category: WorkCategory;
+  category: string;
   imageSrc: string | null;
   videoSrc?: string;
 };
@@ -172,7 +113,7 @@ function WorkCard({
         onBlur={item.videoSrc ? resetVideo : undefined}
       >
         <div
-          className={`relative ${aspect} w-full overflow-hidden rounded-3xl bg-(--neutral-100) ring-1 ring-(--color-border-default) transition-shadow duration-500 group-hover:shadow-[0_30px_70px_-30px_rgba(17,17,17,0.45)]`}
+          className={`relative ${aspect} w-full overflow-hidden bg-(--neutral-100) ring-1 ring-(--color-border-default) transition-shadow duration-500 group-hover:shadow-[0_30px_70px_-30px_rgba(17,17,17,0.45)]`}
         >
           {item.videoSrc ? (
             <motion.div
@@ -188,7 +129,7 @@ function WorkCard({
                 playsInline
                 preload="metadata"
                 aria-hidden="true"
-                className="h-full w-full scale-[1.04] object-cover transition-transform duration-[1100ms] ease-out group-hover:scale-[1.1]"
+                className="h-full w-full object-cover"
               />
             </motion.div>
           ) : item.imageSrc ? (
@@ -200,7 +141,7 @@ function WorkCard({
               <img
                 src={item.imageSrc}
                 alt={`${item.title} — ${item.summary}`}
-                className="h-full w-full scale-[1.04] object-cover transition-transform duration-[1100ms] ease-out group-hover:scale-[1.1]"
+                className="h-full w-full object-cover"
                 loading={feature ? "eager" : "lazy"}
                 decoding="async"
               />
@@ -254,38 +195,40 @@ function WorkCard({
   );
 }
 
-export function WorkPage({ navigationItems, caseStudies }: WorkPageProps) {
+export function WorkPage({ navigationItems, caseStudies, content }: WorkPageProps) {
   const items = useMemo<WorkItem[]>(() => {
     const byId = new Map(caseStudies.map((cs) => [cs.id, cs]));
-    return workOrder
-      .map((id) => byId.get(id))
-      .filter((cs): cs is StudioCaseStudySummary => Boolean(cs))
-      .map((cs) => ({
+    const result: WorkItem[] = [];
+    for (const config of content.items) {
+      const cs = byId.get(config.id);
+      if (!cs) continue;
+      result.push({
         id: cs.id,
         title: cs.title,
         summary: cs.summary,
         sector: cs.sector,
         services: cs.services,
         href: getStudioCaseStudyHref(cs.id),
-        category: categoryById[cs.id] ?? WORK_CATEGORY.product,
+        category: config.category,
         imageSrc:
-          workCoverOverrides[cs.id] ??
+          config.coverSrc ??
           resolveStudioCaseStudyCoverSrc(cs, "summary") ??
           null,
-        videoSrc: workVideoOverrides[cs.id],
-      }));
-  }, [caseStudies]);
+      });
+    }
+    return result;
+  }, [caseStudies, content]);
 
   const filters = useMemo(() => {
     const counts = new Map<string, number>();
+    const order: string[] = [];
     items.forEach((item) => {
+      if (!counts.has(item.category)) order.push(item.category);
       counts.set(item.category, (counts.get(item.category) ?? 0) + 1);
     });
     return [
       { label: ALL_WORK as string, count: items.length },
-      ...Object.values(WORK_CATEGORY)
-        .filter((category) => counts.has(category))
-        .map((category) => ({ label: category, count: counts.get(category) ?? 0 })),
+      ...order.map((category) => ({ label: category, count: counts.get(category) ?? 0 })),
     ];
   }, [items]);
 
@@ -315,14 +258,14 @@ export function WorkPage({ navigationItems, caseStudies }: WorkPageProps) {
                 className="max-w-4xl"
               >
                 <h1 className="text-display-xl text-(--neutral-950)">
-                  Transforming ambitious visions into{" "}
-                  <em className="font-medium not-italic text-brand">digital</em>{" "}
-                  realities.
+                  {content.hero.headingPrefix}{" "}
+                  <em className="font-medium not-italic text-brand">
+                    {content.hero.headingHighlight}
+                  </em>{" "}
+                  {content.hero.headingSuffix}
                 </h1>
                 <p className="text-body-lg mt-6 max-w-xl text-(--color-text-secondary)">
-                  Products, platforms, and brands we&apos;ve shipped with
-                  founders — built with AI-native execution across strategy,
-                  design, engineering, and growth.
+                  {content.hero.subheading}
                 </p>
               </motion.div>
 
@@ -401,7 +344,7 @@ export function WorkPage({ navigationItems, caseStudies }: WorkPageProps) {
                     key={item.id}
                     className={`${isWide ? "lg:col-span-7" : "lg:col-span-5"} ${
                       // Drop the lighter column to break the top alignment.
-                      !isWide ? "lg:mt-16" : ""
+                      !isWide ? "lg:mt-32" : ""
                     }`}
                   >
                     <WorkCard
@@ -442,28 +385,28 @@ export function WorkPage({ navigationItems, caseStudies }: WorkPageProps) {
               />
               <div className="relative">
                 <span className="mb-6 inline-block font-mono text-[12px] font-medium uppercase tracking-[0.04em] text-brand">
-                  Got a project in mind?
+                  {content.cta.eyebrow}
                 </span>
                 <h2 className="careers-cta-heading mb-6 text-(--neutral-900)">
-                  Let&apos;s build something{" "}
+                  {content.cta.headingPrefix}{" "}
                   <em className="font-medium not-italic text-brand">
-                    extraordinary
+                    {content.cta.headingHighlight}
                   </em>{" "}
-                  together.
+                  {content.cta.headingSuffix}
                 </h2>
                 <div className="flex flex-col items-center justify-center gap-3 sm:flex-row">
                   <Link
-                    href="/#process"
+                    href={content.cta.primaryCtaHref}
                     className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-brand px-7 py-4 text-[15px] font-semibold text-white shadow-[0_6px_18px_rgba(88,41,199,0.25)] transition-all hover:-translate-y-0.5 hover:shadow-[0_10px_24px_rgba(88,41,199,0.35)] sm:w-auto"
                   >
-                    Start a project
+                    {content.cta.primaryCtaLabel}
                     <ArrowRight size={16} />
                   </Link>
                   <a
-                    href="mailto:hello@yuvabestudios.com"
+                    href={`mailto:${content.cta.contactEmail}`}
                     className="inline-flex w-full items-center justify-center gap-2 rounded-full border border-(--color-border-default) bg-white px-7 py-4 text-[13px] font-semibold text-(--neutral-700) transition-all hover:border-brand/30 hover:text-brand sm:w-auto sm:text-[15px]"
                   >
-                    hello@yuvabestudios.com
+                    {content.cta.contactEmail}
                   </a>
                 </div>
               </div>

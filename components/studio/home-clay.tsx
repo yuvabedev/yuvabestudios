@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, ArrowUpRight, ChevronRight } from "lucide-react";
@@ -15,6 +15,7 @@ import {
 import type {
   StudioHomepageHeroContent,
   StudioHomepageServicesContent,
+  StudioHomepageWorkContent,
 } from "@/components/studio/studio-homepage-content";
 import { AboutHoverGallery } from "@/components/studio/about-interactive";
 import {
@@ -72,6 +73,25 @@ export function HomeHero({ hero }: { hero: StudioHomepageHeroContent }) {
     reduce ? ["0%", "0%"] : ["0%", "-6%"],
   );
 
+  // Showreel plays muted while it's in view, pauses when scrolled away.
+  const videoRef = useRef<HTMLVideoElement | null>(null);
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          video.play().catch(() => {});
+        } else {
+          video.pause();
+        }
+      },
+      { threshold: 0.35 },
+    );
+    observer.observe(video);
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <section
       ref={ref}
@@ -87,14 +107,14 @@ export function HomeHero({ hero }: { hero: StudioHomepageHeroContent }) {
       />
 
       <Rail className="relative z-10 pt-32 pb-12 md:pt-44 md:pb-16">
-        <h1 className="max-w-5xl text-hero-display text-[var(--neutral-950)]">
+        <h1 className="max-w-5xl text-display-xl text-(--neutral-950) ">
           <span>{hero.headlineIntro} </span>
-          <span className="text-[var(--color-text-brand)]">
+          <span className="font-medium not-italic text-brand">
             {hero.headlineHighlight}
           </span>{" "}
           <span>{hero.headlineLineTwo}</span>
         </h1>
-        <p className="mt-6 max-w-4xl text-hero-support text-[var(--color-text-secondary)]">
+        <p className="mt-6 max-w-5xl text-[24px] leading-[1.5] text-(--color-text-secondary)">
           {hero.supportPrefix}{" "}
           <span className="font-semibold text-[var(--neutral-950)]">
             {hero.supportHighlight}
@@ -114,15 +134,17 @@ export function HomeHero({ hero }: { hero: StudioHomepageHeroContent }) {
       <div className="relative z-10 px-6 pb-16 md:px-12 md:pb-24 lg:px-16">
         <motion.div
           style={{ scale: imageScale, y: imageY }}
-          className="relative mx-auto aspect-[16/9] w-full max-w-[1600px] overflow-hidden  md:aspect-[16/8]"
+          className="relative mx-auto aspect-[16/9] w-full max-w-[1600px] overflow-hidden md:aspect-[16/8]"
         >
-          <Image
-            src="/assets/about/yuvabe-cover.jpeg"
-            alt="The Yuvabe team at the studio in Auroville"
-            fill
-            priority
-            sizes="100vw"
-            className="object-cover object-[center_38%]"
+          <video
+            ref={videoRef}
+            src="/assets/video/showreel-low.mp4"
+            muted
+            loop
+            playsInline
+            preload="auto"
+            aria-label="Yuvabe Studios showreel"
+            className="h-full w-full object-cover object-[center_38%]"
           />
         </motion.div>
       </div>
@@ -132,14 +154,15 @@ export function HomeHero({ hero }: { hero: StudioHomepageHeroContent }) {
 
 // ─── Services — clay two-column list + hover carousel ────────────────────────
 const HOME_SERVICE_GALLERY = [
-  { src: "/assets/careers/group.png", alt: "Yuvabeans building together at the studio" },
-  { src: "/assets/about/saracon_02.jpg", alt: "The Auroville campus where we work" },
-  { src: "/assets/careers/people.png", alt: "A team huddle around an early prototype" },
-  { src: "/assets/about/yuvabe-image.jpeg", alt: "An earlier Yuvabe team photo under a tree" },
-  { src: "/assets/KK/Cover-home.png", alt: "KittyKat product visuals" },
-  { src: "/assets/bevolve/cover-detail.png", alt: "Bevolve ESG platform" },
-  { src: "/assets/tvam/cover.png", alt: "TVAM wellness product" },
-  { src: "/assets/general-aeronautics/cover-summary.jpeg", alt: "General Aeronautics drone platform" },
+  { src: "/assets/home-carousel/web/1.webp", alt: "Life at the Yuvabe studio" },
+  { src: "/assets/home-carousel/web/2.webp", alt: "Life at the Yuvabe studio" },
+  { src: "/assets/home-carousel/web/3.webp", alt: "Life at the Yuvabe studio" },
+  { src: "/assets/home-carousel/web/4.webp", alt: "Life at the Yuvabe studio" },
+  { src: "/assets/home-carousel/web/5.webp", alt: "Life at the Yuvabe studio" },
+  { src: "/assets/home-carousel/web/6.webp", alt: "Life at the Yuvabe studio" },
+  { src: "/assets/home-carousel/web/7.webp", alt: "Life at the Yuvabe studio" },
+  { src: "/assets/home-carousel/web/8.webp", alt: "Life at the Yuvabe studio" },
+  { src: "/assets/home-carousel/web/9.webp", alt: "Life at the Yuvabe studio" },
 ];
 
 export function HomeServices({
@@ -155,9 +178,15 @@ export function HomeServices({
               <p className="text-label-sm uppercase tracking-[0.22em] text-[var(--color-text-tertiary)]">
                 {content.eyebrow}
               </p>
-              <p className="mt-6 text-[clamp(1.5rem,2.4vw,2.15rem)] font-medium leading-[1.32] text-[var(--neutral-950)]">
+              <h2
+                className="mt-4 text-display-muted-editorial tracking-[-0.032em] text-[var(--neutral-950)]"
+                style={{ fontSize: "clamp(2rem,4vw,3rem)", fontWeight: 600 }}
+              >
+                {content.headline}
+              </h2>
+              <p className="mt-5 text-body-lg leading-[1.5] text-[var(--color-text-secondary)]">
                 {content.supportPrefix}{" "}
-                <span className="text-[var(--color-text-brand)]">
+                <span className="font-semibold text-[var(--neutral-950)]">
                   {content.supportHighlight}
                 </span>
                 {content.supportSuffix}
@@ -284,12 +313,10 @@ const HOME_WORK_COVERS: Record<string, string> = {
 
 export function HomeCaseStudies({
   caseStudies,
-  eyebrow,
-  headline,
+  work,
 }: {
   caseStudies: StudioCaseStudySummary[];
-  eyebrow: string;
-  headline: string;
+  work: StudioHomepageWorkContent;
 }) {
   const byId = new Map(caseStudies.map((cs) => [cs.id, cs]));
   const items = HOME_WORK_ORDER.map((id) => byId.get(id)).filter(
@@ -301,14 +328,21 @@ export function HomeCaseStudies({
       <Rail>
         <div className="mb-12 max-w-3xl md:mb-16">
           <p className="text-label-sm uppercase tracking-[0.22em] text-[var(--color-text-tertiary)]">
-            {eyebrow}
+            {work.eyebrow}
           </p>
           <h2
             className="mt-3 text-display-muted-editorial tracking-[-0.032em] text-[var(--neutral-950)]"
             style={{ fontSize: "clamp(2.25rem,5vw,3.5rem)", fontWeight: 600 }}
           >
-            {headline}
+            {work.headline}
           </h2>
+          <p className="mt-4 text-body-lg text-[var(--color-text-secondary)]">
+            {work.supportPrefix}{" "}
+            <span className="font-semibold text-[var(--neutral-950)]">
+              {work.supportHighlight}
+            </span>
+            {work.supportSuffix}
+          </p>
         </div>
 
         <motion.div

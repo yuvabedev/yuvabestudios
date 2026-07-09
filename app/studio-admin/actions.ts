@@ -23,6 +23,14 @@ import {
   parseCareersPageContentInput,
   saveStudioCareersPageContent,
 } from "@/lib/careers-content";
+import {
+  parseWorkPageContentInput,
+  saveStudioWorkPageContent,
+} from "@/lib/work-content";
+import {
+  parseServicesPageContentInput,
+  saveStudioServicesPageContent,
+} from "@/lib/services-content";
 import { saveBlogPost, deleteBlogPost, type BlogPostInput } from "@/lib/blog";
 
 function expectString(value: FormDataEntryValue | null, label: string) {
@@ -108,6 +116,28 @@ export async function saveCareersContentAction(formData: FormData) {
   revalidatePath("/careers");
   revalidatePath("/studio-admin");
   redirect("/studio-admin?tab=careers&saved=careers");
+}
+
+export async function saveServicesPageContentAction(formData: FormData) {
+  const payload = expectString(formData.get("payload"), "Services payload");
+  const parsedPayload = parseServicesPageContentInput(JSON.parse(payload));
+
+  await saveStudioServicesPageContent(parsedPayload);
+
+  revalidatePath("/services");
+  revalidatePath("/studio-admin");
+  redirect("/studio-admin?tab=services-page&saved=services-page");
+}
+
+export async function saveWorkContentAction(formData: FormData) {
+  const payload = expectString(formData.get("payload"), "Work payload");
+  const parsedPayload = parseWorkPageContentInput(JSON.parse(payload));
+
+  await saveStudioWorkPageContent(parsedPayload);
+
+  revalidatePath("/work");
+  revalidatePath("/studio-admin");
+  redirect("/studio-admin?tab=work&saved=work");
 }
 
 export async function saveBlogPostAction(formData: FormData) {

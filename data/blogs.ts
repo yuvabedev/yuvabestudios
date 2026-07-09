@@ -19,7 +19,7 @@ export const blogs: BlogPost[] = [
       "The Overlooked Security Flaw in Front-End Animations You Need to Know",
     subheading:
       "Motion design makes interfaces feel alive — but if implemented carelessly, it can also expose user behavior, states, and data. Here’s how to secure your animations and build safer UIs.",
-    image: "/blog/securityflaw.png",
+    image: "/blog/securityflaw.jpg",
     author: "Roopan R",
     readingTime: "Published on November 18, 2025 · 10 minute read",
     category: "Design & Development",
@@ -29,7 +29,7 @@ export const blogs: BlogPost[] = [
     title: "The Rise of Local AI: Running LLMs on Your Device",
     subheading:
       "Running LLMs locally isn’t just about saving costs — it’s about privacy, speed, and control. Here’s how this shift is reshaping the AI landscape.",
-    image: "/blog/rise-of-local-ai.png",
+    image: "/blog/rise-of-local-ai.jpg",
     author: "Thamarai Kannan",
     readingTime: "Published on November 11, 2025 · 8 minute read",
     category: "AI/ML",
@@ -50,7 +50,7 @@ export const blogs: BlogPost[] = [
     title: "From Clicks to Emotions: Measuring UX Beyond Usability",
     subheading:
       "Why the future of great design lies not just in what users do, but in how they feel",
-    image: "/blog/clicks-to-emotions.png",
+    image: "/blog/clicks-to-emotions.jpg",
     author: "Sagar",
     readingTime: "Published on October 28, 2025 · 8 minute read",
     category: "Design & Development",
@@ -111,7 +111,7 @@ export const blogs: BlogPost[] = [
       "Code Smarter, Not Harder: How LLMs Are Transforming Everyday Development",
     subheading:
       "LLMs are changing the game — turning hours of manual coding into minutes of smart automation.",
-    image: "/blog/code-smarter.png",
+    image: "/blog/code-smarter.jpg",
     author: "Mohamed Safiq S",
     readingTime: "Published on September 16, 2025 · 7 minute read",
     category: "AI/ML",

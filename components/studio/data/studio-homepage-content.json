@@ -63,8 +63,8 @@
   },
   "afterServicesCta": {
     "eyebrow": "",
-    "title": "If you need one team to shape, ship, and grow the product",
-    "description": "We work best with founders who want honest thinking, fast execution, and fewer handoffs between strategy and delivery.",
+    "title": "Need one team to shape, ship and grow your business?",
+    "description": "Let’s turn your ideas into meaningful outcomes — faster.",
     "primaryCtaLabel": "Talk to us",
     "primaryCtaHref": "/#process"
   },
@@ -115,5 +115,31 @@
     "supportPrefix": "See how we turn product bets into",
     "supportHighlight": "shipped experiences,",
     "supportSuffix": "clearer positioning, and faster learning for ambitious teams."
-  }
+  },
+  "faqs": [
+    {
+      "question": "What does Yuvabe actually do?",
+      "answer": "We're an AI-first studio for founders. We help you decide what to build, then design, engineer, and grow it — strategy, product, and delivery in one connected team instead of scattered handoffs."
+    },
+    {
+      "question": "Who do you work best with?",
+      "answer": "0-to-1 and traction-stage startups that need clarity and speed — teams who want a close partner that can move from idea to shipped product without losing context."
+    },
+    {
+      "question": "How does an engagement start?",
+      "answer": "It starts with a conversation about what you're building and the decision you're facing. From there we frame the real priority, agree on scope, and get moving quickly."
+    },
+    {
+      "question": "How is AI part of your process?",
+      "answer": "Practically, not as a buzzword. We use frontier AI to compress the path from idea to artifact, sharpen research and decisions, and build AI-native features where they genuinely help the product."
+    },
+    {
+      "question": "Do you only work with early-stage startups?",
+      "answer": "That's our sweet spot, but we also partner with traction-stage teams and established organizations on focused product, design, and growth work."
+    },
+    {
+      "question": "Where are you based, and can you work remotely?",
+      "answer": "We're based in Auroville, India, and work closely with founders across timezones. The people shaping the product stay in the conversation throughout."
+    }
+  ]
 }

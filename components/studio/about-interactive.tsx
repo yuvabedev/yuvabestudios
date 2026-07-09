@@ -14,7 +14,6 @@ import {
 
 import type { StudioAboutHeroContent } from "@/components/studio/studio-about-content";
 import { StartProjectButton } from "@/components/studio/start-project-button";
-import { Button } from "@/components/ui/button";
 import { isStartProjectHref } from "@/lib/start-project";
 
 const easeOut = [0.22, 1, 0.36, 1] as const;
@@ -100,35 +99,40 @@ export function AboutHeroScroll({
       />
 
       <Rail className="relative z-10 pt-32 pb-12 md:pt-44 md:pb-16">
-        <p className="text-label-sm uppercase tracking-[0.24em] text-[var(--color-text-tertiary)]">
-          {hero.eyebrow}
-        </p>
-        <h1 className="mt-6 max-w-5xl text-hero-display text-[var(--neutral-950)]">
+        <h1 className="max-w-6xl text-display-xl text-(--neutral-950)">
           <span>{hero.title} </span>
-          <span className="text-[var(--color-text-brand)]">{hero.highlight}</span>
+          <span className="font-medium not-italic text-brand">
+            {hero.highlight}
+          </span>
         </h1>
+        <p className="mt-6 max-w-3xl text-[24px] leading-[1.5] text-[var(--color-text-secondary)]">
+          {hero.description}
+        </p>
 
-        <div className="mt-10 flex flex-col items-start gap-4 sm:flex-row sm:items-center">
+        <div className="mt-10 flex flex-col items-start gap-3 sm:flex-row sm:items-center">
           {opensStartProjectModal ? (
             <StartProjectButton
-              size="lg"
               source="about-hero-primary"
-              className="min-w-[220px]"
+              className="inline-flex h-auto items-center gap-2 rounded-full bg-brand px-7 py-4 text-[15px] font-semibold text-white shadow-[0_6px_18px_rgba(88,41,199,0.25)] transition-all hover:-translate-y-0.5 hover:shadow-[0_10px_24px_rgba(88,41,199,0.35)]"
             >
               {hero.primaryCtaLabel}
-              <ArrowRight className="size-4" />
+              <ArrowRight size={16} />
             </StartProjectButton>
           ) : (
-            <Button asChild size="lg" className="min-w-[220px]">
-              <Link href={hero.primaryCtaHref}>
-                {hero.primaryCtaLabel}
-                <ArrowRight className="size-4" />
-              </Link>
-            </Button>
+            <Link
+              href={hero.primaryCtaHref}
+              className="inline-flex items-center gap-2 rounded-full bg-brand px-7 py-4 text-[15px] font-semibold text-white shadow-[0_6px_18px_rgba(88,41,199,0.25)] transition-all hover:-translate-y-0.5 hover:shadow-[0_10px_24px_rgba(88,41,199,0.35)]"
+            >
+              {hero.primaryCtaLabel}
+              <ArrowRight size={16} />
+            </Link>
           )}
-          <Button asChild variant="secondary" size="lg" className="min-w-[180px]">
-            <Link href={hero.secondaryCtaHref}>{hero.secondaryCtaLabel}</Link>
-          </Button>
+          <Link
+            href={hero.secondaryCtaHref}
+            className="inline-flex items-center gap-2 rounded-full border border-(--color-border-default) bg-white px-6 py-4 text-[15px] font-semibold text-(--neutral-900) transition-colors hover:border-brand/40 hover:text-brand"
+          >
+            {hero.secondaryCtaLabel}
+          </Link>
         </div>
       </Rail>
 
@@ -136,7 +140,7 @@ export function AboutHeroScroll({
       <div className="relative z-10 px-6 pb-16 md:px-12 md:pb-24 lg:px-16">
         <motion.div
           style={{ scale: imageScale, y: imageY }}
-          className="relative mx-auto aspect-[16/9] w-full max-w-[1600px] overflow-hidden rounded-3xl md:aspect-[16/8]"
+          className="relative mx-auto aspect-[16/9] w-full max-w-[1600px] overflow-hidden md:aspect-[16/8]"
         >
           <Image
             src={coverSrc}
@@ -159,11 +163,13 @@ export function AboutHoverGallery({
   images,
   eyebrow,
   title,
+  subheading,
   footer,
 }: {
   images: { src: string; alt: string }[];
   eyebrow: string;
   title: string;
+  subheading?: string;
   footer?: ReactNode;
 }) {
   const trackRef = useRef<HTMLDivElement | null>(null);
@@ -215,6 +221,11 @@ export function AboutHoverGallery({
         >
           {title}
         </h2>
+        {subheading ? (
+          <p className="mt-4 max-w-2xl text-body-lg text-[var(--color-text-secondary)]">
+            {subheading}
+          </p>
+        ) : null}
       </Rail>
 
       <div className="group relative">

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 
 import { ServicesPage } from "@/components/services/services-page";
 import { getAbsoluteUrl } from "@/lib/site";
+import { getStudioServicesPageContent } from "@/lib/services-content";
 import { getStudioHomepageContent } from "@/lib/studio-content";
 
 export const dynamic = "force-dynamic";
@@ -27,7 +28,10 @@ export const metadata: Metadata = {
 };
 
 export default async function ServicesRoutePage() {
-  const homepageContent = await getStudioHomepageContent();
+  const [homepageContent, servicesContent] = await Promise.all([
+    getStudioHomepageContent(),
+    getStudioServicesPageContent(),
+  ]);
 
   const services = [
     "Digital Marketing",
@@ -64,7 +68,10 @@ export default async function ServicesRoutePage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
       />
-      <ServicesPage navigationItems={homepageContent.navigationItems} />
+      <ServicesPage
+        navigationItems={homepageContent.navigationItems}
+        content={servicesContent}
+      />
     </>
   );
 }

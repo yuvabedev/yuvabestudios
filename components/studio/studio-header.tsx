@@ -255,12 +255,12 @@ export function StudioHeader({ navigationItems }: StudioHeaderProps) {
               >
                 <Link href="/" onClick={handleNavClick} className="flex shrink-0 items-center">
                   <Image
-                    src="/logo.svg"
+                    src="/yb-logo.png"
                     alt="Yuvabe Studios"
-                    width={140}
-                    height={36}
+                    width={283}
+                    height={100}
                     priority
-                    className="h-9 w-auto"
+                    className="h-12 w-auto"
                   />
                 </Link>
 
@@ -342,12 +342,12 @@ export function StudioHeader({ navigationItems }: StudioHeaderProps) {
               {/* Logo - left side */}
               <Link href="/" onClick={handleNavClick} className="flex shrink-0 items-center">
                 <Image
-                  src="/logo.svg"
+                  src="/yb-logo.png"
                   alt="Yuvabe Studios"
-                  width={140}
-                  height={36}
+                  width={283}
+                  height={100}
                   priority
-                  className="h-9 w-auto"
+                  className="h-12 w-auto"
                 />
               </Link>
 

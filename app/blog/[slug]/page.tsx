@@ -30,7 +30,7 @@ export default async function BlogPostPage({ params }: Props) {
 
   if (!Article) notFound();
 
-  const homepageContent = await getStudioHomepageContent({ source: "supabase" });
+  const homepageContent = await getStudioHomepageContent();
 
   return (
     <main

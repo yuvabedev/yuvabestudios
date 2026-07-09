@@ -6,118 +6,10 @@ import Link from "next/link";
 import { motion, useReducedMotion, type Variants } from "framer-motion";
 
 import type { StudioHomepageNavItem } from "@/components/studio/studio-homepage-content";
+import type { ServicesPageContent } from "@/lib/services-content";
 import { StudioHeader } from "@/components/studio/studio-header";
 import { StudioPageContainer } from "@/components/studio/studio-page-shell";
 import { StartProjectButton } from "@/components/studio/start-project-button";
-
-type ServiceBlock = {
-  slug: string;
-  title: string;
-  shortLabel: string;
-  description: string;
-  capabilities: string[];
-  image: string;
-  imageAlt: string;
-  href?: string;
-};
-
-const services: ServiceBlock[] = [
-  {
-    slug: "digital-marketing",
-    title: "Digital Marketing",
-    shortLabel: "Campaigns built for traction",
-    description:
-      "Positioning, landing pages, and growth loops that turn a launch into measurable momentum. We connect message, channel, and analytics so every campaign teaches you what to scale next.",
-    capabilities: [
-      "Positioning & Messaging",
-      "Landing Pages & Conversion",
-      "Performance Campaigns",
-      "Content & Social Systems",
-      "SEO & Organic Growth",
-      "Analytics & Growth Loops",
-    ],
-    image: "/assets/av-marathon/cover.png",
-    imageAlt: "Rangsutra brand and campaign work by Yuvabe Studios",
-    href: "/digital-marketing",
-  },
-  {
-    slug: "uiux-design",
-    title: "UI/UX Design & Development",
-    shortLabel: "Interfaces people actually use",
-    description:
-      "Research-led product design and front-end builds shaped around real user context. We move from flows and systems to shipped interfaces that stay clear, fast, and on-brand.",
-    capabilities: [
-      "UX Research & Discovery",
-      "Product Flows & Wireframes",
-      "Design Systems",
-      "Interface & Visual Design",
-      "Interactive Prototyping",
-      "Front-end Development",
-    ],
-    image: "/assets/KK/mock-detail.png",
-    imageAlt: "TVAM product interface design by Yuvabe Studios",
-    href: "/uiux-design",
-  },
-  {
-    slug: "ai-native-engineering",
-    title: "AI-Native Engineering",
-    shortLabel: "End-to-end build, shipped right",
-    description:
-      "Product strategy and AI-native apps engineered from brief to launch. RAG systems, full-stack web and mobile, and the cloud infrastructure to run them reliably at scale.",
-    capabilities: [
-      "AI Product Strategy",
-      "RAG & LLM Systems",
-      "Full-stack Web & Mobile Apps",
-      "Backend & API Engineering",
-      "Cloud Infrastructure & CI/CD",
-      "Admin & Internal Platforms",
-    ],
-    image: "/assets/tvam/cover-detail.png",
-    imageAlt: "AgeShift admin platform engineered by Yuvabe Studios",
-    href: "/ai-native-engineering",
-  },
-  {
-    slug: "market-research",
-    title: "Market Research",
-    shortLabel: "Decisions backed by evidence",
-    description:
-      "AI-assisted market and customer intelligence that turns messy signals into decision-ready clarity. We help founders frame the right problem before committing build resources to it.",
-    capabilities: [
-      "Market & Competitor Analysis",
-      "Customer & User Research",
-      "Opportunity Sizing",
-      "Insight Synthesis",
-      "Data Analysis",
-      "Decision Support",
-    ],
-    image: "/assets/bevolve/cover-detail.png",
-    imageAlt:
-      "Bevolve ESG insights and benchmarking platform by Yuvabe Studios",
-  },
-];
-
-const processSteps = [
-  {
-    title: "Frame",
-    description:
-      "We pressure-test the problem, the wedge, and the assumptions worth betting on before anything gets built.",
-  },
-  {
-    title: "Prototype",
-    description:
-      "AI compresses the path from idea to artifact, so richer, more believable versions arrive far earlier.",
-  },
-  {
-    title: "Test",
-    description:
-      "Real users react to something concrete, generating evidence instead of opinions about what works.",
-  },
-  {
-    title: "Decide",
-    description:
-      "We read the signal together and choose to persevere, refine, or pivot — sequencing the next bet with intent.",
-  },
-];
 
 const easeOut = [0.22, 1, 0.36, 1] as const;
 
@@ -136,7 +28,8 @@ const copyReveal: Variants = {
   show: { opacity: 1, y: 0, transition: { duration: 0.65, ease: easeOut } },
 };
 
-const viewportOnce = { once: true, amount: 0.3 } as const;
+// once: false so blocks re-animate every time they scroll back into view.
+const viewportReveal = { once: false, amount: 0.3 } as const;
 
 function Kicker({ children }: { children: React.ReactNode }) {
   return (
@@ -146,13 +39,29 @@ function Kicker({ children }: { children: React.ReactNode }) {
   );
 }
 
+// Words wrapped in *asterisks* in the CMS render in brand color.
+function renderHighlightedTitle(title: string) {
+  return title.split(/(\*[^*]+\*)/g).map((part, index) => {
+    if (part.length > 2 && part.startsWith("*") && part.endsWith("*")) {
+      return (
+        <span key={index} className="font-medium text-brand">
+          {part.slice(1, -1)}
+        </span>
+      );
+    }
+    return <span key={index}>{part}</span>;
+  });
+}
+
 type ServicesPageProps = {
   navigationItems: StudioHomepageNavItem[];
+  content: ServicesPageContent;
 };
 
-export function ServicesPage({ navigationItems }: ServicesPageProps) {
+export function ServicesPage({ navigationItems, content }: ServicesPageProps) {
   const shouldReduceMotion = useReducedMotion();
   const reduceMotion = shouldReduceMotion ?? false;
+  const { hero, overview, process, cta } = content;
 
   // Images slide in from the side they sit on, falling back to a plain fade when motion is reduced.
   const imageReveal = (fromLeft: boolean): Variants => ({
@@ -169,8 +78,17 @@ export function ServicesPage({ navigationItems }: ServicesPageProps) {
 
       <article className="relative">
         {/* 01 — Hero */}
-        <section className="pb-20 pt-36 md:pb-24 md:pt-48">
-          <div className="mx-auto w-full max-w-[1720px] px-6 md:px-12 lg:px-16">
+        <section className="relative overflow-hidden pb-20 pt-36 md:pb-24 md:pt-48">
+          {/* Ambient gradient blush so the open right side reads intentional, matching the homepage hero. */}
+          <div
+            aria-hidden="true"
+            className="pointer-events-none absolute -right-40 -top-24 size-[44rem] rounded-full bg-[radial-gradient(circle_at_32%_30%,rgba(88,41,199,0.16),rgba(255,255,255,0)_70%)] blur-2xl"
+          />
+          <div
+            aria-hidden="true"
+            className="pointer-events-none absolute right-10 top-64 size-[30rem] rounded-full bg-[radial-gradient(circle,rgba(255,202,45,0.16),rgba(255,255,255,0)_72%)] blur-3xl"
+          />
+          <div className="relative z-10 mx-auto w-full max-w-[1720px] px-6 md:px-12 lg:px-16">
             <motion.div
               className="max-w-5xl"
               initial={reduceMotion ? false : { opacity: 0, y: 24 }}
@@ -178,15 +96,26 @@ export function ServicesPage({ navigationItems }: ServicesPageProps) {
               transition={{ duration: 0.6, ease: easeOut }}
             >
               <h1
-                className="text-hero-display mb-8 text-(--neutral-950)"
+                className="mb-8 text-[64px] leading-[1.05] tracking-[-0.03em] text-(--neutral-950)"
                 style={{ fontWeight: 600 }}
               >
-                A full-service digital innovation partner
+                {renderHighlightedTitle(hero.title)}
               </h1>
               <p className="max-w-xl text-[clamp(1.15rem,1.7vw,1.5rem)] leading-[1.45] text-(--color-text-secondary)">
-                We help founders decide what to build, ship it fast, and iterate
-                toward traction — one team, fewer handoffs.
+                {hero.description}
               </p>
+              {hero.ctaLabel && hero.ctaHref && (
+                <Link
+                  href={hero.ctaHref}
+                  className="group mt-10 inline-flex items-center gap-2 rounded-full bg-brand px-7 py-3.5 text-[15px] font-semibold text-white transition-all hover:opacity-90"
+                >
+                  {hero.ctaLabel}
+                  <ArrowRight
+                    size={16}
+                    className="transition-transform group-hover:translate-x-0.5"
+                  />
+                </Link>
+              )}
             </motion.div>
           </div>
         </section>
@@ -198,14 +127,14 @@ export function ServicesPage({ navigationItems }: ServicesPageProps) {
         >
           <div className="mx-auto w-full max-w-[1720px] px-6 md:px-12 lg:px-16">
             <div className="mb-16 max-w-4xl lg:mb-24">
-              <Kicker>What we do</Kicker>
+              <Kicker>{overview.kicker}</Kicker>
               <h2 className="max-w-4xl text-display-muted-editorial text-(--neutral-950)">
-                Four capabilities that compound when they run as one system.
+                {overview.heading}
               </h2>
             </div>
 
             <div className="space-y-28 md:space-y-40">
-              {services.map((service, index) => {
+              {overview.items.map((service, index) => {
                 const imageFirst = index % 2 === 1;
                 return (
                   <motion.div
@@ -215,7 +144,7 @@ export function ServicesPage({ navigationItems }: ServicesPageProps) {
                     variants={blockStagger}
                     initial="hidden"
                     whileInView="show"
-                    viewport={viewportOnce}
+                    viewport={viewportReveal}
                   >
                     {/* Copy column */}
                     <motion.div
@@ -264,7 +193,7 @@ export function ServicesPage({ navigationItems }: ServicesPageProps) {
                       variants={imageReveal(imageFirst)}
                       className={imageFirst ? "lg:order-1" : "lg:order-2"}
                     >
-                      <div className="relative mx-auto aspect-630/820 w-full max-w-157.5 overflow-hidden rounded-3xl border border-(--color-border-default) bg-(--neutral-100) shadow-[0_32px_80px_rgba(17,17,17,0.10)]">
+                      <div className="relative mx-auto aspect-630/820 w-full max-w-157.5 overflow-hidden border border-(--color-border-default) bg-(--neutral-100) shadow-[0_32px_80px_rgba(17,17,17,0.10)]">
                         <Image
                           src={service.image}
                           alt={service.imageAlt}
@@ -285,14 +214,12 @@ export function ServicesPage({ navigationItems }: ServicesPageProps) {
         <section className="relative overflow-hidden border-b border-(--color-border-default) bg-white py-16 md:py-24">
           <StudioPageContainer className="space-y-10">
             <div className="max-w-4xl lg:pl-4 xl:pl-6">
-              <Kicker>How we work</Kicker>
+              <Kicker>{process.kicker}</Kicker>
               <h2 className="max-w-4xl text-display-muted-editorial text-(--neutral-950)">
-                The startup workflow changed. We&apos;re built for the new one.
+                {process.heading}
               </h2>
               <p className="mt-4 max-w-2xl text-body-lg text-(--color-text-secondary)">
-                Making is cheaper than ever, so the edge moved upstream — to
-                framing, judgment, and tighter loops. Every engagement runs on
-                the same operating model.
+                {process.description}
               </p>
             </div>
 
@@ -301,9 +228,9 @@ export function ServicesPage({ navigationItems }: ServicesPageProps) {
               variants={blockStagger}
               initial="hidden"
               whileInView="show"
-              viewport={viewportOnce}
+              viewport={viewportReveal}
             >
-              {processSteps.map((step, index) => (
+              {process.steps.map((step, index) => (
                 <motion.div
                   key={step.title}
                   variants={fadeUp}
@@ -341,18 +268,17 @@ export function ServicesPage({ navigationItems }: ServicesPageProps) {
               />
               <div className="relative">
                 <span className="mb-6 inline-block font-mono text-[12px] font-medium uppercase tracking-[0.04em] text-brand">
-                  Have a bet worth making?
+                  {cta.eyebrow}
                 </span>
                 <h2 className="careers-cta-heading mb-6 text-(--neutral-900)">
-                  One team to{" "}
+                  {cta.headingPrefix}{" "}
                   <em className="font-medium not-italic text-brand">
-                    shape, ship, and grow
+                    {cta.headingHighlight}
                   </em>{" "}
-                  the product.
+                  {cta.headingSuffix}
                 </h2>
                 <p className="mx-auto mb-10 max-w-130 text-base leading-relaxed text-(--neutral-600) md:text-lg">
-                  Tell us what you&apos;re building. We&apos;ll help you decide
-                  what matters, move fast, and turn early signal into traction.
+                  {cta.description}
                 </p>
                 <div className="flex flex-col items-center justify-center gap-3 sm:flex-row sm:flex-wrap">
                   <StartProjectButton
@@ -360,14 +286,14 @@ export function ServicesPage({ navigationItems }: ServicesPageProps) {
                     source="services-page-cta"
                     className="w-full rounded-full px-7 py-4 text-[15px] sm:w-auto"
                   >
-                    Start a project
+                    {cta.primaryCtaLabel}
                     <ArrowRight size={16} />
                   </StartProjectButton>
                   <a
-                    href="mailto:sales@yuvabe.com"
+                    href={`mailto:${cta.contactEmail}`}
                     className="inline-flex w-full items-center justify-center gap-2 rounded-full border border-(--color-border-default) bg-white px-7 py-4 text-[13px] font-semibold text-(--neutral-700) transition-all hover:border-brand/30 hover:text-brand sm:w-auto sm:text-[15px]"
                   >
-                    sales@yuvabe.com
+                    {cta.contactEmail}
                   </a>
                 </div>
               </div>
