@@ -27,6 +27,43 @@ export type StudioAboutStoryContent = {
   }>;
 };
 
+export type StudioAboutStatItem = {
+  value: string;
+  label: string;
+};
+
+export type StudioAboutStatsContent = {
+  items: StudioAboutStatItem[];
+  feature: StudioAboutStatItem;
+};
+
+export type StudioAboutNameMeaningContent = {
+  eyebrow: string;
+  title: string;
+  paragraphs: string[];
+};
+
+export type StudioAboutPhilosophyContent = {
+  eyebrow: string;
+  title: string;
+  intro: string;
+  principles: Array<{
+    title: string;
+    description: string;
+  }>;
+};
+
+export type StudioAboutTestimonialItem = {
+  quote: string;
+  name: string;
+  role: string;
+};
+
+export type StudioAboutTestimonialsContent = {
+  eyebrow: string;
+  items: StudioAboutTestimonialItem[];
+};
+
 export type StudioAboutWorkflowContent = {
   eyebrow: string;
   title: string;
@@ -78,7 +115,11 @@ export type StudioAboutCtaContent = {
 
 export type StudioAboutPageContent = {
   hero: StudioAboutHeroContent;
+  stats: StudioAboutStatsContent;
+  nameMeaning: StudioAboutNameMeaningContent;
+  philosophy: StudioAboutPhilosophyContent;
   story: StudioAboutStoryContent;
+  testimonials: StudioAboutTestimonialsContent;
   workflow: StudioAboutWorkflowContent;
   proof: StudioAboutProofContent;
   values: StudioAboutValuesContent;

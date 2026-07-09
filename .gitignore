@@ -48,3 +48,4 @@ next-env.d.ts
 .env.keys
 .env.local
 .env.*.local
+.claude/skills/**/__pycache__/

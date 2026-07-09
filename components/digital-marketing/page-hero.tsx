@@ -5,7 +5,6 @@ import { ArrowRight } from "lucide-react";
 import { motion, useReducedMotion } from "framer-motion";
 
 import type { DigitalMarketingHeroContent } from "@/components/digital-marketing/digital-marketing-content";
-import { StudioPageContainer } from "@/components/studio/studio-page-shell";
 import { isStartProjectHref } from "@/lib/start-project";
 import { StartProjectButton } from "@/components/studio/start-project-button";
 
@@ -18,13 +17,13 @@ export function PageHero({ content }: PageHeroProps) {
   const reduceMotion = shouldReduceMotion ?? false;
 
   return (
-    <section className="pb-20 pt-32 md:pb-28 md:pt-40">
-      <StudioPageContainer>
+    <section className="pb-20 pt-32 md:pb-28 md:pt-40 bg-white">
+      <div className="mx-auto w-full max-w-[1720px] px-6 md:px-12 lg:px-16">
         <motion.div
           initial={reduceMotion ? false : { opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
-          className="max-w-3xl"
+          className="max-w-4xl"
         >
           <span className="mb-6 inline-block font-mono text-[11px] font-medium uppercase tracking-[0.04em] text-brand">
             {content.subtitle}
@@ -67,7 +66,7 @@ export function PageHero({ content }: PageHeroProps) {
             </a>
           </div>
         </motion.div>
-      </StudioPageContainer>
+      </div>
     </section>
   );
 }

@@ -19,6 +19,7 @@ import {
 } from "@/components/studio/studio-case-study-content";
 import type {
   StudioHomepageContent,
+  StudioHomepageFaqItem,
   StudioHomepageHeroContent,
   StudioHomepageInlineCtaContent,
   StudioHomepageNavItem,
@@ -30,10 +31,14 @@ import type {
 import type {
   StudioAboutCtaContent,
   StudioAboutHeroContent,
+  StudioAboutNameMeaningContent,
   StudioAboutPageContent,
+  StudioAboutPhilosophyContent,
   StudioAboutProofContent,
+  StudioAboutStatsContent,
   StudioAboutStoryContent,
   StudioAboutTeamTeaserContent,
+  StudioAboutTestimonialsContent,
   StudioAboutValuesContent,
   StudioAboutWorkflowContent,
 } from "@/components/studio/studio-about-content";
@@ -163,6 +168,39 @@ const defaultTestimonialsContent: StudioHomepageTestimonialsContent = {
     },
   ],
 };
+
+const defaultFaqs: StudioHomepageFaqItem[] = [
+  {
+    question: "What does Yuvabe actually do?",
+    answer:
+      "We're an AI-first studio for founders. We help you decide what to build, then design, engineer, and grow it — strategy, product, and delivery in one connected team instead of scattered handoffs.",
+  },
+  {
+    question: "Who do you work best with?",
+    answer:
+      "0-to-1 and traction-stage startups that need clarity and speed — teams who want a close partner that can move from idea to shipped product without losing context.",
+  },
+  {
+    question: "How does an engagement start?",
+    answer:
+      "It starts with a conversation about what you're building and the decision you're facing. From there we frame the real priority, agree on scope, and get moving quickly.",
+  },
+  {
+    question: "How is AI part of your process?",
+    answer:
+      "Practically, not as a buzzword. We use frontier AI to compress the path from idea to artifact, sharpen research and decisions, and build AI-native features where they genuinely help the product.",
+  },
+  {
+    question: "Do you only work with early-stage startups?",
+    answer:
+      "That's our sweet spot, but we also partner with traction-stage teams and established organizations on focused product, design, and growth work.",
+  },
+  {
+    question: "Where are you based, and can you work remotely?",
+    answer:
+      "We're based in Auroville, India, and work closely with founders across timezones. The people shaping the product stay in the conversation throughout.",
+  },
+];
 
 const aiWorkflowsNavLabel = "AI Workflows";
 const aiWorkflowsNavHref = "/ai-workflows";
@@ -585,7 +623,18 @@ function parseHomepageContent(value: unknown): StudioHomepageContent {
         )
       : defaultTestimonialsContent,
     work: parseWorkContent(value.work, "homepage content.work"),
+    faqs: value.faqs ? parseFaqs(value.faqs, "homepage content.faqs") : defaultFaqs,
   };
+}
+
+function parseFaqs(value: unknown, label: string): StudioHomepageFaqItem[] {
+  return expectArray(value, label).map((item, index) => {
+    assertRecord(item, `${label}[${index}]`);
+    return {
+      question: expectString(item.question, `${label}[${index}].question`),
+      answer: expectString(item.answer, `${label}[${index}].answer`),
+    };
+  });
 }
 
 // This merge keeps newly added local homepage proof visible when the remote content document is older.
@@ -701,6 +750,9 @@ export function parseStudioHomepageContentInput(
         )
       : defaultTestimonialsContent,
     work: normalizeWorkContent(value.work, "homepage content payload.work"),
+    faqs: value.faqs
+      ? parseFaqs(value.faqs, "homepage content payload.faqs")
+      : defaultFaqs,
   };
 }
 
@@ -998,11 +1050,216 @@ function normalizeAboutCtaContent(
   };
 }
 
+const defaultAboutStats: StudioAboutStatsContent = {
+  items: [
+    { value: "2020", label: "Founded in Auroville" },
+    { value: "40+", label: "Yuvabeans on the team" },
+    { value: "4", label: "Disciplines, one connected loop" },
+  ],
+  feature: { value: "Auroville", label: "Where we're based" },
+};
+
+const defaultAboutNameMeaning: StudioAboutNameMeaningContent = {
+  eyebrow: "What does Yuvabe mean?",
+  title: "A name inspired by the spirit of becoming.",
+  paragraphs: [
+    "‘Yuva’ meaning youth in Sanskrit — reflects the curiosity and possibility of youth.",
+    "‘Be’ represents the act of becoming — the courage to learn, evolve and create a better future.",
+  ],
+};
+
+const defaultAboutTestimonials: StudioAboutTestimonialsContent = {
+  eyebrow: "What partners say",
+  items: [
+    {
+      quote:
+        "Yuvabe felt like part of our team. They helped us decide what to build, not just build it — and that changed how fast we found traction.",
+      name: "Founder",
+      role: "Early-stage SaaS",
+    },
+    {
+      quote:
+        "One team carried us from strategy to a shipped product. Fewer handoffs, sharper decisions, and people who stayed close as things changed.",
+      name: "Co-founder",
+      role: "Climate-tech startup",
+    },
+    {
+      quote:
+        "They brought real product judgment, not just execution. The AI work was genuinely useful, and the thinking behind it was even better.",
+      name: "Product lead",
+      role: "Fintech platform",
+    },
+  ],
+};
+
+// New About sections (stats / name meaning / testimonials) parse tolerantly so
+// documents saved before these fields existed fall back to sensible defaults.
+function parseAboutStatItem(value: unknown, fallback: StudioAboutStatsContent["items"][number]) {
+  if (!value || typeof value !== "object" || Array.isArray(value)) {
+    return { ...fallback };
+  }
+  const record = value as Record<string, unknown>;
+  return {
+    value: optionalString(record.value) ?? fallback.value,
+    label: optionalString(record.label) ?? fallback.label,
+  };
+}
+
+function parseAboutStatsContent(value: unknown): StudioAboutStatsContent {
+  if (!value || typeof value !== "object" || Array.isArray(value)) {
+    return defaultAboutStats;
+  }
+  const record = value as Record<string, unknown>;
+  const items = Array.isArray(record.items)
+    ? record.items.map((item, index) =>
+        parseAboutStatItem(item, defaultAboutStats.items[index] ?? { value: "", label: "" }),
+      )
+    : defaultAboutStats.items;
+  const feature = parseAboutStatItem(record.feature, defaultAboutStats.feature);
+  return { items, feature };
+}
+
+function normalizeAboutStatsContent(value: unknown): StudioAboutStatsContent {
+  const parsed = parseAboutStatsContent(value);
+  return {
+    items: parsed.items.map((item) => ({
+      value: item.value.trim(),
+      label: item.label.trim(),
+    })),
+    feature: { value: parsed.feature.value.trim(), label: parsed.feature.label.trim() },
+  };
+}
+
+function parseAboutNameMeaningContent(value: unknown): StudioAboutNameMeaningContent {
+  if (!value || typeof value !== "object" || Array.isArray(value)) {
+    return defaultAboutNameMeaning;
+  }
+  const record = value as Record<string, unknown>;
+  return {
+    eyebrow: optionalString(record.eyebrow) ?? defaultAboutNameMeaning.eyebrow,
+    title: optionalString(record.title) ?? defaultAboutNameMeaning.title,
+    paragraphs: Array.isArray(record.paragraphs)
+      ? record.paragraphs.filter((item): item is string => typeof item === "string")
+      : defaultAboutNameMeaning.paragraphs,
+  };
+}
+
+function normalizeAboutNameMeaningContent(value: unknown): StudioAboutNameMeaningContent {
+  const parsed = parseAboutNameMeaningContent(value);
+  return {
+    eyebrow: parsed.eyebrow.trim(),
+    title: parsed.title.trim(),
+    paragraphs: parsed.paragraphs.map((paragraph) => paragraph.trim()).filter(Boolean),
+  };
+}
+
+const defaultAboutPhilosophy: StudioAboutPhilosophyContent = {
+  eyebrow: "Our Philosophy",
+  title: "Work. Serve. Evolve.",
+  intro: "The principles that shape who we are and how we show up.",
+  principles: [
+    {
+      title: "Work",
+      description:
+        "We bring curiosity, craftsmanship and dedication to everything we create.",
+    },
+    {
+      title: "Serve",
+      description:
+        "We build with empathy, putting people, purpose and meaningful outcomes at the centre.",
+    },
+    {
+      title: "Evolve",
+      description:
+        "We continuously learn, adapt and embrace new possibilities to create what comes next.",
+    },
+  ],
+};
+
+function parseAboutPhilosophyContent(value: unknown): StudioAboutPhilosophyContent {
+  if (!value || typeof value !== "object" || Array.isArray(value)) {
+    return defaultAboutPhilosophy;
+  }
+  const record = value as Record<string, unknown>;
+  const principles = Array.isArray(record.principles)
+    ? record.principles.map((item) => {
+        const entry =
+          item && typeof item === "object" && !Array.isArray(item)
+            ? (item as Record<string, unknown>)
+            : {};
+        return {
+          title: optionalString(entry.title) ?? "",
+          description: optionalString(entry.description) ?? "",
+        };
+      })
+    : defaultAboutPhilosophy.principles;
+  return {
+    eyebrow: optionalString(record.eyebrow) ?? defaultAboutPhilosophy.eyebrow,
+    title: optionalString(record.title) ?? defaultAboutPhilosophy.title,
+    intro: optionalString(record.intro) ?? defaultAboutPhilosophy.intro,
+    principles,
+  };
+}
+
+function normalizeAboutPhilosophyContent(value: unknown): StudioAboutPhilosophyContent {
+  const parsed = parseAboutPhilosophyContent(value);
+  return {
+    eyebrow: parsed.eyebrow.trim(),
+    title: parsed.title.trim(),
+    intro: parsed.intro.trim(),
+    principles: parsed.principles
+      .map((item) => ({ title: item.title.trim(), description: item.description.trim() }))
+      .filter((item) => item.title || item.description),
+  };
+}
+
+function parseAboutTestimonialsContent(value: unknown): StudioAboutTestimonialsContent {
+  if (!value || typeof value !== "object" || Array.isArray(value)) {
+    return defaultAboutTestimonials;
+  }
+  const record = value as Record<string, unknown>;
+  const items = Array.isArray(record.items)
+    ? record.items.map((item) => {
+        const entry =
+          item && typeof item === "object" && !Array.isArray(item)
+            ? (item as Record<string, unknown>)
+            : {};
+        return {
+          quote: optionalString(entry.quote) ?? "",
+          name: optionalString(entry.name) ?? "",
+          role: optionalString(entry.role) ?? "",
+        };
+      })
+    : defaultAboutTestimonials.items;
+  return {
+    eyebrow: optionalString(record.eyebrow) ?? defaultAboutTestimonials.eyebrow,
+    items,
+  };
+}
+
+function normalizeAboutTestimonialsContent(value: unknown): StudioAboutTestimonialsContent {
+  const parsed = parseAboutTestimonialsContent(value);
+  return {
+    eyebrow: parsed.eyebrow.trim(),
+    items: parsed.items
+      .map((item) => ({
+        quote: item.quote.trim(),
+        name: item.name.trim(),
+        role: item.role.trim(),
+      }))
+      .filter((item) => item.quote || item.name || item.role),
+  };
+}
+
 function parseAboutPageContent(value: unknown): StudioAboutPageContent {
   assertRecord(value, "about content");
 
   return {
     hero: parseAboutHeroContent(value.hero, "about content.hero"),
+    stats: parseAboutStatsContent(value.stats),
+    nameMeaning: parseAboutNameMeaningContent(value.nameMeaning),
+    philosophy: parseAboutPhilosophyContent(value.philosophy),
+    testimonials: parseAboutTestimonialsContent(value.testimonials),
     story: parseAboutStoryContent(value.story, "about content.story"),
     workflow: parseAboutWorkflowContent(value.workflow, "about content.workflow"),
     proof: parseAboutProofContent(value.proof, "about content.proof"),
@@ -1022,6 +1279,10 @@ export function parseStudioAboutPageContentInput(
 
   return {
     hero: normalizeAboutHeroContent(value.hero, "about content payload.hero"),
+    stats: normalizeAboutStatsContent(value.stats),
+    nameMeaning: normalizeAboutNameMeaningContent(value.nameMeaning),
+    philosophy: normalizeAboutPhilosophyContent(value.philosophy),
+    testimonials: normalizeAboutTestimonialsContent(value.testimonials),
     story: normalizeAboutStoryContent(value.story, "about content payload.story"),
     workflow: normalizeAboutWorkflowContent(
       value.workflow,

@@ -58,6 +58,11 @@ export type StudioHomepageTestimonialsContent = {
   }>;
 };
 
+export type StudioHomepageFaqItem = {
+  question: string;
+  answer: string;
+};
+
 export type StudioHomepageContent = {
   navigationItems: StudioHomepageNavItem[];
   hero: StudioHomepageHeroContent;
@@ -66,4 +71,5 @@ export type StudioHomepageContent = {
   testimonials: StudioHomepageTestimonialsContent;
   beforeTestimonialsCta: StudioHomepageInlineCtaContent;
   work: StudioHomepageWorkContent;
+  faqs: StudioHomepageFaqItem[];
 };

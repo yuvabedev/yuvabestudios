@@ -12,8 +12,14 @@ import {
   saveCaseStudyContentAction,
   saveDigitalMarketingContentAction,
   saveHomepageContentAction,
+  saveServicesPageContentAction,
   saveUiuxDesignContentAction,
+  saveWorkContentAction,
 } from "@/app/studio-admin/actions";
+import type { BlogPost } from "@/lib/blog";
+import type { WorkPageContent } from "@/lib/work-content";
+import type { ServicesPageContent } from "@/lib/services-content";
+import { BlogAdminTab } from "@/components/studio/studio-blog-admin-tab";
 import type {
   CareersBenefitItem,
   CareersPageContent,
@@ -67,8 +73,11 @@ type StudioAdminEditorProps = {
   uiuxDesignContent: StudioUiuxDesignContent;
   caseStudies: StudioEditableCaseStudy[];
   careersContent: CareersPageContent;
+  workContent: WorkPageContent;
+  servicesPageContent: ServicesPageContent;
+  blogPosts: BlogPost[];
   initialCaseStudyId?: string;
-  initialTab: "homepage" | "about" | "ai-workflows" | "services" | "case-studies" | "careers";
+  initialTab: "homepage" | "about" | "ai-workflows" | "services" | "services-page" | "case-studies" | "careers" | "work" | "blog";
   savedState?: string;
 };
 
@@ -275,89 +284,6 @@ function ServiceItemsEditor({
   );
 }
 
-function AboutHeroCalloutsEditor({
-  items,
-  onChange,
-}: {
-  items: StudioAboutPageContent["hero"]["callouts"];
-  onChange: (items: StudioAboutPageContent["hero"]["callouts"]) => void;
-}) {
-  return (
-    <div className="space-y-4">
-      <div className="flex items-center justify-between gap-3">
-        <p className="text-label-sm uppercase tracking-[0.16em] text-[var(--color-text-tertiary)]">
-          Hero callouts
-        </p>
-        <Button
-          type="button"
-          variant="secondary"
-          size="sm"
-          onClick={() =>
-            onChange([...items, { label: "", value: "", description: "" }])
-          }
-        >
-          Add callout
-        </Button>
-      </div>
-      {items.map((item, index) => (
-        <Card key={`about-hero-callout-${index}`}>
-          <CardHeader className="flex flex-row items-center justify-between gap-3">
-            <CardTitle className="text-body-lg">Callout {index + 1}</CardTitle>
-            <Button
-              type="button"
-              variant="secondary"
-              size="sm"
-              onClick={() => onChange(removeAt(items, index))}
-            >
-              Remove
-            </Button>
-          </CardHeader>
-          <CardContent className="space-y-4 pb-6">
-            <div className="grid gap-4 lg:grid-cols-2">
-              <Field label="Label">
-                <input
-                  className={formControlClassName}
-                  value={item.label}
-                  onChange={(event) =>
-                    onChange(
-                      replaceAt(items, index, { ...item, label: event.target.value }),
-                    )
-                  }
-                />
-              </Field>
-              <Field label="Value">
-                <input
-                  className={formControlClassName}
-                  value={item.value}
-                  onChange={(event) =>
-                    onChange(
-                      replaceAt(items, index, { ...item, value: event.target.value }),
-                    )
-                  }
-                />
-              </Field>
-            </div>
-            <Field label="Description">
-              <textarea
-                className={textareaClassName}
-                value={item.description}
-                onChange={(event) =>
-                  onChange(
-                    replaceAt(items, index, {
-                      ...item,
-                      description: event.target.value,
-                    }),
-                  )
-                }
-              />
-            </Field>
-          </CardContent>
-        </Card>
-      ))}
-    </div>
-  );
-}
-
 function AboutTitleDescriptionListEditor({
   label,
   items,
@@ -425,154 +351,6 @@ function AboutTitleDescriptionListEditor({
                       ...item,
                       description: event.target.value,
                     }),
-                  )
-                }
-              />
-            </Field>
-          </CardContent>
-        </Card>
-      ))}
-    </div>
-  );
-}
-
-function AboutWorkflowStagesEditor({
-  items,
-  onChange,
-}: {
-  items: StudioAboutPageContent["workflow"]["stages"];
-  onChange: (items: StudioAboutPageContent["workflow"]["stages"]) => void;
-}) {
-  return (
-    <div className="space-y-4">
-      <div className="flex items-center justify-between gap-3">
-        <p className="text-label-sm uppercase tracking-[0.16em] text-[var(--color-text-tertiary)]">
-          Workflow stages
-        </p>
-        <Button
-          type="button"
-          variant="secondary"
-          size="sm"
-          onClick={() => onChange([...items, { label: "", description: "" }])}
-        >
-          Add stage
-        </Button>
-      </div>
-      {items.map((item, index) => (
-        <Card key={`about-workflow-stage-${index}`}>
-          <CardHeader className="flex flex-row items-center justify-between gap-3">
-            <CardTitle className="text-body-lg">Stage {index + 1}</CardTitle>
-            <Button
-              type="button"
-              variant="secondary"
-              size="sm"
-              onClick={() => onChange(removeAt(items, index))}
-            >
-              Remove
-            </Button>
-          </CardHeader>
-          <CardContent className="space-y-4 pb-6">
-            <Field label="Label">
-              <input
-                className={formControlClassName}
-                value={item.label}
-                onChange={(event) =>
-                  onChange(
-                    replaceAt(items, index, { ...item, label: event.target.value }),
-                  )
-                }
-              />
-            </Field>
-            <Field label="Description">
-              <textarea
-                className={textareaClassName}
-                value={item.description}
-                onChange={(event) =>
-                  onChange(
-                    replaceAt(items, index, {
-                      ...item,
-                      description: event.target.value,
-                    }),
-                  )
-                }
-              />
-            </Field>
-          </CardContent>
-        </Card>
-      ))}
-    </div>
-  );
-}
-
-function AboutProofEntriesEditor({
-  items,
-  onChange,
-}: {
-  items: StudioAboutPageContent["proof"]["entries"];
-  onChange: (items: StudioAboutPageContent["proof"]["entries"]) => void;
-}) {
-  return (
-    <div className="space-y-4">
-      <div className="flex items-center justify-between gap-3">
-        <p className="text-label-sm uppercase tracking-[0.16em] text-[var(--color-text-tertiary)]">
-          Proof entries
-        </p>
-        <Button
-          type="button"
-          variant="secondary"
-          size="sm"
-          onClick={() =>
-            onChange([...items, { client: "", sector: "", summary: "" }])
-          }
-        >
-          Add proof entry
-        </Button>
-      </div>
-      {items.map((item, index) => (
-        <Card key={`about-proof-entry-${index}`}>
-          <CardHeader className="flex flex-row items-center justify-between gap-3">
-            <CardTitle className="text-body-lg">Proof entry {index + 1}</CardTitle>
-            <Button
-              type="button"
-              variant="secondary"
-              size="sm"
-              onClick={() => onChange(removeAt(items, index))}
-            >
-              Remove
-            </Button>
-          </CardHeader>
-          <CardContent className="space-y-4 pb-6">
-            <div className="grid gap-4 lg:grid-cols-2">
-              <Field label="Client">
-                <input
-                  className={formControlClassName}
-                  value={item.client}
-                  onChange={(event) =>
-                    onChange(
-                      replaceAt(items, index, { ...item, client: event.target.value }),
-                    )
-                  }
-                />
-              </Field>
-              <Field label="Sector">
-                <input
-                  className={formControlClassName}
-                  value={item.sector}
-                  onChange={(event) =>
-                    onChange(
-                      replaceAt(items, index, { ...item, sector: event.target.value }),
-                    )
-                  }
-                />
-              </Field>
-            </div>
-            <Field label="Summary">
-              <textarea
-                className={textareaClassName}
-                value={item.summary}
-                onChange={(event) =>
-                  onChange(
-                    replaceAt(items, index, { ...item, summary: event.target.value }),
                   )
                 }
               />
@@ -1140,6 +918,9 @@ export function StudioAdminEditor({
   uiuxDesignContent,
   caseStudies,
   careersContent,
+  workContent,
+  servicesPageContent,
+  blogPosts,
   initialCaseStudyId,
   initialTab,
   savedState,
@@ -1153,6 +934,8 @@ export function StudioAdminEditor({
   const [digitalMarketingDraft, setDigitalMarketingDraft] = useState(digitalMarketingContent);
   const [uiuxDesignDraft, setUiuxDesignDraft] = useState(uiuxDesignContent);
   const [careersDraft, setCareersDraft] = useState(careersContent);
+  const [workDraft, setWorkDraft] = useState(workContent);
+  const [servicesPageDraft, setServicesPageDraft] = useState(servicesPageContent);
   const [caseStudyDrafts, setCaseStudyDrafts] = useState(caseStudies);
   const [selectedCaseStudyId, setSelectedCaseStudyId] = useState(
     initialCaseStudyId ?? caseStudies[0]?.id ?? "",
@@ -1225,7 +1008,7 @@ export function StudioAdminEditor({
       <Tabs
         value={activeTab}
         onValueChange={(value) =>
-          setActiveTab(value as "homepage" | "about" | "ai-workflows" | "services" | "case-studies" | "careers")
+          setActiveTab(value as StudioAdminEditorProps["initialTab"])
         }
         className="space-y-6"
       >
@@ -1234,8 +1017,11 @@ export function StudioAdminEditor({
           <TabsTrigger value="about">About</TabsTrigger>
           <TabsTrigger value="ai-workflows">AI Workflows</TabsTrigger>
           <TabsTrigger value="services">Services</TabsTrigger>
+          <TabsTrigger value="services-page">Services page</TabsTrigger>
           <TabsTrigger value="case-studies">Case studies</TabsTrigger>
           <TabsTrigger value="careers">Careers</TabsTrigger>
+          <TabsTrigger value="work">Work</TabsTrigger>
+          <TabsTrigger value="blog">Blog</TabsTrigger>
         </TabsList>
 
         <TabsContent value="homepage">
@@ -1350,6 +1136,61 @@ export function StudioAdminEditor({
                 </div>
               </CardContent>
             </Card>
+
+            {/* Mid-page CTA banner (shown between client logos and case studies). */}
+            <Card>
+              <CardHeader><CardTitle>Mid-page CTA</CardTitle></CardHeader>
+              <CardContent className="space-y-4 pb-6">
+                <Field label="Eyebrow (optional)">
+                  <input className={formControlClassName} value={homepageDraft.afterServicesCta.eyebrow} onChange={(event) => setHomepageDraft({ ...homepageDraft, afterServicesCta: { ...homepageDraft.afterServicesCta, eyebrow: event.target.value } })} />
+                </Field>
+                <Field label="Heading">
+                  <textarea className={textareaClassName} value={homepageDraft.afterServicesCta.title} onChange={(event) => setHomepageDraft({ ...homepageDraft, afterServicesCta: { ...homepageDraft.afterServicesCta, title: event.target.value } })} />
+                </Field>
+                <Field label="Subheading">
+                  <textarea className={textareaClassName} value={homepageDraft.afterServicesCta.description} onChange={(event) => setHomepageDraft({ ...homepageDraft, afterServicesCta: { ...homepageDraft.afterServicesCta, description: event.target.value } })} />
+                </Field>
+                <div className="grid gap-4 lg:grid-cols-2">
+                  <Field label="Button label">
+                    <input className={formControlClassName} value={homepageDraft.afterServicesCta.primaryCtaLabel} onChange={(event) => setHomepageDraft({ ...homepageDraft, afterServicesCta: { ...homepageDraft.afterServicesCta, primaryCtaLabel: event.target.value } })} />
+                  </Field>
+                  <Field label="Button link">
+                    <input className={formControlClassName} value={homepageDraft.afterServicesCta.primaryCtaHref} onChange={(event) => setHomepageDraft({ ...homepageDraft, afterServicesCta: { ...homepageDraft.afterServicesCta, primaryCtaHref: event.target.value } })} />
+                  </Field>
+                </div>
+              </CardContent>
+            </Card>
+
+            {/* FAQs (shown at the bottom of the home page). */}
+            <Card>
+              <CardHeader className="flex flex-row items-center justify-between gap-3">
+                <CardTitle>FAQs</CardTitle>
+                <Button type="button" variant="secondary" size="sm" onClick={() => setHomepageDraft({ ...homepageDraft, faqs: [...homepageDraft.faqs, { question: "", answer: "" }] })}>
+                  Add FAQ
+                </Button>
+              </CardHeader>
+              <CardContent className="space-y-4 pb-6">
+                {homepageDraft.faqs.map((faq, index) => (
+                  <Card key={`faq-${index}`}>
+                    <CardHeader className="flex flex-row items-center justify-between gap-3">
+                      <CardTitle className="text-body-lg">FAQ {index + 1}</CardTitle>
+                      <Button type="button" variant="secondary" size="sm" onClick={() => setHomepageDraft({ ...homepageDraft, faqs: removeAt(homepageDraft.faqs, index) })}>
+                        Remove
+                      </Button>
+                    </CardHeader>
+                    <CardContent className="space-y-3 pb-5">
+                      <Field label="Question">
+                        <input className={formControlClassName} value={faq.question} onChange={(event) => setHomepageDraft({ ...homepageDraft, faqs: replaceAt(homepageDraft.faqs, index, { ...faq, question: event.target.value }) })} />
+                      </Field>
+                      <Field label="Answer">
+                        <textarea className={textareaClassName} value={faq.answer} onChange={(event) => setHomepageDraft({ ...homepageDraft, faqs: replaceAt(homepageDraft.faqs, index, { ...faq, answer: event.target.value }) })} />
+                      </Field>
+                    </CardContent>
+                  </Card>
+                ))}
+              </CardContent>
+            </Card>
+
             {/* The sticky save bar keeps the primary action reachable without forcing long scrolls. */}
             <StickySaveBar
               label="Save homepage content"
@@ -1367,22 +1208,14 @@ export function StudioAdminEditor({
               </CardHeader>
               <CardContent className="space-y-6 pb-6">
                 <div className="grid gap-6 lg:grid-cols-2">
-                  <Field label="Hero eyebrow">
-                    <input className={formControlClassName} value={aboutDraft.hero.eyebrow} onChange={(event) => setAboutDraft({ ...aboutDraft, hero: { ...aboutDraft.hero, eyebrow: event.target.value } })} />
-                  </Field>
                   <Field label="Hero title">
                     <input className={formControlClassName} value={aboutDraft.hero.title} onChange={(event) => setAboutDraft({ ...aboutDraft, hero: { ...aboutDraft.hero, title: event.target.value } })} />
                   </Field>
-                </div>
-                <div className="grid gap-6 lg:grid-cols-2">
                   <Field label="Hero highlight">
                     <input className={formControlClassName} value={aboutDraft.hero.highlight} onChange={(event) => setAboutDraft({ ...aboutDraft, hero: { ...aboutDraft.hero, highlight: event.target.value } })} />
                   </Field>
-                  <Field label="Supporting line">
-                    <input className={formControlClassName} value={aboutDraft.hero.supportingLine} onChange={(event) => setAboutDraft({ ...aboutDraft, hero: { ...aboutDraft.hero, supportingLine: event.target.value } })} />
-                  </Field>
                 </div>
-                <Field label="Hero description">
+                <Field label="Hero subheading">
                   <textarea className={textareaClassName} value={aboutDraft.hero.description} onChange={(event) => setAboutDraft({ ...aboutDraft, hero: { ...aboutDraft.hero, description: event.target.value } })} />
                 </Field>
                 <div className="grid gap-6 lg:grid-cols-2">
@@ -1401,14 +1234,82 @@ export function StudioAdminEditor({
                     <input className={formControlClassName} value={aboutDraft.hero.secondaryCtaHref} onChange={(event) => setAboutDraft({ ...aboutDraft, hero: { ...aboutDraft.hero, secondaryCtaHref: event.target.value } })} />
                   </Field>
                 </div>
-                <AboutHeroCalloutsEditor
-                  items={aboutDraft.hero.callouts}
-                  onChange={(callouts) => setAboutDraft({ ...aboutDraft, hero: { ...aboutDraft.hero, callouts } })}
-                />
+                <Card>
+                  <CardHeader>
+                    <CardTitle className="text-body-lg">Stats strip</CardTitle>
+                  </CardHeader>
+                  <CardContent className="space-y-4 pb-6">
+                    {aboutDraft.stats.items.map((stat, index) => (
+                      <div key={`about-stat-${index}`} className="grid gap-4 lg:grid-cols-2">
+                        <Field label={`Stat ${index + 1} value`}>
+                          <input className={formControlClassName} value={stat.value} onChange={(event) => setAboutDraft({ ...aboutDraft, stats: { ...aboutDraft.stats, items: replaceAt(aboutDraft.stats.items, index, { ...stat, value: event.target.value }) } })} />
+                        </Field>
+                        <Field label={`Stat ${index + 1} label`}>
+                          <input className={formControlClassName} value={stat.label} onChange={(event) => setAboutDraft({ ...aboutDraft, stats: { ...aboutDraft.stats, items: replaceAt(aboutDraft.stats.items, index, { ...stat, label: event.target.value }) } })} />
+                        </Field>
+                      </div>
+                    ))}
+                    <div className="grid gap-4 lg:grid-cols-2">
+                      <Field label="Feature value">
+                        <input className={formControlClassName} value={aboutDraft.stats.feature.value} onChange={(event) => setAboutDraft({ ...aboutDraft, stats: { ...aboutDraft.stats, feature: { ...aboutDraft.stats.feature, value: event.target.value } } })} />
+                      </Field>
+                      <Field label="Feature label">
+                        <input className={formControlClassName} value={aboutDraft.stats.feature.label} onChange={(event) => setAboutDraft({ ...aboutDraft, stats: { ...aboutDraft.stats, feature: { ...aboutDraft.stats.feature, label: event.target.value } } })} />
+                      </Field>
+                    </div>
+                  </CardContent>
+                </Card>
 
                 <Card>
                   <CardHeader>
-                    <CardTitle className="text-body-lg">Story section</CardTitle>
+                    <CardTitle className="text-body-lg">What does Yuvabe mean</CardTitle>
+                  </CardHeader>
+                  <CardContent className="space-y-4 pb-6">
+                    <div className="grid gap-4 lg:grid-cols-2">
+                      <Field label="Eyebrow">
+                        <input className={formControlClassName} value={aboutDraft.nameMeaning.eyebrow} onChange={(event) => setAboutDraft({ ...aboutDraft, nameMeaning: { ...aboutDraft.nameMeaning, eyebrow: event.target.value } })} />
+                      </Field>
+                      <Field label="Title">
+                        <input className={formControlClassName} value={aboutDraft.nameMeaning.title} onChange={(event) => setAboutDraft({ ...aboutDraft, nameMeaning: { ...aboutDraft.nameMeaning, title: event.target.value } })} />
+                      </Field>
+                    </div>
+                    <StringListEditor
+                      label="Paragraphs"
+                      items={aboutDraft.nameMeaning.paragraphs}
+                      addLabel="Add paragraph"
+                      onChange={(paragraphs) => setAboutDraft({ ...aboutDraft, nameMeaning: { ...aboutDraft.nameMeaning, paragraphs } })}
+                    />
+                  </CardContent>
+                </Card>
+
+                <Card>
+                  <CardHeader>
+                    <CardTitle className="text-body-lg">Our philosophy</CardTitle>
+                  </CardHeader>
+                  <CardContent className="space-y-4 pb-6">
+                    <div className="grid gap-4 lg:grid-cols-2">
+                      <Field label="Eyebrow">
+                        <input className={formControlClassName} value={aboutDraft.philosophy.eyebrow} onChange={(event) => setAboutDraft({ ...aboutDraft, philosophy: { ...aboutDraft.philosophy, eyebrow: event.target.value } })} />
+                      </Field>
+                      <Field label="Title">
+                        <input className={formControlClassName} value={aboutDraft.philosophy.title} onChange={(event) => setAboutDraft({ ...aboutDraft, philosophy: { ...aboutDraft.philosophy, title: event.target.value } })} />
+                      </Field>
+                    </div>
+                    <Field label="Intro">
+                      <textarea className={textareaClassName} value={aboutDraft.philosophy.intro} onChange={(event) => setAboutDraft({ ...aboutDraft, philosophy: { ...aboutDraft.philosophy, intro: event.target.value } })} />
+                    </Field>
+                    <AboutTitleDescriptionListEditor
+                      label="Principle"
+                      items={aboutDraft.philosophy.principles}
+                      addLabel="Add principle"
+                      onChange={(principles) => setAboutDraft({ ...aboutDraft, philosophy: { ...aboutDraft.philosophy, principles: principles as StudioAboutPageContent["philosophy"]["principles"] } })}
+                    />
+                  </CardContent>
+                </Card>
+
+                <Card>
+                  <CardHeader>
+                    <CardTitle className="text-body-lg">What drives us</CardTitle>
                   </CardHeader>
                   <CardContent className="space-y-4 pb-6">
                     <div className="grid gap-4 lg:grid-cols-2">
@@ -1419,19 +1320,10 @@ export function StudioAdminEditor({
                         <input className={formControlClassName} value={aboutDraft.story.title} onChange={(event) => setAboutDraft({ ...aboutDraft, story: { ...aboutDraft.story, title: event.target.value } })} />
                       </Field>
                     </div>
-                    <Field label="Origin paragraph">
-                      <textarea className={textareaClassName} value={aboutDraft.story.paragraphs[0] ?? ""} onChange={(event) => setAboutDraft({ ...aboutDraft, story: { ...aboutDraft.story, paragraphs: replaceAt(aboutDraft.story.paragraphs, 0, event.target.value) } })} />
-                    </Field>
-                    <Field label="What changed paragraph">
-                      <textarea className={textareaClassName} value={aboutDraft.story.paragraphs[1] ?? ""} onChange={(event) => setAboutDraft({ ...aboutDraft, story: { ...aboutDraft.story, paragraphs: replaceAt(aboutDraft.story.paragraphs, 1, event.target.value) } })} />
-                    </Field>
-                    <Field label="What we care about now paragraph">
-                      <textarea className={textareaClassName} value={aboutDraft.story.paragraphs[2] ?? ""} onChange={(event) => setAboutDraft({ ...aboutDraft, story: { ...aboutDraft.story, paragraphs: replaceAt(aboutDraft.story.paragraphs, 2, event.target.value) } })} />
-                    </Field>
                     <AboutTitleDescriptionListEditor
-                      label="Operating principle"
+                      label="Pillar"
                       items={aboutDraft.story.operatingPrinciples}
-                      addLabel="Add principle"
+                      addLabel="Add pillar"
                       onChange={(operatingPrinciples) => setAboutDraft({ ...aboutDraft, story: { ...aboutDraft.story, operatingPrinciples: operatingPrinciples as StudioAboutPageContent["story"]["operatingPrinciples"] } })}
                     />
                   </CardContent>
@@ -1439,95 +1331,38 @@ export function StudioAdminEditor({
 
                 <Card>
                   <CardHeader>
-                    <CardTitle className="text-body-lg">How we work section</CardTitle>
+                    <CardTitle className="text-body-lg">Testimonials</CardTitle>
                   </CardHeader>
                   <CardContent className="space-y-4 pb-6">
-                    <div className="grid gap-4 lg:grid-cols-2">
-                      <Field label="Eyebrow">
-                        <input className={formControlClassName} value={aboutDraft.workflow.eyebrow} onChange={(event) => setAboutDraft({ ...aboutDraft, workflow: { ...aboutDraft.workflow, eyebrow: event.target.value } })} />
-                      </Field>
-                      <Field label="Title">
-                        <input className={formControlClassName} value={aboutDraft.workflow.title} onChange={(event) => setAboutDraft({ ...aboutDraft, workflow: { ...aboutDraft.workflow, title: event.target.value } })} />
-                      </Field>
-                    </div>
-                    <Field label="Description">
-                      <textarea className={textareaClassName} value={aboutDraft.workflow.description} onChange={(event) => setAboutDraft({ ...aboutDraft, workflow: { ...aboutDraft.workflow, description: event.target.value } })} />
+                    <Field label="Eyebrow">
+                      <input className={formControlClassName} value={aboutDraft.testimonials.eyebrow} onChange={(event) => setAboutDraft({ ...aboutDraft, testimonials: { ...aboutDraft.testimonials, eyebrow: event.target.value } })} />
                     </Field>
-                    <AboutWorkflowStagesEditor
-                      items={aboutDraft.workflow.stages}
-                      onChange={(stages) => setAboutDraft({ ...aboutDraft, workflow: { ...aboutDraft.workflow, stages } })}
-                    />
-                  </CardContent>
-                </Card>
-
-                <Card>
-                  <CardHeader>
-                    <CardTitle className="text-body-lg">Proof section</CardTitle>
-                  </CardHeader>
-                  <CardContent className="space-y-4 pb-6">
-                    <div className="grid gap-4 lg:grid-cols-2">
-                      <Field label="Eyebrow">
-                        <input className={formControlClassName} value={aboutDraft.proof.eyebrow} onChange={(event) => setAboutDraft({ ...aboutDraft, proof: { ...aboutDraft.proof, eyebrow: event.target.value } })} />
-                      </Field>
-                      <Field label="Title">
-                        <input className={formControlClassName} value={aboutDraft.proof.title} onChange={(event) => setAboutDraft({ ...aboutDraft, proof: { ...aboutDraft.proof, title: event.target.value } })} />
-                      </Field>
-                    </div>
-                    <Field label="Description">
-                      <textarea className={textareaClassName} value={aboutDraft.proof.description} onChange={(event) => setAboutDraft({ ...aboutDraft, proof: { ...aboutDraft.proof, description: event.target.value } })} />
-                    </Field>
-                    <AboutProofEntriesEditor
-                      items={aboutDraft.proof.entries}
-                      onChange={(entries) => setAboutDraft({ ...aboutDraft, proof: { ...aboutDraft.proof, entries } })}
-                    />
-                  </CardContent>
-                </Card>
-
-                <Card>
-                  <CardHeader>
-                    <CardTitle className="text-body-lg">Values and team</CardTitle>
-                  </CardHeader>
-                  <CardContent className="space-y-4 pb-6">
-                    <div className="grid gap-4 lg:grid-cols-2">
-                      <Field label="Values eyebrow">
-                        <input className={formControlClassName} value={aboutDraft.values.eyebrow} onChange={(event) => setAboutDraft({ ...aboutDraft, values: { ...aboutDraft.values, eyebrow: event.target.value } })} />
-                      </Field>
-                      <Field label="Values title">
-                        <input className={formControlClassName} value={aboutDraft.values.title} onChange={(event) => setAboutDraft({ ...aboutDraft, values: { ...aboutDraft.values, title: event.target.value } })} />
-                      </Field>
-                    </div>
-                    <Field label="Values description">
-                      <textarea className={textareaClassName} value={aboutDraft.values.description} onChange={(event) => setAboutDraft({ ...aboutDraft, values: { ...aboutDraft.values, description: event.target.value } })} />
-                    </Field>
-                    <AboutTitleDescriptionListEditor
-                      label="Value"
-                      items={aboutDraft.values.values}
-                      addLabel="Add value"
-                      onChange={(values) => setAboutDraft({ ...aboutDraft, values: { ...aboutDraft.values, values: values as StudioAboutPageContent["values"]["values"] } })}
-                    />
-                    <StringListEditor
-                      label="Principles strip"
-                      items={aboutDraft.values.principles}
-                      addLabel="Add principle"
-                      onChange={(principles) => setAboutDraft({ ...aboutDraft, values: { ...aboutDraft.values, principles } })}
-                    />
-                    <div className="grid gap-4 lg:grid-cols-2">
-                      <Field label="Team eyebrow">
-                        <input className={formControlClassName} value={aboutDraft.teamTeaser.eyebrow} onChange={(event) => setAboutDraft({ ...aboutDraft, teamTeaser: { ...aboutDraft.teamTeaser, eyebrow: event.target.value } })} />
-                      </Field>
-                      <Field label="Team title">
-                        <input className={formControlClassName} value={aboutDraft.teamTeaser.title} onChange={(event) => setAboutDraft({ ...aboutDraft, teamTeaser: { ...aboutDraft.teamTeaser, title: event.target.value } })} />
-                      </Field>
-                    </div>
-                    <Field label="Team description">
-                      <textarea className={textareaClassName} value={aboutDraft.teamTeaser.description} onChange={(event) => setAboutDraft({ ...aboutDraft, teamTeaser: { ...aboutDraft.teamTeaser, description: event.target.value } })} />
-                    </Field>
-                    <StringListEditor
-                      label="Team points"
-                      items={aboutDraft.teamTeaser.points}
-                      addLabel="Add point"
-                      onChange={(points) => setAboutDraft({ ...aboutDraft, teamTeaser: { ...aboutDraft.teamTeaser, points } })}
-                    />
+                    {aboutDraft.testimonials.items.map((item, index) => (
+                      <Card key={`about-testimonial-${index}`}>
+                        <CardHeader className="flex flex-row items-center justify-between gap-3">
+                          <CardTitle className="text-body-lg">Testimonial {index + 1}</CardTitle>
+                          <Button type="button" variant="secondary" size="sm" onClick={() => setAboutDraft({ ...aboutDraft, testimonials: { ...aboutDraft.testimonials, items: removeAt(aboutDraft.testimonials.items, index) } })}>
+                            Remove
+                          </Button>
+                        </CardHeader>
+                        <CardContent className="space-y-4 pb-6">
+                          <Field label="Quote">
+                            <textarea className={textareaClassName} value={item.quote} onChange={(event) => setAboutDraft({ ...aboutDraft, testimonials: { ...aboutDraft.testimonials, items: replaceAt(aboutDraft.testimonials.items, index, { ...item, quote: event.target.value }) } })} />
+                          </Field>
+                          <div className="grid gap-4 lg:grid-cols-2">
+                            <Field label="Name">
+                              <input className={formControlClassName} value={item.name} onChange={(event) => setAboutDraft({ ...aboutDraft, testimonials: { ...aboutDraft.testimonials, items: replaceAt(aboutDraft.testimonials.items, index, { ...item, name: event.target.value }) } })} />
+                            </Field>
+                            <Field label="Role">
+                              <input className={formControlClassName} value={item.role} onChange={(event) => setAboutDraft({ ...aboutDraft, testimonials: { ...aboutDraft.testimonials, items: replaceAt(aboutDraft.testimonials.items, index, { ...item, role: event.target.value }) } })} />
+                            </Field>
+                          </div>
+                        </CardContent>
+                      </Card>
+                    ))}
+                    <Button type="button" variant="secondary" size="sm" onClick={() => setAboutDraft({ ...aboutDraft, testimonials: { ...aboutDraft.testimonials, items: [...aboutDraft.testimonials.items, { quote: "", name: "", role: "" }] } })}>
+                      Add testimonial
+                    </Button>
                   </CardContent>
                 </Card>
 
@@ -3613,6 +3448,318 @@ export function StudioAdminEditor({
 
             <StickySaveBar label="Save careers content" previewHref="/careers" />
           </form>
+        </TabsContent>
+
+        {/* ── Work ─────────────────────────────────────────────────────────── */}
+        <TabsContent value="work">
+          <form action={saveWorkContentAction} className="space-y-6">
+            <input type="hidden" name="payload" value={JSON.stringify(workDraft)} readOnly />
+
+            {/* Hero */}
+            <Card>
+              <CardHeader><CardTitle>Hero</CardTitle></CardHeader>
+              <CardContent className="space-y-4 pb-6">
+                <div className="grid gap-4 lg:grid-cols-3">
+                  <Field label="Heading prefix">
+                    <input
+                      className={formControlClassName}
+                      value={workDraft.hero.headingPrefix}
+                      onChange={(e) => setWorkDraft({ ...workDraft, hero: { ...workDraft.hero, headingPrefix: e.target.value } })}
+                    />
+                  </Field>
+                  <Field label="Heading highlight">
+                    <input
+                      className={formControlClassName}
+                      value={workDraft.hero.headingHighlight}
+                      onChange={(e) => setWorkDraft({ ...workDraft, hero: { ...workDraft.hero, headingHighlight: e.target.value } })}
+                    />
+                  </Field>
+                  <Field label="Heading suffix">
+                    <input
+                      className={formControlClassName}
+                      value={workDraft.hero.headingSuffix}
+                      onChange={(e) => setWorkDraft({ ...workDraft, hero: { ...workDraft.hero, headingSuffix: e.target.value } })}
+                    />
+                  </Field>
+                </div>
+                <Field label="Subheading">
+                  <textarea
+                    className={textareaClassName}
+                    value={workDraft.hero.subheading}
+                    onChange={(e) => setWorkDraft({ ...workDraft, hero: { ...workDraft.hero, subheading: e.target.value } })}
+                  />
+                </Field>
+              </CardContent>
+            </Card>
+
+            {/* CTA */}
+            <Card>
+              <CardHeader><CardTitle>CTA</CardTitle></CardHeader>
+              <CardContent className="space-y-4 pb-6">
+                <div className="grid gap-4 lg:grid-cols-2">
+                  <Field label="Eyebrow">
+                    <input className={formControlClassName} value={workDraft.cta.eyebrow} onChange={(e) => setWorkDraft({ ...workDraft, cta: { ...workDraft.cta, eyebrow: e.target.value } })} />
+                  </Field>
+                  <Field label="Heading prefix">
+                    <input className={formControlClassName} value={workDraft.cta.headingPrefix} onChange={(e) => setWorkDraft({ ...workDraft, cta: { ...workDraft.cta, headingPrefix: e.target.value } })} />
+                  </Field>
+                  <Field label="Heading highlight">
+                    <input className={formControlClassName} value={workDraft.cta.headingHighlight} onChange={(e) => setWorkDraft({ ...workDraft, cta: { ...workDraft.cta, headingHighlight: e.target.value } })} />
+                  </Field>
+                  <Field label="Heading suffix">
+                    <input className={formControlClassName} value={workDraft.cta.headingSuffix} onChange={(e) => setWorkDraft({ ...workDraft, cta: { ...workDraft.cta, headingSuffix: e.target.value } })} />
+                  </Field>
+                  <Field label="Primary button label">
+                    <input className={formControlClassName} value={workDraft.cta.primaryCtaLabel} onChange={(e) => setWorkDraft({ ...workDraft, cta: { ...workDraft.cta, primaryCtaLabel: e.target.value } })} />
+                  </Field>
+                  <Field label="Primary button link">
+                    <input className={formControlClassName} value={workDraft.cta.primaryCtaHref} onChange={(e) => setWorkDraft({ ...workDraft, cta: { ...workDraft.cta, primaryCtaHref: e.target.value } })} />
+                  </Field>
+                  <Field label="Contact email">
+                    <input className={formControlClassName} value={workDraft.cta.contactEmail} onChange={(e) => setWorkDraft({ ...workDraft, cta: { ...workDraft.cta, contactEmail: e.target.value } })} />
+                  </Field>
+                </div>
+              </CardContent>
+            </Card>
+
+            {/* Case study list — order, category, cover */}
+            <Card>
+              <CardHeader className="flex flex-row items-center justify-between gap-3">
+                <CardTitle>Case studies (order · category · cover)</CardTitle>
+                <Button
+                  type="button"
+                  variant="secondary"
+                  size="sm"
+                  onClick={() => setWorkDraft({ ...workDraft, items: [...workDraft.items, { id: "", category: "AI & Product" }] })}
+                >
+                  Add case study
+                </Button>
+              </CardHeader>
+              <CardContent className="space-y-4 pb-6">
+                {workDraft.items.map((item, index) => (
+                  <Card key={`work-item-${index}`}>
+                    <CardContent className="space-y-3 pb-5 pt-6">
+                      <div className="grid gap-3 lg:grid-cols-2">
+                        <Field label="Case study ID">
+                          <input
+                            className={formControlClassName}
+                            value={item.id}
+                            onChange={(e) => setWorkDraft({ ...workDraft, items: replaceAt(workDraft.items, index, { ...item, id: e.target.value }) })}
+                          />
+                        </Field>
+                        <Field label="Category (filter label)">
+                          <input
+                            className={formControlClassName}
+                            value={item.category}
+                            onChange={(e) => setWorkDraft({ ...workDraft, items: replaceAt(workDraft.items, index, { ...item, category: e.target.value }) })}
+                          />
+                        </Field>
+                      </div>
+                      <Field label="Cover image path (optional)">
+                        <input
+                          className={formControlClassName}
+                          value={item.coverSrc ?? ""}
+                          placeholder="/assets/…"
+                          onChange={(e) => setWorkDraft({ ...workDraft, items: replaceAt(workDraft.items, index, { ...item, coverSrc: e.target.value ? e.target.value : undefined }) })}
+                        />
+                      </Field>
+                      <Button
+                        type="button"
+                        variant="secondary"
+                        size="sm"
+                        onClick={() => setWorkDraft({ ...workDraft, items: removeAt(workDraft.items, index) })}
+                      >
+                        Remove
+                      </Button>
+                    </CardContent>
+                  </Card>
+                ))}
+              </CardContent>
+            </Card>
+
+            <StickySaveBar label="Save work content" previewHref="/work" />
+          </form>
+        </TabsContent>
+
+        {/* ── Services overview page ───────────────────────────────────────── */}
+        <TabsContent value="services-page">
+          <form action={saveServicesPageContentAction} className="space-y-6">
+            <input type="hidden" name="payload" value={JSON.stringify(servicesPageDraft)} readOnly />
+
+            {/* Hero */}
+            <Card>
+              <CardHeader><CardTitle>Hero</CardTitle></CardHeader>
+              <CardContent className="space-y-4 pb-6">
+                <Field label="Title (wrap words in *asterisks* to highlight them)">
+                  <input className={formControlClassName} value={servicesPageDraft.hero.title} onChange={(e) => setServicesPageDraft({ ...servicesPageDraft, hero: { ...servicesPageDraft.hero, title: e.target.value } })} />
+                </Field>
+                <Field label="Description">
+                  <textarea className={textareaClassName} value={servicesPageDraft.hero.description} onChange={(e) => setServicesPageDraft({ ...servicesPageDraft, hero: { ...servicesPageDraft.hero, description: e.target.value } })} />
+                </Field>
+                <div className="grid gap-4 lg:grid-cols-2">
+                  <Field label="CTA label (leave blank to hide)">
+                    <input className={formControlClassName} value={servicesPageDraft.hero.ctaLabel} onChange={(e) => setServicesPageDraft({ ...servicesPageDraft, hero: { ...servicesPageDraft.hero, ctaLabel: e.target.value } })} />
+                  </Field>
+                  <Field label="CTA link">
+                    <input className={formControlClassName} value={servicesPageDraft.hero.ctaHref} placeholder="/work" onChange={(e) => setServicesPageDraft({ ...servicesPageDraft, hero: { ...servicesPageDraft.hero, ctaHref: e.target.value } })} />
+                  </Field>
+                </div>
+              </CardContent>
+            </Card>
+
+            {/* Services overview list */}
+            <Card>
+              <CardHeader className="flex flex-row items-center justify-between gap-3">
+                <CardTitle>Services (What we do)</CardTitle>
+                <Button
+                  type="button"
+                  variant="secondary"
+                  size="sm"
+                  onClick={() => setServicesPageDraft({ ...servicesPageDraft, overview: { ...servicesPageDraft.overview, items: [...servicesPageDraft.overview.items, { slug: "", title: "", shortLabel: "", description: "", capabilities: [], image: "", imageAlt: "", href: "" }] } })}
+                >
+                  Add service
+                </Button>
+              </CardHeader>
+              <CardContent className="space-y-4 pb-6">
+                <div className="grid gap-4 lg:grid-cols-2">
+                  <Field label="Kicker">
+                    <input className={formControlClassName} value={servicesPageDraft.overview.kicker} onChange={(e) => setServicesPageDraft({ ...servicesPageDraft, overview: { ...servicesPageDraft.overview, kicker: e.target.value } })} />
+                  </Field>
+                  <Field label="Heading">
+                    <input className={formControlClassName} value={servicesPageDraft.overview.heading} onChange={(e) => setServicesPageDraft({ ...servicesPageDraft, overview: { ...servicesPageDraft.overview, heading: e.target.value } })} />
+                  </Field>
+                </div>
+
+                {servicesPageDraft.overview.items.map((item, index) => {
+                  const updateItem = (next: ServicesPageContent["overview"]["items"][number]) =>
+                    setServicesPageDraft({ ...servicesPageDraft, overview: { ...servicesPageDraft.overview, items: replaceAt(servicesPageDraft.overview.items, index, next) } });
+                  return (
+                    <Card key={`service-item-${index}`}>
+                      <CardHeader className="flex flex-row items-center justify-between gap-3">
+                        <CardTitle className="text-body-lg">Service {index + 1}</CardTitle>
+                        <Button type="button" variant="secondary" size="sm" onClick={() => setServicesPageDraft({ ...servicesPageDraft, overview: { ...servicesPageDraft.overview, items: removeAt(servicesPageDraft.overview.items, index) } })}>
+                          Remove
+                        </Button>
+                      </CardHeader>
+                      <CardContent className="space-y-4 pb-6">
+                        <div className="grid gap-4 lg:grid-cols-2">
+                          <Field label="Title">
+                            <input className={formControlClassName} value={item.title} onChange={(e) => updateItem({ ...item, title: e.target.value })} />
+                          </Field>
+                          <Field label="Short label">
+                            <input className={formControlClassName} value={item.shortLabel} onChange={(e) => updateItem({ ...item, shortLabel: e.target.value })} />
+                          </Field>
+                        </div>
+                        <Field label="Description">
+                          <textarea className={textareaClassName} value={item.description} onChange={(e) => updateItem({ ...item, description: e.target.value })} />
+                        </Field>
+                        <StringListEditor
+                          label="Capabilities"
+                          items={item.capabilities}
+                          addLabel="Add capability"
+                          onChange={(capabilities) => updateItem({ ...item, capabilities })}
+                        />
+                        <div className="grid gap-4 lg:grid-cols-2">
+                          <Field label="Image path">
+                            <input className={formControlClassName} value={item.image} placeholder="/assets/…" onChange={(e) => updateItem({ ...item, image: e.target.value })} />
+                          </Field>
+                          <Field label="Image alt text">
+                            <input className={formControlClassName} value={item.imageAlt} onChange={(e) => updateItem({ ...item, imageAlt: e.target.value })} />
+                          </Field>
+                        </div>
+                        <Field label="Explore link (optional — leave blank to hide button)">
+                          <input className={formControlClassName} value={item.href} placeholder="/digital-marketing" onChange={(e) => updateItem({ ...item, href: e.target.value })} />
+                        </Field>
+                      </CardContent>
+                    </Card>
+                  );
+                })}
+              </CardContent>
+            </Card>
+
+            {/* How we work */}
+            <Card>
+              <CardHeader className="flex flex-row items-center justify-between gap-3">
+                <CardTitle>How we work</CardTitle>
+                <Button
+                  type="button"
+                  variant="secondary"
+                  size="sm"
+                  onClick={() => setServicesPageDraft({ ...servicesPageDraft, process: { ...servicesPageDraft.process, steps: [...servicesPageDraft.process.steps, { title: "", description: "" }] } })}
+                >
+                  Add step
+                </Button>
+              </CardHeader>
+              <CardContent className="space-y-4 pb-6">
+                <div className="grid gap-4 lg:grid-cols-2">
+                  <Field label="Kicker">
+                    <input className={formControlClassName} value={servicesPageDraft.process.kicker} onChange={(e) => setServicesPageDraft({ ...servicesPageDraft, process: { ...servicesPageDraft.process, kicker: e.target.value } })} />
+                  </Field>
+                  <Field label="Heading">
+                    <input className={formControlClassName} value={servicesPageDraft.process.heading} onChange={(e) => setServicesPageDraft({ ...servicesPageDraft, process: { ...servicesPageDraft.process, heading: e.target.value } })} />
+                  </Field>
+                </div>
+                <Field label="Description">
+                  <textarea className={textareaClassName} value={servicesPageDraft.process.description} onChange={(e) => setServicesPageDraft({ ...servicesPageDraft, process: { ...servicesPageDraft.process, description: e.target.value } })} />
+                </Field>
+                {servicesPageDraft.process.steps.map((step, index) => (
+                  <Card key={`process-step-${index}`}>
+                    <CardHeader className="flex flex-row items-center justify-between gap-3">
+                      <CardTitle className="text-body-lg">Step {index + 1}</CardTitle>
+                      <Button type="button" variant="secondary" size="sm" onClick={() => setServicesPageDraft({ ...servicesPageDraft, process: { ...servicesPageDraft.process, steps: removeAt(servicesPageDraft.process.steps, index) } })}>
+                        Remove
+                      </Button>
+                    </CardHeader>
+                    <CardContent className="space-y-4 pb-6">
+                      <Field label="Title">
+                        <input className={formControlClassName} value={step.title} onChange={(e) => setServicesPageDraft({ ...servicesPageDraft, process: { ...servicesPageDraft.process, steps: replaceAt(servicesPageDraft.process.steps, index, { ...step, title: e.target.value }) } })} />
+                      </Field>
+                      <Field label="Description">
+                        <textarea className={textareaClassName} value={step.description} onChange={(e) => setServicesPageDraft({ ...servicesPageDraft, process: { ...servicesPageDraft.process, steps: replaceAt(servicesPageDraft.process.steps, index, { ...step, description: e.target.value }) } })} />
+                      </Field>
+                    </CardContent>
+                  </Card>
+                ))}
+              </CardContent>
+            </Card>
+
+            {/* CTA */}
+            <Card>
+              <CardHeader><CardTitle>CTA</CardTitle></CardHeader>
+              <CardContent className="space-y-4 pb-6">
+                <div className="grid gap-4 lg:grid-cols-2">
+                  <Field label="Eyebrow">
+                    <input className={formControlClassName} value={servicesPageDraft.cta.eyebrow} onChange={(e) => setServicesPageDraft({ ...servicesPageDraft, cta: { ...servicesPageDraft.cta, eyebrow: e.target.value } })} />
+                  </Field>
+                  <Field label="Heading prefix">
+                    <input className={formControlClassName} value={servicesPageDraft.cta.headingPrefix} onChange={(e) => setServicesPageDraft({ ...servicesPageDraft, cta: { ...servicesPageDraft.cta, headingPrefix: e.target.value } })} />
+                  </Field>
+                  <Field label="Heading highlight">
+                    <input className={formControlClassName} value={servicesPageDraft.cta.headingHighlight} onChange={(e) => setServicesPageDraft({ ...servicesPageDraft, cta: { ...servicesPageDraft.cta, headingHighlight: e.target.value } })} />
+                  </Field>
+                  <Field label="Heading suffix">
+                    <input className={formControlClassName} value={servicesPageDraft.cta.headingSuffix} onChange={(e) => setServicesPageDraft({ ...servicesPageDraft, cta: { ...servicesPageDraft.cta, headingSuffix: e.target.value } })} />
+                  </Field>
+                  <Field label="Primary button label">
+                    <input className={formControlClassName} value={servicesPageDraft.cta.primaryCtaLabel} onChange={(e) => setServicesPageDraft({ ...servicesPageDraft, cta: { ...servicesPageDraft.cta, primaryCtaLabel: e.target.value } })} />
+                  </Field>
+                  <Field label="Contact email">
+                    <input className={formControlClassName} value={servicesPageDraft.cta.contactEmail} onChange={(e) => setServicesPageDraft({ ...servicesPageDraft, cta: { ...servicesPageDraft.cta, contactEmail: e.target.value } })} />
+                  </Field>
+                </div>
+                <Field label="Description">
+                  <textarea className={textareaClassName} value={servicesPageDraft.cta.description} onChange={(e) => setServicesPageDraft({ ...servicesPageDraft, cta: { ...servicesPageDraft.cta, description: e.target.value } })} />
+                </Field>
+              </CardContent>
+            </Card>
+
+            <StickySaveBar label="Save services content" previewHref="/services" />
+          </form>
+        </TabsContent>
+
+        {/* ── Blog ─────────────────────────────────────────────────────────── */}
+        <TabsContent value="blog">
+          <BlogAdminTab initialPosts={blogPosts} />
         </TabsContent>
       </Tabs>
     </div>

@@ -36,11 +36,11 @@ export function StudioFooter() {
           <div className="max-w-sm space-y-6">
             <Link href="/" className="inline-flex shrink-0 items-center">
               <Image
-                src="/logo.svg"
+                src="/yb-logo.png"
                 alt="Yuvabe Studios"
-                width={140}
-                height={36}
-                className="h-9 w-auto"
+                width={283}
+                height={100}
+                className="h-12 w-auto"
               />
             </Link>
             <p className="text-body-md text-slate-500">

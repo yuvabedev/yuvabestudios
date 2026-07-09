@@ -11,6 +11,8 @@ import {
   Sparkles,
 } from "lucide-react";
 
+import { SplineScene } from "@/components/ui/spline-scene";
+
 import type {
   StudioAiWorkflowsContent,
   StudioAiWorkflowsDisciplineItem,
@@ -194,41 +196,54 @@ function GuardrailCard({ item }: { item: StudioAiWorkflowsGuardrailItem }) {
 
 function AiWorkflowsHero({ content }: { content: StudioAiWorkflowsContent["hero"] }) {
   return (
-    <section className="relative overflow-hidden border-b border-slate-200/80 bg-white pb-14 pt-14 md:pb-20 md:pt-16">
+    <section className="relative overflow-hidden border-b border-slate-200/80 bg-white">
       <div aria-hidden="true" className="absolute inset-0 overflow-hidden">
-        {/* The hero now uses the same shared frame guides as the homepage hero instead of a custom local grid. */}
         <StudioTrustStripGuides />
-        <div className="absolute left-[-10rem] top-[-6rem] h-[24rem] w-[24rem] rounded-full bg-[radial-gradient(circle,rgba(88,41,199,0.12)_0%,rgba(88,41,199,0)_72%)] blur-3xl" />
-        <div className="absolute right-[-10rem] top-[-9rem] h-[24rem] w-[24rem] rounded-full bg-[radial-gradient(circle,rgba(255,202,45,0.18)_0%,rgba(255,202,45,0)_72%)] blur-3xl" />
+        <div className="absolute left-[-10rem] top-[-6rem] h-[24rem] w-[24rem] rounded-full bg-[radial-gradient(circle,rgba(88,41,199,0.08)_0%,rgba(88,41,199,0)_72%)] blur-3xl" />
+        <div className="absolute right-[-10rem] top-[-9rem] h-[24rem] w-[24rem] rounded-full bg-[radial-gradient(circle,rgba(255,202,45,0.10)_0%,rgba(255,202,45,0)_72%)] blur-3xl" />
       </div>
 
       <StudioPageContainer className="relative z-10">
-        {/* The restored copy halo keeps the hero soft and readable without bringing back the removed panel or CTA clutter. */}
-        <div className="relative max-w-4xl overflow-visible lg:pl-4 xl:pl-6">
-          <div
-            aria-hidden="true"
-            className="pointer-events-none absolute -left-16 -top-14 h-[calc(100%+10rem)] w-[calc(100%+20rem)] max-w-[54rem] overflow-visible sm:-left-20 sm:-top-16 sm:h-[calc(100%+13rem)] sm:w-[calc(100%+26rem)] sm:max-w-[64rem] lg:-left-28 lg:-top-24 lg:h-[calc(100%+18rem)] lg:w-[calc(100%+38rem)] lg:max-w-[88rem] xl:-left-32 xl:w-[calc(100%+44rem)] xl:max-w-[96rem]"
-          >
-            <div className="ds-overlay-hero-copy-halo absolute inset-0" />
-            <div className="ds-overlay-hero-copy-wash absolute inset-0" />
-          </div>
+        <div className="flex min-h-130 flex-col items-center gap-8 py-14 md:min-h-150 md:flex-row md:gap-0 md:py-0 lg:pl-4 xl:pl-6">
 
-          <div className="relative z-10 space-y-5">
-            <Badge variant="brandTagSubtle" className="w-fit">
-              {content.eyebrow}
-            </Badge>
+          {/* Left — copy */}
+          <div className="relative flex w-full flex-col justify-center gap-6 md:w-1/2 md:py-20">
+            <div
+              aria-hidden="true"
+              className="pointer-events-none absolute -left-16 -top-14 h-[calc(100%+10rem)] w-[calc(100%+20rem)] max-w-216 overflow-visible sm:-left-20 sm:-top-16 sm:h-[calc(100%+13rem)] sm:w-[calc(100%+26rem)] sm:max-w-5xl lg:-left-28 lg:-top-24 lg:h-[calc(100%+18rem)] lg:w-[calc(100%+38rem)] lg:max-w-352 xl:-left-32 xl:w-[calc(100%+44rem)] xl:max-w-384"
+            >
+              <div className="ds-overlay-hero-copy-halo absolute inset-0" />
+              <div className="ds-overlay-hero-copy-wash absolute inset-0" />
+            </div>
 
-            <div className="space-y-5">
-              <h1 className="max-w-5xl text-hero-display text-[var(--neutral-950)]">
-                {content.titleLineOne}
-                <br />
-                {content.titleLineTwo}
-              </h1>
-              <p className="max-w-4xl text-hero-support text-[var(--color-text-secondary)]">
-                {content.description}
-              </p>
+            <div className="relative z-10 space-y-5">
+              <Badge variant="brandTagSubtle" className="w-fit">
+                {content.eyebrow}
+              </Badge>
+
+              <div className="space-y-5">
+                <h1 className="text-hero-display text-(--neutral-950)">
+                  {content.titleLineOne}
+                  <br />
+                  {content.titleLineTwo}
+                </h1>
+                <p className="max-w-lg text-hero-support text-(--color-text-secondary)">
+                  {content.description}
+                </p>
+              </div>
             </div>
           </div>
+
+          {/* Right — interactive 3D scene */}
+          <div className="relative w-full md:w-1/2 md:self-stretch">
+            <div className="h-72 w-full md:absolute md:inset-0 md:h-full">
+              <SplineScene
+                scene="https://prod.spline.design/kZDDjO5HuC9GJUM2/scene.splinecode"
+                className="h-full w-full"
+              />
+            </div>
+          </div>
+
         </div>
       </StudioPageContainer>
     </section>

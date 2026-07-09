@@ -6,17 +6,14 @@ import {
   LineChart,
   Megaphone,
   PenTool,
-  Quote,
   type LucideIcon,
 } from "lucide-react";
 import Link from "next/link";
-import { ServiceCaseStudyGrid } from "@/components/shared/service-case-study-grid";
+import { ServiceWorkGrid } from "@/components/shared/service-work-grid";
 import { PageHero } from "@/components/digital-marketing/page-hero";
 import { StudioHeader } from "@/components/studio/studio-header";
-import {
-  StudioPageContainer,
-  StudioPageRails,
-} from "@/components/studio/studio-page-shell";
+import { StudioPageContainer } from "@/components/studio/studio-page-shell";
+import { GlowCard } from "@/components/ui/spotlight-card";
 
 type DigitalMarketingPageProps = {
   navigationItems: StudioHomepageNavItem[];
@@ -62,66 +59,38 @@ export function DigitalMarketingPage({
       data-studio-shell
       className="relative min-h-screen overflow-x-clip overflow-y-visible bg-(--neutral-50) text-foreground"
     >
-      <div aria-hidden="true" className="pointer-events-none absolute inset-0 z-0">
-        <StudioPageRails />
-        <div className="absolute inset-x-0 top-0 h-104 bg-[radial-gradient(circle_at_14%_0%,rgba(88,41,199,0.06),transparent_34%),radial-gradient(circle_at_88%_0%,rgba(255,202,45,0.07),transparent_30%)]" />
-      </div>
-
       <StudioHeader navigationItems={navigationItems} />
 
       <article className="relative">
         <PageHero content={content.hero} />
 
-        {/* 02 — Best fit + client logos */}
-        {content.bestFit && (
-          <section className="relative border-b border-(--color-border-default) bg-white py-12 md:py-16">
-            <StudioPageContainer>
-              <div className="max-w-4xl space-y-3 lg:pl-4 xl:pl-6">
-                <Kicker>{content.bestFit.label}</Kicker>
-                <p className="text-body-lg text-(--color-text-secondary)">
-                  {content.bestFit.description}
-                </p>
-              </div>
-            </StudioPageContainer>
-
-            <div className="mt-8">
-              <StudioPageContainer className="relative md:px-0">
-                <div className="relative overflow-hidden">
-                  <div aria-hidden="true" className="pointer-events-none absolute inset-y-0 left-0 z-20 w-px bg-(--color-border-default)" />
-                  <div aria-hidden="true" className="pointer-events-none absolute inset-y-0 right-0 z-20 w-px bg-(--color-border-default)" />
-                  <div aria-hidden="true" className="pointer-events-none absolute inset-y-0 left-0 z-10 w-20 bg-[linear-gradient(to_right,rgba(255,255,255,0.9),rgba(255,255,255,0))] md:w-28" />
-                  <div aria-hidden="true" className="pointer-events-none absolute inset-y-0 right-0 z-10 w-20 bg-[linear-gradient(to_left,rgba(255,255,255,0.9),rgba(255,255,255,0))] md:w-28" />
-
-                  <div className="marquee-viewport">
-                    <div className="marquee-track py-6">
-                      <div className="marquee-group">
-                        {dmClientLogos.map((logo) => (
-                          <span key={logo.name} className="inline-flex flex-none items-center justify-center">
-                            {/* eslint-disable-next-line @next/next/no-img-element */}
-                            <img src={logo.src} alt={logo.name} className={`${logo.imageClass} ${logoClass}`} loading="lazy" decoding="async" />
-                          </span>
-                        ))}
-                      </div>
-                      <div aria-hidden className="marquee-group">
-                        {dmClientLogos.map((logo) => (
-                          <span key={logo.name} className="inline-flex flex-none items-center justify-center">
-                            {/* eslint-disable-next-line @next/next/no-img-element */}
-                            <img src={logo.src} alt={logo.name} className={`${logo.imageClass} ${logoClass}`} loading="lazy" decoding="async" />
-                          </span>
-                        ))}
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </StudioPageContainer>
+        {/* 02 — Client logos (static grid) */}
+        <section className="relative border-b border-(--color-border-default) bg-white py-14 md:py-20">
+          <div className="mx-auto w-full max-w-[1720px] px-6 md:px-12 lg:px-16">
+            <div className="grid grid-cols-2 items-center justify-items-center gap-x-8 gap-y-14 sm:grid-cols-3 md:gap-y-20 lg:grid-cols-5">
+              {dmClientLogos.map((logo) => (
+                <span
+                  key={logo.name}
+                  className="inline-flex items-center justify-center"
+                >
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src={logo.src}
+                    alt={logo.name}
+                    className={`${logo.imageClass} ${logoClass}`}
+                    loading="lazy"
+                    decoding="async"
+                  />
+                </span>
+              ))}
             </div>
-          </section>
-        )}
+          </div>
+        </section>
 
-        {/* 03 — Case studies */}
-        <section id="case-studies" className="relative overflow-hidden border-b border-(--color-border-default) bg-(--neutral-50) py-14 md:py-20">
-          <StudioPageContainer className="space-y-10">
-            <div className="max-w-4xl space-y-4 lg:pl-4 xl:pl-6">
+        {/* 03 — Case studies (work-page editorial layout) */}
+        <section id="case-studies" className="relative overflow-hidden border-b border-(--color-border-default) bg-white py-14 md:py-20">
+          <div className="mx-auto w-full max-w-[1720px] space-y-12 px-6 md:space-y-16 md:px-12 lg:px-16">
+            <div className="max-w-4xl space-y-4">
               <Kicker>Case studies</Kicker>
               <h2 className="max-w-5xl text-display-muted-editorial text-(--neutral-950)">
                 {content.caseStudiesTitle}
@@ -130,10 +99,18 @@ export function DigitalMarketingPage({
                 {content.caseStudiesDescription}
               </p>
             </div>
-            <div className="lg:pl-4 xl:pl-6">
-              <ServiceCaseStudyGrid items={content.caseStudies} />
-            </div>
-          </StudioPageContainer>
+            <ServiceWorkGrid
+              items={content.caseStudies.map((caseStudy) => ({
+                key: caseStudy.slug,
+                title: caseStudy.title,
+                summary: caseStudy.description,
+                href: `/case-studies/${caseStudy.slug}`,
+                imageSrc: caseStudy.thumbnailSrc ?? null,
+                category: caseStudy.category,
+                tags: caseStudy.services,
+              }))}
+            />
+          </div>
         </section>
 
         {/* 04 — How we approach it */}
@@ -149,23 +126,27 @@ export function DigitalMarketingPage({
 
               <div className="grid gap-6 md:grid-cols-3 lg:pl-4 xl:pl-6">
                 {content.approach.principles.map((principle, index) => (
-                  <div
+                  <GlowCard
                     key={principle.title}
-                    className="relative overflow-hidden rounded-2xl border border-(--color-border-default) bg-white p-7 transition-all duration-300 hover:-translate-y-1 hover:border-brand/30 hover:shadow-[0_20px_40px_rgba(17,17,17,0.08)]"
+                    customSize
+                    glowColor="purple"
+                    className="h-full bg-white! p-7!"
                   >
-                    <div className="mb-5 flex items-center gap-3">
-                      <span className="inline-flex size-8 shrink-0 items-center justify-center rounded-full bg-brand/10 font-mono text-[11px] font-semibold text-brand">
-                        {String(index + 1).padStart(2, "0")}
-                      </span>
-                      <div className="h-px flex-1 bg-(--neutral-200)" />
+                    <div className="flex h-full flex-col">
+                      <div className="mb-5 flex items-center gap-3">
+                        <span className="inline-flex size-8 shrink-0 items-center justify-center rounded-full bg-brand/10 font-mono text-[11px] font-semibold text-brand">
+                          {String(index + 1).padStart(2, "0")}
+                        </span>
+                        <div className="h-px flex-1 bg-(--neutral-200)" />
+                      </div>
+                      <h3 className="mb-3 text-heading-md font-semibold tracking-wide text-(--neutral-950)">
+                        {principle.title}
+                      </h3>
+                      <p className="text-body-md leading-relaxed text-(--color-text-secondary)">
+                        {principle.description}
+                      </p>
                     </div>
-                    <h3 className="mb-3 text-heading-md font-semibold tracking-wide text-(--neutral-950)">
-                      {principle.title}
-                    </h3>
-                    <p className="text-body-md leading-relaxed text-(--color-text-secondary)">
-                      {principle.description}
-                    </p>
-                  </div>
+                  </GlowCard>
                 ))}
               </div>
             </StudioPageContainer>
@@ -173,7 +154,7 @@ export function DigitalMarketingPage({
         )}
 
         {/* 05 — Services list */}
-        <section className="relative overflow-hidden border-b border-(--color-border-default) bg-(--neutral-50) py-14 md:py-20">
+        <section className="relative overflow-hidden border-b border-(--color-border-default) bg-white py-14 md:py-20">
           <StudioPageContainer className="space-y-8">
             <div className="lg:pl-4 xl:pl-6">
               <Kicker>Our services</Kicker>
@@ -185,11 +166,13 @@ export function DigitalMarketingPage({
               {content.services.map((service) => {
                 const Icon = serviceIconMap[service.iconKey];
                 return (
-                  <div
+                  <GlowCard
                     key={service.title}
-                    className="relative overflow-hidden rounded-2xl border border-(--color-border-default) bg-white p-6 transition-all duration-300 hover:-translate-y-1 hover:border-brand/30 hover:shadow-[0_20px_40px_rgba(17,17,17,0.08)]"
+                    customSize
+                    glowColor="purple"
+                    className="h-full bg-white! p-6!"
                   >
-                    <div className="flex items-start gap-4">
+                    <div className="flex h-full items-start gap-4">
                       <div className="flex size-11 shrink-0 items-center justify-center rounded-xl bg-brand/10 text-brand">
                         <Icon className="size-5" />
                       </div>
@@ -202,59 +185,15 @@ export function DigitalMarketingPage({
                         </p>
                       </div>
                     </div>
-                  </div>
+                  </GlowCard>
                 );
               })}
             </div>
           </StudioPageContainer>
         </section>
 
-        {/* 06 — Testimonial */}
-        {content.pageTestimonial && (
-          <section className="relative overflow-hidden border-b border-(--color-border-default) bg-white py-14 md:py-20">
-            <StudioPageContainer>
-              <div className="relative mx-auto max-w-3xl overflow-hidden rounded-3xl border border-(--color-border-default) bg-(--neutral-50) p-8 text-center md:p-10">
-                <div
-                  aria-hidden="true"
-                  className="pointer-events-none absolute inset-0 rounded-3xl bg-[radial-gradient(circle_at_0%_0%,rgba(88,41,199,0.04),transparent_60%),radial-gradient(circle_at_100%_100%,rgba(255,202,45,0.05),transparent_60%)]"
-                />
-                <div className="relative space-y-6">
-                  <div className="flex items-center justify-center gap-3">
-                    <span className="font-mono text-[11px] font-medium uppercase tracking-[0.04em] text-brand">
-                      {content.pageTestimonial.label}
-                    </span>
-                    <Quote className="size-5 text-brand opacity-30" strokeWidth={1.5} />
-                  </div>
-                  <blockquote className="text-body-lg leading-[1.7] text-(--neutral-800) md:text-body-xl">
-                    &ldquo;{content.pageTestimonial.quote}&rdquo;
-                  </blockquote>
-                  <div className="mx-auto h-px w-16 bg-linear-to-r from-transparent via-[rgba(88,41,199,0.3)] to-transparent" />
-                  <div className="flex flex-col items-center gap-3">
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img
-                      src="/logos/nsf.svg"
-                      alt="NorthSouth Foundation"
-                      className="h-12 w-auto shrink-0 object-contain"
-                      loading="lazy"
-                      decoding="async"
-                    />
-                    <div>
-                      <p className="text-body-sm font-semibold text-foreground">
-                        {content.pageTestimonial.name}
-                      </p>
-                      <p className="text-body-sm text-(--color-text-secondary)">
-                        {content.pageTestimonial.attribution}
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </StudioPageContainer>
-          </section>
-        )}
-
         {/* 07 — CTA */}
-        <section className="px-6 py-16 md:px-10 md:py-20">
+        <section className="px-6 py-16 md:px-10 md:py-20 bg-white">
           <StudioPageContainer>
             <div className="careers-cta-surface relative overflow-hidden rounded-4xl px-6 py-14 text-center sm:px-10 sm:py-20 md:px-16 md:py-28">
               <div

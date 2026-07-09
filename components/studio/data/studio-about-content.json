@@ -73,9 +73,76 @@
     "eyebrow": "Selected work",
     "description": "We've worked on AI products, wellness platforms, ecommerce image systems, market-intelligence tools, ESG platforms, and deep-tech websites. Different domains, same job: help teams move from idea to traction with clear thinking and strong execution."
   },
+  "stats": {
+    "items": [
+      {
+        "value": "2020",
+        "label": "Founded in Auroville"
+      },
+      {
+        "value": "40+",
+        "label": "Yuvabeans on the team"
+      },
+      {
+        "value": "4",
+        "label": "Disciplines, one connected loop"
+      }
+    ],
+    "feature": {
+      "value": "Auroville",
+      "label": "Where we're based"
+    }
+  },
+  "nameMeaning": {
+    "eyebrow": "What does Yuvabe mean?",
+    "title": "A name inspired by the spirit of becoming.",
+    "paragraphs": [
+      "‘Yuva’ meaning youth in Sanskrit — reflects the curiosity and possibility of youth.",
+      "‘Be’ represents the act of becoming — the courage to learn, evolve and create a better future."
+    ]
+  },
+  "philosophy": {
+    "eyebrow": "Our Philosophy",
+    "title": "Work. Serve. Evolve.",
+    "intro": "The principles that shape who we are and how we show up.",
+    "principles": [
+      {
+        "title": "Work",
+        "description": "We bring curiosity, craftsmanship and dedication to everything we create."
+      },
+      {
+        "title": "Serve",
+        "description": "We build with empathy, putting people, purpose and meaningful outcomes at the centre."
+      },
+      {
+        "title": "Evolve",
+        "description": "We continuously learn, adapt and embrace new possibilities to create what comes next."
+      }
+    ]
+  },
+  "testimonials": {
+    "eyebrow": "What partners say",
+    "items": [
+      {
+        "quote": "Yuvabe felt like part of our team. They helped us decide what to build, not just build it — and that changed how fast we found traction.",
+        "name": "Founder",
+        "role": "Early-stage SaaS"
+      },
+      {
+        "quote": "One team carried us from strategy to a shipped product. Fewer handoffs, sharper decisions, and people who stayed close as things changed.",
+        "name": "Co-founder",
+        "role": "Climate-tech startup"
+      },
+      {
+        "quote": "They brought real product judgment, not just execution. The AI work was genuinely useful, and the thinking behind it was even better.",
+        "name": "Product lead",
+        "role": "Fintech platform"
+      }
+    ]
+  },
   "story": {
-    "title": "Rooted in care. Built for clear outcomes.",
-    "eyebrow": "Our story",
+    "title": "Better thinking. Better outcomes",
+    "eyebrow": "What drives us",
     "paragraphs": [
       "We started in 2020 in Auroville with a human-centered way of working and a bias toward thoughtful decisions. That foundation still shapes how we work today: with care, curiosity, and long-term responsibility.",
       "The roots stayed the same. What changed was the problem. As building got easier, deciding what was actually worth building became harder.",
@@ -84,15 +151,15 @@
     "operatingPrinciples": [
       {
         "title": "Decide faster",
-        "description": "Get to the real priority before the roadmap fills up."
+        "description": "Get to the real priority before the roadmap fills up. Focus on what delivers the greatest impact instead of chasing every new request. Make confident decisions backed by clear goals and data, so your team spends less time debating and more time building what truly matters. Eliminate unnecessary delays, align stakeholders quickly, and keep your product moving forward with purpose. Every decision becomes clearer when priorities are visible and actionable."
       },
       {
         "title": "Build smarter",
-        "description": "Use AI and strong product judgment to ship without drifting."
+        "description": "Use AI and strong product judgment to ship without drifting. Turn ideas into well-executed features with confidence, balancing speed, quality, and user needs. Leverage intelligent insights to reduce repetitive work, uncover opportunities, and make informed decisions throughout the product lifecycle. Build with clarity, iterate faster, and deliver products that create lasting value."
       },
       {
-        "title": "Learn sooner",
-        "description": "Stay close to the signal so the next move gets clearer."
+        "title": "Learn Sooner",
+        "description": "Validate ideas early by putting real solutions in front of users instead of relying on assumptions. Every release becomes a source of insight, helping your team learn faster and refine the next decision. Continuous feedback keeps momentum high, reduces wasted effort, and leads to products that truly solve customer needs."
       }
     ]
   },

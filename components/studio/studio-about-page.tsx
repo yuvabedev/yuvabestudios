@@ -1,980 +1,279 @@
 import Image from "next/image";
-import Link from "next/link";
-import {
-  ArrowRight,
-  Compass,
-  Lightbulb,
-  Rocket,
-  ShieldCheck,
-  Sparkles,
-  Target,
-} from "lucide-react";
 
 import type { StudioHomepageNavItem } from "@/components/studio/studio-homepage-content";
 import {
+  type StudioAboutNameMeaningContent,
   type StudioAboutPageContent,
-  type StudioAboutProofContent,
+  type StudioAboutPhilosophyContent,
+  type StudioAboutStatsContent,
   type StudioAboutStoryContent,
-  type StudioAboutValuesContent,
-  type StudioAboutWorkflowContent,
 } from "@/components/studio/studio-about-content";
 import {
-  resolveStudioCaseStudyHrefFromLabel,
-  resolveStudioCaseStudyProofTone,
-  type StudioCaseStudyProofTone,
-} from "@/components/studio/studio-case-study-content";
+  AboutHeroScroll,
+  AboutHoverGallery,
+  AboutPillarImage,
+  AboutTestimonials,
+} from "@/components/studio/about-interactive";
 import { StudioCtaCard } from "@/components/studio/studio-cta-card";
 import { StudioHeader } from "@/components/studio/studio-header";
-import {
-  StudioPageContainer,
-  StudioPageRails,
-} from "@/components/studio/studio-page-shell";
-import { StartProjectButton } from "@/components/studio/start-project-button";
-import { Button } from "@/components/ui/button";
-import { PremiumSurface } from "@/components/ui/premium-surface";
-import { isStartProjectHref } from "@/lib/start-project";
+import { StudioPageRails } from "@/components/studio/studio-page-shell";
 
 type StudioAboutPageProps = {
   navigationItems: StudioHomepageNavItem[];
   content: StudioAboutPageContent;
 };
 
-type SectionIntroProps = {
-  eyebrow: string;
-  title: string;
-  description: string;
-  className?: string;
-};
-
-const storyIcons = [Target, Sparkles, Rocket] as const;
-const workflowIcons = [Compass, Lightbulb, Rocket, ShieldCheck] as const;
-const valueIconAssets = {
-  Care: {
-    src: "/assets/how-we-work/care.png",
-    alt: "Care icon",
-    treatment: "panel",
-  },
-  Courage: {
-    src: "/assets/how-we-work/courage.png",
-    alt: "Courage icon",
-    treatment: "panel",
-  },
-  Creativity: {
-    src: "/assets/how-we-work/creativity.png",
-    alt: "Creativity icon",
-    treatment: "panel",
-  },
-} as const;
-const principleHashtagClasses = [
-  "text-[var(--purple-500)]",
-  "text-[var(--cyan-500)]",
-  "text-[var(--orange-500)]",
-  "text-[var(--lavender-500)]",
-] as const;
-const aboutAssets = {
-  cover: {
-    src: "/assets/about/yuvabe-cover.jpeg",
-    alt: "The Yuvabe team gathered outdoors on the studio campus in Auroville.",
-  },
-  roots: {
-    src: "/assets/about/yuvabe-image.jpeg",
-    alt: "An earlier Yuvabe team group photo taken under a large tree in Auroville.",
-  },
-  shirtDetail: {
-    src: "/assets/about/yuvabe-shirt-jpg.jpeg",
-    alt: "A close-up of the Yuvabe mark printed on a grey team shirt.",
-  },
-  illustration: {
-    src: "/assets/about/yuvabe-illustration.png",
-    alt: "An illustration of a sprout growing inside a light bulb.",
-  },
-} as const;
-const workflowCardStyles = [
-  {
-    tone: "tintLavender",
-    numberClassName: "text-[var(--lavender-500)]",
-    iconShellClassName:
-      "border-white/80 bg-white/78 text-[var(--purple-500)]",
-  },
-  {
-    tone: "tintWarm",
-    numberClassName: "text-[var(--orange-500)]",
-    iconShellClassName:
-      "border-white/80 bg-white/80 text-[var(--orange-500)]",
-  },
-  {
-    tone: "tintCyan",
-    numberClassName: "text-[var(--cyan-500)]",
-    iconShellClassName:
-      "border-white/80 bg-white/78 text-[var(--cyan-500)]",
-  },
-  {
-    tone: "tintGreen",
-    numberClassName: "text-[var(--green-500)]",
-    iconShellClassName:
-      "border-white/80 bg-white/78 text-[var(--green-500)]",
-  },
-] as const;
-const aboutProofToneClassNames = {
-  tintWarm: "ds-proof-cell-wash-warm",
-  tintGreen: "ds-proof-cell-wash-green",
-  tintLavender: "ds-proof-cell-wash-lavender",
-  tintPurple: "ds-proof-cell-wash-purple",
-  tintCyan: "ds-proof-cell-wash-cyan",
-} satisfies Record<StudioCaseStudyProofTone, string>;
-const aboutProofHoverWashClassNames = {
-  tintWarm:
-    "bg-[linear-gradient(180deg,rgba(255,248,239,0.94)_0%,rgba(255,238,219,0.96)_100%)]",
-  tintGreen:
-    "bg-[linear-gradient(180deg,rgba(244,252,247,0.94)_0%,rgba(231,247,236,0.97)_100%)]",
-  tintLavender:
-    "bg-[linear-gradient(180deg,rgba(248,245,255,0.94)_0%,rgba(239,232,255,0.97)_100%)]",
-  tintPurple:
-    "bg-[linear-gradient(180deg,rgba(245,241,255,0.95)_0%,rgba(233,225,255,0.98)_100%)]",
-  tintCyan:
-    "bg-[linear-gradient(180deg,rgba(241,251,252,0.94)_0%,rgba(226,246,248,0.97)_100%)]",
-} satisfies Record<StudioCaseStudyProofTone, string>;
-const aboutProofHoverGlowClassNames = {
-  tintWarm:
-    "bg-[radial-gradient(circle_at_50%_50%,rgba(249,169,31,0.34)_0%,rgba(255,202,45,0.22)_30%,rgba(242,125,66,0.14)_54%,transparent_76%)]",
-  tintGreen:
-    "bg-[radial-gradient(circle_at_50%_50%,rgba(144,198,69,0.3)_0%,rgba(95,176,122,0.2)_32%,rgba(43,183,199,0.12)_56%,transparent_76%)]",
-  tintLavender:
-    "bg-[radial-gradient(circle_at_50%_50%,rgba(150,136,192,0.34)_0%,rgba(108,96,187,0.24)_30%,rgba(234,182,167,0.12)_56%,transparent_76%)]",
-  tintPurple:
-    "bg-[radial-gradient(circle_at_50%_50%,rgba(88,41,199,0.3)_0%,rgba(150,136,192,0.24)_30%,rgba(43,183,199,0.1)_56%,transparent_76%)]",
-  tintCyan:
-    "bg-[radial-gradient(circle_at_50%_50%,rgba(43,183,199,0.3)_0%,rgba(132,171,224,0.2)_32%,rgba(150,136,192,0.1)_56%,transparent_76%)]",
-} satisfies Record<StudioCaseStudyProofTone, string>;
-const aboutProofLogoAssets = {
-  TVAM: {
-    src: "/assets/tvam/logo.svg",
-    width: 177,
-    height: 248,
-    stageClassName: "w-[4.5rem] md:w-[5.1rem]",
-  },
-  Bevolve: {
-    src: "/assets/bevolve-ai.svg",
-    width: 170,
-    height: 70,
-    stageClassName: "w-[14.25rem] md:w-[16.5rem]",
-  },
-  KittyKat: {
-    src: "/assets/KK/logo.svg",
-    width: 118,
-    height: 40,
-    stageClassName: "w-[9rem] md:w-[10.5rem]",
-  },
-  "Quilt AI": {
-    src: "/logos/quilt.ai.svg",
-    width: 500,
-    height: 121,
-    stageClassName: "w-[9.5rem] md:w-[11rem]",
-  },
-  AgeShift: {
-    src: "/assets/ageshift/logo.svg",
-    width: 117,
-    height: 107,
-    stageClassName: "w-[5.6rem] md:w-[6.3rem]",
-  },
-  "General Aeronautics": {
-    src: "/assets/general-aeronautics/logo.svg",
-    width: 170,
-    height: 40,
-    stageClassName: "w-[13.125rem] md:w-[15.625rem]",
-  },
-} as const satisfies Record<
-  StudioAboutProofContent["entries"][number]["client"],
-  {
-    src: string;
-    width: number;
-    height: number;
-    stageClassName: string;
-  }
->;
-
-function getAboutProofLogoAsset(
-  client: StudioAboutProofContent["entries"][number]["client"],
-) {
-  return aboutProofLogoAssets[client as keyof typeof aboutProofLogoAssets];
-}
-
-function SectionIntro({
-  eyebrow,
-  title,
-  description,
-  className,
-}: SectionIntroProps) {
-  return (
-    <div className={["max-w-4xl space-y-4", className].filter(Boolean).join(" ")}>
-      <p className="text-label-sm uppercase tracking-[0.22em] text-[var(--color-text-tertiary)]">
-        {eyebrow}
-      </p>
-      <h2
-        className="max-w-5xl text-display-muted-editorial tracking-[-0.032em] text-[var(--neutral-950)]"
-        style={{ fontSize: "3.5rem", fontWeight: 600, wordSpacing: ".2rem" }}
-      >
-        {title}
-      </h2>
-      <p className="text-body-lg text-[var(--color-text-secondary)]">{description}</p>
-    </div>
-  );
-}
-
-type AboutMediaCardProps = {
-  asset: (typeof aboutAssets)[keyof typeof aboutAssets];
-  altCaption?: string;
-  className?: string;
-  frameClassName?: string;
-  imageClassName?: string;
-  priority?: boolean;
-  sizes: string;
-};
-
-// The reusable image frame keeps the new About assets aligned to the existing premium surface system.
-function AboutMediaCard({
-  asset,
-  altCaption,
-  className,
-  frameClassName,
-  imageClassName,
-  priority = false,
-  sizes,
-}: AboutMediaCardProps) {
-  return (
-    <PremiumSurface
-      tone="glassSubtle"
-      elevation="sm"
-      blur="sm"
-      radius="xl"
-      className={["overflow-hidden", className].filter(Boolean).join(" ")}
-    >
-      <div
-        className={[
-          "relative min-h-[26rem] w-full",
-          frameClassName,
-        ]
-          .filter(Boolean)
-          .join(" ")}
-      >
-        <Image
-          src={asset.src}
-          alt={asset.alt}
-          fill
-          sizes={sizes}
-          priority={priority}
-          className={["object-cover object-center", imageClassName].filter(Boolean).join(" ")}
-        />
-      </div>
-      {altCaption ? (
-        <div className="border-t border-slate-200/80 bg-white/92 px-4 py-3">
-          <p className="text-label-sm uppercase tracking-[0.18em] text-[var(--color-text-tertiary)]">
-            {altCaption}
-          </p>
-        </div>
-      ) : null}
-    </PremiumSurface>
-  );
-}
-
-// The illustration stays clean while the section itself carries the larger brand glow.
-function AboutIllustrationStage() {
-  return (
-    <div className="relative mt-2 w-full max-w-[42rem]">
-      <div className="relative flex min-h-[20rem] w-full items-end justify-center px-4 py-2 sm:min-h-[24rem] sm:px-6 sm:py-4 lg:min-h-[34rem] lg:px-8 lg:py-6 xl:min-h-[46rem] xl:px-10 xl:py-8">
-        <Image
-          src={aboutAssets.illustration.src}
-          alt={aboutAssets.illustration.alt}
-          width={608}
-          height={575}
-          sizes="(min-width: 1024px) 34vw, 100vw"
-          className="h-auto w-[15rem] max-w-none translate-x-4 translate-y-1 scale-100 sm:w-[19.5rem] sm:translate-x-6 sm:translate-y-3 sm:scale-105 lg:w-[28.5rem] lg:translate-x-10 lg:translate-y-16 lg:scale-[1.22] xl:w-[33rem] xl:translate-x-12 xl:translate-y-20 xl:scale-[1.26]"
-        />
-      </div>
-    </div>
-  );
-}
-
-type AboutProofEntryCardProps = {
-  entry: StudioAboutProofContent["entries"][number];
-  proofTone: StudioCaseStudyProofTone;
-  className?: string;
-};
-
-// Each proof tile keeps its editorial text layout, then swaps to a logo-led cover on hover.
-function AboutProofEntryCard({
-  entry,
-  proofTone,
-  className,
-}: AboutProofEntryCardProps) {
-  const logoAsset = getAboutProofLogoAsset(entry.client);
-  const proofHref = resolveStudioCaseStudyHrefFromLabel(entry.client);
-  const canNavigate = Boolean(proofHref);
-  const toneClassName = aboutProofToneClassNames[proofTone];
-  const hoverWashClassName = aboutProofHoverWashClassNames[proofTone];
-  const hoverGlowClassName = aboutProofHoverGlowClassNames[proofTone];
-  const shellClassName = [
-    "group relative isolate block min-h-[15rem] overflow-hidden px-6 py-7 transition-[box-shadow,transform] duration-[1000ms] ease-out md:px-8 md:py-8",
-    canNavigate
-      ? "hover:cursor-pointer hover:shadow-[0_24px_64px_rgba(88,41,199,0.08)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-text-brand)] focus-visible:ring-offset-2 focus-visible:ring-offset-white"
-      : "cursor-default",
-    toneClassName,
-    className,
-  ]
-    .filter(Boolean)
-    .join(" ");
-  const tileContent = (
-    <>
-      {/* The text block stays in flow so the tile footprint does not shift before hover. */}
-      <div
-        className={[
-          "relative z-10 flex h-full flex-col gap-4 transition-opacity duration-[1000ms] ease-out",
-          canNavigate ? "group-hover:opacity-0" : "",
-        ]
-          .filter(Boolean)
-          .join(" ")}
-      >
-        <p className="text-label-sm uppercase tracking-[0.18em] text-[var(--color-text-tertiary)]">
-          {entry.sector}
-        </p>
-        <h3 className="text-heading-lg text-[var(--neutral-950)]">{entry.client}</h3>
-        <p className="max-w-[32rem] text-body-md text-[var(--color-text-secondary)]">
-          {entry.summary}
-        </p>
-        {/* Mobile gets an explicit CTA because the desktop hover swap does not exist on touch devices. */}
-        {canNavigate ? (
-          <div className="mt-auto flex items-center gap-2 pt-2 text-label-sm font-semibold uppercase tracking-[0.16em] text-[var(--color-text-brand)] md:hidden">
-            <span>Read case study</span>
-            <ArrowRight className="size-4" />
-          </div>
-        ) : null}
-      </div>
-
-      {/* The hover cover reuses the same wash family, then adds a stronger veil so the logo reads cleanly above it. */}
-      {logoAsset && canNavigate ? (
-        <div
-          aria-hidden="true"
-          className="pointer-events-none absolute inset-0 z-20 opacity-0 transition-opacity duration-[1000ms] ease-out group-hover:opacity-100"
-        >
-          <div className={["absolute inset-0", toneClassName].join(" ")} />
-          <div className={["absolute inset-0", hoverWashClassName].join(" ")} />
-          <div className={["absolute inset-0 scale-[1.08] blur-2xl", hoverGlowClassName].join(" ")} />
-          <div className="absolute inset-0 bg-white/22" />
-          <div className="relative flex h-full items-center justify-center px-6 py-7 md:px-8 md:py-8">
-            <div
-              className={[
-                "transform-gpu transition-transform duration-[1000ms] ease-out group-hover:scale-100",
-                "scale-95",
-                logoAsset.stageClassName,
-              ].join(" ")}
-            >
-              <Image
-                src={logoAsset.src}
-                alt=""
-                width={logoAsset.width}
-                height={logoAsset.height}
-                sizes="(min-width: 1024px) 20vw, 50vw"
-                className="h-auto w-full object-contain drop-shadow-[0_24px_48px_rgba(15,23,42,0.16)]"
-              />
-            </div>
-          </div>
-        </div>
-      ) : null}
-    </>
-  );
-
-  if (proofHref) {
-    return (
-      <Link
-        href={proofHref}
-        aria-label={`Read ${entry.client} case study`}
-        className={shellClassName}
-      >
-        {tileContent}
-      </Link>
-    );
-  }
-
-  return <article className={shellClassName}>{tileContent}</article>;
-}
-
-// The operating principles list is shared between mobile and desktop placements so the copy stays in one place.
-function AboutStoryPrinciplesList({
-  principles,
-  className,
+// Wide editorial rail (no studio page container).
+function Rail({
+  children,
+  className = "",
 }: {
-  principles: StudioAboutStoryContent["operatingPrinciples"];
+  children: React.ReactNode;
   className?: string;
 }) {
   return (
-    <div className={["space-y-5", className].filter(Boolean).join(" ")}>
-      <div className="space-y-3">
-        <p className="text-label-sm uppercase tracking-[0.18em] text-[var(--color-text-tertiary)]">
-          How that shows up
-        </p>
-        <div className="h-px w-24 bg-[linear-gradient(90deg,var(--lavender-500),rgba(203,195,223,0))]" />
-      </div>
+    <div className={`mx-auto w-full max-w-[1600px] px-6 md:px-12 lg:px-16 ${className}`}>
+      {children}
+    </div>
+  );
+}
 
-      <div className="space-y-5">
-        {principles.map((principle, index) => {
-          const Icon = storyIcons[index % storyIcons.length];
+const aboutAssets = {
+  cover: {
+    src: "/assets/about-cover.jpeg",
+    alt: "The full Yuvabe team gathered on the studio campus in Auroville.",
+  },
+} as const;
 
+// Horizontal culture/work gallery imagery.
+const ABOUT_GALLERY_IMAGES = [
+  { src: "/assets/about-carousel/web/1.webp", alt: "Life at the Yuvabe studio" },
+  { src: "/assets/about-carousel/web/2.webp", alt: "Life at the Yuvabe studio" },
+  { src: "/assets/about-carousel/web/3.webp", alt: "Life at the Yuvabe studio" },
+  { src: "/assets/about-carousel/web/4.webp", alt: "Life at the Yuvabe studio" },
+  { src: "/assets/about-carousel/web/5.webp", alt: "Life at the Yuvabe studio" },
+  { src: "/assets/about-carousel/web/6.webp", alt: "Life at the Yuvabe studio" },
+  { src: "/assets/about-carousel/web/7.webp", alt: "Life at the Yuvabe studio" },
+  { src: "/assets/about-carousel/web/8.webp", alt: "Life at the Yuvabe studio" },
+  { src: "/assets/about-carousel/web/9.webp", alt: "Life at the Yuvabe studio" },
+];
+
+// "What drives us" pillar imagery, paired by index with the operating principles.
+const WHY_PILLAR_IMAGES = [
+  { src: "/assets/about/web/thinkdeep.webp", alt: "Thinking deeply about the right problem to solve" },
+  { src: "/assets/about/web/intentionally.webp", alt: "Building intentionally, with craft and judgment" },
+  { src: "/assets/about/web/learnsooner.webp", alt: "Learning sooner by putting work in front of people" },
+] as const;
+
+// Client logo wall — sourced from /public/logos.
+const ABOUT_CLIENT_LOGOS = [
+  { name: "Rangsutra", src: "/logos/rangsutra.svg" },
+  { name: "Quilt AI", src: "/logos/quilt.ai.svg" },
+  { name: "Hemplanet", src: "/logos/hemplanet.svg" },
+  { name: "Buglerock", src: "/logos/buglerock.svg" },
+  { name: "Prakriti Sattva", src: "/logos/prakriti-sattva.svg" },
+  { name: "Matrimandir", src: "/logos/matrimandir.svg" },
+  { name: "Solitude Farm", src: "/logos/solitude-farm.svg" },
+  { name: "AV Marathon", src: "/logos/av-marathon.svg" },
+  { name: "Shraddha Yoga", src: "/logos/shraddha-yoga.svg" },
+  { name: "Maatram", src: "/logos/maatram.svg" },
+  { name: "Startup-O", src: "/logos/startup-o.svg" },
+  { name: "Indic", src: "/logos/indic.svg" },
+  { name: "BMH", src: "/logos/bmh.svg" },
+  { name: "NSF", src: "/logos/nsf.svg" },
+  { name: "CAT", src: "/logos/cat.svg" },
+] as const;
+
+// ─── Clay-style stats strip — big factual numbers + a large location word ─────
+function AboutStatsStrip({ stats }: { stats: StudioAboutStatsContent }) {
+  return (
+    <section className="border-b border-slate-200/80 bg-white py-16 md:py-24">
+      <Rail>
+        <div className="grid grid-cols-2 gap-x-8 gap-y-10 sm:grid-cols-4 lg:gap-x-12 lg:pl-4 xl:pl-6">
+          {[...stats.items, stats.feature].map((stat, index) => (
+            <div key={`${stat.label}-${index}`}>
+              <p className="font-[family-name:var(--font-display-family)] text-[clamp(1.75rem,3.4vw,2.75rem)] font-semibold leading-none tracking-[-0.03em] text-[var(--neutral-950)]">
+                {stat.value}
+              </p>
+              <p className="mt-3 text-body-lg text-[var(--color-text-secondary)]">
+                {stat.label}
+              </p>
+            </div>
+          ))}
+        </div>
+      </Rail>
+    </section>
+  );
+}
+
+// ─── What does Yuvabe mean — name origin, paired with the "Who we are" band ────
+function AboutNameMeaning({
+  content,
+}: {
+  content: StudioAboutNameMeaningContent;
+}) {
+  return (
+    <section className="border-b border-slate-200/80 bg-white py-16 text-[var(--neutral-950)] md:py-24">
+      <Rail>
+        <div className="grid items-center gap-12 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)] lg:gap-16 lg:pl-4 xl:pl-6">
+          <div>
+            <p className="text-label-sm uppercase tracking-[0.22em] text-[var(--color-text-tertiary)]">
+              {content.eyebrow}
+            </p>
+            <h2
+              className="mt-4 max-w-xl leading-[1.05] tracking-[-0.032em] text-[var(--neutral-950)]"
+              style={{ fontSize: "clamp(2.25rem,5vw,3.5rem)", fontWeight: 600 }}
+            >
+              {content.title}
+            </h2>
+            <div className="mt-8 space-y-6">
+              {content.paragraphs.map((paragraph, index) => (
+                <p
+                  key={index}
+                  className="max-w-2xl text-body-lg leading-[1.6] text-[var(--color-text-secondary)]"
+                >
+                  {paragraph}
+                </p>
+              ))}
+            </div>
+          </div>
+          <div className="flex justify-center lg:justify-end">
+            <Image
+              src="/yb-logo.png"
+              alt="Yuvabe Studios"
+              width={2000}
+              height={730}
+              sizes="(min-width: 1024px) 40vw, 80vw"
+              className="h-auto w-full max-w-md"
+            />
+          </div>
+        </div>
+      </Rail>
+    </section>
+  );
+}
+
+// ─── Our philosophy — Work. Serve. Evolve. principle trio ─────────────────────
+function AboutPhilosophy({
+  content,
+}: {
+  content: StudioAboutPhilosophyContent;
+}) {
+  return (
+    <section className="border-b border-slate-200/80 bg-[var(--color-background-canvas)] py-16 text-[var(--neutral-950)] md:py-24">
+      <Rail>
+        <div className="lg:pl-4 xl:pl-6">
+          <p className="text-label-sm uppercase tracking-[0.22em] text-[var(--color-text-tertiary)]">
+            {content.eyebrow}
+          </p>
+          <h2
+            className="mt-4 max-w-2xl tracking-[-0.032em] text-[var(--neutral-950)]"
+            style={{ fontSize: "clamp(2.25rem,5vw,3.5rem)", fontWeight: 600 }}
+          >
+            {content.title}
+          </h2>
+          {content.intro ? (
+            <p className="mt-5 max-w-2xl text-body-lg leading-[1.6] text-[var(--color-text-secondary)]">
+              {content.intro}
+            </p>
+          ) : null}
+        </div>
+
+        <div className="mt-14 grid gap-10 md:mt-20 md:grid-cols-3 lg:gap-14 lg:pl-4 xl:pl-6">
+          {content.principles.map((principle) => (
+            <div key={principle.title}>
+              <h3 className="text-heading-lg text-[var(--color-text-brand)]">
+                {principle.title}
+              </h3>
+              <p className="mt-4 text-body-lg leading-[1.6] text-[var(--color-text-secondary)]">
+                {principle.description}
+              </p>
+            </div>
+          ))}
+        </div>
+      </Rail>
+    </section>
+  );
+}
+
+// ─── What drives us — clay-style numbered pillars with large imagery ──────────
+function AboutWhyPillars({ story }: { story: StudioAboutStoryContent }) {
+  return (
+    <section className="border-b border-slate-200/80 bg-[var(--color-background-canvas)] py-14 md:py-24">
+      <Rail className="space-y-14 md:space-y-24">
+        <div className="lg:pl-4 xl:pl-6">
+          <p className="text-label-sm uppercase tracking-[0.22em] text-[var(--color-text-tertiary)]">
+            {story.eyebrow}
+          </p>
+          <h2
+            className="mt-4 text-display-muted-editorial tracking-[-0.032em] text-[var(--neutral-950)]"
+            style={{ fontSize: "clamp(2.5rem,6vw,4rem)", fontWeight: 600 }}
+          >
+            {story.title}
+          </h2>
+        </div>
+
+        {story.operatingPrinciples.map((principle, index) => {
+          const asset = WHY_PILLAR_IMAGES[index % WHY_PILLAR_IMAGES.length];
+          const imageFirst = index % 2 === 1;
           return (
             <div
               key={principle.title}
-              className="grid gap-4 border-b border-slate-200/70 pb-5 last:border-b-0 last:pb-0 sm:grid-cols-[3rem_minmax(0,1fr)]"
+              className="grid items-center gap-10 lg:grid-cols-2 lg:gap-16 lg:pl-4 xl:pl-6"
             >
-              <div className="flex size-12 items-center justify-center rounded-full border border-white/80 bg-white/88 text-[var(--color-text-brand)] shadow-[0_10px_28px_rgba(15,23,42,0.06)]">
-                <Icon className="size-4.5" />
-              </div>
-              <div className="space-y-1.5">
-                <h3 className="text-heading-md text-[var(--neutral-950)]">
+              <div className={imageFirst ? "lg:order-2" : "lg:order-1"}>
+                <p className="font-[family-name:var(--font-display-family)] text-heading-xl text-[var(--lavender-500)]">
+                  {`${index + 1}`.padStart(2, "0")}
+                </p>
+                <h3 className="mt-5 text-display-muted-editorial leading-[1.02] text-[var(--neutral-950)]">
                   {principle.title}
                 </h3>
-                <p className="max-w-[34rem] text-body-md text-[var(--color-text-secondary)]">
+                <p className="mt-5 max-w-xl text-body-lg text-[var(--color-text-secondary)]">
                   {principle.description}
                 </p>
+              </div>
+              <div className={imageFirst ? "lg:order-1" : "lg:order-2"}>
+                <AboutPillarImage src={asset.src} alt={asset.alt} />
               </div>
             </div>
           );
         })}
-      </div>
-    </div>
-  );
-}
-
-// The hero reframes the legacy About story into the sharper AI-first founder promise.
-function AboutHero({ content }: { content: StudioAboutPageContent["hero"] }) {
-  const hero = content;
-  const descriptionHighlight = "AI-first studio from Auroville";
-  const descriptionParts = hero.description.split(descriptionHighlight);
-  const opensStartProjectModal = isStartProjectHref(hero.primaryCtaHref);
-
-  return (
-    <section className="relative overflow-hidden border-b border-slate-200/80 bg-white pb-14 pt-14 md:pb-20 md:pt-16">
-      <div aria-hidden="true" className="absolute inset-0">
-        <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(148,163,184,0.042)_1px,transparent_1px)] bg-[size:120px_100%]" />
-        <div className="absolute inset-0 bg-[linear-gradient(to_bottom,rgba(148,163,184,0.021)_1px,transparent_1px)] bg-[size:100%_120px]" />
-        <div className="absolute left-[-12rem] top-[-8rem] h-[28rem] w-[28rem] rounded-full bg-[radial-gradient(circle,rgba(88,41,199,0.12)_0%,rgba(88,41,199,0)_72%)] blur-3xl" />
-        <div className="absolute right-[-10rem] top-[-10rem] h-[24rem] w-[24rem] rounded-full bg-[radial-gradient(circle,rgba(255,202,45,0.18)_0%,rgba(255,202,45,0)_72%)] blur-3xl" />
-      </div>
-
-      <StudioPageContainer className="relative z-10 grid gap-8 lg:grid-cols-[minmax(0,1.12fr)_minmax(320px,0.88fr)] lg:items-start lg:gap-10">
-        {/* The left hero column carries the founder-facing page narrative and CTA pair. */}
-        <div className="space-y-6 lg:pl-4 xl:pl-6">
-          <p className="text-label-sm uppercase tracking-[0.24em] text-[var(--color-text-tertiary)]">
-            {hero.eyebrow}
-          </p>
-          <div className="space-y-5">
-            <h1 className="max-w-5xl text-hero-display text-[var(--neutral-950)]">
-              <span>{hero.title} </span>
-              <span className="text-[var(--color-text-brand)]">{hero.highlight}</span>
-            </h1>
-            <p className="max-w-4xl text-hero-support text-[var(--color-text-secondary)]">
-              {descriptionParts.length === 2 ? (
-                <>
-                  {descriptionParts[0]}
-                  <span className="font-semibold text-[var(--neutral-950)]">
-                    {descriptionHighlight}
-                  </span>
-                  {descriptionParts[1]}
-                </>
-              ) : (
-                hero.description
-              )}
-            </p>
-
-            {hero.supportingLine ? (
-              /* This optional identity line only renders when the content model needs a second supporting statement. */
-              <p className="max-w-4xl text-hero-support text-[var(--color-text-brand)]">
-                {hero.supportingLine}
-              </p>
-            ) : null}
-          </div>
-
-          {/* The CTA pair reuses the shared button contract so this route matches the rest of the site. */}
-          <div className="flex flex-col items-start gap-4 pt-2 sm:flex-row sm:items-center">
-            {opensStartProjectModal ? (
-              <StartProjectButton
-                size="lg"
-                source="about-hero-primary"
-                className="min-w-[220px]"
-              >
-                {hero.primaryCtaLabel}
-                <ArrowRight className="size-4" />
-              </StartProjectButton>
-            ) : (
-              <Button asChild size="lg" className="min-w-[220px]">
-                <Link href={hero.primaryCtaHref}>
-                  {hero.primaryCtaLabel}
-                  <ArrowRight className="size-4" />
-                </Link>
-              </Button>
-            )}
-            <Button asChild variant="secondary" size="lg" className="min-w-[180px]">
-              <Link href={hero.secondaryCtaHref}>{hero.secondaryCtaLabel}</Link>
-            </Button>
-          </div>
-        </div>
-
-        {/* The right column becomes a quieter editorial timeline so the three positioning points can breathe. */}
-        <div className="relative lg:pt-6">
-          <div
-            aria-hidden="true"
-            className="absolute bottom-6 left-[0.6875rem] top-6 w-px bg-[linear-gradient(180deg,rgba(150,136,192,0.14)_0%,rgba(150,136,192,0.5)_12%,rgba(150,136,192,0.5)_88%,rgba(150,136,192,0.14)_100%)]"
-          />
-
-          <div className="space-y-10 md:space-y-12">
-            {hero.callouts.map((callout) => (
-              <div
-                key={callout.label}
-                className="grid grid-cols-[1.375rem_minmax(0,1fr)] items-start gap-x-5 md:gap-x-6"
-              >
-                <div className="flex justify-center pt-[calc(0.5rem-7px)]">
-                  <div
-                    aria-hidden="true"
-                    className="flex size-5 items-center justify-center rounded-full border border-[color:color-mix(in_srgb,var(--lavender-200)_74%,white)] bg-white shadow-[0_8px_20px_rgba(15,23,42,0.06)]"
-                  >
-                    <div className="size-2 rounded-full bg-[var(--purple-500)]" />
-                  </div>
-                </div>
-
-                <div className="space-y-3">
-                  <div className="flex min-h-5 items-center pt-[2px]">
-                    <p className="text-label-sm uppercase tracking-[0.18em] text-[var(--color-text-tertiary)]">
-                      {callout.label}
-                    </p>
-                  </div>
-                  <p className="text-heading-lg text-[var(--neutral-950)]">
-                    {callout.value}
-                  </p>
-                  <p className="max-w-[30rem] text-body-md text-[var(--color-text-secondary)]">
-                    {callout.description}
-                  </p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </StudioPageContainer>
+      </Rail>
     </section>
   );
 }
 
-// This section pairs the studio origin story with the practical differentiators founders should remember.
-function AboutStorySection({ content }: { content: StudioAboutStoryContent }) {
-  const [storyTitleLead, storyTitleRest] = content.title.split(". ");
-
+// ─── Our clients — monochrome logo wall ───────────────────────────────────────
+function AboutClients() {
   return (
-    <section className="relative overflow-hidden border-b border-slate-200/80 bg-white py-14 md:py-20">
-      {/* The story background now favors the illustration side so the full reading path can stay on the left without competing with the glow. */}
-      <div aria-hidden="true" className="pointer-events-none absolute inset-0">
-        <div className="absolute inset-0 bg-white" />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_80%_84%,rgba(255,202,45,0.88)_0%,rgba(255,202,45,0.82)_10%,rgba(249,169,31,0.68)_22%,rgba(240,78,40,0.46)_36%,rgba(150,136,192,0.46)_52%,rgba(88,41,199,0.28)_64%,rgba(255,255,255,0)_84%)]" />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_80%_84%,rgba(255,243,181,0.78)_0%,rgba(255,240,166,0.48)_14%,rgba(255,228,138,0.2)_24%,rgba(255,255,255,0)_42%)]" />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_76%_88%,rgba(255,202,45,0.28)_0%,rgba(249,169,31,0.16)_18%,rgba(255,255,255,0)_42%)]" />
-        <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(255,255,255,0.98)_0%,rgba(255,255,255,0.92)_20%,rgba(255,255,255,0.72)_38%,rgba(255,255,255,0.36)_58%,rgba(255,255,255,0.1)_74%,rgba(255,255,255,0)_100%)]" />
-        <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(255,255,255,0.76)_0%,rgba(255,255,255,0.34)_18%,rgba(255,255,255,0.14)_48%,rgba(255,255,255,0.36)_76%,rgba(255,255,255,0.72)_100%)]" />
-        <div className="absolute left-[4%] top-[6%] h-[24rem] w-[24rem] rounded-full bg-[radial-gradient(circle,rgba(255,255,255,0.22)_0%,rgba(255,255,255,0.05)_42%,rgba(255,255,255,0)_76%)] blur-3xl" />
-        <div className="absolute inset-0 flex items-center justify-center px-2 opacity-[0.1] lg:hidden">
-          <Image
-            src={aboutAssets.illustration.src}
-            alt=""
-            width={320}
-            height={303}
-            sizes="100vw"
-            className="h-auto max-w-none w-[min(45rem,117.5vw)]"
-          />
-        </div>
-      </div>
+    <section className="border-b border-slate-200/80 bg-white py-16 text-[var(--neutral-950)] md:py-24">
+      <Rail>
+        <p className="text-label-sm uppercase tracking-[0.22em] text-[var(--color-text-tertiary)]">
+          Our clients
+        </p>
+        <h2
+          className="mt-3 max-w-3xl tracking-[-0.032em] text-[var(--neutral-950)]"
+          style={{ fontSize: "clamp(2.25rem,5vw,3.5rem)", fontWeight: 600 }}
+        >
+          Teams we&apos;ve built alongside.
+        </h2>
 
-      <StudioPageContainer className="relative z-10 grid gap-10 lg:grid-cols-[minmax(0,1.02fr)_minmax(18rem,0.98fr)] lg:items-start lg:gap-12">
-        {/* The full narrative now stays in one left-side stack so the section reads top-to-bottom before the eye lands on the illustration. */}
-        <div className="space-y-10 lg:pl-4 xl:pl-6">
-          <div className="space-y-5">
-            <div className="space-y-3">
-              <p className="text-label-sm uppercase tracking-[0.22em] text-[var(--color-text-tertiary)]">
-                {content.eyebrow}
-              </p>
-              <div className="h-px w-24 bg-[linear-gradient(90deg,var(--lavender-500),rgba(203,195,223,0))]" />
-            </div>
-
-            <h2
-              className="max-w-[15ch] text-display-muted-editorial tracking-[-0.032em] text-[var(--neutral-950)] sm:max-w-[16ch] lg:max-w-[18ch]"
-              style={{
-                fontSize: "clamp(3rem, 11vw, 3.5rem)",
-                fontWeight: 600,
-                wordSpacing: ".2rem",
-              }}
-            >
-              {storyTitleRest ? (
-                <>
-                  <span className="block">{`${storyTitleLead}.`}</span>
-                  <span className="block">{storyTitleRest}</span>
-                </>
-              ) : (
-                content.title
-              )}
-            </h2>
-
-            <p className="max-w-[38rem] text-body-lg text-[var(--color-text-secondary)]">
-              {content.paragraphs[0]}
-            </p>
-          </div>
-
-          {/* The present-day takeaway follows immediately after the origin story so the section carries one continuous argument. */}
-          <div className="relative overflow-visible py-2">
-            <div aria-hidden="true" className="absolute inset-x-[-4%] inset-y-[-24%]">
-              <div className="absolute inset-0 bg-[radial-gradient(circle_at_14%_50%,rgba(255,202,45,0.24)_0%,rgba(249,169,31,0.12)_18%,rgba(255,255,255,0)_46%),linear-gradient(90deg,rgba(255,249,236,0.52)_0%,rgba(255,246,228,0.34)_18%,rgba(255,255,255,0)_58%)] blur-2xl" />
-            </div>
-            <div className="relative max-w-[44rem] space-y-3">
-              <div className="space-y-3">
-                <p className="text-label-sm uppercase tracking-[0.18em] text-[var(--color-text-brand)]">
-                  What we care about now
-                </p>
-                <div className="h-px w-24 bg-[linear-gradient(90deg,var(--lavender-500),rgba(203,195,223,0))]" />
-              </div>
-              <p className="max-w-[40rem] text-body-lg font-medium text-[var(--neutral-950)]">
-                {content.paragraphs[2]}
-              </p>
-            </div>
-          </div>
-
-          {/* Desktop keeps the principles directly under the story copy so the left column reads as one continuous stack. */}
-          <AboutStoryPrinciplesList
-            principles={content.operatingPrinciples}
-            className="hidden pt-2 lg:block"
-          />
-        </div>
-
-        {/* The illustration now sits on the right as a dedicated visual anchor, reinforcing the story after the text is already understood. */}
-        <div className="hidden justify-center lg:flex lg:justify-end lg:pr-4 xl:pr-6">
-          <AboutIllustrationStage />
-        </div>
-
-        {/* Mobile keeps the principles after the illustration so the section still feels paced on smaller screens. */}
-        <AboutStoryPrinciplesList
-          principles={content.operatingPrinciples}
-          className="pt-2 lg:hidden"
-        />
-      </StudioPageContainer>
-    </section>
-  );
-}
-
-// This band introduces the larger team image later in the page so the founder-first story stays intact.
-function AboutTeamBandSection() {
-  return (
-    <section className="border-b border-slate-200/80 bg-[var(--color-background-canvas)] py-14 md:py-20">
-      <StudioPageContainer className="space-y-6">
-        <div className="space-y-3 lg:pl-4 xl:pl-6">
-          <p className="text-label-sm uppercase tracking-[0.22em] text-[var(--color-text-tertiary)]">
-            People behind the work
-          </p>
-          <h2
-            className="max-w-[28ch] text-display-muted-editorial tracking-[-0.032em] text-[var(--neutral-950)]"
-            style={{ fontSize: "3.5rem", fontWeight: 600, wordSpacing: ".2rem" }}
-          >
-            <span>Small team. Deep involvement.</span>
-            <br />
-            <span>Start to finish.</span>
-          </h2>
-        </div>
-
-        <AboutMediaCard
-          asset={aboutAssets.cover}
-          priority
-          sizes="100vw"
-          className="lg:mx-4 xl:mx-6"
-          frameClassName="min-h-[18rem] sm:min-h-[22rem] md:min-h-[26rem]"
-          imageClassName="object-cover object-[center_40%] md:object-center"
-        />
-      </StudioPageContainer>
-    </section>
-  );
-}
-
-// This section turns the studio model into a compact, four-part execution loop instead of a services dump.
-function AboutWorkflowSection({
-  content,
-}: {
-  content: StudioAboutWorkflowContent;
-}) {
-  return (
-    <section
-      id="process"
-      className="border-b border-slate-200/80 bg-[var(--color-background-canvas)] py-14 md:py-20"
-    >
-      <StudioPageContainer className="space-y-10">
-        <SectionIntro
-          eyebrow={content.eyebrow}
-          title={content.title}
-          description={content.description}
-          className="lg:pl-4 xl:pl-6"
-        />
-
-        {/* The workflow grid gives each discipline a clear role while preserving the one-loop story. */}
-        <div className="grid gap-4 lg:grid-cols-4 lg:pl-4 xl:pl-6">
-          {content.stages.map((stage, index) => {
-            const Icon = workflowIcons[index % workflowIcons.length];
-            const workflowCardStyle =
-              workflowCardStyles[index % workflowCardStyles.length];
-
-            return (
-              <PremiumSurface
-                key={stage.label}
-                tone={workflowCardStyle.tone}
-                elevation="sm"
-                blur="sm"
-                radius="xl"
-                className="h-full p-5 md:p-6"
-              >
-                <div className="flex h-full flex-col gap-6">
-                  <div className="flex items-center justify-between gap-4">
-                    <p
-                      className={[
-                        "text-heading-lg",
-                        workflowCardStyle.numberClassName,
-                      ].join(" ")}
-                    >
-                      {`${index + 1}`.padStart(2, "0")}
-                    </p>
-                    <div
-                      className={[
-                        "flex size-11 items-center justify-center rounded-full shadow-[0_10px_28px_rgba(15,23,42,0.06)]",
-                        workflowCardStyle.iconShellClassName,
-                      ].join(" ")}
-                    >
-                      <Icon className="size-5" />
-                    </div>
-                  </div>
-                  <div className="space-y-3">
-                    <h3 className="text-display-muted-editorial leading-[0.94] text-[var(--neutral-950)]">
-                      {stage.label}
-                    </h3>
-                    <p className="text-body-md text-[var(--color-text-secondary)]">
-                      {stage.description}
-                    </p>
-                  </div>
-                </div>
-              </PremiumSurface>
-            );
-          })}
-        </div>
-      </StudioPageContainer>
-    </section>
-  );
-}
-
-// The proof grid keeps named-project evidence tight and narrative-led instead of turning into a case-study wall.
-function AboutProofSection({ content }: { content: StudioAboutProofContent }) {
-  return (
-    <section className="border-b border-slate-200/80 bg-white py-14 md:py-20">
-      <StudioPageContainer className="space-y-10">
-        <SectionIntro
-          eyebrow={content.eyebrow}
-          title={content.title}
-          description={content.description}
-          className="lg:pl-4 xl:pl-6"
-        />
-
-        {/* The proof module trades isolated cards for a dotted grid so the project notes feel lighter and more editorial. */}
-        <div className="relative overflow-hidden rounded-[2rem] border border-slate-200/80 bg-white lg:ml-4 xl:ml-6">
-          <div aria-hidden="true" className="absolute inset-0">
-            <div className="absolute inset-0 bg-[radial-gradient(circle,rgba(88,41,199,0.16)_1px,transparent_1.4px)] bg-[size:20px_20px] opacity-75 [mask-image:linear-gradient(90deg,rgba(0,0,0,1)_0%,rgba(0,0,0,0.92)_34%,rgba(0,0,0,0.18)_64%,transparent_100%)]" />
-            <div className="absolute inset-0 bg-[radial-gradient(circle,rgba(255,202,45,0.22)_1px,transparent_1.45px)] bg-[size:20px_20px] opacity-70 [mask-image:linear-gradient(90deg,transparent_0%,rgba(0,0,0,0.16)_36%,rgba(0,0,0,0.88)_68%,rgba(0,0,0,1)_100%)]" />
-          </div>
-
-          <div className="relative grid lg:grid-cols-2">
-            {content.entries.map((entry, index) => {
-              const totalRows = Math.ceil(content.entries.length / 2);
-              const rowIndex = Math.floor(index / 2);
-              const isLeftColumn = index % 2 === 0;
-              const hasBottomBorder = rowIndex < totalRows - 1;
-              const proofTone = resolveStudioCaseStudyProofTone(entry.client);
-
-              return (
-                <AboutProofEntryCard
-                  key={entry.client}
-                  entry={entry}
-                  proofTone={proofTone}
-                  className={[
-                    hasBottomBorder ? "border-b border-slate-200/80" : "",
-                    isLeftColumn ? "lg:border-r lg:border-slate-200/80" : "",
-                  ]
-                    .filter(Boolean)
-                    .join(" ")}
+        <div className="mt-16 grid grid-cols-2 items-center gap-x-12 gap-y-20 sm:grid-cols-3 md:mt-20 md:gap-x-16 md:gap-y-28 lg:grid-cols-5 lg:gap-x-20">
+          {ABOUT_CLIENT_LOGOS.map((logo) => (
+            <div key={logo.name} className="flex items-center justify-center">
+              <div className="relative h-10 w-full md:h-12">
+                <Image
+                  src={logo.src}
+                  alt={logo.name}
+                  fill
+                  sizes="(min-width: 1024px) 16vw, 40vw"
+                  className="object-contain opacity-60 grayscale transition-all duration-300 hover:opacity-100 hover:grayscale-0"
                 />
-              );
-            })}
-          </div>
-        </div>
-      </StudioPageContainer>
-    </section>
-  );
-}
-
-// This two-panel section pairs the studio's working standards with a parallel explanation of what feels different about working with Yuvabe.
-function AboutValuesAndTeamSection({
-  values,
-  teamTeaser,
-}: {
-  values: StudioAboutValuesContent;
-  teamTeaser: StudioAboutPageContent["teamTeaser"];
-}) {
-  return (
-    <section className="border-b border-slate-200/80 bg-[var(--color-background-canvas)] py-14 md:py-20">
-      <StudioPageContainer className="space-y-10">
-        <SectionIntro
-          eyebrow={values.eyebrow}
-          title={values.title}
-          description={values.description}
-          className="lg:pl-4 xl:pl-6"
-        />
-
-        <div className="grid gap-10 lg:grid-cols-[minmax(0,1.16fr)_minmax(20rem,0.84fr)] lg:items-start lg:gap-12">
-          <div className="min-w-0 lg:pl-4 xl:pl-6">
-            {/* The left subsection is the dedicated values module inside the larger How we work section. */}
-            <PremiumSurface
-              tone="glass"
-              elevation="md"
-              blur="md"
-              radius="xl"
-              className="overflow-hidden px-5 py-5 sm:px-6 md:px-8 md:py-7"
-            >
-              {/* The background wash gives the values card a softer premium depth without competing with the right column. */}
-              <div aria-hidden="true" className="absolute inset-0">
-                <div className="absolute inset-0 bg-[linear-gradient(135deg,rgba(88,41,199,0.12)_0%,rgba(255,255,255,0.72)_34%,rgba(255,202,45,0.14)_100%)]" />
-                <div className="absolute left-[-10%] top-[-18%] h-[20rem] w-[20rem] rounded-full bg-[radial-gradient(circle,rgba(88,41,199,0.2)_0%,rgba(88,41,199,0.08)_34%,rgba(88,41,199,0)_76%)] blur-3xl" />
-                <div className="absolute bottom-[-26%] right-[-10%] h-[18rem] w-[18rem] rounded-full bg-[radial-gradient(circle,rgba(255,202,45,0.22)_0%,rgba(255,202,45,0.1)_36%,rgba(255,202,45,0)_76%)] blur-3xl" />
-                <div className="absolute right-[18%] top-[26%] h-[10rem] w-[10rem] rounded-full bg-[radial-gradient(circle,rgba(121,210,225,0.16)_0%,rgba(121,210,225,0)_72%)] blur-3xl" />
-                <div className="absolute inset-x-[12%] top-[6%] h-[28%] rounded-full bg-[radial-gradient(circle,rgba(255,255,255,0.78)_0%,rgba(255,255,255,0.16)_56%,transparent_86%)] blur-2xl" />
               </div>
-
-              <div className="relative z-10 space-y-4 pb-5 md:pb-7">
-                <p className="text-label-sm uppercase tracking-[0.22em] text-[var(--color-text-tertiary)]">
-                  Our values
-                </p>
-                <h3 className="max-w-[16ch] text-heading-lg text-[var(--neutral-950)] md:text-heading-xl">
-                  Care, courage, and creativity.
-                </h3>
-              </div>
-
-              <div className="relative z-10 space-y-6 md:space-y-7">
-                {values.values.map((value) => {
-                  const valueIconAsset =
-                    valueIconAssets[value.title as keyof typeof valueIconAssets];
-                  const usesLargePanel = valueIconAsset?.treatment === "panel";
-
-                  return (
-                    <div
-                      key={value.title}
-                      className={[
-                        "grid min-w-0 items-start gap-4 py-1 md:gap-5 md:py-2",
-                        usesLargePanel
-                          ? "grid-cols-[4.5rem_minmax(0,1fr)] sm:grid-cols-[5.6875rem_minmax(0,1fr)]"
-                          : "grid-cols-[3rem_minmax(0,1fr)] sm:grid-cols-[auto_minmax(0,1fr)]",
-                      ].join(" ")}
-                    >
-                      <div
-                        className={[
-                          usesLargePanel
-                            ? "relative h-[4.5rem] w-[4.5rem] self-start sm:h-[5.6875rem] sm:w-[5.6875rem]"
-                            : "flex size-11 items-center justify-center rounded-full border border-slate-200/80 bg-white text-[var(--color-text-brand)] shadow-[0_10px_28px_rgba(15,23,42,0.06)]",
-                        ].join(" ")}
-                      >
-                        {valueIconAsset ? (
-                          <div
-                            className={[
-                              "relative",
-                              usesLargePanel ? "h-full w-full" : "size-5",
-                            ].join(" ")}
-                          >
-                            <Image
-                              src={valueIconAsset.src}
-                              alt={valueIconAsset.alt}
-                              fill={usesLargePanel}
-                              width={usesLargePanel ? undefined : 20}
-                              height={usesLargePanel ? undefined : 20}
-                              sizes={usesLargePanel ? "91px" : "20px"}
-                              className={[
-                                "object-contain",
-                                usesLargePanel
-                                  ? "origin-left scale-[0.72] sm:scale-[0.65]"
-                                  : "",
-                              ]
-                                .filter(Boolean)
-                                .join(" ")}
-                            />
-                          </div>
-                        ) : null}
-                      </div>
-                      <div
-                        className={[
-                          "min-w-0 space-y-2 self-start",
-                          usesLargePanel ? "self-start pt-1" : "",
-                        ]
-                          .filter(Boolean)
-                          .join(" ")}
-                      >
-                        <h4 className="text-heading-md text-[var(--neutral-950)]">
-                          {value.title}
-                        </h4>
-                        <p className="text-body-md text-[var(--color-text-secondary)]">
-                          {value.description}
-                        </p>
-                      </div>
-                    </div>
-                  );
-                })}
-              </div>
-
-              <div className="relative z-10 flex w-full min-w-0 flex-wrap items-center gap-x-4 gap-y-3 pb-2 pt-6 md:gap-x-5 md:pt-7">
-                {values.principles.map((principle, index) => (
-                  <span
-                    key={principle}
-                    className={[
-                      "whitespace-nowrap text-label-lg font-semibold md:text-label-xl",
-                      principleHashtagClasses[index % principleHashtagClasses.length],
-                    ].join(" ")}
-                  >
-                    #{principle.replace(/\s+/g, "")}
-                  </span>
-                ))}
-              </div>
-            </PremiumSurface>
-          </div>
-
-          {/* The right subsection stays unframed so the values panel remains the heavier anchor. */}
-          <div className="min-w-0 space-y-6 pt-2 lg:pt-6">
-            <div className="max-w-2xl space-y-3">
-              <p className="text-label-sm uppercase tracking-[0.22em] text-[var(--color-text-tertiary)]">
-                What makes us different
-              </p>
-              <h3 className="max-w-[16ch] text-heading-lg text-[var(--neutral-950)] md:text-heading-xl">
-                {teamTeaser.title}
-              </h3>
-              <p className="text-body-md text-[var(--color-text-secondary)]">
-                {teamTeaser.description}
-              </p>
             </div>
-
-            <div className="space-y-4">
-              {teamTeaser.points.map((point) => (
-                <div
-                  key={point}
-                  className="grid min-w-0 grid-cols-[0.875rem_minmax(0,1fr)] items-start gap-3 py-2"
-                >
-                  <span className="mt-[0.7rem] flex size-3 shrink-0 rounded-full bg-[var(--purple-500)]" />
-                  <p className="text-body-md text-[var(--color-text-secondary)]">
-                    {point}
-                  </p>
-                </div>
-              ))}
-            </div>
-          </div>
+          ))}
         </div>
-      </StudioPageContainer>
+      </Rail>
     </section>
   );
 }
@@ -996,7 +295,8 @@ function AboutFinalCta({ content }: { content: StudioAboutPageContent["cta"] }) 
 }
 
 export function StudioAboutPage({ navigationItems, content }: StudioAboutPageProps) {
-  const { hero, story, workflow, proof, values, teamTeaser, cta } = content;
+  const { hero, stats, nameMeaning, philosophy, story, testimonials, cta } =
+    content;
 
   return (
     <main
@@ -1006,18 +306,31 @@ export function StudioAboutPage({ navigationItems, content }: StudioAboutPagePro
       {/* The page-level rails keep the dedicated route visually tied to the homepage shell. */}
       <div aria-hidden="true" className="pointer-events-none absolute inset-0 z-0">
         <StudioPageRails />
-        <div className="absolute inset-x-0 top-0 h-[22rem] bg-[radial-gradient(circle_at_16%_4%,rgba(88,41,199,0.08),rgba(255,255,255,0)_32%),radial-gradient(circle_at_88%_0%,rgba(255,202,45,0.1),rgba(255,255,255,0)_30%)]" />
       </div>
 
       <StudioHeader navigationItems={navigationItems} />
 
       <article className="relative z-10">
-        <AboutHero content={hero} />
-        <AboutStorySection content={story} />
-        <AboutTeamBandSection />
-        <AboutWorkflowSection content={workflow} />
-        <AboutProofSection content={proof} />
-        <AboutValuesAndTeamSection values={values} teamTeaser={teamTeaser} />
+        <AboutHeroScroll
+          hero={hero}
+          coverSrc={aboutAssets.cover.src}
+          coverAlt={aboutAssets.cover.alt}
+        />
+        <AboutStatsStrip stats={stats} />
+        <AboutHoverGallery
+          images={ABOUT_GALLERY_IMAGES}
+          eyebrow="Who we are"
+          title="A collective of thinkers, creators and builders."
+          subheading="A multidisciplinary team united by curiosity, craft and the drive to create impact."
+        />
+        <AboutNameMeaning content={nameMeaning} />
+        <AboutPhilosophy content={philosophy} />
+        <AboutWhyPillars story={story} />
+        <AboutClients />
+        <AboutTestimonials
+          eyebrow={testimonials.eyebrow}
+          testimonials={testimonials.items}
+        />
         <AboutFinalCta content={cta} />
       </article>
     </main>
