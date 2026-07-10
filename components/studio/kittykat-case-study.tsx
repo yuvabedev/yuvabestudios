@@ -19,21 +19,17 @@ import type {
 
 // ─── Curated KittyKat imagery ────────────────────────────────────────────────
 // Hand-picked from the KK asset set so each section leads with a strong visual.
-const HERO_IMAGE = "/assets/KK/Cover-home.png";
-const BLEED_IMAGE = "/assets/KK/mock-detail.png";
+const HERO_IMAGE = "/assets/KK/Cover-summary.png";
+const BLEED_IMAGE = "/assets/KK/mock5.png";
 const SECTION_IMAGES = [
   "/assets/KK/mock1.png",
   "/assets/KK/mock2.png",
   "/assets/KK/mock3.png",
-  "/assets/KK/full-screenshot.png",
+  "/assets/KK/mock4.png",
 ];
 const GALLERY_IMAGES = [
-  "/assets/kittykat/Screenshot-1.png",
-  "/assets/KK/mock4.png",
-  "/assets/kittykat/Screenshot-2.png",
-  "/assets/kittykat/Screenshot-3.png",
-  "/assets/KK/mock5.png",
-  "/assets/kittykat/Screenshot-4.png",
+  "/assets/KK/cover-mock.png",
+  "/assets/KK/mock.png",
 ];
 
 const easeOut = [0.22, 1, 0.36, 1] as const;
@@ -76,10 +72,10 @@ function ScrollProgress() {
   );
 }
 
-// Scroll-reveal media with continuous parallax drift and a hover zoom.
-// `wipe` (default) reveals the image with a bottom-up clip-path wipe; the big
-// full-bleed covers opt out (wipe={false}) for a calmer fade-up instead.
-// Sharp corners (no radius).
+// Scroll-reveal media: images sit flush (no parallax/zoom). `wipe` (default)
+// reveals the image with a retracting curtain panel; the big full-bleed covers
+// opt out (wipe={false}) for a calmer fade-up. Sharp corners (no radius).
+// `fit="contain"` shows UI screenshots whole instead of cropping them.
 function RevealImage({
   src,
   alt,
@@ -88,6 +84,7 @@ function RevealImage({
   priority,
   className = "",
   wipe = true,
+  fit = "cover",
 }: {
   src: string;
   alt: string;
@@ -96,18 +93,9 @@ function RevealImage({
   priority?: boolean;
   className?: string;
   wipe?: boolean;
+  fit?: "cover" | "contain";
 }) {
-  const ref = useRef<HTMLDivElement | null>(null);
   const reduce = useReducedMotion();
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ["start end", "end start"],
-  });
-  const y = useTransform(
-    scrollYProgress,
-    [0, 1],
-    reduce ? ["0%", "0%"] : ["-8%", "8%"],
-  );
 
   // Big covers (wipe=false) or reduced-motion → simple fade-up. The image is
   // always painted; the wipe is done by a curtain panel that retracts, so the
@@ -116,24 +104,21 @@ function RevealImage({
 
   return (
     <motion.div
-      ref={ref}
       initial={useFade ? { opacity: 0, y: reduce ? 0 : 36 } : false}
       whileInView={useFade ? { opacity: 1, y: 0 } : undefined}
       viewport={{ once: true, amount: 0.2 }}
       transition={{ duration: 0.9, ease: easeOut }}
-      className={`group relative overflow-hidden bg-(--neutral-100) ${className}`}
+      className={`group relative overflow-hidden ${fit === "contain" ? "" : "bg-(--neutral-100)"} ${className}`}
     >
       <div className={`relative ${aspect}`}>
-        <motion.div style={{ y }} className="absolute inset-0 -top-[8%] h-[116%]">
-          <Image
-            src={src}
-            alt={alt}
-            fill
-            priority={priority}
-            sizes={sizes}
-            className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04]"
-          />
-        </motion.div>
+        <Image
+          src={src}
+          alt={alt}
+          fill
+          priority={priority}
+          sizes={sizes}
+          className={fit === "contain" ? "object-contain" : "object-cover"}
+        />
       </div>
 
       {/* Curtain wipe — retracts upward to reveal the image (bottom-up). */}
@@ -344,6 +329,7 @@ export function KittyKatCaseStudy({ caseStudy, detail }: KittyKatCaseStudyProps)
                     alt={`${title} — ${s.title}`}
                     aspect="aspect-[4/3]"
                     sizes="(min-width: 1024px) 50vw, 100vw"
+                    fit="contain"
                   />
                 </div>
               </motion.div>
@@ -397,15 +383,15 @@ export function KittyKatCaseStudy({ caseStudy, detail }: KittyKatCaseStudyProps)
       {/* ── 06 Gallery grid ───────────────────────────────────────────────── */}
       <section className="py-24 md:py-32">
         <Shell>
-          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:gap-6">
             {GALLERY_IMAGES.map((src, i) => (
               <RevealImage
                 key={src}
                 src={src}
                 alt={`${title} product gallery ${i + 1}`}
                 aspect="aspect-[16/10]"
-                sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
-                className={i % 5 === 0 ? "sm:col-span-2" : ""}
+                sizes="(min-width: 640px) 50vw, 100vw"
+                fit="contain"
               />
             ))}
           </div>
@@ -414,9 +400,9 @@ export function KittyKatCaseStudy({ caseStudy, detail }: KittyKatCaseStudyProps)
 
       {/* ── 07 Outcomes strip ─────────────────────────────────────────────── */}
       {outcomes.length > 0 && (
-        <section className="bg-(--neutral-950) py-24 text-white md:py-32">
+        <section className="bg-[#DB6E96] py-24 text-white md:py-32">
           <Shell>
-            <span className="font-mono text-[12px] font-medium uppercase tracking-[0.18em] text-(--yellow-500)">
+            <span className="font-mono text-[12px] font-medium uppercase tracking-[0.18em] text-white">
               Outcomes
             </span>
             <motion.div
@@ -472,7 +458,7 @@ export function KittyKatCaseStudy({ caseStudy, detail }: KittyKatCaseStudyProps)
       )}
 
       {/* ── 09 Footer CTA ─────────────────────────────────────────────────── */}
-      <footer className="bg-(--neutral-950) py-20 text-white md:py-28">
+      <footer className="bg-[#DB6E96] py-20 text-white md:py-28">
         <Shell className="flex flex-col items-start justify-between gap-10 md:flex-row md:items-end">
           <div>
             <h2 className="max-w-2xl font-(family-name:--font-display-family) text-[clamp(2rem,4.5vw,3.6rem)] font-semibold leading-[1.02] tracking-[-0.03em]">
@@ -487,7 +473,10 @@ export function KittyKatCaseStudy({ caseStudy, detail }: KittyKatCaseStudyProps)
               className="group inline-flex items-center gap-2 rounded-full bg-white px-7 py-4 text-[15px] font-semibold text-(--neutral-950) transition-transform duration-200 hover:-translate-y-0.5"
             >
               Start a project
-              <ArrowRight size={16} className="transition-transform duration-200 group-hover:translate-x-0.5" />
+              <ArrowRight
+                size={16}
+                className="transition-transform duration-200 group-hover:translate-x-0.5"
+              />
             </a>
             <Link
               href="/work"

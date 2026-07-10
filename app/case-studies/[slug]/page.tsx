@@ -11,6 +11,8 @@ import { PrakritiSattvaCaseStudy } from "@/components/studio/prakriti-sattva-cas
 import { GaCinematicCaseStudy } from "@/components/studio/ga-cinematic-case-study";
 import { KittyKatCaseStudy } from "@/components/studio/kittykat-case-study";
 import { BevolveCaseStudy } from "@/components/studio/bevolve-case-study";
+import { MatrimandirCaseStudy } from "@/components/studio/matrimandir-case-study";
+import { AvMarathonCaseStudy } from "@/components/studio/av-marathon-case-study";
 import { StudioHeader } from "@/components/studio/studio-header";
 import {
   StudioPageContainer,
@@ -167,6 +169,34 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
         />
         <StudioHeader navigationItems={homepageContent.navigationItems} />
         <BevolveCaseStudy caseStudy={displayCaseStudy} detail={detail} />
+      </>
+    );
+  }
+
+  // Matrimandir — bespoke immersive page: shared header, no shell.
+  if (slug === "matrimandir") {
+    return (
+      <>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+        />
+        <StudioHeader navigationItems={homepageContent.navigationItems} />
+        <MatrimandirCaseStudy caseStudy={displayCaseStudy} detail={detail} />
+      </>
+    );
+  }
+
+  // AV Marathon — bespoke immersive page: shared header, no shell.
+  if (slug === "av-marathon") {
+    return (
+      <>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+        />
+        <StudioHeader navigationItems={homepageContent.navigationItems} />
+        <AvMarathonCaseStudy caseStudy={displayCaseStudy} detail={detail} />
       </>
     );
   }

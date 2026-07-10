@@ -46,6 +46,16 @@ type WorkItem = {
 
 const ALL_WORK = "All Work" as const;
 
+// Case studies whose detail pages aren't ready — shown in the grid but not
+// linked for now.
+const NON_CLICKABLE_IDS = new Set([
+  "ageshift",
+  "hemplanet",
+  "yuvanext",
+  "rangasutra",
+  "buglerock",
+]);
+
 const easeOut = [0.22, 1, 0.36, 1] as const;
 
 type WorkCardVariant = "feature" | "wide" | "narrow";
@@ -55,13 +65,20 @@ function WorkCard({
   index,
   variant,
   fallbackIndex,
+  clickable,
 }: {
   item: WorkItem;
   index: number;
   variant: WorkCardVariant;
   fallbackIndex: number;
+  clickable: boolean;
 }) {
-  const cardRef = useRef<HTMLAnchorElement | null>(null);
+  const cardRef = useRef<HTMLElement | null>(null);
+  // Callback ref accepts the wider HTMLElement type so it can attach to either
+  // the anchor (clickable) or the div (non-clickable) wrapper.
+  const setCardRef = (el: HTMLElement | null) => {
+    cardRef.current = el;
+  };
   const videoRef = useRef<HTMLVideoElement | null>(null);
   const reduceMotion = useReducedMotion();
   const feature = variant === "feature";
@@ -95,6 +112,98 @@ function WorkCard({
       ? "aspect-[16/9] max-h-[80vh]"
       : "aspect-[9/16] max-h-[78vh]";
 
+  const cardContent = (
+    <>
+      <div
+        className={`relative ${aspect} w-full overflow-hidden bg-(--neutral-100) ring-1 ring-(--color-border-default) transition-shadow duration-500 ${
+          clickable
+            ? "group-hover:shadow-[0_30px_70px_-30px_rgba(17,17,17,0.45)]"
+            : ""
+        }`}
+      >
+        {item.videoSrc ? (
+          <motion.div
+            style={{ y: imageY }}
+            className="absolute inset-0 -top-[8%] h-[116%] w-full"
+          >
+            <video
+              ref={videoRef}
+              src={item.videoSrc}
+              poster={item.imageSrc ?? undefined}
+              muted
+              loop
+              playsInline
+              preload="metadata"
+              aria-hidden="true"
+              className="h-full w-full object-cover"
+            />
+          </motion.div>
+        ) : item.imageSrc ? (
+          <motion.div
+            style={{ y: imageY }}
+            className="absolute inset-0 -top-[8%] h-[116%] w-full"
+          >
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src={item.imageSrc}
+              alt={`${item.title} — ${item.summary}`}
+              className="h-full w-full object-cover"
+              loading={feature ? "eager" : "lazy"}
+              decoding="async"
+            />
+          </motion.div>
+        ) : (
+          <div
+            className={`absolute inset-0 flex items-center justify-center bg-(--neutral-950) ${
+              gradientFallbacks[fallbackIndex % gradientFallbacks.length]
+            }`}
+          >
+            <span className="px-8 text-center font-mono text-2xl font-semibold uppercase tracking-[0.12em] text-white/85 transition-transform duration-700 ease-out group-hover:scale-105 sm:text-4xl">
+              {item.title}
+            </span>
+          </div>
+        )}
+
+        {/* Hover affordances only appear on clickable cards. */}
+        {clickable && (
+          <>
+            {/* Hover scrim keeps the floating CTA legible over any cover. */}
+            <div className="absolute inset-0 bg-gradient-to-t from-black/35 via-transparent to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+
+            {/* Floating "view case study" pill — the clay-style micro reveal. */}
+            <div className="pointer-events-none absolute right-4 top-4 translate-y-2 opacity-0 transition-all duration-400 ease-out group-hover:translate-y-0 group-hover:opacity-100">
+              <span className="inline-flex items-center gap-1.5 rounded-full bg-black/85 px-4 py-2 text-[12px] font-medium text-white backdrop-blur">
+                View case study
+                <ArrowUpRight size={14} />
+              </span>
+            </div>
+          </>
+        )}
+      </div>
+
+      <div className="mt-5 flex flex-col gap-2">
+        <h3
+          className={`font-semibold leading-tight text-(--neutral-950) transition-colors duration-200 ${
+            clickable ? "group-hover:text-brand" : ""
+          } ${feature ? "text-2xl sm:text-3xl" : "text-xl sm:text-2xl"}`}
+        >
+          {item.title}
+        </h3>
+        <p className="max-w-2xl text-[15px] leading-relaxed text-(--color-text-secondary)">
+          {item.summary}
+        </p>
+        <div className="mt-1 flex flex-wrap items-center gap-x-2 gap-y-1 font-mono text-[11px] uppercase tracking-[0.12em] text-(--neutral-500)">
+          <span className="text-(--color-text-brand)">{item.category}</span>
+          {item.services.slice(0, 3).map((service) => (
+            <span key={service} className="before:mr-2 before:content-['·']">
+              {service}
+            </span>
+          ))}
+        </div>
+      </div>
+    </>
+  );
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 48 }}
@@ -102,95 +211,24 @@ function WorkCard({
       viewport={{ once: true, margin: "-12% 0px -12% 0px" }}
       transition={{ duration: 0.7, ease: easeOut, delay: (index % 2) * 0.08 }}
     >
-      <Link
-        ref={cardRef}
-        href={item.href}
-        className="group block focus-visible:outline-none"
-        aria-label={`View the ${item.title} case study`}
-        onMouseEnter={item.videoSrc ? playVideo : undefined}
-        onMouseLeave={item.videoSrc ? resetVideo : undefined}
-        onFocus={item.videoSrc ? playVideo : undefined}
-        onBlur={item.videoSrc ? resetVideo : undefined}
-      >
-        <div
-          className={`relative ${aspect} w-full overflow-hidden bg-(--neutral-100) ring-1 ring-(--color-border-default) transition-shadow duration-500 group-hover:shadow-[0_30px_70px_-30px_rgba(17,17,17,0.45)]`}
+      {clickable ? (
+        <Link
+          ref={setCardRef}
+          href={item.href}
+          className="group block focus-visible:outline-none"
+          aria-label={`View the ${item.title} case study`}
+          onMouseEnter={item.videoSrc ? playVideo : undefined}
+          onMouseLeave={item.videoSrc ? resetVideo : undefined}
+          onFocus={item.videoSrc ? playVideo : undefined}
+          onBlur={item.videoSrc ? resetVideo : undefined}
         >
-          {item.videoSrc ? (
-            <motion.div
-              style={{ y: imageY }}
-              className="absolute inset-0 -top-[8%] h-[116%] w-full"
-            >
-              <video
-                ref={videoRef}
-                src={item.videoSrc}
-                poster={item.imageSrc ?? undefined}
-                muted
-                loop
-                playsInline
-                preload="metadata"
-                aria-hidden="true"
-                className="h-full w-full object-cover"
-              />
-            </motion.div>
-          ) : item.imageSrc ? (
-            <motion.div
-              style={{ y: imageY }}
-              className="absolute inset-0 -top-[8%] h-[116%] w-full"
-            >
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src={item.imageSrc}
-                alt={`${item.title} — ${item.summary}`}
-                className="h-full w-full object-cover"
-                loading={feature ? "eager" : "lazy"}
-                decoding="async"
-              />
-            </motion.div>
-          ) : (
-            <div
-              className={`absolute inset-0 flex items-center justify-center bg-(--neutral-950) ${
-                gradientFallbacks[fallbackIndex % gradientFallbacks.length]
-              }`}
-            >
-              <span className="px-8 text-center font-mono text-2xl font-semibold uppercase tracking-[0.12em] text-white/85 transition-transform duration-700 ease-out group-hover:scale-105 sm:text-4xl">
-                {item.title}
-              </span>
-            </div>
-          )}
-
-          {/* Hover scrim keeps the floating CTA legible over any cover. */}
-          <div className="absolute inset-0 bg-gradient-to-t from-black/35 via-transparent to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
-
-          {/* Floating "view case study" pill — the clay-style micro reveal. */}
-          <div className="pointer-events-none absolute right-4 top-4 translate-y-2 opacity-0 transition-all duration-400 ease-out group-hover:translate-y-0 group-hover:opacity-100">
-            <span className="inline-flex items-center gap-1.5 rounded-full bg-black/85 px-4 py-2 text-[12px] font-medium text-white backdrop-blur">
-              View case study
-              <ArrowUpRight size={14} />
-            </span>
-          </div>
+          {cardContent}
+        </Link>
+      ) : (
+        <div ref={setCardRef} className="group block cursor-default">
+          {cardContent}
         </div>
-
-        <div className="mt-5 flex flex-col gap-2">
-          <h3
-            className={`font-semibold leading-tight text-(--neutral-950) transition-colors duration-200 group-hover:text-brand ${
-              feature ? "text-2xl sm:text-3xl" : "text-xl sm:text-2xl"
-            }`}
-          >
-            {item.title}
-          </h3>
-          <p className="max-w-2xl text-[15px] leading-relaxed text-(--color-text-secondary)">
-            {item.summary}
-          </p>
-          <div className="mt-1 flex flex-wrap items-center gap-x-2 gap-y-1 font-mono text-[11px] uppercase tracking-[0.12em] text-(--neutral-500)">
-            <span className="text-(--color-text-brand)">{item.category}</span>
-            {item.services.slice(0, 3).map((service) => (
-              <span key={service} className="before:mr-2 before:content-['·']">
-                {service}
-              </span>
-            ))}
-          </div>
-        </div>
-      </Link>
+      )}
     </motion.div>
   );
 }
@@ -257,7 +295,7 @@ export function WorkPage({ navigationItems, caseStudies, content }: WorkPageProp
                 transition={{ duration: 0.65, ease: easeOut }}
                 className="max-w-4xl"
               >
-                <h1 className="text-display-xl text-(--neutral-950)">
+                <h1 className="font-(family-name:--font-display-family) text-[clamp(2.25rem,6.5vw,4rem)] font-semibold leading-[1.05] tracking-[-0.02em] text-(--neutral-950)">
                   {content.hero.headingPrefix}{" "}
                   <em className="font-medium not-italic text-brand">
                     {content.hero.headingHighlight}
@@ -326,6 +364,7 @@ export function WorkPage({ navigationItems, caseStudies, content }: WorkPageProp
                         index={index}
                         variant="feature"
                         fallbackIndex={index}
+                        clickable={!NON_CLICKABLE_IDS.has(item.id)}
                       />
                     </div>
                   );
@@ -352,6 +391,7 @@ export function WorkPage({ navigationItems, caseStudies, content }: WorkPageProp
                       index={index}
                       variant={isWide ? "wide" : "narrow"}
                       fallbackIndex={index}
+                      clickable={!NON_CLICKABLE_IDS.has(item.id)}
                     />
                   </div>
                 );

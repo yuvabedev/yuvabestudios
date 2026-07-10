@@ -68,15 +68,15 @@ export const defaultWorkItems: WorkItemConfig[] = [
   { id: "tvam", category: WORK_CATEGORY.product, coverSrc: "/assets/tvam/cover.png" },
   { id: "kittykat", category: WORK_CATEGORY.product, coverSrc: "/assets/KK/mock-detail.png" },
   { id: "bevolve", category: WORK_CATEGORY.product, coverSrc: "/assets/bevolve/cover-detail.png" },
+  // Asset folders are spelled rangsutra/martimandir (IDs use rangasutra/matrimandir).
+  { id: "av-marathon", category: WORK_CATEGORY.growth, coverSrc: "/assets/av-marathon/web/cover.webp" },
+  { id: "matrimandir", category: WORK_CATEGORY.web, coverSrc: "/assets/martimandir/web/bg.webp" },
   { id: "prakiti-sattva", category: WORK_CATEGORY.web, coverSrc: "/assets/prakritisattva/hair-care.webp" },
+  { id: "buglerock", category: WORK_CATEGORY.product, coverSrc: "/assets/buglerock/homepage.png" },
+  { id: "rangasutra", category: WORK_CATEGORY.web, coverSrc: "/assets/rangsutra/poster_1.jpg" },
+  // yuvanext temporarily removed from the grid.
   { id: "ageshift", category: WORK_CATEGORY.product, coverSrc: "/assets/ageshift/ageshift_cover.png" },
   { id: "hemplanet", category: WORK_CATEGORY.growth, coverSrc: "/assets/hemplanet/cover.png" },
-  { id: "av-marathon", category: WORK_CATEGORY.growth, coverSrc: "/assets/av-marathon/cover.png" },
-  { id: "buglerock", category: WORK_CATEGORY.product, coverSrc: "/assets/buglerock/homepage.png" },
-  // Asset folders are spelled rangsutra/martimandir (IDs use rangasutra/matrimandir).
-  { id: "rangasutra", category: WORK_CATEGORY.web, coverSrc: "/assets/rangsutra/poster_1.jpg" },
-  { id: "matrimandir", category: WORK_CATEGORY.web, coverSrc: "/assets/martimandir/bg.png" },
-  { id: "yuvanext", category: WORK_CATEGORY.product },
 ];
 
 export const defaultWorkPageContent: WorkPageContent = {
