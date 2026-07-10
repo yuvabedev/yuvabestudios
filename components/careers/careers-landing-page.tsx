@@ -453,7 +453,7 @@ export function CareersLandingPage({
             <div className="mb-12 max-w-2xl md:mb-16">
               <Kicker>Why join us</Kicker>
               <h2 className="text-display-muted-editorial text-(--neutral-950)">
-                The perks of staying.
+                Everything you need to do your best work
               </h2>
             </div>
             <BenefitsScroller items={content.benefits} />
@@ -556,10 +556,10 @@ export function CareersLandingPage({
                     <ArrowRight size={16} />
                   </Link>
                   <a
-                    href="mailto:join@yuvabestudios.com"
+                    href="mailto:info@yuvabe.com"
                     className="inline-flex w-full items-center justify-center gap-2 rounded-full border border-(--color-border-default) bg-white px-7 py-4 text-[13px] font-semibold text-(--neutral-700) transition-all hover:border-brand/30 hover:text-brand sm:w-auto sm:text-[15px]"
                   >
-                    join@yuvabestudios.com
+                    info@yuvabe.com
                   </a>
                 </div>
               </div>
