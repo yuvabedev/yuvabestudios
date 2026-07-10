@@ -18,23 +18,19 @@ import type {
 } from "@/components/studio/studio-case-study-content";
 
 // ─── Curated Bevolve imagery ─────────────────────────────────────────────────
-const HERO_IMAGE = "/assets/bevolve/cover.png";
-const BLEED_IMAGE = "/assets/bevolve/cover-detail.png";
+const HERO_IMAGE = "/assets/bevolve/cover-summary.png";
+const BLEED_IMAGE = "/assets/bevolve/mock4.png";
 const SECTION_IMAGES = [
-  "/assets/bevolve/mock1.png",
-  "/assets/bevolve/mock3.png",
-  "/assets/bevolve/mock2.png",
-  "/assets/bevolve/mock4.png",
+  "/assets/bevolve/mock5.png",
+  "/assets/bevolve/mock6.png",
+  "/assets/bevolve/mock7.png",
+  "/assets/bevolve/mock8.png",
 ];
 // nuant-style "optimized widgets" — two product screens side by side.
 const WIDGET_PAIR = ["/assets/bevolve/mock1.png", "/assets/bevolve/mock3.png"];
 const GALLERY_IMAGES = [
   "/assets/bevolve/mock2.png",
   "/assets/bevolve/cover-mock.png",
-  "/assets/bevolve/mock4.png",
-  "/assets/bevolve/mock3.png",
-  "/assets/bevolve/cover-detail.png",
-  "/assets/bevolve/mock1.png",
 ];
 
 // Bevolve is a sustainability brand — a green accent gives the page its own
@@ -80,8 +76,8 @@ function ScrollProgress() {
   );
 }
 
-// Scroll-reveal media: continuous parallax drift + hover zoom. `wipe` reveals
-// with a retracting curtain panel; big covers fade-up instead. Sharp corners.
+// Scroll-reveal media: images sit flush as object-cover (no parallax/zoom).
+// `wipe` reveals with a retracting curtain panel; big covers fade-up instead.
 function RevealImage({
   src,
   alt,
@@ -90,6 +86,7 @@ function RevealImage({
   priority,
   className = "",
   wipe = true,
+  fit = "cover",
 }: {
   src: string;
   alt: string;
@@ -98,41 +95,29 @@ function RevealImage({
   priority?: boolean;
   className?: string;
   wipe?: boolean;
+  fit?: "cover" | "contain";
 }) {
-  const ref = useRef<HTMLDivElement | null>(null);
   const reduce = useReducedMotion();
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ["start end", "end start"],
-  });
-  const y = useTransform(
-    scrollYProgress,
-    [0, 1],
-    reduce ? ["0%", "0%"] : ["-8%", "8%"],
-  );
 
   const useFade = !wipe || reduce;
 
   return (
     <motion.div
-      ref={ref}
       initial={useFade ? { opacity: 0, y: reduce ? 0 : 36 } : false}
       whileInView={useFade ? { opacity: 1, y: 0 } : undefined}
       viewport={{ once: true, amount: 0.2 }}
       transition={{ duration: 0.9, ease: easeOut }}
-      className={`group relative overflow-hidden bg-(--neutral-100) ${className}`}
+      className={`group relative overflow-hidden ${fit === "contain" ? "" : "bg-(--neutral-100)"} ${className}`}
     >
       <div className={`relative ${aspect}`}>
-        <motion.div style={{ y }} className="absolute inset-0 -top-[8%] h-[116%]">
-          <Image
-            src={src}
-            alt={alt}
-            fill
-            priority={priority}
-            sizes={sizes}
-            className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04]"
-          />
-        </motion.div>
+        <Image
+          src={src}
+          alt={alt}
+          fill
+          priority={priority}
+          sizes={sizes}
+          className={fit === "contain" ? "object-contain" : "object-cover"}
+        />
       </div>
 
       {!useFade && (
@@ -328,6 +313,7 @@ export function BevolveCaseStudy({ caseStudy, detail }: BevolveCaseStudyProps) {
                 alt={`${title} product widget ${i + 1}`}
                 aspect="aspect-[16/11]"
                 sizes="(min-width: 768px) 50vw, 100vw"
+                fit="contain"
               />
             ))}
           </div>
@@ -370,6 +356,7 @@ export function BevolveCaseStudy({ caseStudy, detail }: BevolveCaseStudyProps) {
                     alt={`${title} — ${s.title}`}
                     aspect="aspect-[4/3]"
                     sizes="(min-width: 1024px) 50vw, 100vw"
+                    fit="contain"
                   />
                 </div>
               </motion.div>
@@ -423,15 +410,15 @@ export function BevolveCaseStudy({ caseStudy, detail }: BevolveCaseStudyProps) {
       {/* ── 07 Gallery grid ───────────────────────────────────────────────── */}
       <section className="py-24 md:py-32">
         <Shell>
-          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:gap-6">
             {GALLERY_IMAGES.map((src, i) => (
               <RevealImage
                 key={src}
                 src={src}
                 alt={`${title} product gallery ${i + 1}`}
                 aspect="aspect-[16/10]"
-                sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
-                className={i % 5 === 0 ? "sm:col-span-2" : ""}
+                sizes="(min-width: 640px) 50vw, 100vw"
+                fit="contain"
               />
             ))}
           </div>
