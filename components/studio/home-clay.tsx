@@ -1,13 +1,16 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, ArrowUpRight, ChevronRight } from "lucide-react";
+import { ArrowRight, ArrowUpRight, ChevronRight, Play, X } from "lucide-react";
 import {
+  AnimatePresence,
   motion,
+  useMotionValue,
   useReducedMotion,
   useScroll,
+  useSpring,
   useTransform,
   type Variants,
 } from "framer-motion";
@@ -92,6 +95,44 @@ export function HomeHero({ hero }: { hero: StudioHomepageHeroContent }) {
     return () => observer.disconnect();
   }, []);
 
+  // Click-to-watch: a play cursor trails the pointer over the reel, and
+  // clicking opens the full showreel with sound and controls.
+  const [hovered, setHovered] = useState(false);
+  const [open, setOpen] = useState(false);
+  const mediaRef = useRef<HTMLDivElement | null>(null);
+  const cursorX = useMotionValue(0);
+  const cursorY = useMotionValue(0);
+  const springCfg = { stiffness: 600, damping: 40, mass: 0.4 };
+  const trailX = useSpring(cursorX, springCfg);
+  const trailY = useSpring(cursorY, springCfg);
+
+  function handlePointerMove(event: React.MouseEvent) {
+    const rect = mediaRef.current?.getBoundingClientRect();
+    if (!rect) return;
+    cursorX.set(event.clientX - rect.left);
+    cursorY.set(event.clientY - rect.top);
+  }
+
+  // While the lightbox is open: lock scroll, close on Escape, and pause the
+  // muted background reel so two copies never play at once.
+  useEffect(() => {
+    if (!open) return;
+    const backgroundVideo = videoRef.current;
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setOpen(false);
+    };
+    document.addEventListener("keydown", onKeyDown);
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    backgroundVideo?.pause();
+
+    return () => {
+      document.removeEventListener("keydown", onKeyDown);
+      document.body.style.overflow = previousOverflow;
+      backgroundVideo?.play().catch(() => {});
+    };
+  }, [open]);
+
   return (
     <section
       ref={ref}
@@ -131,7 +172,10 @@ export function HomeHero({ hero }: { hero: StudioHomepageHeroContent }) {
         </div>
       </Rail>
 
-      <div className="relative z-10 px-6 pb-16 md:px-12 md:pb-24 lg:px-16">
+      <div
+        ref={mediaRef}
+        className="relative z-10 px-6 pb-16 md:px-12 md:pb-24 lg:px-16"
+      >
         <motion.div
           style={{ scale: imageScale, y: imageY }}
           className="relative mx-auto aspect-[16/9] w-full max-w-[1600px] overflow-hidden md:aspect-[16/8]"
@@ -143,11 +187,83 @@ export function HomeHero({ hero }: { hero: StudioHomepageHeroContent }) {
             loop
             playsInline
             preload="auto"
-            aria-label="Yuvabe Studios showreel"
-            className="h-full w-full object-cover object-[center_38%]"
+            aria-hidden="true"
+            className="absolute inset-0 h-full w-full object-cover object-[center_38%]"
+          />
+
+          {/* Full-bleed hit area: hides the native cursor and opens the reel. */}
+          <button
+            type="button"
+            onClick={() => setOpen(true)}
+            onMouseEnter={() => setHovered(true)}
+            onMouseLeave={() => setHovered(false)}
+            onMouseMove={handlePointerMove}
+            aria-label="Play the Yuvabe Studios showreel"
+            className="absolute inset-0 z-10 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-brand/50 md:cursor-none"
           />
         </motion.div>
+
+        {/* Trailing play cursor — desktop pointer devices only. */}
+        <AnimatePresence>
+          {hovered && !reduce && (
+            <motion.div
+              aria-hidden="true"
+              style={{ x: trailX, y: trailY, translateX: "-50%", translateY: "-50%" }}
+              initial={{ opacity: 0, scale: 0.6 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.6 }}
+              transition={{ duration: 0.18, ease: easeOut }}
+              className="pointer-events-none absolute left-0 top-0 z-20 hidden md:block"
+            >
+              <span className="flex size-24 flex-col items-center justify-center gap-1 rounded-full bg-white/95 text-(--neutral-950) shadow-[0_10px_30px_rgba(17,17,17,0.25)] backdrop-blur">
+                <Play size={20} fill="currentColor" />
+                <span className="font-mono text-[10px] font-semibold uppercase tracking-[0.14em]">
+                  Play
+                </span>
+              </span>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
+
+      {/* Showreel lightbox — full video with sound and controls. */}
+      <AnimatePresence>
+        {open && (
+          <motion.div
+            role="dialog"
+            aria-modal="true"
+            aria-label="Yuvabe Studios showreel"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.25, ease: easeOut }}
+            onClick={() => setOpen(false)}
+            className="fixed inset-0 z-100 flex items-center justify-center bg-black/90 p-4 backdrop-blur-sm md:p-10"
+          >
+            <button
+              type="button"
+              onClick={() => setOpen(false)}
+              aria-label="Close showreel"
+              className="absolute right-5 top-5 z-10 flex size-11 items-center justify-center rounded-full bg-white/10 text-white transition-colors hover:bg-white/20"
+            >
+              <X size={20} />
+            </button>
+
+            <motion.video
+              src="/assets/video/showreel-low.mp4"
+              controls
+              autoPlay
+              playsInline
+              initial={{ scale: 0.96, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.96, opacity: 0 }}
+              transition={{ duration: 0.28, ease: easeOut }}
+              onClick={(event) => event.stopPropagation()}
+              className="max-h-full w-full max-w-6xl"
+            />
+          </motion.div>
+        )}
+      </AnimatePresence>
     </section>
   );
 }
@@ -217,12 +333,57 @@ export function HomeServices({
 }
 
 // ─── Hover carousel band (reused from the About page) ────────────────────────
+// The four pillars that sit beneath the approach carousel.
+const HOME_APPROACH_CARDS = [
+  {
+    title: "Business-First Thinking",
+    description:
+      "We look beyond the brief to understand your business, your customers and your goals—so every solution creates lasting value.",
+  },
+  {
+    title: "AI at the Core",
+    description:
+      "We don't bolt AI onto projects—we build with it from the start. By integrating AI across every stage of execution, we create smarter workflows, faster delivery and better business outcomes.",
+  },
+  {
+    title: "Integrated Execution",
+    description:
+      "One collaborative team. Fewer handoffs. Faster decisions. Better outcomes.",
+  },
+  {
+    title: "Built for Long-Term Growth",
+    description:
+      "Launching is just the beginning. We help you measure, optimise and evolve your digital products and marketing so your business continues to grow with confidence.",
+  },
+];
+
 export function HomeCarousel() {
   return (
     <AboutHoverGallery
       images={HOME_SERVICE_GALLERY}
-      eyebrow="How we work"
-      title="We transform companies through design innovation."
+      eyebrow="Our Approach"
+      title="One partner. Every stage of growth."
+      subheading="Managing multiple agencies slows progress. Yuvabe brings strategy, design, engineering, AI and marketing together under one roof, giving you a seamless team that thinks strategically, executes efficiently and grows with your business."
+      beforeGallery={
+        <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-4 lg:gap-12">
+          {HOME_APPROACH_CARDS.map((card, index) => (
+            <div
+              key={card.title}
+              className="border-t-2 border-brand/70 pt-6 transition-transform duration-300 hover:-translate-y-1.5"
+            >
+              <span className="font-mono text-[12px] font-medium text-(--neutral-400)">
+                {String(index + 1).padStart(2, "0")}
+              </span>
+              <h3 className="mt-3 text-heading-md font-semibold leading-tight tracking-[-0.02em] text-(--neutral-950)">
+                {card.title}
+              </h3>
+              <p className="mt-3 text-[15px] leading-relaxed text-(--color-text-secondary)">
+                {card.description}
+              </p>
+            </div>
+          ))}
+        </div>
+      }
       footer={
         <Link
           href="/services"

@@ -164,12 +164,15 @@ export function AboutHoverGallery({
   eyebrow,
   title,
   subheading,
+  beforeGallery,
   footer,
 }: {
   images: { src: string; alt: string }[];
   eyebrow: string;
   title: string;
   subheading?: string;
+  // Optional content placed between the heading block and the carousel.
+  beforeGallery?: ReactNode;
   footer?: ReactNode;
 }) {
   const trackRef = useRef<HTMLDivElement | null>(null);
@@ -227,6 +230,10 @@ export function AboutHoverGallery({
           </p>
         ) : null}
       </Rail>
+
+      {beforeGallery ? (
+        <Rail className="mb-14 md:mb-20">{beforeGallery}</Rail>
+      ) : null}
 
       <div className="group relative">
         <div
