@@ -48,13 +48,7 @@ const ALL_WORK = "All Work" as const;
 
 // Case studies whose detail pages aren't ready — shown in the grid but not
 // linked for now.
-const NON_CLICKABLE_IDS = new Set([
-  "ageshift",
-  "hemplanet",
-  "yuvanext",
-  "rangasutra",
-  "buglerock",
-]);
+const NON_CLICKABLE_IDS = new Set(["ageshift", "yuvanext"]);
 
 const easeOut = [0.22, 1, 0.36, 1] as const;
 

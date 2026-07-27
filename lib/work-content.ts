@@ -64,19 +64,26 @@ const WORK_CATEGORY = {
 } as const;
 
 export const defaultWorkItems: WorkItemConfig[] = [
-  { id: "general-aeronautics", category: WORK_CATEGORY.web, coverSrc: "/assets/general-aeronautics/cover-summary.jpeg" },
-  { id: "tvam", category: WORK_CATEGORY.product, coverSrc: "/assets/tvam/cover.png" },
-  { id: "kittykat", category: WORK_CATEGORY.product, coverSrc: "/assets/KK/mock-detail.png" },
-  { id: "bevolve", category: WORK_CATEGORY.product, coverSrc: "/assets/bevolve/cover-detail.png" },
+  { id: "general-aeronautics", category: WORK_CATEGORY.web, coverSrc: "/assets/general-aeronautics/web/cover-summary.webp" },
+  { id: "tvam", category: WORK_CATEGORY.product, coverSrc: "/assets/tvam/web/cover.webp" },
+  { id: "kittykat", category: WORK_CATEGORY.product, coverSrc: "/assets/KK/web/mock-detail.webp" },
+  { id: "bevolve", category: WORK_CATEGORY.product, coverSrc: "/assets/bevolve/web/cover-detail.webp" },
   // Asset folders are spelled rangsutra/martimandir (IDs use rangasutra/matrimandir).
   { id: "av-marathon", category: WORK_CATEGORY.growth, coverSrc: "/assets/av-marathon/web/cover.webp" },
   { id: "matrimandir", category: WORK_CATEGORY.web, coverSrc: "/assets/martimandir/web/bg.webp" },
   { id: "prakiti-sattva", category: WORK_CATEGORY.web, coverSrc: "/assets/prakritisattva/hair-care.webp" },
-  { id: "buglerock", category: WORK_CATEGORY.product, coverSrc: "/assets/buglerock/homepage.png" },
-  { id: "rangasutra", category: WORK_CATEGORY.web, coverSrc: "/assets/rangsutra/poster_1.jpg" },
+  { id: "buglerock", category: WORK_CATEGORY.product, coverSrc: "/assets/buglerock/web/homepage.webp" },
+  { id: "rangasutra", category: WORK_CATEGORY.web, coverSrc: "/assets/rangsutra/web/poster_1.webp" },
+  // Asset folder is capitalised "Maatram" — must match exactly on Linux.
+  { id: "maatram", category: WORK_CATEGORY.web, coverSrc: "/assets/Maatram/web/s26.webp" },
+  { id: "agroecology-india", category: WORK_CATEGORY.web, coverSrc: "/assets/agroecological/web/work-cover.webp" },
+  { id: "bmh", category: WORK_CATEGORY.growth, coverSrc: "/assets/bmh/web/tall.webp" },
+  // Asset folder is capitalised "Nsf" — must match exactly on Linux.
+  { id: "nsf", category: WORK_CATEGORY.growth, coverSrc: "/assets/Nsf/web/s1.webp" },
+  { id: "indic-ai", category: WORK_CATEGORY.web, coverSrc: "/assets/Indic-AI/web/web2.webp" },
   // yuvanext temporarily removed from the grid.
-  { id: "ageshift", category: WORK_CATEGORY.product, coverSrc: "/assets/ageshift/ageshift_cover.png" },
-  { id: "hemplanet", category: WORK_CATEGORY.growth, coverSrc: "/assets/hemplanet/cover.png" },
+  { id: "ageshift", category: WORK_CATEGORY.product, coverSrc: "/assets/ageshift/web/cover.webp" },
+  { id: "hemplanet", category: WORK_CATEGORY.growth, coverSrc: "/assets/hemplanet/web/p4.webp" },
 ];
 
 export const defaultWorkPageContent: WorkPageContent = {

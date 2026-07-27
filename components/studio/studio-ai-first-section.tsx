@@ -1,4 +1,6 @@
-import type { ReactNode } from "react";
+"use client";
+
+import { useEffect, useLayoutEffect, useRef, type ReactNode } from "react";
 import {
   AppWindowMac,
   Brain,
@@ -12,9 +14,18 @@ import {
   Rocket,
   Sparkles,
 } from "lucide-react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 import { IllustrationCard } from "@/components/ui/illustration-card";
 import { cn } from "@/lib/utils";
+
+gsap.registerPlugin(ScrollTrigger);
+
+// useLayoutEffect warns during SSR; fall back to useEffect on the server so the
+// GSAP setup still runs before paint in the browser (no reveal flash).
+const useIsomorphicLayoutEffect =
+  typeof window !== "undefined" ? useLayoutEffect : useEffect;
 
 type GraphicStep = {
   label: string;
@@ -325,7 +336,7 @@ function WorkflowShiftGraphic() {
           </div>
         </div>
 
-        <div className="flex flex-wrap items-center gap-x-1 gap-y-2 md:flex-nowrap">
+        <div className="aidna-oldflow flex flex-wrap items-center gap-x-1 gap-y-2 md:flex-nowrap">
           {legacyWorkflowSteps.map((step, index) => (
             <OldWorkflowStep
               key={step.label}
@@ -338,7 +349,7 @@ function WorkflowShiftGraphic() {
 
       {/* The acceleration divider is the visual hinge between old execution and AI-native loops. */}
       <div className="relative px-5 md:px-6">
-        <div className="h-px bg-[linear-gradient(90deg,transparent_0%,rgb(200_184_149_/_0.86)_50%,transparent_100%)] shadow-[0_0_22px_rgb(200_184_149_/_0.34)]" />
+        <div className="aidna-beam h-px origin-left bg-[linear-gradient(90deg,transparent_0%,rgb(200_184_149_/_0.86)_50%,transparent_100%)] shadow-[0_0_22px_rgb(200_184_149_/_0.34)]" />
         <div className="absolute inset-x-0 top-1/2 flex -translate-y-1/2 justify-center">
           <div className="inline-flex items-center gap-1.5 bg-[rgb(8_15_25_/_0.98)] px-3 text-[0.72rem] uppercase tracking-[0.14em] text-[var(--color-workflow-accent)]">
             <Cog className="size-3.5 stroke-[1.8]" />
@@ -364,7 +375,7 @@ function WorkflowShiftGraphic() {
             aria-hidden="true"
             className="pointer-events-none absolute left-[24%] top-[20%] h-36 w-[54%] bg-[radial-gradient(circle,color-mix(in_srgb,var(--color-workflow-native-gold)_26%,transparent)_0%,transparent_72%)] blur-3xl"
           />
-          <div className="relative hidden min-h-64 md:block">
+          <div className="aidna-native relative hidden min-h-64 md:block">
             <div
               aria-hidden="true"
               className="pointer-events-none absolute left-[35.5%] top-16 h-10 w-48 bg-(--gradient-workflow-native-beam) blur-2xl"
@@ -1025,8 +1036,79 @@ function FramingAndJudgmentRow() {
 
 // This section packages the dark-band story into one reusable homepage-ready pattern while we review it in isolation first.
 export function StudioAiFirstSection({ className }: { className?: string }) {
+  const rootRef = useRef<HTMLElement | null>(null);
+
+  useIsomorphicLayoutEffect(() => {
+    const ctx = gsap.context(() => {
+      const mm = gsap.matchMedia();
+
+      // All motion is gated behind prefers-reduced-motion.
+      mm.add("(prefers-reduced-motion: no-preference)", () => {
+        // 1 — Heading: words rise from behind their own mask.
+        gsap.from(".aidna-word", {
+          yPercent: 120,
+          duration: 0.9,
+          ease: "power3.out",
+          stagger: 0.05,
+          scrollTrigger: { trigger: ".aidna-heading", start: "top 85%" },
+        });
+
+        // 2 — Eyebrow + supporting copy settle in.
+        gsap.from(".aidna-fade", {
+          opacity: 0,
+          y: 18,
+          duration: 0.8,
+          ease: "power3.out",
+          stagger: 0.08,
+          scrollTrigger: { trigger: ".aidna-heading", start: "top 85%" },
+        });
+
+        // 3 — Illustration cards lift and settle as each scrolls in.
+        gsap.utils.toArray<HTMLElement>(".aidna-card").forEach((card) => {
+          gsap.from(card, {
+            opacity: 0,
+            y: 40,
+            scale: 0.98,
+            duration: 0.9,
+            ease: "power3.out",
+            scrollTrigger: { trigger: card, start: "top 84%" },
+          });
+        });
+
+        // 4 — Inside the workflow graphic: the old, linear path ticks in node by
+        // node, the acceleration beam draws across, then the AI-native loops
+        // resolve — a small piece of storytelling in the motion itself.
+        const graphic = rootRef.current?.querySelector<HTMLElement>(".aidna-workflow");
+        if (graphic) {
+          const tl = gsap.timeline({
+            scrollTrigger: { trigger: graphic, start: "top 72%" },
+          });
+          tl.from(
+            graphic.querySelectorAll<HTMLElement>(".aidna-oldflow > *"),
+            { opacity: 0, x: -14, duration: 0.5, ease: "power2.out", stagger: 0.09 },
+          )
+            .from(
+              ".aidna-beam",
+              { scaleX: 0, duration: 0.7, ease: "power2.inOut" },
+              "-=0.1",
+            )
+            .from(
+              ".aidna-native",
+              { opacity: 0, y: 22, duration: 0.8, ease: "power3.out" },
+              "-=0.35",
+            );
+        }
+      });
+
+      return () => mm.revert();
+    }, rootRef);
+
+    return () => ctx.revert();
+  }, []);
+
   return (
     <section
+      ref={rootRef}
       className={cn(
         "ds-section-brand-night relative overflow-hidden border-t border-[rgb(11_15_25_/_0.04)]",
         className,
@@ -1056,8 +1138,8 @@ export function StudioAiFirstSection({ className }: { className?: string }) {
 
       <div className="relative z-10 mx-auto max-w-7xl px-6 py-16 md:px-10 md:py-20">
         {/* The intro keeps the section argument tight so the graphic grid can do the rest of the work. */}
-        <div className="max-w-4xl space-y-4 md:space-y-5">
-          <p className="text-label-sm uppercase tracking-[0.22em] text-[var(--color-text-inverse-muted)]">
+        <div className="aidna-heading max-w-4xl space-y-4 md:space-y-5">
+          <p className="aidna-fade text-label-sm uppercase tracking-[0.22em] text-[var(--color-text-inverse-muted)]">
             AI-first DNA
           </p>
           <h2
@@ -1068,16 +1150,25 @@ export function StudioAiFirstSection({ className }: { className?: string }) {
               wordSpacing: ".2rem",
             }}
           >
-            The 0-to-1 workflow changed.
+            {"The 0-to-1 workflow changed.".split(" ").map((word, i) => (
+              // pb keeps descenders out of the mask; -mb cancels its effect on
+              // the line box so the display leading still governs spacing.
+              <span
+                key={`${word}-${i}`}
+                className="inline-block overflow-hidden pb-[0.12em] -mb-[0.12em] align-bottom"
+              >
+                <span className="aidna-word inline-block">{word}&nbsp;</span>
+              </span>
+            ))}
           </h2>
-          <p className="max-w-3xl text-body-lg text-[var(--color-text-inverse-muted)]">
+          <p className="aidna-fade max-w-3xl text-body-lg text-[var(--color-text-inverse-muted)]">
             Execution got cheaper. The edge moved to framing, faster
             experiments, richer MVPs, and better judgment.
           </p>
         </div>
 
         {/* The workflow anchor card explains the overall shift before the supporting cards unpack the details. */}
-        <div className="mt-10">
+        <div className="aidna-card aidna-workflow mt-10">
           <IllustrationCard
             title="The workflow changed"
             body="AI fundamentally reshaped the path from 0 to 1."
@@ -1088,6 +1179,7 @@ export function StudioAiFirstSection({ className }: { className?: string }) {
         {/* The lower grid breaks the change into four scan-friendly founder-relevant shifts. */}
         <div className="mt-6 grid gap-6 lg:grid-cols-2">
           <IllustrationCard
+            className="aidna-card"
             title="Making got faster"
             body="From prompt to prototype to iteration, teams can explore and ship far earlier than before."
             illustration={
@@ -1101,6 +1193,7 @@ export function StudioAiFirstSection({ className }: { className?: string }) {
             }
           />
           <IllustrationCard
+            className="aidna-card"
             title="Richer MVPs, earlier"
             body="First versions can be usable enough to learn from without waiting for a full polished build."
             illustration={
@@ -1114,7 +1207,7 @@ export function StudioAiFirstSection({ className }: { className?: string }) {
             }
           />
           <IllustrationCard
-            className="lg:col-span-2"
+            className="aidna-card lg:col-span-2"
             graphicOnly
             illustration={<FramingAndJudgmentRow />}
           />
