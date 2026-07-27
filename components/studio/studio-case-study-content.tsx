@@ -26,7 +26,7 @@ export const studioCaseStudyIds: readonly string[] = [
   "matrimandir",
   "buglerock",
   "prakiti-sattva",
-  "bevikve",
+  "bevolve-ai",
   "yuvanext",
 ];
 

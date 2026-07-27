@@ -11,7 +11,6 @@ import {
   Sparkles,
 } from "lucide-react";
 
-import { SplineScene } from "@/components/ui/spline-scene";
 
 import type {
   StudioAiWorkflowsContent,
@@ -204,10 +203,8 @@ function AiWorkflowsHero({ content }: { content: StudioAiWorkflowsContent["hero"
       </div>
 
       <StudioPageContainer className="relative z-10">
-        <div className="flex min-h-130 flex-col items-center gap-8 py-14 md:min-h-150 md:flex-row md:gap-0 md:py-0 lg:pl-4 xl:pl-6">
-
-          {/* Left — copy */}
-          <div className="relative flex w-full flex-col justify-center gap-6 md:w-1/2 md:py-20">
+        <div className="flex min-h-96 flex-col justify-center gap-8 py-24 md:min-h-[32rem] md:py-32 lg:pl-4 xl:pl-6">
+          <div className="relative flex w-full max-w-4xl flex-col justify-center gap-6">
             <div
               aria-hidden="true"
               className="pointer-events-none absolute -left-16 -top-14 h-[calc(100%+10rem)] w-[calc(100%+20rem)] max-w-216 overflow-visible sm:-left-20 sm:-top-16 sm:h-[calc(100%+13rem)] sm:w-[calc(100%+26rem)] sm:max-w-5xl lg:-left-28 lg:-top-24 lg:h-[calc(100%+18rem)] lg:w-[calc(100%+38rem)] lg:max-w-352 xl:-left-32 xl:w-[calc(100%+44rem)] xl:max-w-384"
@@ -227,23 +224,12 @@ function AiWorkflowsHero({ content }: { content: StudioAiWorkflowsContent["hero"
                   <br />
                   {content.titleLineTwo}
                 </h1>
-                <p className="max-w-lg text-hero-support text-(--color-text-secondary)">
+                <p className="max-w-2xl text-hero-support text-(--color-text-secondary)">
                   {content.description}
                 </p>
               </div>
             </div>
           </div>
-
-          {/* Right — interactive 3D scene */}
-          <div className="relative w-full md:w-1/2 md:self-stretch">
-            <div className="h-72 w-full md:absolute md:inset-0 md:h-full">
-              <SplineScene
-                scene="https://prod.spline.design/kZDDjO5HuC9GJUM2/scene.splinecode"
-                className="h-full w-full"
-              />
-            </div>
-          </div>
-
         </div>
       </StudioPageContainer>
     </section>

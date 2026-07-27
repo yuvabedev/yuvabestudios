@@ -13,6 +13,14 @@ import { KittyKatCaseStudy } from "@/components/studio/kittykat-case-study";
 import { BevolveCaseStudy } from "@/components/studio/bevolve-case-study";
 import { MatrimandirCaseStudy } from "@/components/studio/matrimandir-case-study";
 import { AvMarathonCaseStudy } from "@/components/studio/av-marathon-case-study";
+import { RangasutraCaseStudy } from "@/components/studio/rangasutra-case-study";
+import { BuglerockCaseStudy } from "@/components/studio/buglerock-case-study";
+import { HemplanetCaseStudy } from "@/components/studio/hemplanet-case-study";
+import { MaatramCaseStudy } from "@/components/studio/maatram-case-study";
+import { BmhCaseStudy } from "@/components/studio/bmh-case-study";
+import { NsfCaseStudy } from "@/components/studio/nsf-case-study";
+import { IndicAiCaseStudy } from "@/components/studio/indic-ai-case-study";
+import { AgroecologyCaseStudy } from "@/components/studio/agroecology-case-study";
 import { StudioHeader } from "@/components/studio/studio-header";
 import {
   StudioPageContainer,
@@ -197,6 +205,118 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
         />
         <StudioHeader navigationItems={homepageContent.navigationItems} />
         <AvMarathonCaseStudy caseStudy={displayCaseStudy} detail={detail} />
+      </>
+    );
+  }
+
+  // Rangasutra — bespoke immersive page: shared header, no shell.
+  if (slug === "rangasutra") {
+    return (
+      <>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+        />
+        <StudioHeader navigationItems={homepageContent.navigationItems} />
+        <RangasutraCaseStudy caseStudy={displayCaseStudy} detail={detail} />
+      </>
+    );
+  }
+
+  // Agroecology India — bespoke knowledge-hub page: shared header, no shell.
+  if (slug === "agroecology-india") {
+    return (
+      <>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+        />
+        <StudioHeader navigationItems={homepageContent.navigationItems} />
+        <AgroecologyCaseStudy caseStudy={displayCaseStudy} detail={detail} />
+      </>
+    );
+  }
+
+  // Indic-AI — bespoke pillars/two-surfaces page: shared header, no shell.
+  if (slug === "indic-ai") {
+    return (
+      <>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+        />
+        <StudioHeader navigationItems={homepageContent.navigationItems} />
+        <IndicAiCaseStudy caseStudy={displayCaseStudy} detail={detail} />
+      </>
+    );
+  }
+
+  // North South Foundation — bespoke storytelling page: shared header, no shell.
+  if (slug === "nsf") {
+    return (
+      <>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+        />
+        <StudioHeader navigationItems={homepageContent.navigationItems} />
+        <NsfCaseStudy caseStudy={displayCaseStudy} detail={detail} />
+      </>
+    );
+  }
+
+  // BMH Equipment — bespoke spec-sheet page: shared header, no shell.
+  if (slug === "bmh") {
+    return (
+      <>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+        />
+        <StudioHeader navigationItems={homepageContent.navigationItems} />
+        <BmhCaseStudy caseStudy={displayCaseStudy} detail={detail} />
+      </>
+    );
+  }
+
+  // Maatram — bespoke calm page: shared header, no shell.
+  if (slug === "maatram") {
+    return (
+      <>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+        />
+        <StudioHeader navigationItems={homepageContent.navigationItems} />
+        <MaatramCaseStudy caseStudy={displayCaseStudy} detail={detail} />
+      </>
+    );
+  }
+
+  // Hemplanet — bespoke GSAP scroll page: shared header, no shell.
+  if (slug === "hemplanet") {
+    return (
+      <>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+        />
+        <StudioHeader navigationItems={homepageContent.navigationItems} />
+        <HemplanetCaseStudy caseStudy={displayCaseStudy} detail={detail} />
+      </>
+    );
+  }
+
+  // Buglerock — bespoke page: shared header, no shell.
+  if (slug === "buglerock") {
+    return (
+      <>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+        />
+        <StudioHeader navigationItems={homepageContent.navigationItems} />
+        <BuglerockCaseStudy caseStudy={displayCaseStudy} detail={detail} />
       </>
     );
   }
