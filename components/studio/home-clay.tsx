@@ -26,7 +26,7 @@ import {
   resolveStudioCaseStudyCoverSrc,
   type StudioCaseStudySummary,
 } from "@/components/studio/studio-case-study-content";
-import { blogs } from "@/data/blogs";
+import type { PublicBlogPost } from "@/lib/blog";
 
 const easeOut = [0.22, 1, 0.36, 1] as const;
 
@@ -591,8 +591,8 @@ export function HomeCaseStudies({
 }
 
 // ─── Featured blogs ───────────────────────────────────────────────────────────
-export function HomeFeaturedBlogs() {
-  const featured = blogs.slice(0, 3);
+export function HomeFeaturedBlogs({ posts }: { posts: PublicBlogPost[] }) {
+  const featured = posts.slice(0, 3);
   if (featured.length === 0) return null;
 
   return (

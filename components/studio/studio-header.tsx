@@ -251,7 +251,7 @@ export function StudioHeader({ navigationItems }: StudioHeaderProps) {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -14 }}
                 transition={overlayTransition}
-                className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-5 pb-4 pt-[calc(env(safe-area-inset-top)+1rem)] sm:px-0 sm:pb-2 sm:pt-0"
+                className="mx-auto flex max-w-[1600px] items-center justify-between gap-4 px-5 pb-4 pt-[calc(env(safe-area-inset-top)+1rem)] sm:px-0 sm:pb-2 sm:pt-0"
               >
                 <Link href="/" onClick={handleNavClick} className="flex shrink-0 items-center">
                   <Image
@@ -260,7 +260,7 @@ export function StudioHeader({ navigationItems }: StudioHeaderProps) {
                     width={283}
                     height={100}
                     priority
-                    className="h-12 w-auto"
+                    className="h-14 w-auto"
                   />
                 </Link>
 
@@ -284,7 +284,7 @@ export function StudioHeader({ navigationItems }: StudioHeaderProps) {
                 elevation="lg"
                 blur="lg"
                 radius="xl"
-                className="mx-auto flex w-full max-w-7xl flex-col rounded-none border-0 bg-[linear-gradient(180deg,rgba(255,255,255,0.94),rgba(248,248,250,0.9))] p-0 shadow-none sm:mt-4 sm:rounded-[2rem] sm:border sm:border-white/60 sm:bg-[linear-gradient(180deg,rgba(255,255,255,0.68),rgba(255,255,255,0.42))] sm:p-3 sm:shadow-[0_28px_80px_rgba(15,23,42,0.12)]"
+                className="mx-auto flex w-full max-w-[1600px] flex-col rounded-none border-0 bg-[linear-gradient(180deg,rgba(255,255,255,0.94),rgba(248,248,250,0.9))] p-0 shadow-none sm:mt-4 sm:rounded-[2rem] sm:border sm:border-white/60 sm:bg-[linear-gradient(180deg,rgba(255,255,255,0.68),rgba(255,255,255,0.42))] sm:p-3 sm:shadow-[0_28px_80px_rgba(15,23,42,0.12)]"
               >
                 <motion.nav
                   id="mobile-site-nav"
@@ -315,7 +315,7 @@ export function StudioHeader({ navigationItems }: StudioHeaderProps) {
     <>
       <motion.header
         ref={headerRef}
-        className="sticky top-0 z-50 mx-auto w-full max-w-7xl"
+        className="sticky top-0 z-50 mx-auto w-full max-w-[1600px]"
         style={{
           paddingTop: headerInset,
           paddingLeft: headerInset,
@@ -338,7 +338,7 @@ export function StudioHeader({ navigationItems }: StudioHeaderProps) {
               borderColor: headerBorderColor,
             }}
           >
-            <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-6 py-3 md:px-10">
+            <div className="mx-auto flex max-w-[1600px] items-center justify-between gap-4 px-6 py-3 md:px-12 lg:px-16">
               {/* Logo - left side */}
               <Link href="/" onClick={handleNavClick} className="flex shrink-0 items-center">
                 <Image
@@ -347,7 +347,7 @@ export function StudioHeader({ navigationItems }: StudioHeaderProps) {
                   width={283}
                   height={100}
                   priority
-                  className="h-12 w-auto"
+                  className="h-14 w-auto"
                 />
               </Link>
 

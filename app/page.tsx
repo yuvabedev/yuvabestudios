@@ -13,13 +13,15 @@ import {
   getStudioCaseStudies,
   getStudioHomepageContent,
 } from "@/lib/studio-content";
+import { getPublicBlogPosts } from "@/lib/blog";
 
 export const dynamic = "force-dynamic";
 
 export default async function Home() {
-  const [homepageContent, caseStudies] = await Promise.all([
+  const [homepageContent, caseStudies, blogPosts] = await Promise.all([
     getStudioHomepageContent(),
     getStudioCaseStudies().catch(() => []),
+    getPublicBlogPosts().catch(() => []),
   ]);
 
   return (
@@ -54,7 +56,7 @@ export default async function Home() {
       <HomeCarousel />
 
       {/* 07 — Featured blogs */}
-      <HomeFeaturedBlogs />
+      <HomeFeaturedBlogs posts={blogPosts} />
 
       {/* 08 — FAQs */}
       <section className="border-t border-slate-200/80 bg-white py-16 md:py-24">

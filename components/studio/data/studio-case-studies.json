@@ -1335,5 +1335,132 @@
       "quote": "Yuvabe Studios helped Indic-AI communicate its mission with clarity and dignity across education, employment, healthcare, and AI. Through accessible design, structured navigation, and collaborative iteration, they delivered a website and brochure that feel authentic, impactful, and easy to manage, helping partners clearly understand and support the organisation's work.",
       "attribution": "Sarita Chand, Co-Founder, Indic-AI"
     }
+  },
+  {
+    "id": "startup-o",
+    "title": "Startup-O",
+    "sector": "Investment & Venture",
+    "summary": "Data-driven investment research that connects high-potential startups with strategic capital — memos, thought leadership, and market insight for faster, sharper funding decisions.",
+    "seoTitle": "Startup-O Case Study",
+    "seoDescription": "See how Yuvabe powered Startup-O with data-driven investment research — investment memos, tech-sector thought leadership, and a defence-tech investment thesis.",
+    "services": [
+      "Investment Research",
+      "Financial Analysis",
+      "Market Benchmarking",
+      "Thought Leadership"
+    ],
+    "mediaIconKey": "barChart3",
+    "mockViewport": "landscape",
+    "heroMockHeadline": "Smarter startup funding with data-driven insights",
+    "modalIntro": "Startup-O connects bold startups with smart capital through data-driven evaluation. We identify high-potential opportunities and craft investment memos, thought leadership, and market insight that make funding faster, smarter, and more accessible.",
+    "modalOutcomes": [
+      "Delivered investment memos that enabled clear, strategic funding decisions.",
+      "Published thought leadership clarifying tech-market evolution and investment landscapes.",
+      "Built databases that strengthened investor decision-making.",
+      "Authored a defence-tech investment thesis surfacing promising opportunities."
+    ],
+    "modalSections": [
+      {
+        "title": "Context",
+        "body": "Startup-O connects bold startups with smart capital through data-driven evaluation — turning scattered financial data into decisions investors can act on."
+      },
+      {
+        "title": "Challenge",
+        "body": "Distilling vast, fast-moving market data into accurate, actionable insight — and telling genuinely high-potential startups apart from saturated markets."
+      },
+      {
+        "title": "What we changed",
+        "body": "We built a research engine spanning benchmarking, investment memos, thought leadership, and a sector thesis — so every recommendation was grounded in structured data."
+      },
+      {
+        "title": "Outcome",
+        "body": "Sharper, faster funding decisions backed by rigorous analysis, clear memos, and databases the team could keep building on."
+      }
+    ],
+    "modalProofPoints": [
+      {
+        "title": "Data Analysis & Benchmarking",
+        "iconKey": "barChart3",
+        "description": "Structured financial data from reports, filings, and live markets, then benchmarked company and industry performance to surface real opportunities."
+      },
+      {
+        "title": "Investment Memos",
+        "iconKey": "scanSearch",
+        "description": "In-depth company assessments — business model, team, market potential, competitive landscape — with projections, risk analysis, and growth plans."
+      },
+      {
+        "title": "Research & Thought Leadership",
+        "iconKey": "sparkles",
+        "description": "Deep articles on the Indian tech landscape (2023–2030) and maintained databases of listed and unlisted tech companies across the US, China, and India."
+      },
+      {
+        "title": "Defence-Tech Investment Thesis",
+        "iconKey": "layoutGrid",
+        "description": "A thesis on India's defence-technology sector — global and domestic overview, policy and risk analysis, key investment areas, and a startup database."
+      }
+    ]
+  },
+  {
+    "id": "quilt-ai",
+    "title": "Quilt.AI",
+    "sector": "AI & Cultural Insight",
+    "summary": "AI-driven human insight — decoding digital conversations through a cultural lens so brands, businesses, and NGOs can read the why behind behaviour.",
+    "seoTitle": "Quilt.AI Case Study",
+    "seoDescription": "See how Yuvabe supported Quilt.AI's AI-and-anthropology insight platform — trend portals, brand profiles, and healthcare insight across global markets.",
+    "services": [
+      "AI Integration",
+      "Website Design",
+      "Cloud Deployment"
+    ],
+    "mediaIconKey": "bot",
+    "mockViewport": "landscape",
+    "heroMockHeadline": "Human insights with AI-driven precision",
+    "modalIntro": "Quilt.AI combines cutting-edge AI with anthropological expertise to analyse digital conversations through a cultural lens. It doesn't just track online behaviour — it decodes the why behind it, helping brands, businesses, and NGOs understand evolving narratives and act with precision.",
+    "modalOutcomes": [
+      "Identified and quantified 2,500+ trends across 18 global markets for a leading cosmetics brand.",
+      "Built 50+ social-media brand profiles for a fashion-insights company.",
+      "Produced patient-journey and disease-specific reports for healthcare insights.",
+      "Analysed reputation and social impact for large foundations through discourse reports."
+    ],
+    "modalSections": [
+      {
+        "title": "Context",
+        "body": "Quilt.AI analyses social conversations, search trends, news, blogs, and forums to turn digital culture into insight — pairing AI with anthropology to explain not just what people do, but why."
+      },
+      {
+        "title": "Challenge",
+        "body": "Translating vast, noisy digital signal into accurate, culturally grounded insight that brands, businesses, and NGOs can actually act on."
+      },
+      {
+        "title": "What we changed",
+        "body": "We supported the platform across AI integration, website design, and cloud deployment — and delivered research: trend portals, brand profiles, and interactive dashboards that made complex data legible."
+      },
+      {
+        "title": "Outcome",
+        "body": "Strategic, data-driven decisions grounded in real cultural context — from beauty and fashion to healthcare and social-impact work."
+      }
+    ],
+    "modalProofPoints": [
+      {
+        "title": "Market Research & Consumer Insights",
+        "iconKey": "scanSearch",
+        "description": "In-depth analysis of consumer behaviour, market trends, and competitive landscapes — helping companies adapt to shifting digital narratives."
+      },
+      {
+        "title": "Digital Ecosystem Analysis",
+        "iconKey": "bot",
+        "description": "Research reports and interactive dashboards from social conversations, search trends, news, blogs, and forums — complex data turned into action."
+      },
+      {
+        "title": "Trend Portal",
+        "iconKey": "barChart3",
+        "description": "For a leading cosmetics brand: 2,500+ trends across 18 markets, with end-to-end tracking, hashtag relevance, and impact measurement."
+      },
+      {
+        "title": "Brand Profiles & Healthcare Insight",
+        "iconKey": "sparkles",
+        "description": "50+ social brand profiles for a fashion-insights company, plus patient-journey and disease reports visualised on the Sphere platform."
+      }
+    ]
   }
 ]

@@ -232,7 +232,10 @@ export function BlogAdminTab({ initialPosts }: { initialPosts: BlogPost[] }) {
         <div>
           <label className={labelCls}>Body</label>
           <p className="mb-2 text-xs text-(--neutral-400)">
-            Separate paragraphs with a blank line (double Enter).
+            Separate paragraphs with a blank line. Supports Markdown-lite: <code>## Heading</code>,{" "}
+            <code>- bullet</code>, <code>1. item</code>, <code>&gt; quote</code>,{" "}
+            <code>**bold**</code>, <code>*italic*</code>, <code>[link](url)</code>,{" "}
+            <code>![alt](image-url)</code>, and <code>```</code> code fences.
           </p>
           <textarea
             className={textareaCls}
@@ -251,10 +254,20 @@ export function BlogAdminTab({ initialPosts }: { initialPosts: BlogPost[] }) {
                 className="sr-only"
                 checked={draft.published}
                 onChange={(e) => {
-                  update("published", e.target.checked);
-                  if (e.target.checked && !draft.published_at) {
-                    update("published_at", new Date().toISOString());
-                  }
+                  const checked = e.target.checked;
+                  // Set both fields in one update — two separate update() calls
+                  // would each spread the same stale draft, and the second would
+                  // clobber the first (leaving published back at false).
+                  setMode({
+                    type: "edit",
+                    post: {
+                      ...draft,
+                      published: checked,
+                      published_at: checked
+                        ? draft.published_at ?? new Date().toISOString()
+                        : draft.published_at,
+                    },
+                  });
                 }}
               />
               <div
