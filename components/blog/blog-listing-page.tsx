@@ -4,13 +4,14 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
 
-import { blogCategories, type BlogPost } from "@/data/blogs";
+import type { PublicBlogPost } from "@/lib/blog";
 import type { StudioHomepageNavItem } from "@/components/studio/studio-homepage-content";
 import { StudioHeader } from "@/components/studio/studio-header";
 
 type BlogListingPageProps = {
   navigationItems: StudioHomepageNavItem[];
-  posts: BlogPost[];
+  posts: PublicBlogPost[];
+  categories: string[];
 };
 
 const easeOut = [0.22, 1, 0.36, 1] as const;
@@ -35,7 +36,7 @@ function MetaRow({
   showCategory = false,
   className = "",
 }: {
-  post: BlogPost;
+  post: PublicBlogPost;
   showCategory?: boolean;
   className?: string;
 }) {
@@ -54,7 +55,7 @@ function MetaRow({
 }
 
 // The single most-recent post, shown as a large two-column hero.
-function LatestCard({ post }: { post: BlogPost }) {
+function LatestCard({ post }: { post: PublicBlogPost }) {
   return (
     <motion.div
       initial={{ opacity: 0, y: 32 }}
@@ -99,7 +100,7 @@ function LatestCard({ post }: { post: BlogPost }) {
 }
 
 // Large lead card inside a category section.
-function BigCard({ post }: { post: BlogPost }) {
+function BigCard({ post }: { post: PublicBlogPost }) {
   return (
     <Link href={`/blog/${post.slug}`} className="group flex h-full flex-col">
       <div className="relative aspect-[16/9] overflow-hidden rounded-2xl bg-(--neutral-100) ring-1 ring-(--color-border-default)">
@@ -121,7 +122,7 @@ function BigCard({ post }: { post: BlogPost }) {
 }
 
 // Compact card used in the category grids.
-function CompactCard({ post, index = 0 }: { post: BlogPost; index?: number }) {
+function CompactCard({ post, index = 0 }: { post: PublicBlogPost; index?: number }) {
   return (
     <motion.div
       initial={{ opacity: 0, y: 24 }}
@@ -156,7 +157,7 @@ function CategorySection({
 }: {
   title: string;
   description?: string;
-  posts: BlogPost[];
+  posts: PublicBlogPost[];
 }) {
   if (posts.length === 0) return null;
 
@@ -194,11 +195,11 @@ function CategorySection({
   );
 }
 
-export function BlogListingPage({ navigationItems, posts }: BlogListingPageProps) {
+export function BlogListingPage({ navigationItems, posts, categories }: BlogListingPageProps) {
   const [latest, ...rest] = posts;
 
-  // Group the remaining posts by category, following the canonical category order.
-  const groups = blogCategories
+  // Group the remaining posts by category, following the CMS-derived order.
+  const groups = categories
     .filter((category) => category !== "All Posts")
     .map((category) => ({
       category,

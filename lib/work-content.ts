@@ -81,6 +81,9 @@ export const defaultWorkItems: WorkItemConfig[] = [
   // Asset folder is capitalised "Nsf" — must match exactly on Linux.
   { id: "nsf", category: WORK_CATEGORY.growth, coverSrc: "/assets/Nsf/web/s1.webp" },
   { id: "indic-ai", category: WORK_CATEGORY.web, coverSrc: "/assets/Indic-AI/web/web2.webp" },
+  // Asset folder is capitalised "startup-O" — must match exactly on Linux.
+  { id: "startup-o", category: WORK_CATEGORY.product, coverSrc: "/assets/startup-O/web/tall.webp" },
+  { id: "quilt-ai", category: WORK_CATEGORY.product, coverSrc: "/assets/quilt/web/s4.webp" },
   // yuvanext temporarily removed from the grid.
   { id: "ageshift", category: WORK_CATEGORY.product, coverSrc: "/assets/ageshift/web/cover.webp" },
   { id: "hemplanet", category: WORK_CATEGORY.growth, coverSrc: "/assets/hemplanet/web/p4.webp" },

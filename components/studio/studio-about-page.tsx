@@ -9,9 +9,9 @@ import {
   type StudioAboutStoryContent,
 } from "@/components/studio/studio-about-content";
 import {
+  AboutDrivesSticky,
   AboutHeroScroll,
   AboutHoverGallery,
-  AboutPillarImage,
   AboutTestimonials,
 } from "@/components/studio/about-interactive";
 import { StudioCtaCard } from "@/components/studio/studio-cta-card";
@@ -196,50 +196,15 @@ function AboutPhilosophy({
   );
 }
 
-// ─── What drives us — clay-style numbered pillars with large imagery ──────────
+// ─── What drives us — sticky split-screen (pinned image + scrolling principles)
 function AboutWhyPillars({ story }: { story: StudioAboutStoryContent }) {
   return (
-    <section className="border-b border-slate-200/80 bg-[var(--color-background-canvas)] py-14 md:py-24">
-      <Rail className="space-y-14 md:space-y-24">
-        <div className="lg:pl-4 xl:pl-6">
-          <p className="text-label-sm uppercase tracking-[0.22em] text-[var(--color-text-tertiary)]">
-            {story.eyebrow}
-          </p>
-          <h2
-            className="mt-4 text-display-muted-editorial tracking-[-0.032em] text-[var(--neutral-950)]"
-            style={{ fontSize: "clamp(2.5rem,6vw,4rem)", fontWeight: 600 }}
-          >
-            {story.title}
-          </h2>
-        </div>
-
-        {story.operatingPrinciples.map((principle, index) => {
-          const asset = WHY_PILLAR_IMAGES[index % WHY_PILLAR_IMAGES.length];
-          const imageFirst = index % 2 === 1;
-          return (
-            <div
-              key={principle.title}
-              className="grid items-center gap-10 lg:grid-cols-2 lg:gap-16 lg:pl-4 xl:pl-6"
-            >
-              <div className={imageFirst ? "lg:order-2" : "lg:order-1"}>
-                <p className="font-[family-name:var(--font-display-family)] text-heading-xl text-[var(--lavender-500)]">
-                  {`${index + 1}`.padStart(2, "0")}
-                </p>
-                <h3 className="mt-5 text-display-muted-editorial leading-[1.02] text-[var(--neutral-950)]">
-                  {principle.title}
-                </h3>
-                <p className="mt-5 max-w-xl text-body-lg text-[var(--color-text-secondary)]">
-                  {principle.description}
-                </p>
-              </div>
-              <div className={imageFirst ? "lg:order-1" : "lg:order-2"}>
-                <AboutPillarImage src={asset.src} alt={asset.alt} />
-              </div>
-            </div>
-          );
-        })}
-      </Rail>
-    </section>
+    <AboutDrivesSticky
+      eyebrow={story.eyebrow}
+      title={story.title}
+      items={story.operatingPrinciples}
+      images={[...WHY_PILLAR_IMAGES]}
+    />
   );
 }
 

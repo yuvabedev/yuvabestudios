@@ -13,7 +13,7 @@ const footerLinks = {
   Company: [
     { label: "Work", href: "/#work" },
     { label: "About", href: "/about" },
-    { label: "Contact", href: "/#process" },
+    { label: "Contact", href: "/contact" },
   ],
 };
 
@@ -30,8 +30,8 @@ export function StudioFooter() {
   return (
     <footer className="border-t border-slate-200 bg-white">
       {/* Top section */}
-      <div className="mx-auto max-w-7xl px-6 pb-12 pt-16 md:px-10 md:pt-20">
-        <div className="grid max-w-7xl grid-cols-1 gap-12 lg:grid-cols-[1fr_auto]">
+      <div className="mx-auto max-w-[1600px] px-6 pb-12 pt-16 md:px-12 lg:px-16 md:pt-20">
+        <div className="grid max-w-[1600px] grid-cols-1 gap-12 lg:grid-cols-[1fr_auto]">
           {/* Brand column */}
           <div className="max-w-sm space-y-6">
             <Link href="/" className="inline-flex shrink-0 items-center">
@@ -40,7 +40,7 @@ export function StudioFooter() {
                 alt="Yuvabe Studios"
                 width={283}
                 height={100}
-                className="h-12 w-auto"
+                className="h-14 w-auto"
               />
             </Link>
             <p className="text-body-md text-slate-500">
@@ -79,12 +79,12 @@ export function StudioFooter() {
       </div>
 
       {/* Divider */}
-      <div className="mx-auto max-w-7xl px-6 md:px-10">
+      <div className="mx-auto max-w-[1600px] px-6 md:px-12 lg:px-16">
         <div className="h-px bg-slate-200" />
       </div>
 
       {/* Bottom bar */}
-      <div className="mx-auto max-w-7xl px-6 py-6 md:px-10">
+      <div className="mx-auto max-w-[1600px] px-6 py-6 md:px-12 lg:px-16">
         <div className="flex flex-col items-start gap-4 sm:flex-row sm:items-center sm:justify-between">
           <p className="text-caption text-slate-400">
             © {footerCopyrightYear} Yuvabe Studios. All rights reserved.

@@ -1,6 +1,8 @@
-import { getBlogPosts } from "@/data/blogs";
+import { deriveBlogCategories, getPublicBlogPosts } from "@/lib/blog";
 import { getStudioHomepageContent } from "@/lib/studio-content";
 import { BlogListingPage } from "@/components/blog/blog-listing-page";
+
+export const dynamic = "force-dynamic";
 
 export const metadata = {
   title: "Blog — Yuvabe Studios",
@@ -9,12 +11,16 @@ export const metadata = {
 };
 
 export default async function BlogPage() {
-  const homepageContent = await getStudioHomepageContent();
+  const [homepageContent, posts] = await Promise.all([
+    getStudioHomepageContent(),
+    getPublicBlogPosts(),
+  ]);
 
   return (
     <BlogListingPage
       navigationItems={homepageContent.navigationItems}
-      posts={getBlogPosts()}
+      posts={posts}
+      categories={deriveBlogCategories(posts)}
     />
   );
 }

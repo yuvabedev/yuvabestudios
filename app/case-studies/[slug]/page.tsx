@@ -21,6 +21,8 @@ import { BmhCaseStudy } from "@/components/studio/bmh-case-study";
 import { NsfCaseStudy } from "@/components/studio/nsf-case-study";
 import { IndicAiCaseStudy } from "@/components/studio/indic-ai-case-study";
 import { AgroecologyCaseStudy } from "@/components/studio/agroecology-case-study";
+import { StartupOCaseStudy } from "@/components/studio/startup-o-case-study";
+import { QuiltAiCaseStudy } from "@/components/studio/quilt-ai-case-study";
 import { StudioHeader } from "@/components/studio/studio-header";
 import {
   StudioPageContainer,
@@ -219,6 +221,34 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
         />
         <StudioHeader navigationItems={homepageContent.navigationItems} />
         <RangasutraCaseStudy caseStudy={displayCaseStudy} detail={detail} />
+      </>
+    );
+  }
+
+  // Quilt.AI — bespoke decode/insight page: shared header, no shell.
+  if (slug === "quilt-ai") {
+    return (
+      <>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+        />
+        <StudioHeader navigationItems={homepageContent.navigationItems} />
+        <QuiltAiCaseStudy caseStudy={displayCaseStudy} detail={detail} />
+      </>
+    );
+  }
+
+  // Startup-O — bespoke interaction-forward page: shared header, no shell.
+  if (slug === "startup-o") {
+    return (
+      <>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+        />
+        <StudioHeader navigationItems={homepageContent.navigationItems} />
+        <StartupOCaseStudy caseStudy={displayCaseStudy} detail={detail} />
       </>
     );
   }

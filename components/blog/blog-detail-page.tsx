@@ -1,13 +1,17 @@
 import Link from "next/link";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 
-import { blogs, type BlogPost } from "@/data/blogs";
+import type { PublicBlogPost } from "@/lib/blog";
+import { getAbsoluteUrl } from "@/lib/site";
 import type { StudioHomepageNavItem } from "@/components/studio/studio-homepage-content";
 import { StudioHeader } from "@/components/studio/studio-header";
+import { BlogBody, extractHeadings } from "@/components/blog/blog-body";
+import { BlogReader } from "@/components/blog/blog-reader";
 
 type BlogDetailPageProps = {
   navigationItems: StudioHomepageNavItem[];
-  post: BlogPost;
+  post: PublicBlogPost;
+  related: PublicBlogPost[];
 };
 
 // "Published on November 18, 2025 · 10 minute read" → { date, read }
@@ -17,9 +21,9 @@ function splitMeta(readingTime: string): { date: string; read: string } {
   return { date: date ?? "", read: read ?? "" };
 }
 
-export function BlogDetailPage({ navigationItems, post }: BlogDetailPageProps) {
+// Renders CMS-authored posts (posts without a bespoke article component).
+export function BlogDetailPage({ navigationItems, post, related }: BlogDetailPageProps) {
   const { date, read } = splitMeta(post.readingTime);
-  const related = blogs.filter((p) => p.slug !== post.slug).slice(0, 3);
 
   return (
     <main
@@ -61,10 +65,12 @@ export function BlogDetailPage({ navigationItems, post }: BlogDetailPageProps) {
 
               <div className="flex items-center gap-4 border-t border-(--color-border-default) pt-6">
                 <div className="flex size-9 shrink-0 items-center justify-center rounded-full bg-brand/10 font-mono text-[13px] font-semibold text-brand">
-                  {post.author.charAt(0).toUpperCase()}
+                  {(post.author || "Y").charAt(0).toUpperCase()}
                 </div>
                 <div>
-                  <p className="text-sm font-semibold text-(--neutral-900)">{post.author}</p>
+                  <p className="text-sm font-semibold text-(--neutral-900)">
+                    {post.author || "Yuvabe Studios"}
+                  </p>
                   <p className="text-xs text-(--neutral-500)">
                     {[date, read].filter(Boolean).join(" · ")}
                   </p>
@@ -92,23 +98,17 @@ export function BlogDetailPage({ navigationItems, post }: BlogDetailPageProps) {
           </section>
         )}
 
-        {/* Lead */}
+        {/* Body — sticky table of contents + reading progress + share */}
         <section className="py-14 md:py-20">
           <div className="mx-auto w-full max-w-[1720px] px-6 md:px-12 lg:px-16">
-            <div className="max-w-3xl lg:pl-4 xl:pl-6">
-              <p className="text-[20px] leading-[1.7] text-(--neutral-700) md:text-[22px]">
-                {post.subheading}
-              </p>
-
-              <div className="mt-14 border-t border-(--color-border-default) pt-8">
-                <Link
-                  href="/blog"
-                  className="inline-flex items-center gap-2 font-mono text-[11px] font-medium uppercase tracking-[0.04em] text-(--neutral-500) transition-colors hover:text-brand"
-                >
-                  <ArrowLeft size={13} />
-                  All posts
-                </Link>
-              </div>
+            <div className="lg:pl-4 xl:pl-6">
+              <BlogReader
+                headings={extractHeadings(post.body)}
+                title={post.title}
+                shareUrl={getAbsoluteUrl(`/blog/${post.slug}`)}
+              >
+                <BlogBody body={post.body} />
+              </BlogReader>
             </div>
           </div>
         </section>
@@ -164,17 +164,17 @@ export function BlogDetailPage({ navigationItems, post }: BlogDetailPageProps) {
                 </h2>
                 <div className="flex flex-col items-center justify-center gap-3 sm:flex-row">
                   <Link
-                    href="/#process"
+                    href="/contact"
                     className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-brand px-7 py-4 text-[15px] font-semibold text-white shadow-[0_6px_18px_rgba(88,41,199,0.25)] transition-all hover:-translate-y-0.5 hover:shadow-[0_10px_24px_rgba(88,41,199,0.35)] sm:w-auto"
                   >
                     Start a project
                     <ArrowRight size={16} />
                   </Link>
                   <a
-                    href="mailto:hello@yuvabestudios.com"
+                    href="mailto:sales@yuvabe.com"
                     className="inline-flex w-full items-center justify-center gap-2 rounded-full border border-(--color-border-default) bg-white px-7 py-4 text-[13px] font-semibold text-(--neutral-700) transition-all hover:border-brand/30 hover:text-brand sm:w-auto sm:text-[15px]"
                   >
-                    hello@yuvabestudios.com
+                    sales@yuvabe.com
                   </a>
                 </div>
               </div>

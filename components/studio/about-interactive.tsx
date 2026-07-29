@@ -55,6 +55,136 @@ export function AboutPillarImage({ src, alt }: { src: string; alt: string }) {
   );
 }
 
+// ─── What drives us — sticky split: pinned image + scrolling principles ──────
+// Modelled on the case-study context section: the image column pins and
+// crossfades as each principle scrolls through the middle of the viewport.
+export function AboutDrivesSticky({
+  eyebrow,
+  title,
+  items,
+  images,
+}: {
+  eyebrow: string;
+  title: string;
+  items: { title: string; description: string }[];
+  images: { src: string; alt: string }[];
+}) {
+  const reduce = useReducedMotion();
+  const [active, setActive] = useState(0);
+  const itemRefs = useRef<(HTMLDivElement | null)[]>([]);
+
+  useEffect(() => {
+    const nodes = itemRefs.current.filter(Boolean) as HTMLDivElement[];
+    if (nodes.length === 0) return;
+
+    // A zero-height line across the middle of the viewport: exactly one block
+    // crosses it at a time, so the pinned image and counter always match.
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          const index = nodes.indexOf(entry.target as HTMLDivElement);
+          if (index !== -1) setActive(index);
+        });
+      },
+      { rootMargin: "-50% 0px -50% 0px", threshold: 0 },
+    );
+    nodes.forEach((node) => observer.observe(node));
+    return () => observer.disconnect();
+  }, [items.length]);
+
+  const activeImage = images[active % images.length];
+
+  return (
+    <section className="border-b border-slate-200/80 bg-[var(--color-background-canvas)] py-14 md:py-24">
+      <Rail>
+        <div className="lg:pl-4 xl:pl-6">
+          <p className="text-label-sm uppercase tracking-[0.22em] text-[var(--color-text-tertiary)]">
+            {eyebrow}
+          </p>
+          <h2
+            className="mt-4 text-display-muted-editorial tracking-[-0.032em] text-[var(--neutral-950)]"
+            style={{ fontSize: "clamp(2.5rem,6vw,4rem)", fontWeight: 600 }}
+          >
+            {title}
+          </h2>
+        </div>
+
+        <div className="mt-12 grid gap-12 md:mt-16 lg:grid-cols-2 lg:gap-16 lg:pl-4 xl:pl-6">
+          {/* Pinned image column (desktop only) */}
+          <div className="hidden lg:block">
+            <div className="sticky top-28 flex h-[calc(100vh-9rem)] items-center">
+              <div className="relative aspect-[3/4] h-full max-h-[74vh] w-full overflow-hidden bg-[var(--neutral-100)] ring-1 ring-slate-200/80">
+                <AnimatePresence mode="sync">
+                  <motion.div
+                    key={activeImage.src}
+                    initial={{ opacity: 0, scale: reduce ? 1 : 1.03 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: 0.7, ease: easeOut }}
+                    className="absolute inset-0"
+                  >
+                    <Image
+                      src={activeImage.src}
+                      alt={activeImage.alt}
+                      fill
+                      sizes="(min-width: 1024px) 50vw, 100vw"
+                      className="object-cover"
+                    />
+                  </motion.div>
+                </AnimatePresence>
+
+                {/* Counter ties the two columns together. */}
+                <div className="absolute bottom-5 left-5 z-10 flex items-center gap-2 rounded-full bg-black/70 px-4 py-2 font-mono text-[11px] font-medium uppercase tracking-[0.14em] text-white backdrop-blur">
+                  {String(active + 1).padStart(2, "0")}
+                  <span className="text-white/40">/</span>
+                  <span className="text-white/60">
+                    {String(items.length).padStart(2, "0")}
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Scrolling principles */}
+          <div>
+            {items.map((item, i) => (
+              <div
+                key={item.title}
+                ref={(node) => {
+                  itemRefs.current[i] = node;
+                }}
+                className="flex flex-col justify-center border-b border-slate-200/70 py-12 last:border-b-0 lg:min-h-[74vh] lg:border-b-0 lg:py-16"
+              >
+                <p className="font-[family-name:var(--font-display-family)] text-heading-xl text-[var(--lavender-500)]">
+                  {`${i + 1}`.padStart(2, "0")}
+                </p>
+                <h3 className="mt-5 text-display-muted-editorial leading-[1.02] text-[var(--neutral-950)]">
+                  {item.title}
+                </h3>
+                <p className="mt-5 max-w-xl text-body-lg text-[var(--color-text-secondary)]">
+                  {item.description}
+                </p>
+
+                {/* Mobile: each principle carries its image inline. */}
+                <div className="relative mt-8 aspect-[3/4] w-full overflow-hidden bg-[var(--neutral-100)] ring-1 ring-slate-200/80 lg:hidden">
+                  <Image
+                    src={images[i % images.length].src}
+                    alt={images[i % images.length].alt}
+                    fill
+                    sizes="100vw"
+                    className="object-cover"
+                  />
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </Rail>
+    </section>
+  );
+}
+
 // ─── Hero with a scroll-revealed team image ──────────────────────────────────
 export function AboutHeroScroll({
   hero,
