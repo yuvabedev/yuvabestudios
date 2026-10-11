@@ -4,6 +4,7 @@ import { promises as fs } from "node:fs";
 import path from "node:path";
 
 import { unstable_noStore as noStore } from "next/cache";
+import { unstable_rethrow } from "next/navigation";
 
 import {
   homepageCaseStudyIds,
@@ -1983,6 +1984,8 @@ async function getOrBootstrapDocument<T>(
   try {
     existingPayload = await readContentDocument(key);
   } catch (error) {
+    // Let Next.js render-control signals (e.g. noStore during prerender) propagate.
+    unstable_rethrow(error);
     if (!shouldUseLocalContentFallback(error)) {
       throw error;
     }
@@ -2006,6 +2009,8 @@ async function getOrBootstrapDocument<T>(
   try {
     await writeContentDocument(key, fallbackPayload);
   } catch (error) {
+    // Let Next.js render-control signals (e.g. noStore during prerender) propagate.
+    unstable_rethrow(error);
     if (!shouldUseLocalContentFallback(error)) {
       throw error;
     }
@@ -2083,6 +2088,8 @@ async function saveStudioContentDocument(
   try {
     await writeContentDocument(key, payload);
   } catch (error) {
+    // Let Next.js render-control signals (e.g. noStore during prerender) propagate.
+    unstable_rethrow(error);
     if (!shouldUseLocalContentFallback(error)) {
       throw error;
     }
@@ -2192,6 +2199,8 @@ export async function getStudioCaseStudies(options?: StudioContentOptions) {
       }
     }
   } catch (error) {
+    // Let Next.js render-control signals (e.g. noStore during prerender) propagate.
+    unstable_rethrow(error);
     if (contentSource === "supabase" || !shouldUseLocalContentFallback(error)) {
       throw error;
     }
@@ -2249,6 +2258,8 @@ export async function saveStudioCaseStudy(
   try {
     await writeContentDocument("case_studies", supabasePayload);
   } catch (error) {
+    // Let Next.js render-control signals (e.g. noStore during prerender) propagate.
+    unstable_rethrow(error);
     if (contentSource === "supabase" || !shouldUseLocalContentFallback(error)) {
       throw error;
     }
@@ -2611,6 +2622,8 @@ export async function getStudioDigitalMarketingContent(
       supabaseRaw = payload as Record<string, unknown>;
     }
   } catch (error) {
+    // Let Next.js render-control signals (e.g. noStore during prerender) propagate.
+    unstable_rethrow(error);
     if (contentSource === "supabase" || !shouldUseLocalContentFallback(error)) throw error;
     console.warn("Falling back to local digital_marketing content.", error);
     return parseDigitalMarketingContent(localRaw);
@@ -2749,6 +2762,8 @@ export async function getStudioUiuxDesignContent(options?: StudioContentOptions)
       supabaseRaw = payload as Record<string, unknown>;
     }
   } catch (error) {
+    // Let Next.js render-control signals (e.g. noStore during prerender) propagate.
+    unstable_rethrow(error);
     if (contentSource === "supabase" || !shouldUseLocalContentFallback(error)) throw error;
     console.warn("Falling back to local uiux_design content.", error);
     return parseUiuxDesignContent(localRaw);
@@ -2770,6 +2785,8 @@ export async function getStudioUiuxDesignContent(options?: StudioContentOptions)
   try {
     return parseUiuxDesignContent(supabaseRaw);
   } catch (error) {
+    // Let Next.js render-control signals (e.g. noStore during prerender) propagate.
+    unstable_rethrow(error);
     const contentSource2 = options?.source ?? getStudioContentSource();
     if (contentSource2 !== "auto") throw error;
     console.warn("Falling back to local uiux_design content because Supabase payload validation failed.", error);
@@ -2887,6 +2904,8 @@ export async function getStudioAiNativeEngineeringContent(options?: StudioConten
       supabaseRaw = payload as Record<string, unknown>;
     }
   } catch (error) {
+    // Let Next.js render-control signals (e.g. noStore during prerender) propagate.
+    unstable_rethrow(error);
     if (contentSource === "supabase" || !shouldUseLocalContentFallback(error)) throw error;
     console.warn("Falling back to local ai_native_engineering content.", error);
     return parseAiNativeEngineeringContent(localRaw);
@@ -2908,6 +2927,8 @@ export async function getStudioAiNativeEngineeringContent(options?: StudioConten
   try {
     return parseAiNativeEngineeringContent(supabaseRaw);
   } catch (error) {
+    // Let Next.js render-control signals (e.g. noStore during prerender) propagate.
+    unstable_rethrow(error);
     // Keep production pages renderable when auto mode receives malformed CMS payloads.
     if (contentSource !== "auto") {
       throw error;

@@ -1,6 +1,7 @@
 import "server-only";
 
 import { unstable_noStore as noStore } from "next/cache";
+import { unstable_rethrow } from "next/navigation";
 
 import { getSupabaseAdminClient } from "@/lib/supabase-admin";
 
@@ -186,6 +187,8 @@ export async function getStudioWorkPageContent(): Promise<WorkPageContent> {
     const raw = await readWorkDocument();
     return parseWorkPageContentInput(raw ?? defaultWorkPageContent);
   } catch (error) {
+    // Let Next.js render-control signals (e.g. noStore during prerender) propagate.
+    unstable_rethrow(error);
     console.warn("Could not load work content from Supabase, using defaults.", error);
     return defaultWorkPageContent;
   }
