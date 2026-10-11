@@ -1,5 +1,4 @@
 import Image from "next/image";
-import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 
 import {
@@ -14,6 +13,7 @@ import {
 } from "@/components/studio/studio-page-shell";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import { StartProjectLink } from "@/components/studio/start-project-link";
 
 type StudioCaseStudyPageHeroProps = {
   caseStudy: StudioCaseStudySummary;
@@ -125,10 +125,10 @@ export function StudioCaseStudyPageHero({
 
               <div className="mt-10 flex flex-col gap-3 sm:mt-12 sm:flex-row">
                 <Button asChild size="lg" className="px-6">
-                  <Link href="/#process">
+                  <StartProjectLink source="case-study-hero">
                     Start a project
                     <ArrowUpRight className="size-4" />
-                  </Link>
+                  </StartProjectLink>
                 </Button>
               </div>
             </div>

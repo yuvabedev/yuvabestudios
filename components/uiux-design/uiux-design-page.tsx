@@ -8,12 +8,12 @@ import {
   Smartphone,
   type LucideIcon,
 } from "lucide-react";
-import Link from "next/link";
 import { ServiceWorkGrid } from "@/components/shared/service-work-grid";
 import { PageHero } from "@/components/digital-marketing/page-hero";
 import { StudioHeader } from "@/components/studio/studio-header";
 import { StudioPageContainer } from "@/components/studio/studio-page-shell";
 import { GlowCard } from "@/components/ui/spotlight-card";
+import { StartProjectLink } from "@/components/studio/start-project-link";
 
 type UiuxDesignPageProps = {
   navigationItems: StudioHomepageNavItem[];
@@ -220,13 +220,13 @@ export function UiuxDesignPage({
                   We design product experiences from first flow to final component — built to ship, built to scale.
                 </p>
                 <div className="flex flex-col items-center justify-center gap-3 sm:flex-row sm:flex-wrap">
-                  <Link
-                    href="/#process"
+                  <StartProjectLink
+                    source="uiux-design-page"
                     className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-brand px-7 py-4 text-[15px] font-semibold text-white shadow-[0_6px_18px_rgba(88,41,199,0.25)] transition-all hover:-translate-y-0.5 hover:shadow-[0_10px_24px_rgba(88,41,199,0.35)] sm:w-auto"
                   >
                     Start a project
                     <ArrowRight size={16} />
-                  </Link>
+                  </StartProjectLink>
                   <a
                     href="mailto:hello@yuvabestudios.com"
                     className="inline-flex w-full items-center justify-center gap-2 rounded-full border border-(--color-border-default) bg-white px-7 py-4 text-[13px] font-semibold text-(--neutral-700) transition-all hover:border-brand/30 hover:text-brand sm:w-auto sm:text-[15px]"

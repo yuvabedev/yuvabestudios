@@ -27,6 +27,11 @@ import {
   type StudioCaseStudySummary,
 } from "@/components/studio/studio-case-study-content";
 import type { PublicBlogPost } from "@/lib/blog";
+import { isStartProjectHref } from "@/lib/start-project";
+import { StartProjectLink } from "@/components/studio/start-project-link";
+
+const heroCtaClassName =
+  "inline-flex items-center gap-2 rounded-full bg-brand px-7 py-4 text-[15px] font-semibold text-white shadow-[0_6px_18px_rgba(88,41,199,0.25)] transition-all hover:-translate-y-0.5 hover:shadow-[0_10px_24px_rgba(88,41,199,0.35)]";
 
 const easeOut = [0.22, 1, 0.36, 1] as const;
 
@@ -162,13 +167,18 @@ export function HomeHero({ hero }: { hero: StudioHomepageHeroContent }) {
           </span>
         </p>
         <div className="mt-10">
-          <Link
-            href={hero.ctaHref}
-            className="inline-flex items-center gap-2 rounded-full bg-brand px-7 py-4 text-[15px] font-semibold text-white shadow-[0_6px_18px_rgba(88,41,199,0.25)] transition-all hover:-translate-y-0.5 hover:shadow-[0_10px_24px_rgba(88,41,199,0.35)]"
-          >
-            {hero.ctaLabel}
-            <ArrowRight size={16} />
-          </Link>
+          {/* CMS hrefs like "#" or "/#process" mean "open the inquiry modal" */}
+          {isStartProjectHref(hero.ctaHref) ? (
+            <StartProjectLink source="homepage-hero" className={heroCtaClassName}>
+              {hero.ctaLabel}
+              <ArrowRight size={16} />
+            </StartProjectLink>
+          ) : (
+            <Link href={hero.ctaHref} className={heroCtaClassName}>
+              {hero.ctaLabel}
+              <ArrowRight size={16} />
+            </Link>
+          )}
         </div>
       </Rail>
 

@@ -7,6 +7,7 @@ import type { StudioHomepageNavItem } from "@/components/studio/studio-homepage-
 import { StudioHeader } from "@/components/studio/studio-header";
 import { BlogBody, extractHeadings } from "@/components/blog/blog-body";
 import { BlogReader } from "@/components/blog/blog-reader";
+import { StartProjectLink } from "@/components/studio/start-project-link";
 
 type BlogDetailPageProps = {
   navigationItems: StudioHomepageNavItem[];
@@ -163,13 +164,13 @@ export function BlogDetailPage({ navigationItems, post, related }: BlogDetailPag
                   <em className="font-medium not-italic text-brand">something real.</em>
                 </h2>
                 <div className="flex flex-col items-center justify-center gap-3 sm:flex-row">
-                  <Link
-                    href="/contact"
+                  <StartProjectLink
+                    source="blog-detail-page"
                     className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-brand px-7 py-4 text-[15px] font-semibold text-white shadow-[0_6px_18px_rgba(88,41,199,0.25)] transition-all hover:-translate-y-0.5 hover:shadow-[0_10px_24px_rgba(88,41,199,0.35)] sm:w-auto"
                   >
                     Start a project
                     <ArrowRight size={16} />
-                  </Link>
+                  </StartProjectLink>
                   <a
                     href="mailto:sales@yuvabe.com"
                     className="inline-flex w-full items-center justify-center gap-2 rounded-full border border-(--color-border-default) bg-white px-7 py-4 text-[13px] font-semibold text-(--neutral-700) transition-all hover:border-brand/30 hover:text-brand sm:w-auto sm:text-[15px]"

@@ -16,6 +16,7 @@ import type {
   ResolvedStudioCaseStudyDetail,
   StudioCaseStudySummary,
 } from "@/components/studio/studio-case-study-content";
+import { StartProjectLink } from "@/components/studio/start-project-link";
 
 // ─── Curated Rangasutra imagery (web-sized webp) ─────────────────────────────
 // The artisan photography is tall portrait (4480x6720), so this page pins it in
@@ -462,13 +463,13 @@ export function RangasutraCaseStudy({ caseStudy, detail }: RangasutraCaseStudyPr
             </h2>
           </div>
           <div className="flex flex-wrap items-center gap-3">
-            <a
-              href="mailto:sales@yuvabe.com"
+            <StartProjectLink
+              source="rangasutra-case-study"
               className="group inline-flex items-center gap-2 rounded-full bg-white px-7 py-4 text-[15px] font-semibold text-(--neutral-950) transition-transform duration-200 hover:-translate-y-0.5"
             >
               Start a project
               <ArrowRight size={16} className="transition-transform duration-200 group-hover:translate-x-0.5" />
-            </a>
+            </StartProjectLink>
             <Link
               href="/work"
               className="inline-flex items-center gap-2 rounded-full border border-white/25 px-7 py-4 text-[15px] font-semibold text-white transition-colors duration-200 hover:bg-white/10"

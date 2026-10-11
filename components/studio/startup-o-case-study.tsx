@@ -18,6 +18,7 @@ import type {
   ResolvedStudioCaseStudyDetail,
   StudioCaseStudySummary,
 } from "@/components/studio/studio-case-study-content";
+import { useStartProjectModal } from "@/components/studio/start-project-modal-provider";
 
 // ─── Curated Startup-O imagery (web-sized webp) ──────────────────────────────
 // NOTE: the asset folder is "startup-O" — must match exactly on Linux.
@@ -80,7 +81,17 @@ function Shell({
 }
 
 // ─── Magnetic button — the primary CTA drifts toward the cursor ──────────────
-function MagneticButton({ href, children }: { href: string; children: React.ReactNode }) {
+// When `source` is set, a plain click opens the shared inquiry modal instead of following `href`.
+function MagneticButton({
+  href,
+  source,
+  children,
+}: {
+  href: string;
+  source?: string;
+  children: React.ReactNode;
+}) {
+  const { openStartProject } = useStartProjectModal();
   const reduce = useReducedMotion();
   const x = useMotionValue(0);
   const y = useMotionValue(0);
@@ -97,9 +108,16 @@ function MagneticButton({ href, children }: { href: string; children: React.Reac
     y.set(0);
   }
 
+  function onClick(e: React.MouseEvent<HTMLAnchorElement>) {
+    if (!source || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button !== 0) return;
+    e.preventDefault();
+    openStartProject(source);
+  }
+
   return (
     <motion.a
       href={href}
+      onClick={onClick}
       onMouseMove={reduce ? undefined : onMove}
       onMouseLeave={reset}
       style={{ backgroundColor: BRAND, color: "#FFFFFF", ...(reduce ? {} : { x: sx, y: sy }) }}
@@ -542,7 +560,9 @@ export function StartupOCaseStudy({ caseStudy, detail }: StartupOCaseStudyProps)
             great backing.
           </h2>
           <div className="flex flex-wrap items-center gap-3">
-            <MagneticButton href="mailto:sales@yuvabe.com">Start a project</MagneticButton>
+            <MagneticButton href="/contact" source="startup-o-case-study">
+              Start a project
+            </MagneticButton>
             <Link
               href="/work"
               className="inline-flex items-center gap-2 rounded-full border border-(--color-border-default) px-7 py-4 text-[15px] font-semibold text-(--neutral-800) transition-colors duration-200 hover:bg-(--neutral-50)"
