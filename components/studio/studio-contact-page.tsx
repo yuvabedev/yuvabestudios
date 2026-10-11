@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useState } from "react";
 import { Check, LoaderCircle, Mail, MapPin, Phone } from "lucide-react";
 
+import { RecaptchaField, recaptchaSiteKey } from "@/components/studio/recaptcha-field";
 import type { StudioHomepageNavItem } from "@/components/studio/studio-homepage-content";
 import { StudioHeader } from "@/components/studio/studio-header";
 import { StudioPageRails } from "@/components/studio/studio-page-shell";
@@ -79,6 +80,12 @@ export function StudioContactPage({ navigationItems }: StudioContactPageProps) {
   const [phone, setPhone] = useState("");
   const [needs, setNeeds] = useState<string[]>([]);
   const [notes, setNotes] = useState("");
+  // Spam signals: a hidden field only bots fill, and when the form became visible.
+  const [website, setWebsite] = useState("");
+  const [startedAt, setStartedAt] = useState(() => Date.now());
+  // Captcha tokens are single-use, so bumping the key remounts a fresh widget after each attempt.
+  const [captchaToken, setCaptchaToken] = useState<string | null>(null);
+  const [captchaKey, setCaptchaKey] = useState(0);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitState, setSubmitState] = useState<"idle" | "success" | "error">("idle");
   const [submitMessage, setSubmitMessage] = useState("");
@@ -93,7 +100,17 @@ export function StudioContactPage({ navigationItems }: StudioContactPageProps) {
       const response = await fetch("/api/start-project", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name, email, phone, needs, notes, source: "contact-page" }),
+        body: JSON.stringify({
+          name,
+          email,
+          phone,
+          needs,
+          notes,
+          source: "contact-page",
+          website,
+          startedAt,
+          captchaToken,
+        }),
       });
 
       const body = (await response.json()) as { error?: string };
@@ -109,6 +126,7 @@ export function StudioContactPage({ navigationItems }: StudioContactPageProps) {
       setPhone("");
       setNeeds([]);
       setNotes("");
+      setStartedAt(Date.now());
     } catch (error) {
       setSubmitState("error");
       setSubmitMessage(
@@ -116,6 +134,8 @@ export function StudioContactPage({ navigationItems }: StudioContactPageProps) {
       );
     } finally {
       setIsSubmitting(false);
+      setCaptchaToken(null);
+      setCaptchaKey((key) => key + 1);
     }
   }
 
@@ -170,6 +190,20 @@ export function StudioContactPage({ navigationItems }: StudioContactPageProps) {
                 </p>
 
                 <form className="mt-7 space-y-5" onSubmit={handleSubmit}>
+                  {/* Honeypot — invisible to people and assistive tech; bots that auto-fill every input reveal themselves */}
+                  <div aria-hidden="true" className="sr-only">
+                    <label htmlFor="contact-website">Website</label>
+                    <input
+                      id="contact-website"
+                      name="website"
+                      type="text"
+                      tabIndex={-1}
+                      autoComplete="off"
+                      value={website}
+                      onChange={(e) => setWebsite(e.target.value)}
+                    />
+                  </div>
+
                   <div className="space-y-2">
                     <label htmlFor="contact-name" className="text-label-lg text-(--neutral-800)">
                       Name
@@ -261,8 +295,23 @@ export function StudioContactPage({ navigationItems }: StudioContactPageProps) {
                     />
                   </div>
 
+                  {/* Captcha — only rendered when a site key is configured */}
+                  {recaptchaSiteKey ? (
+                    <RecaptchaField
+                      key={captchaKey}
+                      sitekey={recaptchaSiteKey}
+                      onChange={(token) => setCaptchaToken(token)}
+                      onExpired={() => setCaptchaToken(null)}
+                    />
+                  ) : null}
+
                   <div className="space-y-2 pt-1">
-                    <Button type="submit" size="lg" className="w-full" disabled={isSubmitting}>
+                    <Button
+                      type="submit"
+                      size="lg"
+                      className="w-full"
+                      disabled={isSubmitting || (Boolean(recaptchaSiteKey) && !captchaToken)}
+                    >
                       {isSubmitting ? (
                         <span className="inline-flex items-center gap-2">
                           <LoaderCircle className="size-4 animate-spin" />

@@ -1,9 +1,84 @@
 import { Resend } from "resend";
 
 import type { StartProjectDraft } from "@/lib/start-project";
+import { detectSpamSubmission } from "@/lib/start-project-spam";
 import { storeStartProjectSubmission } from "@/lib/start-project-submissions";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
+
+const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+const phonePattern = /^[+\d\s().-]{6,24}$/;
+const fieldLimits = { name: 120, email: 254, notes: 4_000 } as const;
+
+type StartProjectPayload = Partial<StartProjectDraft> & {
+  website?: unknown;
+  startedAt?: unknown;
+  captchaToken?: unknown;
+};
+
+// Confirms the reCAPTCHA token with Google. Skips (with a warning) when no secret is configured,
+// so local development keeps working without keys.
+async function verifyCaptcha(token: unknown, remoteIp: string | null): Promise<boolean> {
+  const secret = process.env.RECAPTCHA_SECRET_KEY;
+  if (!secret) {
+    console.warn("RECAPTCHA_SECRET_KEY is not set — skipping captcha verification.");
+    return true;
+  }
+  if (typeof token !== "string" || token === "") return false;
+
+  const params = new URLSearchParams({ secret, response: token });
+  if (remoteIp) params.set("remoteip", remoteIp);
+
+  try {
+    const response = await fetch("https://www.google.com/recaptcha/api/siteverify", {
+      method: "POST",
+      body: params,
+    });
+    const result = (await response.json()) as { success?: boolean };
+    return result.success === true;
+  } catch (error) {
+    console.error("Captcha verification error:", error);
+    return false;
+  }
+}
+
+// Submitted values are interpolated into HTML emails, so escape them to block markup injection.
+function escapeHtml(value: string) {
+  return value
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#39;");
+}
+
+function escapeSubmission(submission: StartProjectDraft): StartProjectDraft {
+  return {
+    name: escapeHtml(submission.name),
+    email: escapeHtml(submission.email),
+    phone: escapeHtml(submission.phone),
+    needs: submission.needs.map(escapeHtml),
+    notes: escapeHtml(submission.notes),
+    source: submission.source ? escapeHtml(submission.source) : submission.source,
+  };
+}
+
+// Returns a user-facing validation error, or null when the fields are well-formed.
+function validateSubmission(submission: StartProjectDraft): string | null {
+  if (!submission.name || !submission.email) return "Name and email are required.";
+  if (!emailPattern.test(submission.email)) return "Please enter a valid email address.";
+  if (submission.phone && !phonePattern.test(submission.phone)) {
+    return "Please enter a valid phone or WhatsApp number.";
+  }
+  if (
+    submission.name.length > fieldLimits.name ||
+    submission.email.length > fieldLimits.email ||
+    submission.notes.length > fieldLimits.notes
+  ) {
+    return "One of the fields is too long.";
+  }
+  return null;
+}
 
 function normalizeSubmission(payload: Partial<StartProjectDraft>): StartProjectDraft {
   return {
@@ -121,24 +196,45 @@ async function sendUserReply(submission: StartProjectDraft) {
 }
 
 export async function POST(request: Request) {
-  let payload: Partial<StartProjectDraft>;
+  let payload: StartProjectPayload;
 
   try {
-    payload = (await request.json()) as Partial<StartProjectDraft>;
+    payload = (await request.json()) as StartProjectPayload;
   } catch {
     return Response.json({ error: "Invalid request payload." }, { status: 400 });
   }
 
   const submission = normalizeSubmission(payload);
 
-  if (!submission.name || !submission.email) {
-    return Response.json({ error: "Name and email are required." }, { status: 400 });
+  const validationError = validateSubmission(submission);
+  if (validationError) {
+    return Response.json({ error: validationError }, { status: 400 });
   }
+
+  const remoteIp = request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ?? null;
+  if (!(await verifyCaptcha(payload.captchaToken, remoteIp))) {
+    return Response.json(
+      { error: "Please complete the captcha and try again." },
+      { status: 400 },
+    );
+  }
+
+  // Bots get a fake success so they don't adapt; nothing is stored or emailed.
+  const spamReason = detectSpamSubmission(submission, {
+    honeypot: payload.website,
+    startedAt: payload.startedAt,
+  });
+  if (spamReason) {
+    console.warn(`Start-project spam dropped (${spamReason}):`, submission.email);
+    return Response.json({ ok: true });
+  }
+
+  const emailSafeSubmission = escapeSubmission(submission);
 
   try {
     const [storedSubmission, adminEmail] = await Promise.all([
       storeStartProjectSubmission(submission),
-      sendAdminEmail(submission),
+      sendAdminEmail(emailSafeSubmission),
     ]);
 
     if (adminEmail.error) {
@@ -146,7 +242,7 @@ export async function POST(request: Request) {
     }
 
     // Fire-and-forget — a failed auto-reply should not block the success response.
-    sendUserReply(submission).catch((err) => console.error("User reply error:", err));
+    sendUserReply(emailSafeSubmission).catch((err) => console.error("User reply error:", err));
 
     return Response.json({ ok: true, id: storedSubmission.id });
   } catch (error) {

@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { Check, LoaderCircle } from "lucide-react";
 
+import { RecaptchaField, recaptchaSiteKey } from "@/components/studio/recaptcha-field";
 import { Button } from "@/components/ui/button";
 import { ModalShell } from "@/components/ui/modal-shell";
 import { START_PROJECT_EMAIL } from "@/lib/start-project";
@@ -47,6 +48,12 @@ export function StartProjectModal({
   const [phone, setPhone] = useState("");
   const [needs, setNeeds] = useState<string[]>([]);
   const [notes, setNotes] = useState("");
+  // Spam signals: a hidden field only bots fill, and when the form became visible.
+  const [website, setWebsite] = useState("");
+  const [startedAt, setStartedAt] = useState(0);
+  // Captcha tokens are single-use, so bumping the key remounts a fresh widget after each attempt.
+  const [captchaToken, setCaptchaToken] = useState<string | null>(null);
+  const [captchaKey, setCaptchaKey] = useState(0);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitState, setSubmitState] = useState<"idle" | "success" | "error">("idle");
   const [submitMessage, setSubmitMessage] = useState("");
@@ -58,6 +65,9 @@ export function StartProjectModal({
     setPhone("");
     setNeeds([]);
     setNotes("");
+    setWebsite("");
+    setStartedAt(Date.now());
+    setCaptchaToken(null);
     setIsSubmitting(false);
     setSubmitState("idle");
     setSubmitMessage("");
@@ -73,7 +83,17 @@ export function StartProjectModal({
       const response = await fetch("/api/start-project", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name, email, phone, needs, notes, source }),
+        body: JSON.stringify({
+          name,
+          email,
+          phone,
+          needs,
+          notes,
+          source,
+          website,
+          startedAt,
+          captchaToken,
+        }),
       });
 
       const body = (await response.json()) as { error?: string };
@@ -96,6 +116,8 @@ export function StartProjectModal({
       );
     } finally {
       setIsSubmitting(false);
+      setCaptchaToken(null);
+      setCaptchaKey((key) => key + 1);
     }
   }
 
@@ -144,6 +166,20 @@ export function StartProjectModal({
         {/* Right column — form */}
         <div className="relative -mx-5 rounded-b-[inherit] border-t border-white/72 bg-white/92 px-5 pt-4 sm:-mx-8 sm:px-8 lg:-my-8 lg:mx-0 lg:flex lg:h-[calc(100%+4rem)] lg:min-h-0 lg:flex-col lg:overflow-hidden lg:rounded-[inherit] lg:border-l lg:border-t-0 lg:border-white/80 lg:px-8 lg:pb-8 lg:pt-8">
           <form className="space-y-4 lg:min-h-0 lg:overflow-y-auto lg:pr-1" onSubmit={handleSubmit}>
+
+            {/* Honeypot — invisible to people and assistive tech; bots that auto-fill every input reveal themselves */}
+            <div aria-hidden="true" className="sr-only">
+              <label htmlFor="start-project-website">Website</label>
+              <input
+                id="start-project-website"
+                name="website"
+                type="text"
+                tabIndex={-1}
+                autoComplete="off"
+                value={website}
+                onChange={(e) => setWebsite(e.target.value)}
+              />
+            </div>
 
             <div className="space-y-2">
               <label htmlFor="start-project-name" className="text-label-lg text-(--neutral-800)">Name</label>
@@ -227,8 +263,23 @@ export function StartProjectModal({
               />
             </div>
 
+            {/* Captcha — only rendered when a site key is configured */}
+            {recaptchaSiteKey ? (
+              <RecaptchaField
+                key={captchaKey}
+                sitekey={recaptchaSiteKey}
+                onChange={(token) => setCaptchaToken(token)}
+                onExpired={() => setCaptchaToken(null)}
+              />
+            ) : null}
+
             <div className="space-y-2 pt-1">
-              <Button type="submit" size="lg" className="w-full" disabled={isSubmitting}>
+              <Button
+                type="submit"
+                size="lg"
+                className="w-full"
+                disabled={isSubmitting || (Boolean(recaptchaSiteKey) && !captchaToken)}
+              >
                 {isSubmitting ? (
                   <span className="inline-flex items-center gap-2">
                     <LoaderCircle className="size-4 animate-spin" />
