@@ -1,7 +1,7 @@
 // Server component — clay.global editorial layout
-import Link from "next/link";
 import { ScaleReveal } from "@/components/studio/scale-reveal";
 import { TvamInViewVideo } from "@/components/studio/tvam-inview-video";
+import { StartProjectLink } from "@/components/studio/start-project-link";
 
 const FACTS = [
   { idx: "01", label: "Year",     value: "2024" },
@@ -332,12 +332,12 @@ export function TvamCaseStudyContent() {
               An AI-first health and wealth super-app, built for India&apos;s
               next wave of digital users.
             </p>
-            <Link
-              href="/#process"
+            <StartProjectLink
+              source="tvam-case-study-content"
               className="shrink-0 inline-flex items-center gap-2 rounded-full bg-[#fff] px-7 py-3.5 text-[14px] font-semibold text-black shadow-[0_6px_20px_rgba(239,136,41,0.4)] transition-all hover:-translate-y-0.5 hover:shadow-[0_10px_28px_rgba(239,136,41,0.5)]"
             >
               Start a project
-            </Link>
+            </StartProjectLink>
           </div>
         </div>
       </section>

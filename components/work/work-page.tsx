@@ -19,6 +19,11 @@ import {
 import { StudioHeader } from "@/components/studio/studio-header";
 import { StudioPageContainer } from "@/components/studio/studio-page-shell";
 import type { WorkPageContent } from "@/lib/work-content";
+import { isStartProjectHref } from "@/lib/start-project";
+import { StartProjectLink } from "@/components/studio/start-project-link";
+
+const workCtaClassName =
+  "inline-flex w-full items-center justify-center gap-2 rounded-full bg-brand px-7 py-4 text-[15px] font-semibold text-white shadow-[0_6px_18px_rgba(88,41,199,0.25)] transition-all hover:-translate-y-0.5 hover:shadow-[0_10px_24px_rgba(88,41,199,0.35)] sm:w-auto";
 
 type WorkPageProps = {
   navigationItems: StudioHomepageNavItem[];
@@ -429,13 +434,18 @@ export function WorkPage({ navigationItems, caseStudies, content }: WorkPageProp
                   {content.cta.headingSuffix}
                 </h2>
                 <div className="flex flex-col items-center justify-center gap-3 sm:flex-row">
-                  <Link
-                    href={content.cta.primaryCtaHref}
-                    className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-brand px-7 py-4 text-[15px] font-semibold text-white shadow-[0_6px_18px_rgba(88,41,199,0.25)] transition-all hover:-translate-y-0.5 hover:shadow-[0_10px_24px_rgba(88,41,199,0.35)] sm:w-auto"
-                  >
-                    {content.cta.primaryCtaLabel}
-                    <ArrowRight size={16} />
-                  </Link>
+                  {/* CMS hrefs like "#" or "/#process" mean "open the inquiry modal" */}
+                  {isStartProjectHref(content.cta.primaryCtaHref) ? (
+                    <StartProjectLink source="work-page-cta" className={workCtaClassName}>
+                      {content.cta.primaryCtaLabel}
+                      <ArrowRight size={16} />
+                    </StartProjectLink>
+                  ) : (
+                    <Link href={content.cta.primaryCtaHref} className={workCtaClassName}>
+                      {content.cta.primaryCtaLabel}
+                      <ArrowRight size={16} />
+                    </Link>
+                  )}
                   <a
                     href={`mailto:${content.cta.contactEmail}`}
                     className="inline-flex w-full items-center justify-center gap-2 rounded-full border border-(--color-border-default) bg-white px-7 py-4 text-[13px] font-semibold text-(--neutral-700) transition-all hover:border-brand/30 hover:text-brand sm:w-auto sm:text-[15px]"

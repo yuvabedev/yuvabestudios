@@ -1,10 +1,10 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import Link from "next/link";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { HeroParallax } from "@/components/ui/hero-parallax";
+import { StartProjectLink } from "@/components/studio/start-project-link";
 
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
@@ -404,12 +404,12 @@ export function PrakritiSattvaCaseStudy() {
             <p className="max-w-sm text-[17px] leading-relaxed text-white/65">
               A brand rooted in Ayurveda — now ready for the conscious consumer.
             </p>
-            <Link
-              href="/#process"
+            <StartProjectLink
+              source="prakriti-sattva-case-study"
               className="shrink-0 inline-flex items-center gap-2 rounded-full bg-[#d37f6e] px-7 py-3.5 text-[14px] font-semibold text-white shadow-[0_6px_20px_rgba(90,122,58,0.4)] transition-all hover:-translate-y-0.5 hover:shadow-[0_10px_28px_rgba(90,122,58,0.5)]"
             >
               Start your project
-            </Link>
+            </StartProjectLink>
           </div>
         </div>
       </section>

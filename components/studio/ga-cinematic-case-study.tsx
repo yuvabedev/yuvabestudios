@@ -1,10 +1,10 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import Link from "next/link";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import ScrollExpandMedia from "@/components/ui/scroll-expansion-hero";
+import { StartProjectLink } from "@/components/studio/start-project-link";
 
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
@@ -439,12 +439,12 @@ export function GaCinematicCaseStudy() {
               Technical breadth made legible — one clear story, ready to scale
               across every vertical.
             </p>
-            <Link
-              href="/#process"
+            <StartProjectLink
+              source="ga-cinematic-case-study"
               className="shrink-0 inline-flex items-center gap-2 rounded-full bg-white px-7 py-3.5 text-[14px] font-semibold text-slate-900 transition-all hover:-translate-y-0.5 hover:shadow-[0_10px_28px_rgba(15,23,42,0.4)]"
             >
               Start your project
-            </Link>
+            </StartProjectLink>
           </div>
         </div>
       </section>

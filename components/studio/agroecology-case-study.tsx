@@ -11,6 +11,7 @@ import type {
   ResolvedStudioCaseStudyDetail,
   StudioCaseStudySummary,
 } from "@/components/studio/studio-case-study-content";
+import { StartProjectLink } from "@/components/studio/start-project-link";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -532,14 +533,14 @@ export function AgroecologyCaseStudy({ caseStudy, detail }: AgroecologyCaseStudy
             telling well?
           </h2>
           <div className="ag-rise flex flex-wrap items-center gap-3">
-            <a
-              href="mailto:sales@yuvabe.com"
+            <StartProjectLink
+              source="agroecology-case-study"
               style={{ backgroundColor: TEAL }}
               className="group inline-flex items-center gap-2 rounded-full px-7 py-4 text-[15px] font-semibold text-white transition-transform duration-200 hover:-translate-y-0.5"
             >
               Start a project
               <ArrowRight size={16} className="transition-transform duration-200 group-hover:translate-x-0.5" />
-            </a>
+            </StartProjectLink>
             <Link
               href="/work"
               className="inline-flex items-center gap-2 rounded-full border border-(--color-border-default) px-7 py-4 text-[15px] font-semibold text-(--neutral-800) transition-colors duration-200 hover:bg-(--neutral-50)"
