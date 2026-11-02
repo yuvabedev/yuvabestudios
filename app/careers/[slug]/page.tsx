@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 
 import { CareersJobDetail } from "@/components/careers/careers-job-detail";
-import { getJobBySlug, getAllJobSlugs } from "@/services/careers.service";
+import { getJobBySlug } from "@/services/careers.service";
 import { getAbsoluteUrl } from "@/lib/site";
 import { getStudioHomepageContent } from "@/lib/studio-content";
 
@@ -10,10 +10,10 @@ type JobPageProps = {
   params: Promise<{ slug: string }>;
 };
 
-export async function generateStaticParams() {
-  const slugs = await getAllJobSlugs();
-  return slugs.map((slug) => ({ slug }));
-}
+// Jobs are posted from the people CMS at any time and the page reads live studio content
+// (noStore), so render per request instead of prebuilding slugs — a job added after the
+// last deploy would otherwise 500 when Next tries to render it statically on demand.
+export const dynamic = "force-dynamic";
 
 export async function generateMetadata({ params }: JobPageProps): Promise<Metadata> {
   const { slug } = await params;
