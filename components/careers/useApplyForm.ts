@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { applySchema, ApplyFormValues } from "./apply-schema";
 import { useCheckApplication } from "@/hooks/use-careers";
+import { submitApplication } from "@/services/careers.service";
 
 type UseApplyFormProps = {
   jobCode: string;
@@ -40,16 +41,7 @@ export function useApplyForm({ jobCode }: UseApplyFormProps) {
       fd.append("email", values.email);
       fd.append("resume", values.resume);
 
-      const res = await fetch("/api/careers/apply", {
-        method: "POST",
-        body: fd,
-      });
-
-      const data = (await res.json()) as { error?: string };
-
-      if (!res.ok) {
-        throw new Error(data.error || `Request failed (${res.status})`);
-      }
+      await submitApplication(fd);
 
       setSubmitState("success");
       setSubmitMessage("Application submitted! We'll review your resume and get back to you soon.");
