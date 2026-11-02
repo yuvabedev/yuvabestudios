@@ -139,3 +139,20 @@ export async function checkApplicationExists(
     return false;
   }
 }
+
+// Posts the application straight from the browser to the people-CMS edge function.
+// Going direct (instead of via a Next API route) keeps resumes off the Vercel function
+// body limit, which rejected larger PDFs with a plain-text 413.
+export async function submitApplication(formData: FormData): Promise<void> {
+  const client = getSupabasePeopleClient();
+  const { error } = await client.functions.invoke("apply-function", { body: formData });
+  if (!error) return;
+
+  // Surface the function's own error message when it sent one.
+  const response = (error as { context?: unknown }).context;
+  if (response instanceof Response) {
+    const body = (await response.json().catch(() => null)) as { error?: string } | null;
+    throw new Error(body?.error || `Application failed (${response.status}).`);
+  }
+  throw new Error("Failed to submit application. Please try again.");
+}
